@@ -1,0 +1,22 @@
+name: movie_shaker
+description: "Can’t decide what to watch? Just shake your phone and get a random movie suggestion instantly! Fast, fun, and perfect for movie nights."
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: 1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  generate: true
