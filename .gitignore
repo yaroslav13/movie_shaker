@@ -114,7 +114,7 @@ pubspec_overrides.yaml
 #assets_gen output
 **/images_source.dart
 /modules/*/build/**
-lib/src/resources/
+lib/src/resources/translations/
 
 # FVM Version Cache
 .fvm/
