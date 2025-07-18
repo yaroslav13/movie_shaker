@@ -1,0 +1,20 @@
+name: ui_components
+description: "Ui Components"
+version: 0.0.1
+homepage: none
+resolution: workspace
+
+environment:
+  sdk: ^3.6.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ui
+  google_fonts: 6.2.1
+
+  # annotations
+  meta: 1.16.0
+

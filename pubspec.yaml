@@ -7,6 +7,9 @@ version: 1.0.0+1
 environment:
   sdk: ^3.6.0
 
+workspace:
+  - packages/ui_components
+
 dependencies:
   flutter:
     sdk: flutter
