@@ -16,11 +16,25 @@ dependencies:
     sdk: flutter
   intl: 0.20.2
 
+  # ui
   cupertino_icons: 1.0.8
+
+  # state management / di
+  hooks_riverpod: 2.6.1
+  flutter_hooks: 0.21.2
+  riverpod_annotation: 2.6.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # code generation
+  build_runner: 2.5.4
+  riverpod_generator: 2.6.5
+
+  # lints
+  custom_lint: 0.7.6
+  riverpod_lint: 2.6.5
 
 flutter:
   uses-material-design: true

@@ -1,4 +1,6 @@
 analyzer:
+  plugins:
+    - custom_lint
   language:
     strict-casts: true
     strict-inference: true
@@ -74,12 +76,6 @@ dart_code_metrics:
     - prefer-conditional-expressions
     - no-equal-then-else
     - prefer-extracting-callbacks
-    - prefer-trailing-comma:
-        severity: style
-        break-on: 4
-  anti-patterns:
-    - long-parameter-list
-    - long-method
 
 linter:
   rules:
@@ -168,7 +164,6 @@ linter:
     - omit_local_variable_types
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
@@ -243,7 +238,6 @@ linter:
     - unnecessary_this
     - unnecessary_to_list_in_spreads
     - unrelated_type_equality_checks
-    - unsafe_html
     - use_build_context_synchronously
     - use_colored_box
     - use_decorated_box
