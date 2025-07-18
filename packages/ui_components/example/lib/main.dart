@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'UiComponents Demo',
-      home: const MyHomePage(title: 'UiComponents Demo'),
+      home: MyHomePage(title: 'UiComponents Demo'),
     );
   }
 }
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.all(2),
                 child: ListTile(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
                     side: BorderSide(
                       color: Theme.of(context).colorScheme.primary,
                     ),
