@@ -1,7 +1,5 @@
 name: ui_components
 description: "Ui Components"
-version: 0.0.1
-homepage: none
 resolution: workspace
 
 environment:
