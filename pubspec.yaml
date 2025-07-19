@@ -21,11 +21,15 @@ dependencies:
 
   # ui
   cupertino_icons: 1.0.8
+  ui_components: 1.0.0
 
   # state management / di
   hooks_riverpod: 2.6.1
   flutter_hooks: 0.21.2
   riverpod_annotation: 2.6.1
+
+  # navigation
+  go_router: 16.0.0
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +38,7 @@ dev_dependencies:
   # code generation
   build_runner: 2.5.4
   riverpod_generator: 2.6.5
+  go_router_builder: 3.0.0
 
   # lints
   custom_lint: 0.7.6
