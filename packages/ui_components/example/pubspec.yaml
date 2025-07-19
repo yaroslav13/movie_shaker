@@ -14,5 +14,8 @@ dependencies:
   ui_components:
     path: ../
 
+dev_dependencies:
+  dart_code_metrics_presets: 2.24.0
+
 flutter:
   uses-material-design: true

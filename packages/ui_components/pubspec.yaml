@@ -16,4 +16,6 @@ dependencies:
 
   # annotations
   meta: 1.16.0
+dev_dependencies:
+  dart_code_metrics_presets: 2.24.0
 
