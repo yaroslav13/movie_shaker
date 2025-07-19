@@ -12,6 +12,7 @@ dependencies:
 
   # ui
   google_fonts: 6.2.1
+  flex_color_scheme: 8.2.0
 
   # annotations
   meta: 1.16.0

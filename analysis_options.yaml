@@ -26,7 +26,6 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/*.config.dart"
     - "**/generated/**"
-    - "lib/src/di/modules/firebase_core_module/firebase_options.dart"
 
 dart_code_metrics:
   metrics:
@@ -44,11 +43,18 @@ dart_code_metrics:
     - prefer-const-border-radius
     - avoid-non-null-assertion:
         severity: warning
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - prefer-conditional-expressions
+    - no-equal-then-else
+    - prefer-extracting-callbacks
     - member-ordering:
         order:
           - constructors
           - named-constructors
-          - final-fields
+          - public-final-fields
+          - private-final-fields
           - static-methods
           - const-fields
           - private-fields
@@ -70,12 +76,6 @@ dart_code_metrics:
           - build-method
           - ==-method
           - to-string-method
-    - newline-before-return
-    - no-boolean-literal-compare
-    - no-empty-block
-    - prefer-conditional-expressions
-    - no-equal-then-else
-    - prefer-extracting-callbacks
 
 linter:
   rules:
