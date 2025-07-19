@@ -35,6 +35,9 @@ dart_code_metrics:
     maximum-nesting-level: 5
   metrics-exclude:
     - test/**
+  extends:
+    - package:dart_code_metrics_presets/riverpod.yaml
+    - package:dart_code_metrics_presets/flutter_hooks.yaml
 
   rules:
     - always-remove-listener
@@ -53,8 +56,8 @@ dart_code_metrics:
         order:
           - constructors
           - named-constructors
-          - public-final-fields
-          - private-final-fields
+          - public-fields
+          - final-fields
           - static-methods
           - const-fields
           - private-fields
