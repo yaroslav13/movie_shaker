@@ -16,10 +16,15 @@ final class MoviesListView extends HookConsumerWidget {
         child: Text('Oops, something unexpected happened'),
       ),
       AsyncData(:final value) => ListView.builder(
+        padding: MsEdgeInsets.listViewMargin,
         itemBuilder: (_, index) {
           final movie = value[index];
 
-          return MovieCard(imageUrl: movie.posterUrl, title: movie.title);
+          return MovieCard(
+            margin: MsEdgeInsets.listViewItemMargin,
+            imageUrl: movie.posterUrl,
+            title: movie.title,
+          );
         },
       ),
       _ => const Center(child: CircularProgressIndicator()),
