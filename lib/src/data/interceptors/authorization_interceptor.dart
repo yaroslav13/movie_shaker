@@ -3,14 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:movie_shaker/src/domain/build_config/build_config.dart';
 
 @immutable
-final class MetadataInterceptor extends Interceptor {
-  const MetadataInterceptor(this._buildConfig);
+final class AuthorizationInterceptor extends Interceptor {
+  const AuthorizationInterceptor(this._buildConfig);
 
   final BuildConfig _buildConfig;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.queryParameters['apikey'] = _buildConfig.apiKey;
+    options.headers['api_key'] = _buildConfig.apiKey;
     super.onRequest(options, handler);
   }
 }
