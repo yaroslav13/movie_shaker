@@ -12,8 +12,6 @@ const _connectTimeout = Duration(seconds: 5);
 const _sendTimeout = Duration(seconds: 10);
 const _receiveTimeout = Duration(seconds: 15);
 
-const _baseUrl = 'https://api.themoviedb.org';
-
 @riverpod
 Dio dio(Ref ref) {
   final loggerInterceptor = ref.watch(prettyDioLoggerProvider);
@@ -29,7 +27,7 @@ Dio dio(Ref ref) {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: _baseUrl,
+      baseUrl: buildConfig.baseUrl,
       connectTimeout: _connectTimeout,
       sendTimeout: _sendTimeout,
       receiveTimeout: _receiveTimeout,
