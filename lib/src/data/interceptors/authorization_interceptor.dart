@@ -10,7 +10,7 @@ final class AuthorizationInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['api_key'] = _buildConfig.apiKey;
+    options.queryParameters['api_key'] = _buildConfig.apiKey;
     super.onRequest(options, handler);
   }
 }
