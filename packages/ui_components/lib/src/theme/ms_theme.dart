@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/theme/ms_colors.dart';
 
 extension type MsTheme._(ThemeData data) implements ThemeData {
@@ -12,9 +13,24 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   }
 
   static ThemeData _createThemeData(MsColors colors, Brightness brightness) {
+    final theme = _setupThemeFoundation(colors, brightness);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    return theme.copyWith(
+      extensions: [
+        _createMovieCardTheme(colorScheme, textTheme),
+      ],
+    );
+  }
+
+  static ThemeData _setupThemeFoundation(
+    MsColors colors,
+    Brightness brightness,
+  ) {
     const cupertinoTheme = CupertinoThemeData(applyThemeToAll: true);
 
-    final colorScheme =
+    final flexSchemeColor =
         FlexSchemeColor.effective(_createColorScheme(colors), 4);
     final visualDensity = FlexColorScheme.comfortablePlatformDensity;
 
@@ -22,13 +38,13 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
 
     return switch (brightness) {
       Brightness.dark => FlexThemeData.dark(
-          colors: colorScheme,
+          colors: flexSchemeColor,
           visualDensity: visualDensity,
           cupertinoOverrideTheme: cupertinoTheme,
           textTheme: textTheme,
         ),
       Brightness.light => FlexThemeData.light(
-          colors: colorScheme,
+          colors: flexSchemeColor,
           visualDensity: visualDensity,
           cupertinoOverrideTheme: cupertinoTheme,
           textTheme: textTheme,
@@ -46,6 +62,67 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   }
 
   static TextTheme _createTextTheme() {
-    return GoogleFonts.robotoTextTheme();
+    return TextTheme(
+      displayLarge: GoogleFonts.roboto(
+        fontSize: 36,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -1.5,
+      ),
+      displayMedium: GoogleFonts.roboto(
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
+        letterSpacing: -1,
+      ),
+      headlineMedium: GoogleFonts.roboto(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        letterSpacing: -0.5,
+      ),
+      titleLarge: GoogleFonts.roboto(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.15,
+      ),
+      titleMedium: GoogleFonts.roboto(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.1,
+      ),
+      bodyLarge: GoogleFonts.roboto(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.25,
+      ),
+      bodyMedium: GoogleFonts.roboto(
+        fontSize: 13,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0.2,
+      ),
+      labelLarge: GoogleFonts.roboto(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.4,
+      ),
+      labelSmall: GoogleFonts.roboto(
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 1,
+      ),
+    );
+  }
+
+  static MovieCardTheme _createMovieCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MovieCardTheme(
+      backgroundColor: colorScheme.surfaceContainerLow,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(24),
+      ),
+      titleStyle: textTheme.titleLarge,
+      subtitleStyle: textTheme.bodyMedium,
+      elevation: 8,
+    );
   }
 }
