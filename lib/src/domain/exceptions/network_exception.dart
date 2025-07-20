@@ -25,21 +25,61 @@ final class UnknownNetworkException extends NetworkException {
 }
 
 sealed class BadResponseException extends NetworkException {
-  const BadResponseException(super.message);
+  const BadResponseException();
+}
+
+final class InvalidServiceException extends BadResponseException {
+  const InvalidServiceException();
 }
 
 final class UnauthorizedException extends BadResponseException {
-  const UnauthorizedException(super.message);
+  const UnauthorizedException();
+}
+
+final class InvalidFormatException extends BadResponseException {
+  const InvalidFormatException();
+}
+
+final class InvalidApiKeyException extends BadResponseException {
+  const InvalidApiKeyException();
+}
+
+final class SuspendedApiKeyException extends BadResponseException {
+  const SuspendedApiKeyException();
+}
+
+final class DuplicateEntryException extends BadResponseException {
+  const DuplicateEntryException();
+}
+
+final class ServiceUnavailableException extends BadResponseException {
+  const ServiceUnavailableException();
+}
+
+final class InvalidAcceptHeaderException extends BadResponseException {
+  const InvalidAcceptHeaderException();
 }
 
 final class BadRequestException extends BadResponseException {
-  const BadRequestException(super.message);
+  const BadRequestException();
 }
 
 final class NotFoundException extends BadResponseException {
-  const NotFoundException(super.message);
+  const NotFoundException();
+}
+
+final class RequestValidationException extends BadResponseException {
+  const RequestValidationException();
+}
+
+final class RateLimitExceededException extends BadResponseException {
+  const RateLimitExceededException();
 }
 
 final class InternalServerErrorException extends BadResponseException {
-  const InternalServerErrorException(super.message);
+  const InternalServerErrorException();
+}
+
+final class RequestTimedOutException extends BadResponseException {
+  const RequestTimedOutException();
 }
