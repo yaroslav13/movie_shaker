@@ -1,8 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_components/src/grid_view/simple_grid_view_theme.dart';
+import 'package:ui_components/src/loader_indicator/progress_indicator_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
+import 'package:ui_components/src/shared/ms_border_radius.dart';
+import 'package:ui_components/src/shared/ms_edge_insets.dart';
+import 'package:ui_components/src/shared/ms_spacings.dart';
 import 'package:ui_components/src/theme/ms_colors.dart';
 
 extension type MsTheme._(ThemeData data) implements ThemeData {
@@ -20,6 +25,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return theme.copyWith(
       extensions: [
         _createMovieCardTheme(colorScheme, textTheme),
+        _createSimpleGridViewTheme(),
+        _createLoaderIndicatorTheme(colorScheme),
       ],
     );
   }
@@ -30,25 +37,27 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   ) {
     const cupertinoTheme = CupertinoThemeData(applyThemeToAll: true);
 
-    final flexSchemeColor =
-        FlexSchemeColor.effective(_createColorScheme(colors), 4);
+    final flexSchemeColor = FlexSchemeColor.effective(
+      _createColorScheme(colors),
+      4,
+    );
     final visualDensity = FlexColorScheme.comfortablePlatformDensity;
 
     final textTheme = _createTextTheme();
 
     return switch (brightness) {
       Brightness.dark => FlexThemeData.dark(
-          colors: flexSchemeColor,
-          visualDensity: visualDensity,
-          cupertinoOverrideTheme: cupertinoTheme,
-          textTheme: textTheme,
-        ),
+        colors: flexSchemeColor,
+        visualDensity: visualDensity,
+        cupertinoOverrideTheme: cupertinoTheme,
+        textTheme: textTheme,
+      ),
       Brightness.light => FlexThemeData.light(
-          colors: flexSchemeColor,
-          visualDensity: visualDensity,
-          cupertinoOverrideTheme: cupertinoTheme,
-          textTheme: textTheme,
-        ),
+        colors: flexSchemeColor,
+        visualDensity: visualDensity,
+        cupertinoOverrideTheme: cupertinoTheme,
+        textTheme: textTheme,
+      ),
     };
   }
 
@@ -117,12 +126,31 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   ) {
     return MovieCardTheme(
       backgroundColor: colorScheme.surfaceContainerLow,
-      borderRadius: const BorderRadius.all(
-        Radius.circular(24),
-      ),
+      borderRadius: MsBorderRadius.extraLarge,
       titleStyle: textTheme.titleLarge,
       subtitleStyle: textTheme.bodyMedium,
       elevation: 8,
+    );
+  }
+
+  static SimpleGridViewTheme _createSimpleGridViewTheme() {
+    return const SimpleGridViewTheme(
+      childAspectRatio: 1,
+      crossAxisCount: 2,
+      mainAxisExtent: 340,
+      crossAxisSpacing: MsSpacings.medium,
+      mainAxisSpacing: MsSpacings.medium,
+      padding: MsEdgeInsets.scrollableContent,
+    );
+  }
+
+  static ProgressIndicatorTheme _createLoaderIndicatorTheme(
+    ColorScheme colorScheme,
+  ) {
+    return ProgressIndicatorTheme(
+      dotSize: 6,
+      spacing: MsSpacings.xxSmall,
+      color: colorScheme.primary,
     );
   }
 }

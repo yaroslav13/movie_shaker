@@ -6,10 +6,8 @@ abstract final class MsEdgeInsets {
   static const regularContent = EdgeInsets.all(12);
   static const largeContent = EdgeInsets.all(24);
 
-  static const listViewMargin = EdgeInsets.symmetric(
-    horizontal: 20,
+  static const scrollableContent = EdgeInsets.symmetric(
+    horizontal: 16,
     vertical: 12,
   );
-
-  static const listViewItemMargin = EdgeInsets.symmetric(vertical: 8);
 }
