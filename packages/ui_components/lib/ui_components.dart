@@ -1,9 +1,10 @@
-// movie card
+export 'src/grid_view/simple_grid_view.dart';
+export 'src/grid_view/simple_grid_view_theme.dart';
+export 'src/loader_indicator/progress_indicator.dart';
+export 'src/loader_indicator/progress_indicator_theme.dart';
 export 'src/movie_card/movie_card.dart';
 export 'src/movie_card/movie_card_theme.dart';
-// shared
 export 'src/shared/ms_edge_insets.dart';
 export 'src/shared/ms_spacings.dart';
-// theme
 export 'src/theme/ms_colors.dart';
 export 'src/theme/ms_theme.dart';
