@@ -3,21 +3,21 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 @immutable
-final class ProgressIndicatorTheme
-    extends ThemeExtension<ProgressIndicatorTheme> {
-  const ProgressIndicatorTheme({this.color, this.dotSize, this.spacing});
+final class DotsProgressIndicatorTheme
+    extends ThemeExtension<DotsProgressIndicatorTheme> {
+  const DotsProgressIndicatorTheme({this.color, this.dotSize, this.spacing});
 
   final Color? color;
   final double? dotSize;
   final double? spacing;
 
   @override
-  ProgressIndicatorTheme copyWith({
+  DotsProgressIndicatorTheme copyWith({
     Color? color,
     double? dotSize,
     double? spacing,
   }) {
-    return ProgressIndicatorTheme(
+    return DotsProgressIndicatorTheme(
       color: color ?? this.color,
       dotSize: dotSize ?? this.dotSize,
       spacing: spacing ?? this.spacing,
@@ -25,15 +25,15 @@ final class ProgressIndicatorTheme
   }
 
   @override
-  ThemeExtension<ProgressIndicatorTheme> lerp(
-    covariant ThemeExtension<ProgressIndicatorTheme>? other,
+  ThemeExtension<DotsProgressIndicatorTheme> lerp(
+    covariant ThemeExtension<DotsProgressIndicatorTheme>? other,
     double t,
   ) {
-    if (other is! ProgressIndicatorTheme) {
+    if (other is! DotsProgressIndicatorTheme) {
       return this;
     }
 
-    return ProgressIndicatorTheme(
+    return DotsProgressIndicatorTheme(
       color: Color.lerp(color, other.color, t),
       dotSize: lerpDouble(dotSize, other.dotSize, t),
       spacing: lerpDouble(spacing, other.spacing, t),

@@ -101,22 +101,10 @@ final class _Hint extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: MsSpacings.xxSmall,
         children: [
-          Flexible(
-            child: Text(
-              title,
-              style: titleStyle,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+          Flexible(child: Text(title, style: titleStyle)),
           if (subtitle case final subtitle?) ...[
             const SizedBox(height: MsSpacings.xxSmall),
-            Flexible(
-              child: Text(
-                subtitle,
-                style: subtitleStyle,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+            Flexible(child: Text(subtitle, style: subtitleStyle)),
           ],
         ],
       ),

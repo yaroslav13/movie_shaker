@@ -1,4 +1,5 @@
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
+import 'package:example/src/pages/progress_indicator_example/progress_indicator_example_view.dart';
 import 'package:example/src/utils/labeled_widget_mixin.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ final class MainScreen extends StatefulWidget {
 final class _MainScreenState extends State<MainScreen> {
   final _destinations = <Widget>[
     const MovieCardExamplesView(),
+    const ProgressIndicatorExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

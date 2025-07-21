@@ -2,8 +2,8 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ui_components/src/grid_view/simple_grid_view_theme.dart';
-import 'package:ui_components/src/loader_indicator/progress_indicator_theme.dart';
+import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
+import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
@@ -25,8 +25,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return theme.copyWith(
       extensions: [
         _createMovieCardTheme(colorScheme, textTheme),
-        _createSimpleGridViewTheme(),
-        _createLoaderIndicatorTheme(colorScheme),
+        _createStaggeredGridViewTheme(),
+        _createDotsProgressIndicatorTheme(colorScheme),
       ],
     );
   }
@@ -133,21 +133,19 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  static SimpleGridViewTheme _createSimpleGridViewTheme() {
-    return const SimpleGridViewTheme(
-      childAspectRatio: 1,
+  static StaggeredGridViewTheme _createStaggeredGridViewTheme() {
+    return const StaggeredGridViewTheme(
       crossAxisCount: 2,
-      mainAxisExtent: 340,
       crossAxisSpacing: MsSpacings.medium,
       mainAxisSpacing: MsSpacings.medium,
       padding: MsEdgeInsets.scrollableContent,
     );
   }
 
-  static ProgressIndicatorTheme _createLoaderIndicatorTheme(
+  static DotsProgressIndicatorTheme _createDotsProgressIndicatorTheme(
     ColorScheme colorScheme,
   ) {
-    return ProgressIndicatorTheme(
+    return DotsProgressIndicatorTheme(
       dotSize: 6,
       spacing: MsSpacings.xxSmall,
       color: colorScheme.primary,

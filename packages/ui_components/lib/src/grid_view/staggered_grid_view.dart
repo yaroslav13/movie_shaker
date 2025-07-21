@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/grid_view/simple_grid_view_theme.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
 
 const _defaultCrossAxisCount = 2;
-const _defaultAspectRatio = 0.5;
 
-final class SimpleGridView extends StatelessWidget {
-  const SimpleGridView({
+final class StaggeredGridView extends StatelessWidget {
+  const StaggeredGridView({
     required this.itemBuilder,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -16,10 +16,8 @@ final class SimpleGridView extends StatelessWidget {
     this.padding,
     this.controller,
     this.crossAxisCount,
-    this.mainAxisExtent,
-    this.crossAxisSpacing,
     this.mainAxisSpacing,
-    this.childAspectRatio,
+    this.crossAxisSpacing,
     super.key,
   });
 
@@ -33,18 +31,16 @@ final class SimpleGridView extends StatelessWidget {
   final bool? primary;
 
   final int? crossAxisCount;
-  final double? mainAxisExtent;
-  final double? crossAxisSpacing;
   final double? mainAxisSpacing;
-  final double? childAspectRatio;
+  final double? crossAxisSpacing;
 
   final EdgeInsetsGeometry? padding;
 
-  final NullableIndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).extension<SimpleGridViewTheme>();
+    final theme = Theme.of(context).extension<StaggeredGridViewTheme>();
 
     final crossAxisCount =
         this.crossAxisCount ?? theme?.crossAxisCount ?? _defaultCrossAxisCount;
@@ -53,21 +49,12 @@ final class SimpleGridView extends StatelessWidget {
     final mainAxisSpacing =
         this.mainAxisSpacing ?? theme?.mainAxisSpacing ?? MsSpacings.medium;
 
-    final childAspectRatio =
-        this.childAspectRatio ?? theme?.childAspectRatio ?? _defaultAspectRatio;
-
-    final mainAxisExtent = this.mainAxisExtent ?? theme?.mainAxisExtent;
-
     final padding = this.padding ?? theme?.padding ?? EdgeInsets.zero;
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        crossAxisSpacing: crossAxisSpacing,
-        mainAxisSpacing: mainAxisSpacing,
-        childAspectRatio: childAspectRatio,
-        mainAxisExtent: mainAxisExtent,
-      ),
+    return MasonryGridView.count(
+      crossAxisCount: crossAxisCount,
+      crossAxisSpacing: crossAxisSpacing,
+      mainAxisSpacing: mainAxisSpacing,
       controller: controller,
       padding: padding,
       scrollDirection: scrollDirection,
