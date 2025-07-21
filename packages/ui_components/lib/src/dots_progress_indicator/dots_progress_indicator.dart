@@ -1,13 +1,18 @@
-import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
-import 'package:ui_components/src/loader_indicator/progress_indicator_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
 
 const _dotSize = 6.0;
 const _spacing = 2.0;
 
 const _minHeight = _dotSize * 1.5;
 
-final class ProgressIndicator extends StatefulWidget {
-  const ProgressIndicator({this.color, this.dotSize, this.spacing, super.key});
+final class DotsProgressIndicator extends StatefulWidget {
+  const DotsProgressIndicator({
+    this.color,
+    this.dotSize,
+    this.spacing,
+    super.key,
+  });
 
   final double? dotSize;
   final double? spacing;
@@ -17,7 +22,7 @@ final class ProgressIndicator extends StatefulWidget {
   State<StatefulWidget> createState() => _DotsLoaderIndicatorState();
 }
 
-final class _DotsLoaderIndicatorState extends State<ProgressIndicator>
+final class _DotsLoaderIndicatorState extends State<DotsProgressIndicator>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _loadingAnimation;
@@ -51,7 +56,7 @@ final class _DotsLoaderIndicatorState extends State<ProgressIndicator>
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final theme = Theme.of(context).extension<ProgressIndicatorTheme>();
+    final theme = Theme.of(context).extension<DotsProgressIndicatorTheme>();
 
     final dotSize = widget.dotSize ?? theme?.dotSize ?? _dotSize;
     final color = widget.color ?? theme?.color ?? colorScheme.primary;
