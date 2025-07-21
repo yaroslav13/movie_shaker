@@ -1,11 +1,21 @@
 import 'package:flutter/foundation.dart';
+import 'package:movie_shaker/src/domain/build_config/build_type.dart';
 
 const _apiKey = String.fromEnvironment('API_KEY');
+const _appBuildType = String.fromEnvironment('BUILD_TYPE');
+
+const _baseUrl = 'https://api.themoviedb.org/3';
+const _baseImageUrl = 'https://image.tmdb.org/t/p/w500';
 
 @immutable
 final class BuildConfig {
   factory BuildConfig() {
-    return BuildConfig._dev();
+    final currentBuildType = BuildType.fromValue(_appBuildType);
+
+    return switch (currentBuildType) {
+      BuildType.dev => BuildConfig._dev(),
+      BuildType.prod => BuildConfig._prod(),
+    };
   }
 
   const BuildConfig._({
@@ -19,8 +29,17 @@ final class BuildConfig {
     return const BuildConfig._(
       enableLogs: true,
       apiKey: _apiKey,
-      baseUrl: 'https://api.themoviedb.org/3',
-      baseImageUrl: 'https://image.tmdb.org/t/p/w500',
+      baseUrl: _baseUrl,
+      baseImageUrl: _baseImageUrl,
+    );
+  }
+
+  factory BuildConfig._prod() {
+    return const BuildConfig._(
+      enableLogs: false,
+      apiKey: _apiKey,
+      baseUrl: _baseUrl,
+      baseImageUrl: _baseImageUrl,
     );
   }
 
