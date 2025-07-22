@@ -14,8 +14,8 @@ final class MovieShakerApp extends HookConsumerWidget {
 
     return MaterialApp.router(
       routerConfig: router,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: context.localizationsDelegates,
+      supportedLocales: context.supportedLocales,
       theme: theme,
     );
   }

@@ -19,7 +19,7 @@ final class LoadingErrorStub extends StatelessWidget {
       child: Padding(
         padding: MsEdgeInsets.scaffoldBody,
         child: Text(
-          description ?? AppLocalizations.of(context)!.somethingWentWrong,
+          description ?? context.localizations.somethingWentWrong,
           style: textStyle,
           textAlign: TextAlign.center,
         ),
