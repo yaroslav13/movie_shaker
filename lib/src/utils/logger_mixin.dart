@@ -45,6 +45,7 @@ mixin LoggerMixin<T> on AutoDisposeNotifier<T> {
   }
 
   @nonVirtual
+  @protected
   void fine(Object message, [Object? error, StackTrace? stackTrace]) {
     ref
         .read(loggerProvider)
