@@ -9,5 +9,6 @@ sealed class HomeState with _$HomeState {
     @Default(false) bool isLoading,
     @Default(false) bool hasError,
     @Default([]) List<Movie> movies,
+    Movie? suggestedMovie,
   }) = _HomeState;
 }

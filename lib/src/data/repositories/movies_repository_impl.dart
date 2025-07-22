@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movie_shaker/src/data/datasources/movies_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/movies/movies_datasource.dart';
 import 'package:movie_shaker/src/data/mappers/movie_mapper.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
