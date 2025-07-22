@@ -11,8 +11,8 @@ final class UiKitApplication extends StatelessWidget {
     return MaterialApp(
       title: 'UiComponents Demo',
       theme: MsTheme.light(),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: context.localizationsDelegates,
+      supportedLocales: context.supportedLocales,
       home: const MainScreen(title: 'UiComponents Demo'),
     );
   }
