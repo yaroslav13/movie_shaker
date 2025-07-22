@@ -95,7 +95,9 @@ final class _Hint extends StatelessWidget {
     final subtitleStyle = this.subtitleStyle ?? theme?.subtitleStyle;
 
     return Padding(
-      padding: MsEdgeInsets.regularContent,
+      padding: EdgeInsets.symmetric(
+        horizontal: MsEdgeInsets.smallContent.horizontal,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -103,7 +105,6 @@ final class _Hint extends StatelessWidget {
         children: [
           Flexible(child: Text(title, style: titleStyle)),
           if (subtitle case final subtitle?) ...[
-            const SizedBox(height: MsSpacings.xxSmall),
             Flexible(child: Text(subtitle, style: subtitleStyle)),
           ],
         ],

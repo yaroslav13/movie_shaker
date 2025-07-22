@@ -1,0 +1,22 @@
+name: localization
+description: "Localized strings source"
+version: 1.0.0
+resolution: workspace
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  intl: 0.20.2
+
+dev_dependencies:
+  dart_code_metrics_presets: 2.24.0
+
+flutter:
+  generate: true
+

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
+import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
@@ -27,6 +28,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMovieCardTheme(colorScheme, textTheme),
         _createStaggeredGridViewTheme(),
         _createDotsProgressIndicatorTheme(colorScheme),
+        _createLoadingErrorStubTheme(textTheme),
       ],
     );
   }
@@ -150,5 +152,11 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       spacing: MsSpacings.xxSmall,
       color: colorScheme.primary,
     );
+  }
+
+  static LoadingErrorStubTheme _createLoadingErrorStubTheme(
+    TextTheme textTheme,
+  ) {
+    return LoadingErrorStubTheme(textStyle: textTheme.titleLarge);
   }
 }
