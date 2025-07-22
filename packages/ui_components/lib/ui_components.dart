@@ -2,6 +2,7 @@ export 'src/dots_progress_indicator/dots_progress_indicator.dart';
 export 'src/dots_progress_indicator/dots_progress_indicator_theme.dart';
 export 'src/grid_view/staggered_grid_view.dart';
 export 'src/grid_view/staggered_grid_view_theme.dart';
+export 'src/loading_error_stub/loading_error_stub.dart';
 export 'src/movie_card/movie_card.dart';
 export 'src/movie_card/movie_card_theme.dart';
 export 'src/shared/ms_edge_insets.dart';

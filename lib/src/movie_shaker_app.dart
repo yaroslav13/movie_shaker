@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/di/router/router_provider.dart';
 import 'package:movie_shaker/src/di/theme/theme_provider.dart';
 
@@ -13,6 +14,8 @@ final class MovieShakerApp extends HookConsumerWidget {
 
     return MaterialApp.router(
       routerConfig: router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: theme,
     );
   }

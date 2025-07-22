@@ -27,6 +27,9 @@ analyzer:
     - "**/*.config.dart"
     - "**/generated/**"
 
+formatter:
+  trailing_commas: preserve
+
 dart_code_metrics:
   metrics:
     source-lines-of-code: 50

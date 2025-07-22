@@ -1,5 +1,6 @@
 import 'package:example/src/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class UiKitApplication extends StatelessWidget {
@@ -10,6 +11,8 @@ final class UiKitApplication extends StatelessWidget {
     return MaterialApp(
       title: 'UiComponents Demo',
       theme: MsTheme.light(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const MainScreen(title: 'UiComponents Demo'),
     );
   }
