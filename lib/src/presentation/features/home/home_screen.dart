@@ -26,6 +26,28 @@ final class _MoviesGridView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeStateNotifierProvider);
 
+    final suggestedMovie = state.suggestedMovie;
+    useEffect(
+      () {
+        if (suggestedMovie != null) {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Suggested movie: ${suggestedMovie.title}',
+                  ),
+                ),
+              );
+            },
+          );
+        }
+
+        return;
+      },
+      [suggestedMovie],
+    );
+
     if (state.hasError) {
       return const LoadingErrorStub();
     } else if (state.isLoading) {

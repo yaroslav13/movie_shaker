@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_shaker/src/data/datasources/movies_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/movies/movies_datasource.dart';
 import 'package:movie_shaker/src/di/network/dio_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

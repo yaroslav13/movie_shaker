@@ -43,6 +43,12 @@ dependencies:
   freezed_annotation: 3.1.0
   json_serializable: 6.9.5
 
+  # shake gesture
+  sensors_plus: 6.1.1
+
+  # stream transformers
+  rxdart: 0.28.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
