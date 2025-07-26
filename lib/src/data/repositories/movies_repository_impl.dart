@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_shaker/src/data/datasources/movies/movies_datasource.dart';
 import 'package:movie_shaker/src/data/mappers/movie_mapper.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
@@ -12,11 +13,17 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   final MovieMapper _movieMapper;
 
   @override
-  Future<List<Movie>> getMovies() async {
+  Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber) async {
     try {
-      final response = await _moviesDatasource.getMovies(page: 1);
+      final response = await _moviesDatasource.getMovies(page: pageNumber);
 
-      return response.results.map(_movieMapper.map).toList();
+      final movies = response.results.map(_movieMapper.map).toList();
+
+      return PaginationPage<Movie>(
+        items: movies,
+        pageNumber: response.page,
+        isLastPage: response.page >= response.totalPages,
+      );
     } on DioException catch (e, s) {
       final error = e.error;
       Error.throwWithStackTrace(error ?? const UnknownNetworkException(), s);

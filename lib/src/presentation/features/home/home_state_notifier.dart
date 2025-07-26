@@ -6,6 +6,7 @@ import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:ui_components/ui_components.dart';
 
 part 'home_state_notifier.g.dart';
 
@@ -19,10 +20,16 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       () => _movieSuggestionsSubscription?.cancel().ignore(),
     );
 
-    return const HomeState(isLoading: true);
+    return const HomeState(
+      paginationState: PaginationState(isLoading: true),
+    );
   }
 
   void onStart() {
+    unawaited(_fetchMovies());
+  }
+
+  void onMoviesGridViewBottomReached() {
     unawaited(_fetchMovies());
   }
 
@@ -32,13 +39,32 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
 
       final getMoviesInteractor = ref.read(getMoviesInteractorProvider);
 
-      final movies = await getMoviesInteractor();
-      state = state.copyWith(isLoading: false, movies: movies);
-      _subscribeMovieSuggestions(movies);
+      final pageNumber = state.paginationState.pagesCount + 1;
+      final paginationPage = await getMoviesInteractor(pageNumber);
+
+      final currentPaginationState = state.paginationState;
+      final updatedPaginationState = currentPaginationState.copyWith(
+        isLoading: false,
+        pages: [...?currentPaginationState.pages, paginationPage.items],
+        keys: [
+          ...?currentPaginationState.keys,
+          paginationPage.pageNumber,
+        ],
+        hasNextPage: !paginationPage.isLastPage,
+      );
+
+      state = state.copyWith(paginationState: updatedPaginationState);
+
+      _subscribeMovieSuggestions(updatedPaginationState.items);
     } on Exception catch (e, s) {
       error('Error fetching movies:', e, s);
 
-      state = state.copyWith(isLoading: false, hasError: true);
+      state = state.copyWith(
+        paginationState: state.paginationState.copyWith(
+          isLoading: false,
+          error: e,
+        ),
+      );
     }
   }
 

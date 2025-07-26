@@ -2,6 +2,7 @@ name: localization
 description: "Localized strings source"
 version: 1.0.0
 resolution: workspace
+publish_to: 'none'
 
 environment:
   sdk: ^3.8.0
