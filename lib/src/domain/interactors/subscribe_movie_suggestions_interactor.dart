@@ -4,6 +4,7 @@ import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
 
+// TODO(yhalivets): Make a custom request to the API to get a random movie
 final class SubscribeMovieSuggestionsInteractor
     implements StreamInteractor<Movie, List<Movie>> {
   SubscribeMovieSuggestionsInteractor(this._deviceShakeNotificationsRepository);

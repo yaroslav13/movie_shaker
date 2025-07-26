@@ -2,6 +2,7 @@ name: ui_components
 description: "Ui Components"
 version: 1.0.0
 resolution: workspace
+publish_to: 'none'
 
 environment:
   sdk: ^3.8.0
@@ -14,6 +15,9 @@ dependencies:
   google_fonts: 6.2.1
   flex_color_scheme: 8.2.0
   flutter_staggered_grid_view: 0.7.0
+  infinite_scroll_pagination: 5.1.0
+  custom_refresh_indicator: 4.0.1
+  rive: 0.13.20
 
   # network
   cached_network_image: 3.4.1
@@ -22,8 +26,26 @@ dependencies:
   localization:
     path: ../localization
 
+  # dart utils
+  collection: 1.19.1
+
   # annotations
   meta: 1.16.0
 dev_dependencies:
+  # lints
   dart_code_metrics_presets: 2.24.0
 
+  # code generation
+  flutter_gen_runner: 5.11.0
+  build_runner: 2.5.4
+
+flutter:
+  assets:
+    - assets/animations/popcorn_animation.riv
+
+flutter_gen:
+  output: lib/src/shared/
+  assets:
+    outputs:
+      package_parameter_enabled: true
+      class_name: MsAssets

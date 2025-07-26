@@ -1,6 +1,6 @@
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 
 abstract interface class MoviesRepository {
-  // TODO(yhalivets): Implement pagination
-  Future<List<Movie>> getMovies();
+  Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber);
 }
