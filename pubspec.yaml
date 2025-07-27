@@ -66,6 +66,7 @@ dev_dependencies:
 
   # launcher icons gen
   flutter_launcher_icons: 0.14.4
+  flutter_native_splash: 2.4.6
 
 flutter:
   uses-material-design: true
