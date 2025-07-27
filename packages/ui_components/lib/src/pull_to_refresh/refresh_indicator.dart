@@ -102,7 +102,7 @@ final class _RefreshIndicatorState extends State<_RefreshIndicator> {
   @override
   Widget build(BuildContext context) {
     return RiveAnimation.asset(
-      MsAssets.animations.popcornAnimation,
+      MsAssets.animations.popcornBoomAnimation,
       onInit: _onRiveInit,
     );
   }

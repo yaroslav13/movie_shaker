@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator.dart';
+import 'package:ui_components/src/glasses_progress_indicator/glasses_progress_indicator.dart';
 import 'package:ui_components/src/grid_view/entities/pagination_state.dart';
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub.dart';
@@ -86,7 +86,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
         itemBuilder: itemBuilder,
         firstPageErrorIndicatorBuilder: (_) => const LoadingErrorStub(),
         firstPageProgressIndicatorBuilder: (context) => const Center(
-          child: DotsProgressIndicator(),
+          child: GlassesProgressIndicator(),
         ),
         noItemsFoundIndicatorBuilder: (_) => const SizedBox.shrink(),
         noMoreItemsIndicatorBuilder: (_) => const SizedBox.shrink(),
