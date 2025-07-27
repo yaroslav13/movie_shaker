@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:ui_components/ui_components.dart';
 
@@ -48,21 +49,18 @@ final class _MoviesGridView extends HookConsumerWidget {
       [suggestedMovie],
     );
 
-    if (state.hasError) {
-      return const LoadingErrorStub();
-    } else if (state.isLoading) {
-      return const Center(child: DotsProgressIndicator());
-    }
-
-    final movies = state.movies;
-
-    return StaggeredGridView(
-      itemCount: movies.length,
-      itemBuilder: (_, i) {
-        final movie = movies[i];
-
-        return MovieCard(imageUrl: movie.posterUrl, title: movie.title);
-      },
+    return PullToRefreshWidget(
+      onRefresh: () async =>
+          ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
+      child: PagedStaggeredGridView<Movie>(
+        paginationState: state.paginationState,
+        fetchNextPage: () => ref
+            .read(homeStateNotifierProvider.notifier)
+            .onMoviesGridViewBottomReached(),
+        itemBuilder: (_, movie, index) {
+          return MovieCard(imageUrl: movie.posterUrl, title: movie.title);
+        },
+      ),
     );
   }
 }
