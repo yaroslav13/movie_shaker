@@ -93,6 +93,12 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       primary: primary,
       scrollController: controller,
       fetchNextPage: onNextPage,
+      physics: state.pages == null && (state.error != null || state.isLoading)
+          ? const NeverScrollableScrollPhysics()
+          : const BouncingScrollPhysics(),
+      showNewPageErrorIndicatorAsGridChild: false,
+      showNewPageProgressIndicatorAsGridChild: false,
+      showNoMoreItemsIndicatorAsGridChild: false,
       builderDelegate: PagedChildBuilderDelegate(
         itemBuilder: itemBuilder,
         firstPageErrorIndicatorBuilder: (_) => LoadingErrorStub(
