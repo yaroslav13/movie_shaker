@@ -54,9 +54,11 @@ final class _MoviesGridView extends HookConsumerWidget {
           ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
       child: PagedStaggeredGridView<Movie>(
         paginationState: state.paginationState,
-        fetchNextPage: () => ref
+        onNextPage: () => ref
             .read(homeStateNotifierProvider.notifier)
             .onMoviesGridViewBottomReached(),
+        onReload: () =>
+            ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
         itemBuilder: (_, movie, index) {
           return MovieCard(imageUrl: movie.posterUrl, title: movie.title);
         },

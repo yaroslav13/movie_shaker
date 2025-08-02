@@ -12,6 +12,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get movieShaker => 'Movie Shaker';
 
   @override
-  String get somethingWentWrong =>
-      'Something went wrong, please try again later.';
+  String get aChillingBooo => 'A chilling “Booo!”';
+
+  @override
+  String get tryAgain => 'Try Again… If You Dare';
 }

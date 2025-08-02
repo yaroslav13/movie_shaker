@@ -1,15 +1,18 @@
-part of 'pull_to_refresh_widget.dart';
+part of '../pull_to_refresh_widget.dart';
 
-final class _RefreshIndicator extends StatefulWidget {
-  const _RefreshIndicator({this.state});
+final class _PopcornRefreshIndicator extends StatefulWidget {
+  @Deprecated('Use `GlassesRefreshIndicator` instead.')
+  const _PopcornRefreshIndicator({this.state});
 
   final IndicatorState? state;
 
   @override
-  State<_RefreshIndicator> createState() => _RefreshIndicatorState();
+  State<_PopcornRefreshIndicator> createState() =>
+      _PopcornRefreshIndicatorState();
 }
 
-final class _RefreshIndicatorState extends State<_RefreshIndicator> {
+final class _PopcornRefreshIndicatorState
+    extends State<_PopcornRefreshIndicator> {
   final _riveControllerCompleter = Completer<StateMachineController>();
   SMIBool? _popcornPoppingTrigger;
   Timer? _resetAnimationTimer;
@@ -82,7 +85,7 @@ final class _RefreshIndicatorState extends State<_RefreshIndicator> {
   }
 
   @override
-  void didUpdateWidget(covariant _RefreshIndicator oldWidget) {
+  void didUpdateWidget(covariant _PopcornRefreshIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.state != oldWidget.state) {

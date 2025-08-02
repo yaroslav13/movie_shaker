@@ -1,0 +1,4 @@
+enum LoadingErrorStubType {
+  vertical,
+  horizontal,
+}

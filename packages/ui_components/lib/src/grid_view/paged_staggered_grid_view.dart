@@ -3,8 +3,12 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:ui_components/src/glasses_progress_indicator/glasses_progress_indicator.dart';
 import 'package:ui_components/src/grid_view/entities/pagination_state.dart';
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
+import 'package:ui_components/src/loading_error_stub/enitities/loading_error_stub_type.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub.dart';
+import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
+
+part 'widgets/footer_tile.dart';
 
 const _defaultCrossAxisCount = 2;
 
@@ -12,7 +16,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
   const PagedStaggeredGridView({
     required this.paginationState,
     required this.itemBuilder,
-    required this.fetchNextPage,
+    required this.onNextPage,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.shrinkWrap = false,
@@ -23,6 +27,9 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
     this.crossAxisCount,
     this.mainAxisSpacing,
     this.crossAxisSpacing,
+    this.largeTextStyle,
+    this.smallTextStyle,
+    this.onReload,
     super.key,
   });
 
@@ -41,11 +48,14 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
   final double? mainAxisSpacing;
   final double? crossAxisSpacing;
 
+  final TextStyle? largeTextStyle;
+  final TextStyle? smallTextStyle;
   final EdgeInsetsGeometry? padding;
 
   final Widget Function(BuildContext context, T item, int index) itemBuilder;
 
-  final VoidCallback fetchNextPage;
+  final VoidCallback onNextPage;
+  final VoidCallback? onReload;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +70,9 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
 
     final padding = this.padding ?? theme?.padding ?? EdgeInsets.zero;
 
+    final largeTextStyle = this.largeTextStyle ?? theme?.largeTextStyle;
+    final smallTextStyle = this.smallTextStyle ?? theme?.smallTextStyle;
+
     final state = PagingState<int, T>(
       pages: paginationState.pages,
       keys: paginationState.keys,
@@ -68,7 +81,6 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       isLoading: paginationState.isLoading,
     );
 
-    // TODO(yhalivets): Handle edge cases like empty state, errors, etc.
     return PagedMasonryGridView<int, T>.count(
       state: state,
       crossAxisSpacing: crossAxisSpacing,
@@ -80,14 +92,28 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       shrinkWrap: shrinkWrap,
       primary: primary,
       scrollController: controller,
-      fetchNextPage: fetchNextPage,
+      fetchNextPage: onNextPage,
       builderDelegate: PagedChildBuilderDelegate(
-        animateTransitions: true,
         itemBuilder: itemBuilder,
-        firstPageErrorIndicatorBuilder: (_) => const LoadingErrorStub(),
+        firstPageErrorIndicatorBuilder: (_) => LoadingErrorStub(
+          textStyle: largeTextStyle,
+          onRetry: onReload,
+        ),
         firstPageProgressIndicatorBuilder: (context) => const Center(
           child: GlassesProgressIndicator(),
         ),
+        newPageProgressIndicatorBuilder: (context) => const _FooterTile(
+          child: GlassesProgressIndicator(),
+        ),
+        newPageErrorIndicatorBuilder: (context) => _FooterTile(
+          child: LoadingErrorStub(
+            textStyle: smallTextStyle,
+            type: LoadingErrorStubType.horizontal,
+            onRetry: onNextPage,
+          ),
+        ),
+
+        /// TODO(yhalivets): Handle empty state.
         noItemsFoundIndicatorBuilder: (_) => const SizedBox.shrink(),
         noMoreItemsIndicatorBuilder: (_) => const SizedBox.shrink(),
       ),

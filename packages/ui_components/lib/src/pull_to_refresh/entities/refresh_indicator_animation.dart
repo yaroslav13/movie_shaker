@@ -1,0 +1,4 @@
+enum RefreshIndicatorAnimation {
+  popcorn,
+  glasses,
+}
