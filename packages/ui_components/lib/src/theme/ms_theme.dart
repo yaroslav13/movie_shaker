@@ -6,6 +6,8 @@ import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicato
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
+import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
+import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
@@ -26,9 +28,11 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return theme.copyWith(
       extensions: [
         _createMovieCardTheme(colorScheme, textTheme),
-        _createStaggeredGridViewTheme(),
+        _createStaggeredGridViewTheme(textTheme),
         _createDotsProgressIndicatorTheme(colorScheme),
         _createLoadingErrorStubTheme(textTheme),
+        _createMSElevatedButtonTheme(colorScheme, textTheme),
+        _createMsIconButtonTheme(colorScheme),
       ],
     );
   }
@@ -135,12 +139,16 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  static StaggeredGridViewTheme _createStaggeredGridViewTheme() {
-    return const StaggeredGridViewTheme(
+  static StaggeredGridViewTheme _createStaggeredGridViewTheme(
+    TextTheme textTheme,
+  ) {
+    return StaggeredGridViewTheme(
       crossAxisCount: 2,
       crossAxisSpacing: MsSpacings.medium,
       mainAxisSpacing: MsSpacings.medium,
       padding: MsEdgeInsets.scrollableContent,
+      largeTextStyle: textTheme.displayMedium,
+      smallTextStyle: textTheme.bodyLarge,
     );
   }
 
@@ -157,6 +165,32 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   static LoadingErrorStubTheme _createLoadingErrorStubTheme(
     TextTheme textTheme,
   ) {
-    return LoadingErrorStubTheme(textStyle: textTheme.titleLarge);
+    return LoadingErrorStubTheme(textStyle: textTheme.displayMedium);
+  }
+
+  static MsElevatedButtonTheme _createMSElevatedButtonTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsElevatedButtonTheme(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      borderRadius: MsBorderRadius.regular,
+      elevation: 8,
+      padding: const EdgeInsets.all(24),
+      textStyle: textTheme.labelLarge,
+    );
+  }
+
+  static MsIconButtonTheme _createMsIconButtonTheme(
+    ColorScheme colorScheme,
+  ) {
+    return MsIconButtonTheme(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      borderRadius: MsBorderRadius.regular,
+      elevation: 8,
+      padding: const EdgeInsets.all(16),
+    );
   }
 }

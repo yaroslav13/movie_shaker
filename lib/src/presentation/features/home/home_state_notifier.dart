@@ -38,6 +38,12 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
     unawaited(_fetchMovies(_initialPageNumber));
   }
 
+  void onReloadPressed() {
+    info('Refreshing movies...');
+
+    unawaited(_fetchMovies(_initialPageNumber));
+  }
+
   void onMoviesGridViewBottomReached() {
     final pageNumber = state.paginationState.pagesCount + 1;
     unawaited(_fetchMovies(pageNumber));

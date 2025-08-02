@@ -100,11 +100,17 @@ abstract class AppLocalizations {
   /// **'Movie Shaker'**
   String get movieShaker;
 
-  /// No description provided for @somethingWentWrong.
+  /// No description provided for @aChillingBooo.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong, please try again later.'**
-  String get somethingWentWrong;
+  /// **'A chilling “Booo!”'**
+  String get aChillingBooo;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again… If You Dare'**
+  String get tryAgain;
 }
 
 class _AppLocalizationsDelegate
