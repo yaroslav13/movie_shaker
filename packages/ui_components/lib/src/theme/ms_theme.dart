@@ -78,47 +78,47 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
 
   static TextTheme _createTextTheme() {
     return TextTheme(
-      displayLarge: GoogleFonts.roboto(
+      displayLarge: GoogleFonts.caprasimo(
         fontSize: 36,
         fontWeight: FontWeight.w700,
         letterSpacing: -1.5,
       ),
-      displayMedium: GoogleFonts.roboto(
+      displayMedium: GoogleFonts.caprasimo(
         fontSize: 32,
         fontWeight: FontWeight.w700,
         letterSpacing: -1,
       ),
-      headlineMedium: GoogleFonts.roboto(
+      headlineMedium: GoogleFonts.caprasimo(
         fontSize: 24,
         fontWeight: FontWeight.w600,
         letterSpacing: -0.5,
       ),
-      titleLarge: GoogleFonts.roboto(
+      titleLarge: GoogleFonts.caprasimo(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         letterSpacing: 0.15,
       ),
-      titleMedium: GoogleFonts.roboto(
+      titleMedium: GoogleFonts.caprasimo(
         fontSize: 16,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.1,
       ),
-      bodyLarge: GoogleFonts.roboto(
+      bodyLarge: GoogleFonts.caprasimo(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.25,
       ),
-      bodyMedium: GoogleFonts.roboto(
+      bodyMedium: GoogleFonts.caprasimo(
         fontSize: 13,
         fontWeight: FontWeight.w400,
         letterSpacing: 0.2,
       ),
-      labelLarge: GoogleFonts.roboto(
+      labelLarge: GoogleFonts.caprasimo(
         fontSize: 12,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.4,
       ),
-      labelSmall: GoogleFonts.roboto(
+      labelSmall: GoogleFonts.caprasimo(
         fontSize: 10,
         fontWeight: FontWeight.w400,
         letterSpacing: 1,
