@@ -15,6 +15,7 @@ final class MovieCard extends StatelessWidget {
     this.backgroundColor,
     this.elevation,
     this.borderRadius,
+    this.onTap,
     super.key,
   });
 
@@ -32,6 +33,8 @@ final class MovieCard extends StatelessWidget {
   final double? elevation;
   final BorderRadiusGeometry? borderRadius;
 
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<MovieCardTheme>();
@@ -48,25 +51,29 @@ final class MovieCard extends StatelessWidget {
       shape: borderRadius != null
           ? RoundedRectangleBorder(borderRadius: borderRadius)
           : null,
-      child: Padding(
-        padding: MsEdgeInsets.regularContent,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          spacing: MsSpacings.medium,
-          children: [
-            ClipRRect(
-              borderRadius: borderRadius ?? BorderRadius.zero,
-              child: CachedNetworkImage(imageUrl: imageUrl),
-            ),
-            _Hint(
-              title: title,
-              subtitle: subtitle,
-              titleStyle: titleStyle,
-              subtitleStyle: subtitleStyle,
-            ),
-          ],
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: borderRadius is BorderRadius ? borderRadius : null,
+        child: Padding(
+          padding: MsEdgeInsets.regularContent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            spacing: MsSpacings.medium,
+            children: [
+              ClipRRect(
+                borderRadius: borderRadius ?? BorderRadius.zero,
+                child: CachedNetworkImage(imageUrl: imageUrl),
+              ),
+              _Hint(
+                title: title,
+                subtitle: subtitle,
+                titleStyle: titleStyle,
+                subtitleStyle: subtitleStyle,
+              ),
+            ],
+          ),
         ),
       ),
     );

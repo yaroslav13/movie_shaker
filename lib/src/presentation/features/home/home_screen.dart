@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class HomeScreen extends HookConsumerWidget {
@@ -22,6 +23,10 @@ final class HomeScreen extends HookConsumerWidget {
 
 final class _MoviesGridView extends HookConsumerWidget {
   const _MoviesGridView();
+
+  void _onMovieSelected(BuildContext context, Movie movie) {
+    MovieDetailsRoute(id: movie.id).go(context);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,7 +65,11 @@ final class _MoviesGridView extends HookConsumerWidget {
         onReload: () =>
             ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
         itemBuilder: (_, movie, index) {
-          return MovieCard(imageUrl: movie.posterUrl, title: movie.title);
+          return MovieCard(
+            imageUrl: movie.posterUrl,
+            title: movie.title,
+            onTap: () => _onMovieSelected(context, movie),
+          );
         },
       ),
     );
