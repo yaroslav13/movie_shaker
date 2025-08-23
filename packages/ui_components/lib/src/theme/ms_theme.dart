@@ -26,12 +26,13 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     final textTheme = theme.textTheme;
 
     return theme.copyWith(
+      inputDecorationTheme: _createInputDecorationTheme(colorScheme, textTheme),
       extensions: [
         _createMovieCardTheme(colorScheme, textTheme),
         _createStaggeredGridViewTheme(textTheme),
         _createDotsProgressIndicatorTheme(colorScheme),
         _createLoadingErrorStubTheme(textTheme),
-        _createMSElevatedButtonTheme(colorScheme, textTheme),
+        _createMsElevatedButtonTheme(colorScheme, textTheme),
         _createMsIconButtonTheme(colorScheme),
       ],
     );
@@ -168,7 +169,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return LoadingErrorStubTheme(textStyle: textTheme.displayMedium);
   }
 
-  static MsElevatedButtonTheme _createMSElevatedButtonTheme(
+  static MsElevatedButtonTheme _createMsElevatedButtonTheme(
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
@@ -191,6 +192,78 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       borderRadius: MsBorderRadius.regular,
       elevation: 8,
       padding: const EdgeInsets.all(16),
+    );
+  }
+
+  /* TODO(yhalivets): Migrate to [MsInputDecorationTheme]
+      to be less dependent on Material 3 changes.
+   */
+  static InputDecorationTheme _createInputDecorationTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    final enabledBorder = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.outline,
+      ),
+    );
+
+    final focusedBorder = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.primary,
+      ),
+    );
+
+    final errorBorder = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.error,
+      ),
+    );
+
+    final focusedErrorBorder = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.error,
+        width: 2,
+      ),
+    );
+
+    final disabledBorder = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.onSurface,
+      ),
+    );
+
+    final border = OutlineInputBorder(
+      borderRadius: MsBorderRadius.regular,
+      borderSide: BorderSide(
+        color: colorScheme.outline,
+      ),
+    );
+
+    return InputDecorationTheme(
+      filled: true,
+      fillColor: colorScheme.surfaceContainerLow,
+      contentPadding: MsEdgeInsets.textFieldContent,
+      border: border,
+      enabledBorder: enabledBorder,
+      focusedBorder: focusedBorder,
+      errorBorder: errorBorder,
+      focusedErrorBorder: focusedErrorBorder,
+      disabledBorder: disabledBorder,
+      hintStyle: textTheme.bodyMedium?.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+      labelStyle: textTheme.bodyMedium?.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+      errorStyle: textTheme.bodyMedium?.copyWith(
+        color: colorScheme.error,
+      ),
     );
   }
 }

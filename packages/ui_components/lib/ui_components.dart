@@ -8,6 +8,7 @@ export 'src/grid_view/staggered_grid_view_theme.dart';
 export 'src/loading_error_stub/loading_error_stub.dart';
 export 'src/movie_card/movie_card.dart';
 export 'src/movie_card/movie_card_theme.dart';
+export 'src/ms_text_form_field/ms_text_form_field.dart';
 export 'src/pull_to_refresh/pull_to_refresh_widget.dart';
 export 'src/shared/ms_edge_insets.dart';
 export 'src/shared/ms_spacings.dart';
