@@ -11,6 +11,12 @@ abstract final class MsEdgeInsets {
     horizontal: 16,
     vertical: 12,
   );
+
+  static const textFieldContent = EdgeInsets.symmetric(
+    horizontal: 12,
+    vertical: 8,
+  );
+
   static const scaffoldBody = EdgeInsets.symmetric(horizontal: 16);
 
   static const horizontalLarge = EdgeInsets.symmetric(horizontal: 24);
