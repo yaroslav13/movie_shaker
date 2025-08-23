@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
 
 final class MsTextFormField extends StatelessWidget {
   const MsTextFormField({
@@ -22,6 +23,17 @@ final class MsTextFormField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.textInputAction = TextInputAction.done,
     this.readOnly = false,
+    this.fillColor,
+    this.contentPadding,
+    this.border,
+    this.disabledBorder,
+    this.enabledBorder,
+    this.focusedBorder,
+    this.errorBorder,
+    this.focusedErrorBorder,
+    this.hintStyle,
+    this.labelStyle,
+    this.errorStyle,
     super.key,
   });
 
@@ -45,9 +57,35 @@ final class MsTextFormField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final TextInputAction textInputAction;
   final bool readOnly;
+  final Color? fillColor;
+  final EdgeInsetsGeometry? contentPadding;
+  final InputBorder? border;
+  final InputBorder? disabledBorder;
+  final InputBorder? enabledBorder;
+  final InputBorder? focusedBorder;
+  final InputBorder? errorBorder;
+  final InputBorder? focusedErrorBorder;
+  final TextStyle? hintStyle;
+  final TextStyle? labelStyle;
+  final TextStyle? errorStyle;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<MsInputDecorationTheme>();
+    final filled = theme?.filled ?? true;
+    final fillColor = this.fillColor ?? theme?.fillColor;
+    final contentPadding = this.contentPadding ?? theme?.contentPadding;
+    final border = this.border ?? theme?.border;
+    final disabledBorder = this.disabledBorder ?? theme?.disabledBorder;
+    final enabledBorder = this.enabledBorder ?? theme?.enabledBorder;
+    final focusedBorder = this.focusedBorder ?? theme?.focusedBorder;
+    final errorBorder = this.errorBorder ?? theme?.errorBorder;
+    final focusedErrorBorder =
+        this.focusedErrorBorder ?? theme?.focusedErrorBorder;
+    final hintStyle = this.hintStyle ?? theme?.hintStyle;
+    final labelStyle = this.labelStyle ?? theme?.labelStyle;
+    final errorStyle = this.errorStyle ?? theme?.errorStyle;
+
     return TextFormField(
       controller: controller,
       decoration: const InputDecoration().copyWith(
@@ -55,6 +93,18 @@ final class MsTextFormField extends StatelessWidget {
         labelText: labelText,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        filled: filled,
+        fillColor: fillColor,
+        contentPadding: contentPadding,
+        border: border,
+        enabledBorder: enabledBorder,
+        focusedBorder: focusedBorder,
+        errorBorder: errorBorder,
+        focusedErrorBorder: focusedErrorBorder,
+        disabledBorder: disabledBorder,
+        hintStyle: hintStyle,
+        labelStyle: labelStyle,
+        errorStyle: errorStyle,
       ),
       keyboardType: keyboardType,
       validator: validator,
