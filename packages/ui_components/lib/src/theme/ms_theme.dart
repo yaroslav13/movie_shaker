@@ -8,6 +8,7 @@ import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.da
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
+import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
@@ -26,7 +27,6 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     final textTheme = theme.textTheme;
 
     return theme.copyWith(
-      inputDecorationTheme: _createInputDecorationTheme(colorScheme, textTheme),
       extensions: [
         _createMovieCardTheme(colorScheme, textTheme),
         _createStaggeredGridViewTheme(textTheme),
@@ -34,6 +34,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createLoadingErrorStubTheme(textTheme),
         _createMsElevatedButtonTheme(colorScheme, textTheme),
         _createMsIconButtonTheme(colorScheme),
+        _createMsInputDecorationTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -195,10 +196,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  /* TODO(yhalivets): Migrate to [MsInputDecorationTheme]
-      to be less dependent on Material 3 changes.
-   */
-  static InputDecorationTheme _createInputDecorationTheme(
+  static MsInputDecorationTheme _createMsInputDecorationTheme(
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
@@ -245,7 +243,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       ),
     );
 
-    return InputDecorationTheme(
+    return MsInputDecorationTheme(
       filled: true,
       fillColor: colorScheme.surfaceContainerLow,
       contentPadding: MsEdgeInsets.textFieldContent,
