@@ -14,6 +14,14 @@ final class MovieCardExamplesView extends StatefulWidget
 }
 
 final class _MovieCardExamplesViewState extends State<MovieCardExamplesView> {
+  void _onMovieCardTap(int index) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Tapped on Movie Card $index'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +33,7 @@ final class _MovieCardExamplesViewState extends State<MovieCardExamplesView> {
           itemCount: 6,
           itemBuilder: (_, i) {
             return MovieCard(
+              onTap: () => _onMovieCardTap(i),
               imageUrl:
                   'https://media.printables.com/media/prints/5322/images/34243_38525894-79c4-48db-99b9-7782e2723276/thumbs/inside/1920x1440/jpg/20190824172724_019184.webp',
               title: 'Movie Title $i',
