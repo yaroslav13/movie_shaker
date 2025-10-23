@@ -53,6 +53,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # momorepo  tools
+  melos: 7.2.0
+
   # code generation
   build_runner: 2.5.4
   riverpod_generator: 2.6.5
@@ -74,3 +77,21 @@ flutter:
 
   assets:
     - assets/images/launch_icons/
+
+melos:
+  command:
+    bootstrap:
+      runPubGetInParallel: false
+      usePubspecOverrides: true
+
+  scripts:
+    analyze:
+      exec:
+        concurrency: 1
+      run: /bin/zsh $MELOS_ROOT_PATH/scripts/lint.sh
+    code_gen:
+      exec:
+        concurrency: 1
+      packageFilters:
+        ignore: "localization"
+      run: /bin/zsh $MELOS_ROOT_PATH/scripts/run_code_generation.sh
