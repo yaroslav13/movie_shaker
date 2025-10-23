@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_shaker/src/data/entities/discover_movies/discover_movies_response.dart';
+import 'package:movie_shaker/src/data/entities/search_movies/search_movies_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'movies_datasource.g.dart';
@@ -10,4 +11,10 @@ abstract interface class MoviesDatasource {
 
   @GET('/discover/movie')
   Future<DiscoverMoviesResponse> getMovies({@Query('page') required int page});
+
+  @GET('/search/movie')
+  Future<SearchMoviesResponse> searchMovies({
+    @Query('query') required String query,
+    @Query('page') required int page,
+  });
 }

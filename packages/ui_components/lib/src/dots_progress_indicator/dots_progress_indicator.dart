@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
 
@@ -22,8 +24,7 @@ final class DotsProgressIndicator extends StatefulWidget {
   State<StatefulWidget> createState() => _DotsLoaderIndicatorState();
 }
 
-final class _DotsLoaderIndicatorState extends State<DotsProgressIndicator>
-    with SingleTickerProviderStateMixin {
+final class _DotsLoaderIndicatorState extends State<DotsProgressIndicator> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _loadingAnimation;
 
@@ -43,7 +44,7 @@ final class _DotsLoaderIndicatorState extends State<DotsProgressIndicator>
     super.initState();
     _initAnimation();
 
-    _animationController.repeat(reverse: true);
+    unawaited(_animationController.repeat(reverse: true));
   }
 
   @override

@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:movie_shaker/src/di/interactors/get_movies_interactor_provider.dart';
+import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/subscribe_movie_suggestions_interactor_provider.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
+import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -49,12 +51,26 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
     unawaited(_fetchMovies(pageNumber));
   }
 
+  void onSearchInputChanged(String query) {
+    info('Search input changed: $query');
+
+    state = state.copyWith(searchQuery: query);
+
+    unawaited(_fetchMovies(_initialPageNumber));
+  }
+
   Future<void> _fetchMovies(PageNumber pageNumber) async {
     try {
       info('Fetching movies...');
 
       final getMoviesInteractor = ref.read(getMoviesInteractorProvider);
-      final moviesPage = await getMoviesInteractor(pageNumber);
+      final searchMoviesInteractor = ref.read(searchMoviesInteractorProvider);
+
+      final moviesPage = state.searchQuery.isEmpty
+          ? await getMoviesInteractor(pageNumber)
+          : await searchMoviesInteractor(
+              SearchQuery(query: state.searchQuery, page: pageNumber),
+            );
 
       final paginationState = state.paginationState;
 

@@ -11,6 +11,7 @@ final class MsTextFormField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.onChanged,
+    this.onFieldSubmitted,
     this.onSaved,
     this.prefixIcon,
     this.suffixIcon,
@@ -46,6 +47,7 @@ final class MsTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
   final ValueChanged<String?>? onSaved;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -80,8 +82,7 @@ final class MsTextFormField extends StatelessWidget {
     final enabledBorder = this.enabledBorder ?? theme?.enabledBorder;
     final focusedBorder = this.focusedBorder ?? theme?.focusedBorder;
     final errorBorder = this.errorBorder ?? theme?.errorBorder;
-    final focusedErrorBorder =
-        this.focusedErrorBorder ?? theme?.focusedErrorBorder;
+    final focusedErrorBorder = this.focusedErrorBorder ?? theme?.focusedErrorBorder;
     final hintStyle = this.hintStyle ?? theme?.hintStyle;
     final labelStyle = this.labelStyle ?? theme?.labelStyle;
     final errorStyle = this.errorStyle ?? theme?.errorStyle;
@@ -109,6 +110,7 @@ final class MsTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator,
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       onSaved: onSaved,
       maxLines: maxLines,
       minLines: minLines,

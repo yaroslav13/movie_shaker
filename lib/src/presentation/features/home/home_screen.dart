@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
@@ -11,13 +12,40 @@ final class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final searchController = useTextEditingController();
+
     useEffect(() {
       ref.read(homeStateNotifierProvider.notifier).onStart();
 
       return;
     }, const []);
 
-    return const Scaffold(body: SafeArea(child: _MoviesGridView()));
+    useEffect(
+      () {
+        final searchInputListener = () {
+          ref
+              .read(homeStateNotifierProvider.notifier)
+              .onSearchInputChanged(searchController.text);
+        };
+
+        searchController.addListener(searchInputListener);
+
+        return () {
+          searchController.removeListener(searchInputListener);
+        };
+      },
+      const [],
+    );
+
+    return Scaffold(
+      appBar: MsAppBar.searchBar(
+        title: context.localizations.movieShaker,
+        controller: searchController,
+      ),
+      body: const SafeArea(
+        child: _MoviesGridView(),
+      ),
+    );
   }
 }
 
