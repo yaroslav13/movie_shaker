@@ -16,4 +16,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tryAgain => 'Try Again… If You Dare';
+
+  @override
+  String get search => 'Search';
 }

@@ -8,6 +8,7 @@ part 'home_state.freezed.dart';
 sealed class HomeState with _$HomeState {
   const factory HomeState({
     required PaginationState<Movie> paginationState,
+    @Default('') String searchQuery,
     Movie? suggestedMovie,
   }) = _HomeState;
 }
