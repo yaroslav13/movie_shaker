@@ -6,10 +6,10 @@ part 'movie_dto.g.dart';
 @freezed
 sealed class MovieDto with _$MovieDto {
   const factory MovieDto({
-    required int id,
-    required String title,
-    required String originalTitle,
-    required String? posterPath,
+    int? id,
+    String? title,
+    String? originalTitle,
+    String? posterPath,
   }) = _MovieDto;
 
   factory MovieDto.fromJson(Map<String, dynamic> json) =>
