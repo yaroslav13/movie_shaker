@@ -5,7 +5,10 @@ import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:ui_components/ui_components.dart';
+
+const _moviesSearchDebounceTime = Duration(milliseconds: 200);
 
 final class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
@@ -13,6 +16,7 @@ final class HomeScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final searchController = useTextEditingController();
+    final inputStreamController = useStreamController<String>();
 
     useEffect(() {
       ref.read(homeStateNotifierProvider.notifier).onStart();
@@ -23,9 +27,8 @@ final class HomeScreen extends HookConsumerWidget {
     useEffect(
       () {
         final searchInputListener = () {
-          ref
-              .read(homeStateNotifierProvider.notifier)
-              .onSearchInputChanged(searchController.text);
+          final input = searchController.text;
+          inputStreamController.add(input);
         };
 
         searchController.addListener(searchInputListener);
@@ -36,6 +39,21 @@ final class HomeScreen extends HookConsumerWidget {
       },
       const [],
     );
+
+    useEffect(() {
+      final subscription = inputStreamController.stream
+          .debounceTime(_moviesSearchDebounceTime)
+          .listen((input) {
+            ref
+                .read(homeStateNotifierProvider.notifier)
+                .onSearchInputChanged(input);
+          });
+
+      return () async {
+        await subscription.cancel();
+        await inputStreamController.close();
+      };
+    }, const []);
 
     return Scaffold(
       appBar: MsAppBar.searchBar(
