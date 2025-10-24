@@ -9,7 +9,7 @@ sealed class MovieDto with _$MovieDto {
     required int id,
     required String title,
     required String originalTitle,
-    required String posterPath,
+    required String? posterPath,
   }) = _MovieDto;
 
   factory MovieDto.fromJson(Map<String, dynamic> json) =>

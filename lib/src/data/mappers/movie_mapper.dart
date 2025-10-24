@@ -10,11 +10,17 @@ final class MovieMapper implements BaseMapper<MovieDto, Movie> {
 
   @override
   Movie map(MovieDto argument) {
+    final posterPath = argument.posterPath;
+
+    final posterUrl = posterPath != null
+        ? '${_buildConfig.baseImageUrl}$posterPath'
+        : null;
+
     return Movie(
       id: argument.id,
       title: argument.title,
       originalTitle: argument.originalTitle,
-      posterUrl: '${_buildConfig.baseImageUrl}${argument.posterPath}',
+      posterUrl: posterUrl,
     );
   }
 }

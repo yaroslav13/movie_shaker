@@ -7,10 +7,10 @@ part 'search_movies_response.g.dart';
 @freezed
 sealed class SearchMoviesResponse with _$SearchMoviesResponse {
   const factory SearchMoviesResponse({
+    required List<MovieDto> results,
     required int page,
     required int totalPages,
     required int totalResults,
-    @Default(<MovieDto>[]) List<MovieDto> results,
   }) = _SearchMoviesResponse;
 
   factory SearchMoviesResponse.fromJson(Map<String, dynamic> json) =>
