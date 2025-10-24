@@ -10,7 +10,9 @@ abstract interface class MoviesDatasource {
   factory MoviesDatasource(Dio dio) = _MoviesDatasource;
 
   @GET('/discover/movie')
-  Future<DiscoverMoviesResponse> getMovies({@Query('page') required int page});
+  Future<DiscoverMoviesResponse> discoverMovies({
+    @Query('page') required int page,
+  });
 
   @GET('/search/movie')
   Future<SearchMoviesResponse> searchMovies({

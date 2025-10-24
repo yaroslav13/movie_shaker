@@ -16,7 +16,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber) async {
     try {
-      final response = await _moviesDatasource.getMovies(page: pageNumber);
+      final response = await _moviesDatasource.discoverMovies(page: pageNumber);
 
       final movies = response.results.map(_movieMapper.map).toList();
 
