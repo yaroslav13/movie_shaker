@@ -18,11 +18,14 @@ final class HomeScreen extends HookConsumerWidget {
     final searchController = useTextEditingController();
     final inputStreamController = useStreamController<String>();
 
-    useEffect(() {
-      ref.read(homeStateNotifierProvider.notifier).onStart();
+    useEffect(
+      () {
+        ref.read(homeStateNotifierProvider.notifier).onStart();
 
-      return;
-    }, const []);
+        return;
+      },
+      const [],
+    );
 
     useEffect(
       () {
@@ -40,20 +43,23 @@ final class HomeScreen extends HookConsumerWidget {
       const [],
     );
 
-    useEffect(() {
-      final subscription = inputStreamController.stream
-          .debounceTime(_moviesSearchDebounceTime)
-          .listen((input) {
-            ref
-                .read(homeStateNotifierProvider.notifier)
-                .onSearchInputChanged(input);
-          });
+    useEffect(
+      () {
+        final subscription = inputStreamController.stream
+            .debounceTime(_moviesSearchDebounceTime)
+            .listen((input) {
+              ref
+                  .read(homeStateNotifierProvider.notifier)
+                  .onSearchInputChanged(input);
+            });
 
-      return () async {
-        await subscription.cancel();
-        await inputStreamController.close();
-      };
-    }, const []);
+        return () async {
+          await subscription.cancel();
+          await inputStreamController.close();
+        };
+      },
+      const [],
+    );
 
     return Scaffold(
       appBar: MsAppBar.searchBar(
