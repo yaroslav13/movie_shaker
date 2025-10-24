@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
 
 final class MovieCard extends StatelessWidget {
   const MovieCard({
+    required this.imageUrl,
     required this.title,
     this.margin = EdgeInsets.zero,
-    this.imageUrl,
     this.subtitle,
     this.titleStyle,
     this.subtitleStyle,
@@ -20,7 +19,7 @@ final class MovieCard extends StatelessWidget {
     super.key,
   });
 
-  final String? imageUrl;
+  final String imageUrl;
   final String title;
   final String? subtitle;
 
@@ -45,8 +44,6 @@ final class MovieCard extends StatelessWidget {
     final backgroundColor = this.backgroundColor ?? theme?.backgroundColor;
     final elevation = this.elevation ?? theme?.elevation;
 
-    final imageUrl = this.imageUrl;
-
     return Card(
       margin: margin,
       elevation: elevation,
@@ -67,9 +64,7 @@ final class MovieCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: borderRadius ?? BorderRadius.zero,
-                child: imageUrl != null
-                    ? CachedNetworkImage(imageUrl: imageUrl)
-                    : const _PosterPlaceholder(),
+                child: CachedNetworkImage(imageUrl: imageUrl),
               ),
               _Hint(
                 title: title,
@@ -120,23 +115,6 @@ final class _Hint extends StatelessWidget {
             Flexible(child: Text(subtitle, style: subtitleStyle)),
           ],
         ],
-      ),
-    );
-  }
-}
-
-final class _PosterPlaceholder extends StatelessWidget {
-  const _PosterPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Padding(
-        padding: MsEdgeInsets.largeContent,
-        child: Icon(
-          HugeIcons.strokeRoundedSpam,
-          size: 64,
-        ),
       ),
     );
   }

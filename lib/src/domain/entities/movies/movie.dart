@@ -8,6 +8,6 @@ sealed class Movie with _$Movie {
     required int id,
     required String title,
     required String originalTitle,
-    required String? posterUrl,
+    required String posterUrl,
   }) = _Movie;
 }

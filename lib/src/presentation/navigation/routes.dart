@@ -25,5 +25,5 @@ final class MovieDetailsRoute extends GoRouteData with _$MovieDetailsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const MovieDetailsScreen();
+      MovieDetailsScreen(movieId: id);
 }
