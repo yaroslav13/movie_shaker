@@ -117,6 +117,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search'**
   String get search;
+
+  /// No description provided for @movieDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie Details'**
+  String get movieDetails;
 }
 
 class _AppLocalizationsDelegate

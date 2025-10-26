@@ -30,7 +30,10 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
 
       final movieDetails = await getMovieDetailsByIdInteractor(movieId);
 
-      state = MovieDetailsState.data(title: movieDetails.title);
+      state = MovieDetailsState.data(
+        title: movieDetails.title,
+        posterUrl: movieDetails.posterUrl,
+      );
     } on AppException catch (e, s) {
       error('Error fetching movie details', e, s);
 

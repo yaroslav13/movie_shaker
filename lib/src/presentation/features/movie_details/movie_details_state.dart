@@ -5,9 +5,11 @@ part 'movie_details_state.freezed.dart';
 
 @freezed
 sealed class MovieDetailsState with _$MovieDetailsState {
-  const factory MovieDetailsState.loading() = _Loading;
-  const factory MovieDetailsState.error(AppException exception) = _Error;
+  const factory MovieDetailsState.loading() = MovieDetailsStateLoading;
+  const factory MovieDetailsState.error(AppException exception) =
+      MovieDetailsStateError;
   const factory MovieDetailsState.data({
     required String title,
-  }) = _Data;
+    required String posterUrl,
+  }) = MovieDetailsStateData;
 }

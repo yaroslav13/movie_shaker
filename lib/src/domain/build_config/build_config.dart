@@ -5,7 +5,7 @@ const _apiKey = String.fromEnvironment('API_KEY');
 const _appBuildType = String.fromEnvironment('BUILD_TYPE');
 
 const _baseUrl = 'https://api.themoviedb.org/3';
-const _baseImageUrl = 'https://image.tmdb.org/t/p/w500';
+const _baseImageUrl = 'https://image.tmdb.org/t/p';
 
 @immutable
 final class BuildConfig {
