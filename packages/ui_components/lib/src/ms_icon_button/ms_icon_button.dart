@@ -34,6 +34,17 @@ final class MsIconButton extends StatelessWidget {
     );
   }
 
+  factory MsIconButton.back({
+    EdgeInsetsGeometry? padding,
+    VoidCallback? onPressed,
+  }) {
+    return MsIconButton(
+      padding: padding,
+      icon: const Icon(HugeIcons.strokeRoundedArrowLeft01),
+      onPressed: onPressed,
+    );
+  }
+
   final Color? backgroundColor;
   final Color? foregroundColor;
   final BorderRadiusGeometry? borderRadius;
@@ -48,10 +59,15 @@ final class MsIconButton extends StatelessWidget {
     final theme = Theme.of(context).extension<MsIconButtonTheme>();
     final colorScheme = Theme.of(context).colorScheme;
 
-    final backgroundColor = this.backgroundColor ?? theme?.backgroundColor ?? colorScheme.primary;
-    final foregroundColor = this.foregroundColor ?? theme?.foregroundColor ?? colorScheme.onPrimary;
+    final backgroundColor =
+        this.backgroundColor ?? theme?.backgroundColor ?? colorScheme.primary;
+    final foregroundColor =
+        this.foregroundColor ?? theme?.foregroundColor ?? colorScheme.onPrimary;
 
-    final borderRadius = this.borderRadius ?? theme?.borderRadius ?? const BorderRadius.all(Radius.circular(8));
+    final borderRadius =
+        this.borderRadius ??
+        theme?.borderRadius ??
+        const BorderRadius.all(Radius.circular(8));
 
     final padding = this.padding ?? theme?.padding ?? const EdgeInsets.all(16);
 

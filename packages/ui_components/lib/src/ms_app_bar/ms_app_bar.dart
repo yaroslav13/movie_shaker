@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
 import 'package:ui_components/src/ms_search_bar/ms_search_bar.dart';
 
 final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -7,6 +8,11 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarHeight,
     this.bottom,
     this.flexibleSpace,
+    this.backgroundColor,
+    this.elevation,
+    this.titleTextStyle,
+    this.iconTheme,
+    this.centerTitle,
     super.key,
   }) : preferredSize = _PreferredAppBarSize(
          toolbarHeight,
@@ -17,6 +23,11 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     String? title,
     double? toolbarHeight,
     Widget? flexibleSpace,
+    Color? backgroundColor,
+    double? elevation,
+    TextStyle? titleTextStyle,
+    IconThemeData? iconTheme,
+    bool? centerTitle,
     TextEditingController? controller,
     FocusNode? focusNode,
     ValueChanged<String>? onChanged,
@@ -27,6 +38,11 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       toolbarHeight: toolbarHeight,
       flexibleSpace: flexibleSpace,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      titleTextStyle: titleTextStyle,
+      iconTheme: iconTheme,
+      centerTitle: centerTitle,
       key: key,
       bottom: MsSearchBar(
         controller: controller,
@@ -43,6 +59,12 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final Widget? flexibleSpace;
 
+  final Color? backgroundColor;
+  final double? elevation;
+  final TextStyle? titleTextStyle;
+  final IconThemeData? iconTheme;
+  final bool? centerTitle;
+
   @override
   final Size preferredSize;
 
@@ -50,10 +72,20 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final title = this.title;
 
+    final theme = Theme.of(context).extension<MsAppBarTheme>();
+    final backgroundColor = theme?.backgroundColor ?? this.backgroundColor;
+    final elevation = theme?.elevation ?? this.elevation;
+    final titleTextStyle = theme?.titleTextStyle ?? this.titleTextStyle;
+    final iconTheme = theme?.iconTheme ?? this.iconTheme;
+    final centerTitle = theme?.centerTitle ?? this.centerTitle ?? false;
+
     return AppBar(
       title: title != null ? Text(title) : null,
-      centerTitle: true,
-      elevation: 4,
+      centerTitle: centerTitle,
+      elevation: elevation,
+      backgroundColor: backgroundColor,
+      titleTextStyle: titleTextStyle,
+      iconTheme: iconTheme,
       toolbarHeight: toolbarHeight,
       bottom: bottom,
       flexibleSpace: flexibleSpace,

@@ -6,7 +6,9 @@ import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicato
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
+import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
+import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
@@ -35,6 +37,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsElevatedButtonTheme(colorScheme, textTheme),
         _createMsIconButtonTheme(colorScheme),
         _createMsInputDecorationTheme(colorScheme, textTheme),
+        _createMsAppBarTheme(colorScheme, textTheme),
+        _createMsFloatingAppBarTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -261,6 +265,33 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       ),
       errorStyle: textTheme.bodyMedium?.copyWith(
         color: colorScheme.error,
+      ),
+    );
+  }
+
+  static MsAppBarTheme _createMsAppBarTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsAppBarTheme(
+      elevation: 4,
+      centerTitle: true,
+    );
+  }
+
+  static MsFloatingAppBarTheme _createMsFloatingAppBarTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsFloatingAppBarTheme(
+      elevation: 4,
+      centerTitle: false,
+      expandedHeight: 350,
+      iconTheme: IconThemeData(
+        color: colorScheme.onPrimary,
+      ),
+      titleTextStyle: textTheme.titleLarge?.copyWith(
+        color: colorScheme.onPrimary,
       ),
     );
   }

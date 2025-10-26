@@ -1,13 +1,15 @@
 import 'package:movie_shaker/src/data/entities/movie/movie_dto.dart';
+import 'package:movie_shaker/src/data/entities/poster/poster.dart';
 import 'package:movie_shaker/src/data/extensions/object_x.dart';
+import 'package:movie_shaker/src/data/mappers/poster_url_mapper.dart';
+import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
-import 'package:movie_shaker/src/domain/build_config/build_config.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 
 final class MovieMapper with SafeMapper<MovieDto, Movie> {
-  const MovieMapper(this._buildConfig);
+  const MovieMapper(this._posterUrlMapper);
 
-  final BuildConfig _buildConfig;
+  final PosterUrlMapper _posterUrlMapper;
 
   @override
   Movie mapSafe(MovieDto instance) {
@@ -31,11 +33,18 @@ final class MovieMapper with SafeMapper<MovieDto, Movie> {
       'MovieDto.posterPath',
     );
 
+    final posterUrl = _posterUrlMapper.mapSafe(
+      Poster(
+        resolution: ImageResolutions.original,
+        posterPath: posterPath,
+      ),
+    );
+
     return Movie(
       id: id,
       title: title,
       originalTitle: originalTitle,
-      posterUrl: '${_buildConfig.baseImageUrl}$posterPath',
+      posterUrl: posterUrl,
     );
   }
 }

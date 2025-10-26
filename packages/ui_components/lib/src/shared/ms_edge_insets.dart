@@ -20,4 +20,6 @@ abstract final class MsEdgeInsets {
   static const scaffoldBody = EdgeInsets.symmetric(horizontal: 16);
 
   static const horizontalLarge = EdgeInsets.symmetric(horizontal: 24);
+  static const horizontalRegular = EdgeInsets.symmetric(horizontal: 12);
+  static const horizontalSmall = EdgeInsets.symmetric(horizontal: 6);
 }
