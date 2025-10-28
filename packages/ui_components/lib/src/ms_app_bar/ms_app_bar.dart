@@ -73,11 +73,11 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     final title = this.title;
 
     final theme = Theme.of(context).extension<MsAppBarTheme>();
-    final backgroundColor = theme?.backgroundColor ?? this.backgroundColor;
-    final elevation = theme?.elevation ?? this.elevation;
-    final titleTextStyle = theme?.titleTextStyle ?? this.titleTextStyle;
-    final iconTheme = theme?.iconTheme ?? this.iconTheme;
-    final centerTitle = theme?.centerTitle ?? this.centerTitle ?? false;
+    final backgroundColor = this.backgroundColor ?? theme?.backgroundColor;
+    final elevation = this.elevation ?? theme?.elevation;
+    final titleTextStyle = this.titleTextStyle ?? theme?.titleTextStyle;
+    final iconTheme = this.iconTheme ?? theme?.iconTheme;
+    final centerTitle = this.centerTitle ?? theme?.centerTitle ?? false;
 
     return AppBar(
       title: title != null ? Text(title) : null,
