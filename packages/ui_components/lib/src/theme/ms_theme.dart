@@ -286,13 +286,10 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return MsFloatingAppBarTheme(
       elevation: 4,
       centerTitle: false,
-      expandedHeight: 350,
       iconTheme: IconThemeData(
         color: colorScheme.onPrimary,
       ),
-      titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: colorScheme.onPrimary,
-      ),
+      expandedHeight: 350,
     );
   }
 }

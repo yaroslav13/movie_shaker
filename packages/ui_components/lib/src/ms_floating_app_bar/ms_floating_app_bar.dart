@@ -4,8 +4,8 @@ import 'package:ui_components/ui_components.dart';
 
 final class MsFloatingAppBar extends StatelessWidget {
   const MsFloatingAppBar({
-    required this.title,
     required this.imageUrl,
+    this.title,
     this.toolbarHeight,
     this.expandedHeight,
     this.bottom,
