@@ -31,13 +31,18 @@ final class MovieDetailsScreen extends HookConsumerWidget {
         MovieDetailsStateData(:final title, :final posterUrl) =>
           CustomScrollView(
             slivers: [
-              MsFloatingAppBar(
-                title: title,
-                imageUrl: posterUrl,
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [],
+              MsFloatingAppBar(imageUrl: posterUrl),
+              SliverPadding(
+                padding: MsEdgeInsets.largeContent,
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
