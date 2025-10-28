@@ -120,10 +120,8 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       subscribeMovieSuggestionsInteractorProvider,
     );
 
-    _movieSuggestionsSubscription ??=
-        subscribeMovieSuggestionsInteractor(
-          movies,
-        ).listen(
+    _movieSuggestionsSubscription ??= subscribeMovieSuggestionsInteractor()
+        .listen(
           (movie) {
             state = state.copyWith(suggestedMovie: movie);
           },

@@ -11,4 +11,8 @@ sealed class PaginationPage<T> with _$PaginationPage<T> {
     required PageNumber pageNumber,
     required bool isLastPage,
   }) = _PaginationPage<T>;
+
+  const PaginationPage._();
+
+  static const maxPageNumber = 500;
 }

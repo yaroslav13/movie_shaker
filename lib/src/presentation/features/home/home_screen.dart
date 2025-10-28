@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
@@ -80,6 +81,18 @@ final class _MoviesGridView extends HookConsumerWidget {
     MovieDetailsRoute(id: movie.id).go(context);
   }
 
+  void _onMovieSuggested(BuildContext context, Movie movie) {
+    final isHomeOpened =
+        GoRouter.of(context).routerDelegate.currentConfiguration.fullPath ==
+        const HomeRoute().location;
+
+    if (!isHomeOpened) {
+      return;
+    }
+
+    MovieDetailsRoute(id: movie.id).go(context);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeStateNotifierProvider);
@@ -88,17 +101,9 @@ final class _MoviesGridView extends HookConsumerWidget {
     useEffect(
       () {
         if (suggestedMovie != null) {
-          WidgetsBinding.instance.addPostFrameCallback(
-            (_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Suggested movie: ${suggestedMovie.title}',
-                  ),
-                ),
-              );
-            },
-          );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _onMovieSuggested(context, suggestedMovie);
+          });
         }
 
         return;

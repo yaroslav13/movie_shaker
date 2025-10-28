@@ -2,26 +2,45 @@ import 'dart:math';
 
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
+import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
+import 'package:rxdart/rxdart.dart';
 
-// TODO(yhalivets): Make a custom request to the API to get a random movie
 final class SubscribeMovieSuggestionsInteractor
-    implements StreamInteractor<Movie, List<Movie>> {
-  SubscribeMovieSuggestionsInteractor(this._deviceShakeNotificationsRepository);
+    implements NoArgumentStreamInteractor<Movie> {
+  SubscribeMovieSuggestionsInteractor(
+    this._deviceShakeNotificationsRepository,
+    this._moviesRepository,
+  );
 
   final DeviceShakeNotificationsRepository _deviceShakeNotificationsRepository;
+  final MoviesRepository _moviesRepository;
 
   @override
-  Stream<Movie> call(List<Movie> param) {
-    final random = Random();
-
+  Stream<Movie> call() {
     return _deviceShakeNotificationsRepository.deviceShakeNotificationsStream
-        .map(
-          (_) {
-            final index = random.nextInt(param.length - 1);
-
-            return param[index];
+        .debounceTime(const Duration(seconds: 2))
+        .asyncMap(
+          (_) async {
+            final movies = await _getRandomMoviesPage();
+            return _chooseRandomMovie(movies);
           },
         );
+  }
+
+  Future<List<Movie>> _getRandomMoviesPage() async {
+    final random = Random();
+    final pageNumber = random.nextInt(PaginationPage.maxPageNumber);
+    final moviesPage = await _moviesRepository.getMovies(pageNumber);
+
+    return moviesPage.items;
+  }
+
+  Movie _chooseRandomMovie(List<Movie> movies) {
+    final random = Random();
+    final index = random.nextInt(movies.length - 1);
+
+    return movies[index];
   }
 }
