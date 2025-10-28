@@ -27,7 +27,11 @@ final class MovieDetailsScreen extends HookConsumerWidget {
         MovieDetailsStateLoading() => const Center(
           child: GlassesProgressIndicator(),
         ),
-        MovieDetailsStateError() => const LoadingErrorStub(),
+        MovieDetailsStateError() => LoadingErrorStub(
+          onRetry: () => ref
+              .read(movieDetailsStateNotifierProvider.notifier)
+              .onRetryPressed(movieId),
+        ),
         MovieDetailsStateData(:final title, :final posterUrl) =>
           CustomScrollView(
             slivers: [

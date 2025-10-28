@@ -20,6 +20,14 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
     unawaited(_fetchMovieDetails(movieId));
   }
 
+  void onRetryPressed(int movieId) {
+    info('Retrying to fetch movie details for movieId: $movieId');
+
+    state = const MovieDetailsState.loading();
+
+    unawaited(_fetchMovieDetails(movieId));
+  }
+
   Future<void> _fetchMovieDetails(int movieId) async {
     try {
       final getMovieDetailsByIdInteractor = ref.read(
