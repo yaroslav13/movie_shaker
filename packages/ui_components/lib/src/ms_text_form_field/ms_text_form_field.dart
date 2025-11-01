@@ -82,7 +82,8 @@ final class MsTextFormField extends StatelessWidget {
     final enabledBorder = this.enabledBorder ?? theme?.enabledBorder;
     final focusedBorder = this.focusedBorder ?? theme?.focusedBorder;
     final errorBorder = this.errorBorder ?? theme?.errorBorder;
-    final focusedErrorBorder = this.focusedErrorBorder ?? theme?.focusedErrorBorder;
+    final focusedErrorBorder =
+        this.focusedErrorBorder ?? theme?.focusedErrorBorder;
     final hintStyle = this.hintStyle ?? theme?.hintStyle;
     final labelStyle = this.labelStyle ?? theme?.labelStyle;
     final errorStyle = this.errorStyle ?? theme?.errorStyle;

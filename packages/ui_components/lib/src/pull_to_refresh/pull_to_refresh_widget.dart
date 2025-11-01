@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'dart:async';
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
@@ -10,9 +12,9 @@ import 'package:ui_components/src/pull_to_refresh/exceptions/no_state_machine_fo
 import 'package:ui_components/src/shared/assets.gen.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 
+part 'rive/refresh_indicator_rive_inputs.dart';
 part 'widgets/glasses_refresh_indicator.dart';
 part 'widgets/popcorn_refresh_indicator.dart';
-part 'rive/refresh_indicator_rive_inputs.dart';
 
 const _refreshIndicatorDuration = RefreshIndicatorDurations(
   completeDuration: Duration(milliseconds: 500),

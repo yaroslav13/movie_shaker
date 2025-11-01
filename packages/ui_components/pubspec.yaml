@@ -3,6 +3,7 @@ description: "Ui Components"
 version: 1.0.0
 resolution: workspace
 publish_to: 'none'
+example: ./example
 
 environment:
   sdk: ^3.8.0
