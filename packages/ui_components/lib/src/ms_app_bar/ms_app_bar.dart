@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
 import 'package:ui_components/src/ms_search_bar/ms_search_bar.dart';
+import 'package:ui_components/src/ms_text/ms_text.dart';
 
 final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
   MsAppBar({
@@ -80,7 +81,7 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     final centerTitle = this.centerTitle ?? theme?.centerTitle ?? false;
 
     return AppBar(
-      title: title != null ? Text(title) : null,
+      title: title != null ? MsText(title) : null,
       centerTitle: centerTitle,
       elevation: elevation,
       backgroundColor: backgroundColor,

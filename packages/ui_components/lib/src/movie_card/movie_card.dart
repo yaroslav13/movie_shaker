@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
+import 'package:ui_components/src/ms_text/ms_text.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
 
@@ -64,7 +65,13 @@ final class MovieCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: borderRadius ?? BorderRadius.zero,
-                child: CachedNetworkImage(imageUrl: imageUrl),
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  placeholder: (_, _) {
+                    /// TODO: Calculate size based on the typical image size
+                    return const SizedBox(height: 227.3, width: 153);
+                  },
+                ),
               ),
               _Hint(
                 title: title,
@@ -110,9 +117,9 @@ final class _Hint extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: MsSpacings.xxSmall,
         children: [
-          Flexible(child: Text(title, style: titleStyle)),
+          Flexible(child: MsText(title, style: titleStyle)),
           if (subtitle case final subtitle?) ...[
-            Flexible(child: Text(subtitle, style: subtitleStyle)),
+            Flexible(child: MsText(subtitle, style: subtitleStyle)),
           ],
         ],
       ),

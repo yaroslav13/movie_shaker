@@ -11,5 +11,11 @@ sealed class MovieDetailsState with _$MovieDetailsState {
   const factory MovieDetailsState.data({
     required String title,
     required String posterUrl,
+    required String overview,
+    required Duration runtime,
+    required double voteAverage,
+    required int voteCount,
+    required DateTime releaseDate,
+    required double popularity,
   }) = MovieDetailsStateData;
 }

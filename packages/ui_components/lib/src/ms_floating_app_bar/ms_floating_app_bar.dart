@@ -56,7 +56,7 @@ final class MsFloatingAppBar extends StatelessWidget {
       expandedHeight: expandedHeight,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: centerTitle,
-        title: title != null ? Text(title, style: titleTextStyle) : null,
+        title: title != null ? MsText(title, style: titleTextStyle) : null,
         background: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:ui_components/src/ms_icon/ms_icon.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 
 final class MsIconButton extends StatelessWidget {
@@ -20,7 +20,7 @@ final class MsIconButton extends StatelessWidget {
   }) {
     return MsIconButton(
       padding: padding,
-      icon: const Icon(HugeIcons.strokeRoundedCancel01),
+      icon: MsIcon.cancel(),
       onPressed: onPressed,
     );
   }
@@ -29,7 +29,7 @@ final class MsIconButton extends StatelessWidget {
     VoidCallback? onPressed,
   }) {
     return MsIconButton(
-      icon: const Icon(HugeIcons.strokeRoundedRefresh),
+      icon: MsIcon.refresh(),
       onPressed: onPressed,
     );
   }
@@ -40,7 +40,7 @@ final class MsIconButton extends StatelessWidget {
   }) {
     return MsIconButton(
       padding: padding,
-      icon: const Icon(HugeIcons.strokeRoundedArrowLeft01),
+      icon: MsIcon.arrowLeft(),
       onPressed: onPressed,
     );
   }

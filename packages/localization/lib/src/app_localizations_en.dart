@@ -22,4 +22,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get movieDetails => 'Movie Details';
+
+  @override
+  String get overview => 'Overview';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
+  String get releaseYear => 'Release Year';
+
+  @override
+  String get genres => 'Genres';
+
+  @override
+  String get runtime => 'Runtime';
+
+  @override
+  String get popularity => 'Popularity';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String durationFormatMinutes(int minutes) {
+    return '${minutes}m';
+  }
+
+  @override
+  String durationFormatHoursMinutes(int hours, int minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String durationFormatHours(int hours) {
+    return '${hours}h';
+  }
 }
