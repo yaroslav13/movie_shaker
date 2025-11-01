@@ -76,7 +76,7 @@ final class MovieDetailsMapper with SafeMapper<MovieDetailsDto, MovieDetails> {
       genres:
           instance.genres?.map(_genreMapper.map).nonNulls.toList() ?? <Genre>[],
       posterUrl: posterUrl,
-      runtime: runtime,
+      runtime: Duration(minutes: runtime),
       voteCount: voteCount,
       releaseDate: DateTime.parse(releaseDate),
       popularity: popularity,

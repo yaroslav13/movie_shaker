@@ -41,6 +41,12 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
       state = MovieDetailsState.data(
         title: movieDetails.title,
         posterUrl: movieDetails.posterUrl,
+        overview: movieDetails.overview,
+        runtime: movieDetails.runtime,
+        voteAverage: movieDetails.voteAverage,
+        voteCount: movieDetails.voteCount,
+        releaseDate: movieDetails.releaseDate,
+        popularity: movieDetails.popularity,
       );
     } on AppException catch (e, s) {
       error('Error fetching movie details', e, s);

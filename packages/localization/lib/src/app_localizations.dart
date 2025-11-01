@@ -123,6 +123,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Movie Details'**
   String get movieDetails;
+
+  /// No description provided for @overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get overview;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
+  /// No description provided for @releaseYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Release Year'**
+  String get releaseYear;
+
+  /// No description provided for @genres.
+  ///
+  /// In en, this message translates to:
+  /// **'Genres'**
+  String get genres;
+
+  /// No description provided for @runtime.
+  ///
+  /// In en, this message translates to:
+  /// **'Runtime'**
+  String get runtime;
+
+  /// No description provided for @popularity.
+  ///
+  /// In en, this message translates to:
+  /// **'Popularity'**
+  String get popularity;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Duration format for minutes only, e.g., 45m
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m'**
+  String durationFormatMinutes(int minutes);
+
+  /// Duration format for hours and minutes, e.g., 1h 45m
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String durationFormatHoursMinutes(int hours, int minutes);
+
+  /// Duration format for hours only, e.g., 2h
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h'**
+  String durationFormatHours(int hours);
 }
 
 class _AppLocalizationsDelegate

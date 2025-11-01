@@ -4,6 +4,7 @@ import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
 import 'package:example/src/pages/ms_floating_app_bar_example/ms_floating_app_bar_example_view.dart';
 import 'package:example/src/pages/refresh_indicator_example/refresh_indicator_example_view.dart';
+import 'package:example/src/pages/segmented_row_example/segmented_row_example_view.dart';
 import 'package:example/src/pages/text_form_field_example/text_form_field_example_view.dart';
 import 'package:example/src/utils/labeled_widget_mixin.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ final class _MainScreenState extends State<MainScreen> {
     const RefreshIndicatorExampleView(),
     const TextFormFieldExampleView(),
     const MsFloatingAppBarExampleView(),
+    const SegmentedRowExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

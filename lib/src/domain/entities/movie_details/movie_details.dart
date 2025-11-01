@@ -10,7 +10,7 @@ sealed class MovieDetails with _$MovieDetails {
     required String title,
     required String overview,
     required String posterUrl,
-    required int runtime,
+    required Duration runtime,
     required double voteAverage,
     required int voteCount,
     required DateTime releaseDate,

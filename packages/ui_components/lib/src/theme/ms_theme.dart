@@ -11,6 +11,8 @@ import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.da
 import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
+import 'package:ui_components/src/segmented_row/segmented_row_entry_theme.dart';
+import 'package:ui_components/src/segmented_row/segmented_row_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
@@ -39,6 +41,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsInputDecorationTheme(colorScheme, textTheme),
         _createMsAppBarTheme(colorScheme, textTheme),
         _createMsFloatingAppBarTheme(colorScheme, textTheme),
+        _createSegmentedRowTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -290,6 +293,27 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         color: colorScheme.onPrimary,
       ),
       expandedHeight: 350,
+    );
+  }
+
+  static SegmentedRowTheme _createSegmentedRowTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return SegmentedRowTheme(
+      dividerTheme: DividerThemeData(
+        color: colorScheme.outlineVariant,
+        space: 16,
+        thickness: 1,
+        indent: 0,
+        endIndent: 0,
+        radius: MsBorderRadius.regular,
+      ),
+      segmentTheme: SegmentedRowEntryTheme(
+        labelStyle: textTheme.bodyMedium,
+        captionStyle: textTheme.labelMedium,
+        contentPadding: MsEdgeInsets.regularContent,
+      ),
     );
   }
 }

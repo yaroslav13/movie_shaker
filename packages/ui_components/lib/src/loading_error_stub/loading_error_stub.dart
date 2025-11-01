@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ui_components/src/loading_error_stub/enitities/loading_error_stub_type.dart';
+import 'package:ui_components/src/loading_error_stub/entities/loading_error_stub_type.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button.dart';
+import 'package:ui_components/src/ms_text/ms_text.dart';
 import 'package:ui_components/src/shared/assets.gen.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
@@ -88,7 +89,7 @@ final class _VerticalLoadingErrorStub extends StatelessWidget {
             const Spacer(),
             MsElevatedButton(
               onPressed: onRetry,
-              child: Text(context.localizations.tryAgain),
+              child: MsText(context.localizations.tryAgain),
             ),
           ],
         ),
@@ -116,7 +117,7 @@ final class _HorizontalLoadingErrorStub extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            child: Text(
+            child: MsText(
               description,
               style: textStyle,
               textAlign: TextAlign.start,
