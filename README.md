@@ -113,8 +113,10 @@ workspace:
    - Presentation layer depends on domain
 
 2. **Repository Pattern:**
-   - Abstracts data sources
-   - Mappers convert between data entities and domain models
+   - **Interface (Domain)**: Defines what operations are available (e.g., `MoviesRepository`)
+   - **Implementation (Data)**: Handles actual data fetching from APIs/databases (e.g., `MoviesRepositoryImpl`)
+   - **Mappers**: Convert API response objects (`MovieDto`) to domain models (`Movie`)
+   - **Why**: Presentation layer doesn't know if data comes from API, database, or cache
 
 3. **Interactor Pattern:**
    - Each interactor encapsulates a single business operation
