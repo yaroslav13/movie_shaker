@@ -5,11 +5,11 @@ import 'package:meta/meta.dart';
 @immutable
 final class MsColors {
   factory MsColors.light() => const MsColors._(
-        brand: _rebeccaPurple,
-        accent: _pistachio,
-        supportive: _tropicalIndigo,
-        error: _chillRed,
-      );
+    brand: _rebeccaPurple,
+    accent: _pistachio,
+    supportive: _tropicalIndigo,
+    error: _chillRed,
+  );
 
   const MsColors._({
     required this.brand,
