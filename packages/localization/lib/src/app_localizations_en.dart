@@ -58,4 +58,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String durationFormatHours(int hours) {
     return '${hours}h';
   }
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get collections => 'Collections';
+
+  @override
+  String get favorites => 'Favorites';
+
+  @override
+  String get profile => 'Profile';
 }

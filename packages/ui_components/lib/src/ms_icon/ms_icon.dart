@@ -120,6 +120,58 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.home({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedHome01,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+    );
+  }
+
+  factory MsIcon.collections({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedShapeCollection,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+    );
+  }
+
+  factory MsIcon.favorite({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedFavourite,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+    );
+  }
+
+  factory MsIcon.profile({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedProfile,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+    );
+  }
+
   final IconData? icon;
   final double? size;
   final double? fill;

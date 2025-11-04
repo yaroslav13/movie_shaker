@@ -22,4 +22,9 @@ abstract final class MsEdgeInsets {
   static const horizontalLarge = EdgeInsets.symmetric(horizontal: 24);
   static const horizontalRegular = EdgeInsets.symmetric(horizontal: 12);
   static const horizontalSmall = EdgeInsets.symmetric(horizontal: 6);
+
+  static const bottomBarItem = EdgeInsets.symmetric(
+    vertical: 10,
+    horizontal: 16,
+  );
 }
