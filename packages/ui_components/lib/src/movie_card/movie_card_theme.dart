@@ -6,16 +6,8 @@ import 'package:flutter/material.dart';
 final class MovieCardTheme extends ThemeExtension<MovieCardTheme> {
   const MovieCardTheme({
     this.borderRadius,
-    this.titleStyle,
-    this.subtitleStyle,
     this.elevation,
-    this.backgroundColor,
   });
-
-  final TextStyle? titleStyle;
-  final TextStyle? subtitleStyle;
-
-  final Color? backgroundColor;
 
   final double? elevation;
   final BorderRadiusGeometry? borderRadius;
@@ -30,10 +22,7 @@ final class MovieCardTheme extends ThemeExtension<MovieCardTheme> {
   }) {
     return MovieCardTheme(
       borderRadius: borderRadius ?? this.borderRadius,
-      titleStyle: titleStyle ?? this.titleStyle,
-      subtitleStyle: subtitleStyle ?? this.subtitleStyle,
       elevation: elevation ?? this.elevation,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
     );
   }
 
@@ -52,10 +41,7 @@ final class MovieCardTheme extends ThemeExtension<MovieCardTheme> {
         other.borderRadius,
         t,
       ),
-      titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t),
-      subtitleStyle: TextStyle.lerp(subtitleStyle, other.subtitleStyle, t),
       elevation: lerpDouble(elevation, other.elevation, t) ?? 0,
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
     );
   }
 }

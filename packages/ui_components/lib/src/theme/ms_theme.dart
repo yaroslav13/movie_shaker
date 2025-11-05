@@ -141,11 +141,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     ColorScheme colorScheme,
     TextTheme textTheme,
   ) {
-    return MovieCardTheme(
-      backgroundColor: colorScheme.surfaceContainerLow,
+    return const MovieCardTheme(
       borderRadius: MsBorderRadius.extraLarge,
-      titleStyle: textTheme.titleLarge,
-      subtitleStyle: textTheme.bodyMedium,
       elevation: 8,
     );
   }

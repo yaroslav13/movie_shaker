@@ -124,7 +124,6 @@ final class _MoviesGridView extends HookConsumerWidget {
         itemBuilder: (_, movie, index) {
           return MovieCard(
             imageUrl: movie.posterUrl,
-            title: movie.title,
             onTap: () => _onMovieSelected(context, movie),
           );
         },
