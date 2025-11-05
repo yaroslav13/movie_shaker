@@ -40,5 +40,9 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "home": "Home",
+    "collections": "Collections",
+    "favorites": "Favorites",
+    "profile": "Profile"
 }

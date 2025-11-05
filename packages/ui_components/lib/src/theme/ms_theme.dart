@@ -7,6 +7,7 @@ import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
+import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
 import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
@@ -42,6 +43,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsAppBarTheme(colorScheme, textTheme),
         _createMsFloatingAppBarTheme(colorScheme, textTheme),
         _createSegmentedRowTheme(colorScheme, textTheme),
+        _createMsBottomBarTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -314,6 +316,17 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         captionStyle: textTheme.labelMedium,
         contentPadding: MsEdgeInsets.regularContent,
       ),
+    );
+  }
+
+  static MsBottomBarTheme _createMsBottomBarTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsBottomBarTheme(
+      selectedItemColor: colorScheme.primary,
+      itemPadding: MsEdgeInsets.bottomBarItem,
+      margin: MsEdgeInsets.regularContent,
     );
   }
 }

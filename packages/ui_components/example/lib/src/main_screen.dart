@@ -2,6 +2,7 @@ import 'package:example/src/pages/dots_progress_indicator_example/dots_progress_
 import 'package:example/src/pages/glasses_progress_indicator_example/glasses_progress_indicator_example_view.dart';
 import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_example_view.dart';
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
+import 'package:example/src/pages/ms_bottom_bar_example/ms_bottom_bar_example_view.dart';
 import 'package:example/src/pages/ms_floating_app_bar_example/ms_floating_app_bar_example_view.dart';
 import 'package:example/src/pages/refresh_indicator_example/refresh_indicator_example_view.dart';
 import 'package:example/src/pages/segmented_row_example/segmented_row_example_view.dart';
@@ -31,6 +32,7 @@ final class _MainScreenState extends State<MainScreen> {
     const TextFormFieldExampleView(),
     const MsFloatingAppBarExampleView(),
     const SegmentedRowExampleView(),
+    const MsBottomBarExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

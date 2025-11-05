@@ -49,6 +49,9 @@ dependencies:
   # stream transformers
   rxdart: 0.28.0
 
+  # dart utils
+  collection: 1.19.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
