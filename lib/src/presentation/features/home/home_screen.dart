@@ -123,6 +123,12 @@ final class _MoviesGridView extends HookConsumerWidget {
             ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
         itemBuilder: (_, movie, index) {
           return MovieCard(
+            action: LikeButton(
+              isLiked: true,
+              onChanged: (isLiked) {
+                /// TODO: Implement like/unlike functionality
+              },
+            ),
             imageUrl: movie.posterUrl,
             onTap: () => _onMovieSelected(context, movie),
           );

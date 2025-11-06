@@ -28,10 +28,10 @@ final class AppShell extends StatelessWidget {
                 final localizations = context.localizations;
 
                 final icon = switch (tab) {
-                  BottomNavTab.home => MsIcon.home(),
-                  BottomNavTab.collections => MsIcon.collections(),
-                  BottomNavTab.favorites => MsIcon.favorite(),
-                  BottomNavTab.profile => MsIcon.profile(),
+                  BottomNavTab.home => MsIcon.outlinedHome(),
+                  BottomNavTab.collections => MsIcon.outlinedCollections(),
+                  BottomNavTab.favorites => MsIcon.outlinedFavorite(),
+                  BottomNavTab.profile => MsIcon.outlinedProfile(),
                 };
 
                 final label = switch (tab) {

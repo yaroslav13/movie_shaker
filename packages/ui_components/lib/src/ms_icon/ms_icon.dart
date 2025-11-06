@@ -20,12 +20,14 @@ final class MsIcon extends StatelessWidget {
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedCancel01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
@@ -33,12 +35,14 @@ final class MsIcon extends StatelessWidget {
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedRefresh,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
@@ -46,12 +50,14 @@ final class MsIcon extends StatelessWidget {
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedArrowLeft01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
@@ -59,51 +65,59 @@ final class MsIcon extends StatelessWidget {
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedArrowRight01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.star({
+  factory MsIcon.outlinedStar({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedStarAward01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.schedule({
+  factory MsIcon.outlinedSchedule({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedTimeSchedule,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.clock({
+  factory MsIcon.outlinedClock({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedClock01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
@@ -111,64 +125,74 @@ final class MsIcon extends StatelessWidget {
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedTradeUp,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.home({
+  factory MsIcon.outlinedHome({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedHome01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.collections({
+  factory MsIcon.outlinedCollections({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedShapeCollection,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.favorite({
+  factory MsIcon.outlinedFavorite({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedFavourite,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 
-  factory MsIcon.profile({
+  factory MsIcon.outlinedProfile({
     double? size,
     Color? color,
     String? semanticLabel,
+    Key? key,
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedProfile,
       size: size,
       color: color,
       semanticLabel: semanticLabel,
+      key: key,
     );
   }
 

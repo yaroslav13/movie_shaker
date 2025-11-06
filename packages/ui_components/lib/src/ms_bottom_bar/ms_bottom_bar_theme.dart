@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@immutable
 final class MsBottomBarTheme extends ThemeExtension<MsBottomBarTheme> {
   const MsBottomBarTheme({
     this.selectedItemColor,

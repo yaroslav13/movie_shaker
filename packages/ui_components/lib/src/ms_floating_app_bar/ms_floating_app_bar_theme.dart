@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+@immutable
 final class MsFloatingAppBarTheme
     extends ThemeExtension<MsFloatingAppBarTheme> {
-  MsFloatingAppBarTheme({
+  const MsFloatingAppBarTheme({
     this.backgroundColor,
     this.elevation,
     this.titleTextStyle,
