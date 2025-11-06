@@ -5,6 +5,8 @@ export 'src/grid_view/entities/pagination_state.dart';
 export 'src/grid_view/paged_staggered_grid_view.dart';
 export 'src/grid_view/staggered_grid_view.dart';
 export 'src/grid_view/staggered_grid_view_theme.dart';
+export 'src/like_button/like_button.dart';
+export 'src/like_button/like_button_theme.dart';
 export 'src/loading_error_stub/entities/loading_error_stub_type.dart';
 export 'src/loading_error_stub/loading_error_stub.dart';
 export 'src/loading_error_stub/loading_error_stub_theme.dart';

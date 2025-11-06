@@ -29,7 +29,7 @@ final class _PopularityMetricsWidget extends StatelessWidget {
         SegmentedRow(
           segments: [
             SegmentData(
-              icon: MsIcon.star(),
+              icon: MsIcon.outlinedStar(),
               label: _formatVoteAverage(voteAverage),
               caption: '${context.localizations.rating} ($voteCount)',
             ),

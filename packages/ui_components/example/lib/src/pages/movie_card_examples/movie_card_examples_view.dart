@@ -33,6 +33,7 @@ final class _MovieCardExamplesViewState extends State<MovieCardExamplesView> {
           itemCount: 6,
           itemBuilder: (_, i) {
             return MovieCard(
+              action: const _IndependentLikeButton(),
               onTap: () => _onMovieCardTap(i),
               imageUrl:
                   'https://media.printables.com/media/prints/5322/images/34243_38525894-79c4-48db-99b9-7782e2723276/thumbs/inside/1920x1440/jpg/20190824172724_019184.webp',
@@ -40,6 +41,27 @@ final class _MovieCardExamplesViewState extends State<MovieCardExamplesView> {
           },
         ),
       ),
+    );
+  }
+}
+
+final class _IndependentLikeButton extends StatefulWidget {
+  const _IndependentLikeButton();
+
+  @override
+  State<_IndependentLikeButton> createState() => _IndependentLikeButtonState();
+}
+
+final class _IndependentLikeButtonState extends State<_IndependentLikeButton> {
+  var _isLiked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return LikeButton(
+      isLiked: _isLiked,
+      onChanged: (isLiked) => setState(() {
+        _isLiked = isLiked;
+      }),
     );
   }
 }

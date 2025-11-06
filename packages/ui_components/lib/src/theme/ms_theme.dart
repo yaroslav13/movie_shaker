@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
 import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
+import 'package:ui_components/src/like_button/like_button_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
@@ -44,6 +45,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsFloatingAppBarTheme(colorScheme, textTheme),
         _createSegmentedRowTheme(colorScheme, textTheme),
         _createMsBottomBarTheme(colorScheme, textTheme),
+        _createLikeButtonTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -324,6 +326,17 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       selectedItemColor: colorScheme.primary,
       itemPadding: MsEdgeInsets.bottomBarItem,
       margin: MsEdgeInsets.regularContent,
+    );
+  }
+
+  static LikeButtonTheme _createLikeButtonTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return LikeButtonTheme(
+      likedColor: colorScheme.error,
+      unlikedColor: colorScheme.onInverseSurface,
+      backgroundColor: colorScheme.inverseSurface.withValues(alpha: 0.8),
     );
   }
 }

@@ -32,12 +32,12 @@ final class _TimeMetricsWidget extends StatelessWidget {
         SegmentedRow(
           segments: [
             SegmentData(
-              icon: MsIcon.clock(),
+              icon: MsIcon.outlinedClock(),
               label: _formatRuntime(context, runtime),
               caption: context.localizations.runtime,
             ),
             SegmentData(
-              icon: MsIcon.schedule(),
+              icon: MsIcon.outlinedSchedule(),
               label: releaseDate.year.toString(),
               caption: context.localizations.releaseYear,
             ),
