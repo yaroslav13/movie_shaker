@@ -1,0 +1,15 @@
+import 'package:drift/drift.dart';
+
+@DataClassName('MovieDbo')
+class Movies extends Table {
+  IntColumn get apiId => integer().named('api_id')();
+
+  TextColumn get title => text().named('title')();
+
+  TextColumn get originalTitle => text().named('original_title')();
+
+  TextColumn get posterUrl => text().named('poster_url')();
+
+  @override
+  Set<Column> get primaryKey => {apiId};
+}

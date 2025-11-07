@@ -3,8 +3,8 @@ import 'package:movie_shaker/src/data/extensions/object_x.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 
-final class GenreMapper with SafeMapper<GenreDto, Genre> {
-  const GenreMapper();
+final class GenreDtoMapper with SafeMapper<GenreDto, Genre> {
+  const GenreDtoMapper();
 
   @override
   Genre mapSafe(GenreDto instance) {

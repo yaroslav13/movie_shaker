@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:movie_shaker/src/data/datasources/sensors/sensors_data_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/remote/sensors_data_remote_datasource.dart';
 import 'package:movie_shaker/src/domain/entities/device_shake_notification/axis.dart';
 import 'package:movie_shaker/src/domain/entities/device_shake_notification/device_shake_notification.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
@@ -10,13 +10,13 @@ import 'package:sensors_plus/sensors_plus.dart';
 
 final class DeviceShakeNotificationsRepositoryImpl
     implements DeviceShakeNotificationsRepository {
-  DeviceShakeNotificationsRepositoryImpl(this._sensorsDataDatasource);
+  DeviceShakeNotificationsRepositoryImpl(this._sensorsDataRemoteDatasource);
 
-  final SensorsDataDatasource _sensorsDataDatasource;
+  final SensorsDataRemoteDatasource _sensorsDataRemoteDatasource;
 
   @override
   Stream<DeviceShakeNotification> get deviceShakeNotificationsStream =>
-      _sensorsDataDatasource.subscribeAccelerometer().transform(
+      _sensorsDataRemoteDatasource.subscribeAccelerometer().transform(
         _ShakeDetectionTransformer(),
       );
 }

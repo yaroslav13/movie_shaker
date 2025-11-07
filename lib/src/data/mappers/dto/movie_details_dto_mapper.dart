@@ -1,17 +1,18 @@
 import 'package:movie_shaker/src/data/entities/movie_details/movie_details_dto.dart';
 import 'package:movie_shaker/src/data/entities/poster/poster.dart';
 import 'package:movie_shaker/src/data/extensions/object_x.dart';
-import 'package:movie_shaker/src/data/mappers/genre_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/dto/genre_dto_mapper.dart';
 import 'package:movie_shaker/src/data/mappers/poster_url_mapper.dart';
 import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dart';
 
-final class MovieDetailsMapper with SafeMapper<MovieDetailsDto, MovieDetails> {
-  const MovieDetailsMapper(this._genreMapper, this._posterUrlMapper);
+final class MovieDetailsDtoMapper
+    with SafeMapper<MovieDetailsDto, MovieDetails> {
+  const MovieDetailsDtoMapper(this._genreDtoMapper, this._posterUrlMapper);
 
-  final GenreMapper _genreMapper;
+  final GenreDtoMapper _genreDtoMapper;
   final PosterUrlMapper _posterUrlMapper;
 
   @override
@@ -74,7 +75,8 @@ final class MovieDetailsMapper with SafeMapper<MovieDetailsDto, MovieDetails> {
       overview: overview,
       voteAverage: voteAverage,
       genres:
-          instance.genres?.map(_genreMapper.map).nonNulls.toList() ?? <Genre>[],
+          instance.genres?.map(_genreDtoMapper.map).nonNulls.toList() ??
+          <Genre>[],
       posterUrl: posterUrl,
       runtime: Duration(minutes: runtime),
       voteCount: voteCount,

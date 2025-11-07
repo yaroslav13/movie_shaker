@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/get_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/subscribe_movie_suggestions_interactor_provider.dart';
+import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
@@ -29,6 +31,9 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       paginationState: PaginationState(isLoading: true),
     );
   }
+
+  @override
+  Logger get logger => ref.read(loggerProvider);
 
   void onStart() {
     unawaited(_fetchMovies(_initialPageNumber));

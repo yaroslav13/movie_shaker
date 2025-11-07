@@ -54,7 +54,7 @@ final class PullToRefreshWidget extends StatelessWidget {
               height: indicatorHeight,
               child: Padding(
                 padding: EdgeInsets.only(
-                  bottom: MsEdgeInsets.largeContent.bottom,
+                  bottom: MsEdgeInsets.smallContent.bottom,
                 ),
                 child: switch (animation) {
                   RefreshIndicatorAnimation.glasses =>
