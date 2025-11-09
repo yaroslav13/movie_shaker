@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:movie_shaker/src/data/datasources/movies/movies_datasource.dart';
-import 'package:movie_shaker/src/data/mappers/movie_details_mapper.dart';
-import 'package:movie_shaker/src/data/mappers/movie_mapper.dart';
+import 'package:movie_shaker/src/data/datasources/local/movie_collection_entries_local_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/local/movies_local_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/remote/movies_remote_datasource.dart';
+import 'package:movie_shaker/src/data/mappers/dbo/movie_dbo_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/dto/movie_details_dto_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/dto/movie_dto_mapper.dart';
+import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
@@ -11,22 +15,34 @@ import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
 final class MoviesRepositoryImpl implements MoviesRepository {
   const MoviesRepositoryImpl(
-    this._moviesDatasource,
-    this._movieMapper,
-    this._movieDetailsMapper,
+    this._moviesRemoteDatasource,
+    this._moviesLocalDatasource,
+    this._movieCollectionEntriesLocalDatasource,
+    this._movieDtoMapper,
+    this._movieDboMapper,
+    this._movieDetailsDtoMapper,
   );
 
-  final MoviesDatasource _moviesDatasource;
+  final MoviesRemoteDatasource _moviesRemoteDatasource;
+  final MoviesLocalDatasource _moviesLocalDatasource;
+  final MovieCollectionEntriesLocalDatasource
+  _movieCollectionEntriesLocalDatasource;
 
-  final MovieMapper _movieMapper;
-  final MovieDetailsMapper _movieDetailsMapper;
+  final MovieDtoMapper _movieDtoMapper;
+  final MovieDboMapper _movieDboMapper;
+  final MovieDetailsDtoMapper _movieDetailsDtoMapper;
 
   @override
   Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber) async {
     try {
-      final response = await _moviesDatasource.discoverMovies(page: pageNumber);
+      final response = await _moviesRemoteDatasource.discoverMovies(
+        page: pageNumber,
+      );
 
-      final movies = response.results.map(_movieMapper.map).nonNulls.toList();
+      final movies = response.results
+          .map(_movieDtoMapper.map)
+          .nonNulls
+          .toList();
 
       return PaginationPage<Movie>(
         items: movies,
@@ -43,12 +59,15 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   Future<PaginationPage<Movie>> getMoviesByQuery(SearchQuery query) async {
     try {
       final SearchQuery(query: queryText, page: pageNumber) = query;
-      final response = await _moviesDatasource.searchMovies(
+      final response = await _moviesRemoteDatasource.searchMovies(
         query: queryText,
         page: pageNumber,
       );
 
-      final movies = response.results.map(_movieMapper.map).nonNulls.toList();
+      final movies = response.results
+          .map(_movieDtoMapper.map)
+          .nonNulls
+          .toList();
 
       return PaginationPage<Movie>(
         items: movies,
@@ -64,11 +83,11 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   @override
   Future<MovieDetails> getMovieDetails(int movieId) async {
     try {
-      final response = await _moviesDatasource.getMovieDetails(
+      final response = await _moviesRemoteDatasource.getMovieDetails(
         movieId: movieId,
       );
 
-      final movieDetails = _movieDetailsMapper.map(response);
+      final movieDetails = _movieDetailsDtoMapper.map(response);
 
       if (movieDetails == null) {
         throw const MovieDetailsNotFoundException();
@@ -78,6 +97,84 @@ final class MoviesRepositoryImpl implements MoviesRepository {
     } on DioException catch (e, s) {
       final error = e.error;
       Error.throwWithStackTrace(error ?? const UnknownNetworkException(), s);
+    }
+  }
+
+  @override
+  Future<List<Movie>> getMoviesByCollection(MovieCollection collection) async {
+    final movieCollectionEntries = await _movieCollectionEntriesLocalDatasource
+        .getMovieCollectionsEntries(collectionName: collection.name);
+
+    final movies = <Movie>[];
+    try {
+      await Future.wait(
+        eagerError: true,
+        movieCollectionEntries.map(
+          (entry) async {
+            final movieDbo = await _moviesLocalDatasource.getMovie(
+              id: entry.movieId,
+            );
+
+            final movie = _movieDboMapper.map(movieDbo);
+            if (movie != null) {
+              movies.add(movie);
+            }
+          },
+        ),
+      );
+
+      return movies;
+    } on Exception catch (_, s) {
+      Error.throwWithStackTrace(
+        const CacheReadException(),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<void> addMovieToCollection(
+    Movie movie,
+    MovieCollection collection,
+  ) async {
+    try {
+      final movieDbo = _movieDboMapper.reverseMap(movie);
+      if (movieDbo == null) {
+        throw const CacheWriteException();
+      }
+
+      await _moviesLocalDatasource.saveMovie(movie: movieDbo);
+
+      await _movieCollectionEntriesLocalDatasource.saveMovieCollectionEntry(
+        collectionName: collection.name,
+        movieId: movie.id,
+      );
+    } on CacheWriteException {
+      rethrow;
+    } on Exception catch (_, s) {
+      Error.throwWithStackTrace(
+        const CacheWriteException(),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<void> removeMovieFromCollection(
+    Movie movie,
+    MovieCollection collection,
+  ) async {
+    try {
+      return await _movieCollectionEntriesLocalDatasource
+          .deleteMovieCollectionEntry(
+            collectionName: collection.name,
+            movieId: movie.id,
+          );
+    } on Exception catch (_, s) {
+      Error.throwWithStackTrace(
+        const CacheWriteException(),
+        s,
+      );
     }
   }
 }

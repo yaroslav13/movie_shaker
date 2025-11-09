@@ -6,8 +6,8 @@ import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 
-final class MovieMapper with SafeMapper<MovieDto, Movie> {
-  const MovieMapper(this._posterUrlMapper);
+final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
+  const MovieDtoMapper(this._posterUrlMapper);
 
   final PosterUrlMapper _posterUrlMapper;
 

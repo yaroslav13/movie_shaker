@@ -4,11 +4,11 @@ import 'package:movie_shaker/src/data/entities/movie_details/movie_details_dto.d
 import 'package:movie_shaker/src/data/entities/search_movies/search_movies_response.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'movies_datasource.g.dart';
+part 'movies_remote_datasource.g.dart';
 
 @RestApi()
-abstract interface class MoviesDatasource {
-  factory MoviesDatasource(Dio dio) = _MoviesDatasource;
+abstract interface class MoviesRemoteDatasource {
+  factory MoviesRemoteDatasource(Dio dio) = _MoviesRemoteDatasource;
 
   @GET('/discover/movie')
   Future<DiscoverMoviesResponse> discoverMovies({

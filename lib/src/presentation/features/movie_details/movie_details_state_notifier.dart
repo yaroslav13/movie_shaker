@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_details_by_id_interactor_provider.dart';
+import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
@@ -13,6 +15,9 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
     with LoggerMixin {
   @override
   MovieDetailsState build() => const MovieDetailsState.loading();
+
+  @override
+  Logger get logger => ref.read(loggerProvider);
 
   void onStart(int movieId) {
     info('MovieDetailsStateNotifier started');

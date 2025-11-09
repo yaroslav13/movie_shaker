@@ -1,60 +1,54 @@
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_shaker/src/di/logger/logger_provider.dart';
+import 'package:logger/logger.dart';
 
-mixin LoggerMixin<T> on AutoDisposeNotifier<T> {
+mixin LoggerMixin {
   String get _tag => '$runtimeType ${identityHashCode(this)}';
+
+  @protected
+  Logger get logger;
 
   @nonVirtual
   @protected
   void info(Object message, [Object? error, StackTrace? stackTrace]) {
-    ref
-        .read(loggerProvider)
-        .i(
-          _buildLogMessage(message),
-          time: DateTime.now(),
-          error: error,
-          stackTrace: stackTrace,
-        );
+    logger.i(
+      _buildLogMessage(message),
+      time: DateTime.now(),
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   @nonVirtual
   @protected
   void warning(Object message, [Object? error, StackTrace? stackTrace]) {
-    ref
-        .read(loggerProvider)
-        .w(
-          _buildLogMessage(message),
-          time: DateTime.now(),
-          error: error,
-          stackTrace: stackTrace,
-        );
+    logger.w(
+      _buildLogMessage(message),
+      time: DateTime.now(),
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   @nonVirtual
   @protected
   void error(Object message, [Object? error, StackTrace? stackTrace]) {
-    ref
-        .read(loggerProvider)
-        .e(
-          _buildLogMessage(message),
-          time: DateTime.now(),
-          error: error,
-          stackTrace: stackTrace,
-        );
+    logger.e(
+      _buildLogMessage(message),
+      time: DateTime.now(),
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   @nonVirtual
   @protected
   void fine(Object message, [Object? error, StackTrace? stackTrace]) {
-    ref
-        .read(loggerProvider)
-        .f(
-          _buildLogMessage(message),
-          time: DateTime.now(),
-          error: error,
-          stackTrace: stackTrace,
-        );
+    logger.f(
+      _buildLogMessage(message),
+      time: DateTime.now(),
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
   String _buildLogMessage(Object message) {
