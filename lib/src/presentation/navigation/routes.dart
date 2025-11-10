@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
+import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
 
@@ -54,7 +55,7 @@ final class FavoritesRoute extends GoRouteData with _$FavoritesRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const Placeholder();
+      const FavoritesScreen();
 }
 
 final class ProfileRoute extends GoRouteData with _$ProfileRoute {

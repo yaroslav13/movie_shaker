@@ -25,7 +25,7 @@ final class MsFloatingAppBarTheme
   final double? toolbarHeight;
 
   @override
-  ThemeExtension<MsFloatingAppBarTheme> copyWith({
+  MsFloatingAppBarTheme copyWith({
     Color? backgroundColor,
     double? elevation,
     TextStyle? titleTextStyle,
@@ -46,7 +46,7 @@ final class MsFloatingAppBarTheme
   }
 
   @override
-  ThemeExtension<MsFloatingAppBarTheme> lerp(
+  MsFloatingAppBarTheme lerp(
     covariant ThemeExtension<MsFloatingAppBarTheme>? other,
     double t,
   ) {

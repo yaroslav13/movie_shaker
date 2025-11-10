@@ -15,7 +15,7 @@ final class MovieLikeButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieLikeState = ref.watch(
+    final state = ref.watch(
       movieLikeStateNotifierProvider(movie: movie),
     );
 
@@ -29,7 +29,7 @@ final class MovieLikeButton extends HookConsumerWidget {
       const [],
     );
 
-    final isLiked = movieLikeState.isLiked;
+    final isLiked = state.isLiked;
 
     return LikeButton(
       isLiked: isLiked,

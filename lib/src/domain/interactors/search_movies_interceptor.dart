@@ -6,7 +6,7 @@ import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
 final class SearchMoviesInterceptor
     implements Interactor<PaginationPage<Movie>, SearchQuery> {
-  SearchMoviesInterceptor(this._moviesRepository);
+  const SearchMoviesInterceptor(this._moviesRepository);
 
   final MoviesRepository _moviesRepository;
 

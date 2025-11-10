@@ -5,7 +5,7 @@ import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
 final class GetMoviesInteractor
     implements Interactor<PaginationPage<Movie>, PageNumber> {
-  GetMoviesInteractor(this._moviesRepository);
+  const GetMoviesInteractor(this._moviesRepository);
 
   final MoviesRepository _moviesRepository;
 

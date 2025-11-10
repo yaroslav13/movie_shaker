@@ -12,6 +12,7 @@ export 'src/loading_error_stub/loading_error_stub.dart';
 export 'src/loading_error_stub/loading_error_stub_theme.dart';
 export 'src/movie_card/movie_card.dart';
 export 'src/movie_card/movie_card_theme.dart';
+export 'src/movie_carousel/movie_carousel.dart';
 export 'src/ms_app_bar/ms_app_bar.dart';
 export 'src/ms_bottom_bar/entities/ms_bottom_bar_item.dart';
 export 'src/ms_bottom_bar/ms_bottom_bar.dart';

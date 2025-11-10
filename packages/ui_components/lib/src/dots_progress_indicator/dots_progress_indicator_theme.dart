@@ -25,7 +25,7 @@ final class DotsProgressIndicatorTheme
   }
 
   @override
-  ThemeExtension<DotsProgressIndicatorTheme> lerp(
+  DotsProgressIndicatorTheme lerp(
     covariant ThemeExtension<DotsProgressIndicatorTheme>? other,
     double t,
   ) {

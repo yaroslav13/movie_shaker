@@ -45,7 +45,7 @@ final class StaggeredGridViewTheme
   }
 
   @override
-  ThemeExtension<StaggeredGridViewTheme> lerp(
+  StaggeredGridViewTheme lerp(
     covariant ThemeExtension<StaggeredGridViewTheme>? other,
     double t,
   ) {

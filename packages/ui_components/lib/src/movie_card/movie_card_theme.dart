@@ -27,7 +27,7 @@ final class MovieCardTheme extends ThemeExtension<MovieCardTheme> {
   }
 
   @override
-  ThemeExtension<MovieCardTheme> lerp(
+  MovieCardTheme lerp(
     covariant ThemeExtension<MovieCardTheme>? other,
     double t,
   ) {

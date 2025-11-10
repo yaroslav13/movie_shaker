@@ -35,7 +35,7 @@ final class MsAppBarTheme extends ThemeExtension<MsAppBarTheme> {
   }
 
   @override
-  ThemeExtension<MsAppBarTheme> lerp(
+  MsAppBarTheme lerp(
     covariant ThemeExtension<MsAppBarTheme>? other,
     double t,
   ) {

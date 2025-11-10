@@ -7,6 +7,8 @@ import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/like_button/like_button_theme.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
+import 'package:ui_components/src/movie_carousel/carousel_dots_indicator_theme.dart';
+import 'package:ui_components/src/movie_carousel/movie_carousel_theme.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
 import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
@@ -27,6 +29,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return MsTheme._(data);
   }
 
+  static const _recommendedAlpha = 0.8;
+
   static ThemeData _createThemeData(MsColors colors, Brightness brightness) {
     final theme = _setupThemeFoundation(colors, brightness);
     final colorScheme = theme.colorScheme;
@@ -46,6 +50,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createSegmentedRowTheme(colorScheme, textTheme),
         _createMsBottomBarTheme(colorScheme, textTheme),
         _createLikeButtonTheme(colorScheme, textTheme),
+        _createMovieCarouselTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -336,7 +341,24 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return LikeButtonTheme(
       likedColor: colorScheme.error,
       unlikedColor: colorScheme.onInverseSurface,
-      backgroundColor: colorScheme.inverseSurface.withValues(alpha: 0.8),
+      backgroundColor: _applyAlpha(colorScheme.inverseSurface),
     );
+  }
+
+  static MovieCarouselTheme _createMovieCarouselTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MovieCarouselTheme(
+      dotsIndicatorTheme: CarouselDotsIndicatorTheme(
+        backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+        activeColor: colorScheme.primary,
+        inactiveColor: colorScheme.onInverseSurface,
+      ),
+    );
+  }
+
+  static Color _applyAlpha(Color color) {
+    return color.withValues(alpha: _recommendedAlpha);
   }
 }

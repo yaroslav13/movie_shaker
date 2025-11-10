@@ -23,6 +23,7 @@ dependencies:
   flutter_svg: 2.2.0
   hugeicons: 0.0.11
   salomon_bottom_bar: 3.3.2
+  smooth_page_indicator: 1.2.1
 
   # network
   cached_network_image: 3.4.1
