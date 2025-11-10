@@ -19,7 +19,7 @@ final class LoadingErrorStubTheme
   }
 
   @override
-  ThemeExtension<LoadingErrorStubTheme> lerp(
+  LoadingErrorStubTheme lerp(
     covariant ThemeExtension<LoadingErrorStubTheme>? other,
     double t,
   ) {

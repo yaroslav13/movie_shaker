@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart';
 
 final class SubscribeMovieSuggestionsInteractor
     implements NoArgumentStreamInteractor<Movie> {
-  SubscribeMovieSuggestionsInteractor(
+  const SubscribeMovieSuggestionsInteractor(
     this._deviceShakeNotificationsRepository,
     this._moviesRepository,
   );

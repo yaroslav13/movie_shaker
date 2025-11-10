@@ -8,6 +8,7 @@ const _defaultImageSize = Size(177, 265.5);
 final class MovieCard extends StatelessWidget {
   const MovieCard({
     required this.imageUrl,
+    this.size = _defaultImageSize,
     this.action,
     this.margin = EdgeInsets.zero,
     this.elevation,
@@ -15,6 +16,18 @@ final class MovieCard extends StatelessWidget {
     this.onTap,
     super.key,
   });
+
+  const MovieCard.expanded({
+    required this.imageUrl,
+    this.action,
+    this.margin = EdgeInsets.zero,
+    this.elevation,
+    this.borderRadius,
+    this.onTap,
+    super.key,
+  }) : size = Size.infinite;
+
+  final Size size;
 
   final String imageUrl;
   final Widget? action;
@@ -38,7 +51,7 @@ final class MovieCard extends StatelessWidget {
           ? RoundedRectangleBorder(borderRadius: borderRadius)
           : null,
       child: SizedBox.fromSize(
-        size: _defaultImageSize,
+        size: size,
         child: Stack(
           children: [
             _MoviePosterWidget(
