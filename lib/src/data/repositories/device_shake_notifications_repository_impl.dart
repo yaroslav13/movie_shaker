@@ -24,7 +24,7 @@ final class DeviceShakeNotificationsRepositoryImpl
 final class _ShakeDetectionTransformer
     extends
         StreamTransformerBase<UserAccelerometerEvent, DeviceShakeNotification> {
-  static const _shakeThresholdGravity = 2.7;
+  static const _shakeThresholdGravity = 1.8;
   static const _shakeSlopTimeMS = 500;
   static const _shakeCountResetTime = 3000;
   static const _minimumShakeCount = 1;

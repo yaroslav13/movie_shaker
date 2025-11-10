@@ -53,17 +53,18 @@ final class _MovieCarouselState extends State<MovieCarousel> {
                 (index) => widget.itemBuilder(context, index),
               ),
             ),
-            Positioned(
-              right: MsEdgeInsets.horizontalLarge.right,
-              child: _DotsIndicator(
-                controller: _carouselController,
-                itemCount: widget.itemCount,
-                itemExtent: itemExtent,
-                backgroundColor: dotsIndicatorTheme?.backgroundColor,
-                activeColor: dotsIndicatorTheme?.activeColor,
-                inactiveColor: dotsIndicatorTheme?.inactiveColor,
+            if (widget.itemCount > 1)
+              Positioned(
+                right: MsEdgeInsets.horizontalLarge.right,
+                child: _DotsIndicator(
+                  controller: _carouselController,
+                  itemCount: widget.itemCount,
+                  itemExtent: itemExtent,
+                  backgroundColor: dotsIndicatorTheme?.backgroundColor,
+                  activeColor: dotsIndicatorTheme?.activeColor,
+                  inactiveColor: dotsIndicatorTheme?.inactiveColor,
+                ),
               ),
-            ),
           ],
         );
       },
@@ -108,6 +109,7 @@ final class _DotsIndicator extends StatelessWidget {
             controller.offset / itemExtent,
           );
         }
+
         return DecoratedBox(
           decoration: BoxDecoration(
             color: backgroundColor,
