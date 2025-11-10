@@ -9,10 +9,10 @@ echo "--- Running Analyzer ---"
 
 if [ -n "$DCM_CI_KEY" ] && [ -n "$DCM_EMAIL" ]; then
   echo "CI variables found. Running with CI credentials."
-  dcm analyze --ci-key="$DCM_CI_KEY" --email="$DCM_EMAIL" .
+  dcm analyze --fatal-style --fatal-warnings --ci-key="$DCM_CI_KEY" --email="$DCM_EMAIL" .
 else
   echo "No CI variables found. Running locally."
-  dcm analyze .
+  dcm analyze --fatal-style --fatal-warnings .
 fi
 
 echo "--- Script finished successfully ---"
