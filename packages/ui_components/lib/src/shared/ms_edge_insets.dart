@@ -17,6 +17,11 @@ abstract final class MsEdgeInsets {
     vertical: 8,
   );
 
+  static const chipContent = EdgeInsets.symmetric(
+    horizontal: 16,
+    vertical: 12,
+  );
+
   static const scaffoldBody = EdgeInsets.symmetric(horizontal: 16);
 
   static const horizontalLarge = EdgeInsets.symmetric(horizontal: 24);
