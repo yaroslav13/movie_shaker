@@ -20,6 +20,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.shrinkWrap = false,
+    this.physics,
     this.itemCount,
     this.primary,
     this.padding,
@@ -38,6 +39,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
   final ScrollController? controller;
 
   final Axis scrollDirection;
+  final ScrollPhysics? physics;
   final bool reverse;
   final bool shrinkWrap;
 
@@ -95,7 +97,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       fetchNextPage: onNextPage,
       physics: state.pages == null && (state.error != null || state.isLoading)
           ? const NeverScrollableScrollPhysics()
-          : const BouncingScrollPhysics(),
+          : physics ?? const BouncingScrollPhysics(),
       showNewPageErrorIndicatorAsGridChild: false,
       showNewPageProgressIndicatorAsGridChild: false,
       showNoMoreItemsIndicatorAsGridChild: false,

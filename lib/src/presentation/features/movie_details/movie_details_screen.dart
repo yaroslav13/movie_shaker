@@ -49,7 +49,7 @@ final class MovieDetailsScreen extends HookConsumerWidget {
         ) =>
           CustomScrollView(
             slivers: [
-              MsFloatingAppBar(imageUrl: posterUrl),
+              MsFloatingAppBar.backgroundImage(imageUrl: posterUrl),
               SliverPadding(
                 padding: MsEdgeInsets.largeContent,
                 sliver: SliverList(

@@ -20,8 +20,32 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
          bottom?.preferredSize.height,
        );
 
+  factory MsAppBar.titleText({
+    required String title,
+    double? toolbarHeight,
+    Widget? flexibleSpace,
+    Color? backgroundColor,
+    double? elevation,
+    TextStyle? titleTextStyle,
+    IconThemeData? iconTheme,
+    bool? centerTitle,
+    Key? key,
+  }) {
+    return MsAppBar(
+      title: MsText(title),
+      toolbarHeight: toolbarHeight,
+      flexibleSpace: flexibleSpace,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      titleTextStyle: titleTextStyle,
+      iconTheme: iconTheme,
+      centerTitle: centerTitle,
+      key: key,
+    );
+  }
+
   factory MsAppBar.searchBar({
-    String? title,
+    Widget? title,
     double? toolbarHeight,
     Widget? flexibleSpace,
     Color? backgroundColor,
@@ -54,7 +78,7 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  final String? title;
+  final Widget? title;
   final double? toolbarHeight;
 
   final PreferredSizeWidget? bottom;
@@ -81,7 +105,7 @@ final class MsAppBar extends StatelessWidget implements PreferredSizeWidget {
     final centerTitle = this.centerTitle ?? theme?.centerTitle ?? false;
 
     return AppBar(
-      title: title != null ? MsText(title) : null,
+      title: title,
       centerTitle: centerTitle,
       elevation: elevation,
       backgroundColor: backgroundColor,

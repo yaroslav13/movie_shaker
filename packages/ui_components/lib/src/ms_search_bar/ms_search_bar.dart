@@ -7,7 +7,7 @@ import 'package:ui_components/src/shared/ms_animation_durations.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
 
-const _searchBarHeight = 56.0;
+const _searchBarHeight = 80.0;
 
 final class MsSearchBar extends StatefulWidget implements PreferredSizeWidget {
   const MsSearchBar({
@@ -85,14 +85,17 @@ final class _MsSearchBarState extends State<MsSearchBar> {
         spacing: MsSpacings.regular,
         children: [
           Expanded(
-            child: MsTextFormField(
-              focusNode: _focusNode,
-              controller: _controller,
-              hintText: context.localizations.search,
-              onFieldSubmitted: widget.onSubmitted,
-              onChanged: widget.onChanged,
-              prefixIcon: const Icon(HugeIcons.strokeRoundedSearch01),
-              textInputAction: TextInputAction.search,
+            child: TapRegion(
+              onTapOutside: (_) => _focusNode.unfocus(),
+              child: MsTextFormField(
+                focusNode: _focusNode,
+                controller: _controller,
+                hintText: context.localizations.search,
+                onFieldSubmitted: widget.onSubmitted,
+                onChanged: widget.onChanged,
+                prefixIcon: const Icon(HugeIcons.strokeRoundedSearch01),
+                textInputAction: TextInputAction.search,
+              ),
             ),
           ),
           ValueListenableBuilder(

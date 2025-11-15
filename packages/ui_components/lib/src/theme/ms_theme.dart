@@ -10,8 +10,10 @@ import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/movie_carousel/carousel_dots_indicator_theme.dart';
 import 'package:ui_components/src/movie_carousel/movie_carousel_theme.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
+import 'package:ui_components/src/ms_app_bar_delegate/ms_app_bar_delegate_theme.dart';
 import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
+import 'package:ui_components/src/ms_filter_bar/ms_filter_chip_theme.dart';
 import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
@@ -51,6 +53,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsBottomBarTheme(colorScheme, textTheme),
         _createLikeButtonTheme(colorScheme, textTheme),
         _createMovieCarouselTheme(colorScheme, textTheme),
+        _createMsFilterChipTheme(colorScheme, textTheme),
+        _createDiscoverAppBarTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -355,6 +359,33 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         activeColor: colorScheme.primary,
         inactiveColor: colorScheme.onInverseSurface,
       ),
+    );
+  }
+
+  static MsFilterChipTheme _createMsFilterChipTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsFilterChipTheme(
+      backgroundColor: colorScheme.surfaceContainerLowest,
+      foregroundColor: colorScheme.onSecondary,
+      selectedBackgroundColor: colorScheme.secondary,
+      selectedForegroundColor: colorScheme.surfaceContainerLowest,
+      borderRadius: MsBorderRadius.regular,
+      padding: MsEdgeInsets.regularContent,
+      labelStyle: textTheme.labelLarge,
+      showCheckmark: false,
+    );
+  }
+
+  static MsAppBarDelegateTheme _createDiscoverAppBarTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsAppBarDelegateTheme(
+      backgroundColor: colorScheme.primaryFixed,
+      elevation: 8,
+      borderRadius: MsBorderRadius.large,
     );
   }
 
