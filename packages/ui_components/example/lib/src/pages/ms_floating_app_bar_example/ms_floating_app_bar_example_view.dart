@@ -12,7 +12,7 @@ final class MsFloatingAppBarExampleView extends StatelessWidget
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            MsFloatingAppBar(
+            MsFloatingAppBar.backgroundImage(
               title: label,
               iconTheme: const IconThemeData(color: Colors.black),
               imageUrl:
