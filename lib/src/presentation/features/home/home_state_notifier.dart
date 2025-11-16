@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
+import 'package:movie_shaker/src/di/interactors/get_movie_genres_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/subscribe_movie_suggestions_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
+import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
@@ -37,6 +39,7 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
 
   void onStart() {
     unawaited(_fetchMovies(_initialPageNumber));
+    unawaited(_fetchMovieGenres());
   }
 
   void onPullToRefresh() {
@@ -62,6 +65,14 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
     state = state.copyWith(searchQuery: query);
 
     unawaited(_fetchMovies(_initialPageNumber));
+  }
+
+  void onGenreSelected(Genre? genre) {
+    info('Genre selected: ${genre?.name}');
+
+    state = state.copyWith(selectedGenre: genre);
+
+    /// TODO: Implement genre filtering in movie fetching
   }
 
   Future<void> _fetchMovies(PageNumber pageNumber) async {
@@ -117,6 +128,22 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
           error: e,
         ),
       );
+    }
+  }
+
+  Future<void> _fetchMovieGenres() async {
+    try {
+      info('Fetching movie genres...');
+
+      final getMovieGenresInteractor = ref.read(
+        getMovieGenresInteractorProvider,
+      );
+
+      final genres = await getMovieGenresInteractor();
+
+      state = state.copyWith(availableGenres: genres);
+    } on Exception catch (e, s) {
+      error('Error fetching movie genres:', e, s);
     }
   }
 
