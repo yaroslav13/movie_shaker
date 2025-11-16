@@ -82,7 +82,7 @@ final class _MsSearchBarState extends State<MsSearchBar> {
     return Padding(
       padding: MsEdgeInsets.regularContent,
       child: Row(
-        spacing: MsSpacings.regular,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
             child: TapRegion(
@@ -103,7 +103,14 @@ final class _MsSearchBarState extends State<MsSearchBar> {
             builder: (context, value, child) {
               return AnimatedSwitcher(
                 duration: MsAnimationDurations.medium,
-                child: value ? child : const SizedBox.shrink(),
+                child: value
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                          left: MsSpacings.regular,
+                        ),
+                        child: child,
+                      )
+                    : const SizedBox.shrink(),
               );
             },
             child: MsIconButton.close(

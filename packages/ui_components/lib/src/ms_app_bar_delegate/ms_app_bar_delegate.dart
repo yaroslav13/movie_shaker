@@ -25,8 +25,10 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   static MsAppBarDelegate withSearchAndFilter<T>({
     required BuildContext context,
-    required List<T> filterItems,
-    required String Function(BuildContext, T) filterLabelBuilder,
+    T? selectedFilterItem,
+    List<T>? filterItems,
+    String Function(BuildContext, T)? filterLabelBuilder,
+    ValueChanged<T?>? onFilterSelected,
     TextEditingController? searchController,
     FocusNode? searchFocusNode,
     ValueChanged<String>? onSearchChanged,
@@ -42,6 +44,13 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
       'this search field. Both were null.',
     );
 
+    assert(
+      filterItems == null || filterLabelBuilder != null,
+      'If `filterItems` is provided, `filterLabelBuilder` must also be '
+      'provided. `filterItems` was not null, but `filterLabelBuilder` was '
+      'null.',
+    );
+
     final searchBar = MsSearchBar(
       controller: searchController,
       focusNode: searchFocusNode,
@@ -49,15 +58,24 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
       onSubmitted: onSearchSubmitted,
     );
 
-    final filterBar = MsFilterBar<T>(
-      padding: EdgeInsets.only(
-        bottom: MsEdgeInsets.regularContent.bottom,
-        left: MsEdgeInsets.scaffoldBody.left,
-        right: MsEdgeInsets.scaffoldBody.right,
-      ),
-      items: filterItems,
-      labelBuilder: filterLabelBuilder,
-    );
+    final isFilterBarVisible =
+        filterItems != null &&
+        filterLabelBuilder != null &&
+        filterItems.isNotEmpty;
+
+    final filterBar = isFilterBarVisible
+        ? MsFilterBar<T>(
+            padding: EdgeInsets.only(
+              bottom: MsEdgeInsets.regularContent.bottom,
+              left: MsEdgeInsets.scaffoldBody.left,
+              right: MsEdgeInsets.scaffoldBody.right,
+            ),
+            items: filterItems,
+            selectedItem: selectedFilterItem,
+            labelBuilder: filterLabelBuilder,
+            onSelected: onFilterSelected,
+          )
+        : null;
 
     return MsAppBarDelegate(
       context: context,
@@ -112,12 +130,12 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
 
     final shouldTitleBeShown = shrinkOffset == 0.0;
 
-    final overlapContent =
+    final shouldBeElevated =
         shrinkOffset > 0.0 || overlapsContent || forceElevated;
 
     return Material(
-      color: overlapContent ? backgroundColor : null,
-      elevation: overlapContent ? elevation : 0.0,
+      color: shouldBeElevated ? backgroundColor : null,
+      elevation: shouldBeElevated ? elevation : 0.0,
       borderRadius: borderRadius,
       child: Padding(
         padding: EdgeInsets.only(top: topPadding),

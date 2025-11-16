@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
@@ -34,6 +35,58 @@ final class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeStateNotifierProvider);
 
+    final suggestedMovie = state.suggestedMovie;
+    useEffect(
+      () {
+        if (suggestedMovie != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _onMovieSuggested(context, suggestedMovie);
+          });
+        }
+
+        return;
+      },
+      [suggestedMovie],
+    );
+
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (_, innerBoxIsScrolled) => [
+          _Header(innerBoxIsScrolled: innerBoxIsScrolled),
+        ],
+        body: PullToRefreshWidget(
+          onRefresh: () async =>
+              ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
+          child: PagedStaggeredGridView<Movie>(
+            paginationState: state.paginationState,
+            onNextPage: () => ref
+                .read(homeStateNotifierProvider.notifier)
+                .onMoviesGridViewBottomReached(),
+            onReload: () =>
+                ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
+            itemBuilder: (_, movie, index) {
+              return MovieCard(
+                action: MovieLikeButton(movie: movie),
+                imageUrl: movie.posterUrl,
+                onTap: () => _onMovieSelected(context, movie),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+final class _Header extends HookConsumerWidget {
+  const _Header({
+    required this.innerBoxIsScrolled,
+  });
+
+  final bool innerBoxIsScrolled;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final searchController = useTextEditingController();
     final inputStreamController = useStreamController<String>();
 
@@ -80,62 +133,20 @@ final class HomeScreen extends HookConsumerWidget {
       const [],
     );
 
-    final suggestedMovie = state.suggestedMovie;
-    useEffect(
-      () {
-        if (suggestedMovie != null) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _onMovieSuggested(context, suggestedMovie);
-          });
-        }
+    final state = ref.watch(homeStateNotifierProvider);
 
-        return;
-      },
-      [suggestedMovie],
-    );
-
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (_, innerBoxIsScrolled) => [
-          SliverPersistentHeader(
-            delegate: MsAppBarDelegate.withSearchAndFilter<String>(
-              context: context,
-              forceElevated: innerBoxIsScrolled,
-              searchController: searchController,
-              // TODO(yhalivets): Implement Filtering
-              filterItems: [
-                'Movies',
-                'TV Shows',
-                'People',
-                'More',
-                'Settings',
-                'Help',
-              ],
-              filterLabelBuilder: (_, item) => item,
-            ),
-            pinned: true,
-          ),
-        ],
-        body: PullToRefreshWidget(
-          onRefresh: () async =>
-              ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
-          child: PagedStaggeredGridView<Movie>(
-            paginationState: state.paginationState,
-            onNextPage: () => ref
-                .read(homeStateNotifierProvider.notifier)
-                .onMoviesGridViewBottomReached(),
-            onReload: () =>
-                ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
-            itemBuilder: (_, movie, index) {
-              return MovieCard(
-                action: MovieLikeButton(movie: movie),
-                imageUrl: movie.posterUrl,
-                onTap: () => _onMovieSelected(context, movie),
-              );
-            },
-          ),
-        ),
+    return SliverPersistentHeader(
+      delegate: MsAppBarDelegate.withSearchAndFilter<Genre>(
+        context: context,
+        forceElevated: innerBoxIsScrolled,
+        searchController: searchController,
+        filterItems: state.availableGenres,
+        filterLabelBuilder: (_, item) => item.name,
+        selectedFilterItem: state.selectedGenre,
+        onFilterSelected: (genre) =>
+            ref.read(homeStateNotifierProvider.notifier).onGenreSelected(genre),
       ),
+      pinned: true,
     );
   }
 }
