@@ -5,9 +5,10 @@ import 'package:movie_shaker/src/data/datasources/remote/movies_remote_datasourc
 import 'package:movie_shaker/src/data/mappers/dbo/movie_dbo_mapper.dart';
 import 'package:movie_shaker/src/data/mappers/dto/movie_details_dto_mapper.dart';
 import 'package:movie_shaker/src/data/mappers/dto/movie_dto_mapper.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
@@ -33,10 +34,13 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   final MovieDetailsDtoMapper _movieDetailsDtoMapper;
 
   @override
-  Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber) async {
+  Future<PaginationPage<Movie>> getMovies(MoviesQuery query) async {
     try {
+      final MoviesQuery(:pageNumber, :filter) = query;
+
       final response = await _moviesRemoteDatasource.discoverMovies(
         page: pageNumber,
+        genres: filter?.genres?.map((e) => e.id).join(','),
       );
 
       final movies = response.results
@@ -59,6 +63,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   Future<PaginationPage<Movie>> getMoviesByQuery(SearchQuery query) async {
     try {
       final SearchQuery(query: queryText, page: pageNumber) = query;
+
       final response = await _moviesRemoteDatasource.searchMovies(
         query: queryText,
         page: pageNumber,

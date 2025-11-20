@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
@@ -24,6 +25,7 @@ final class SubscribeMovieSuggestionsInteractor
         .asyncMap(
           (_) async {
             final movies = await _getRandomMoviesPage();
+
             return _chooseRandomMovie(movies);
           },
         );
@@ -32,7 +34,9 @@ final class SubscribeMovieSuggestionsInteractor
   Future<List<Movie>> _getRandomMoviesPage() async {
     final random = Random();
     final pageNumber = random.nextInt(PaginationPage.maxPageNumber);
-    final moviesPage = await _moviesRepository.getMovies(pageNumber);
+    final moviesPage = await _moviesRepository.getMovies(
+      MoviesQuery(pageNumber: pageNumber),
+    );
 
     return moviesPage.items;
   }

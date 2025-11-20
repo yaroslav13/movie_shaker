@@ -10,6 +10,7 @@ sealed class MovieDto with _$MovieDto {
     String? title,
     String? originalTitle,
     String? posterPath,
+    List<int>? genreIds,
   }) = _MovieDto;
 
   factory MovieDto.fromJson(Map<String, dynamic> json) =>

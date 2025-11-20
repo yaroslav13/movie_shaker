@@ -10,6 +10,8 @@ class Movies extends Table {
 
   TextColumn get posterUrl => text().named('poster_url')();
 
+  TextColumn get genreIds => text().named('genre_ids')();
+
   @override
   Set<Column> get primaryKey => {apiId};
 }
