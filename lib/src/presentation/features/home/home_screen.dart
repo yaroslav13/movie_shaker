@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';

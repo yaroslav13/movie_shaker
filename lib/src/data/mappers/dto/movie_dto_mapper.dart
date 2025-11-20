@@ -4,7 +4,7 @@ import 'package:movie_shaker/src/data/extensions/object_x.dart';
 import 'package:movie_shaker/src/data/mappers/poster_url_mapper.dart';
 import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 
 final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
   const MovieDtoMapper(this._posterUrlMapper);
@@ -33,6 +33,8 @@ final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
       'MovieDto.posterPath',
     );
 
+    final genreIds = instance.genreIds ?? <int>[];
+
     final posterUrl = _posterUrlMapper.mapSafe(
       Poster(
         resolution: ImageResolutions.original,
@@ -45,6 +47,7 @@ final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
       title: title,
       originalTitle: originalTitle,
       posterUrl: posterUrl,
+      genreIds: genreIds,
     );
   }
 }

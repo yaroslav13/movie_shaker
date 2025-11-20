@@ -15,6 +15,7 @@ class CollectionDao extends DatabaseAccessor<LocalDatabase>
 
   Future<List<CollectionDbo>> getAllCollections() async {
     final query = select(collections);
+
     return query.get();
   }
 

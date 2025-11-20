@@ -14,6 +14,7 @@ final class CollectionsLocalDatasource {
 
   Future<List<CollectionDbo>> getAllCollections() async {
     final availableCollections = await _dao.getAllCollections();
+
     return availableCollections;
   }
 

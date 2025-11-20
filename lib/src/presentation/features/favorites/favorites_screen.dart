@@ -15,6 +15,7 @@ final class FavoritesScreen extends HookConsumerWidget {
     useEffect(
       () {
         ref.read(favoritesStateNotifierProvider.notifier).onStart();
+
         return;
       },
       const [],

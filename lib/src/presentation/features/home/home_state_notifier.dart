@@ -7,7 +7,9 @@ import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provide
 import 'package:movie_shaker/src/di/interactors/subscribe_movie_suggestions_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dart';
+import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state.dart';
@@ -72,7 +74,7 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
 
     state = state.copyWith(selectedGenre: genre);
 
-    /// TODO: Implement genre filtering in movie fetching
+    unawaited(_fetchMovies(_initialPageNumber));
   }
 
   Future<void> _fetchMovies(PageNumber pageNumber) async {
@@ -82,10 +84,23 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       final getMoviesInteractor = ref.read(getMoviesInteractorProvider);
       final searchMoviesInteractor = ref.read(searchMoviesInteractorProvider);
 
+      final filter = MoviesFilter(
+        genres: [?state.selectedGenre],
+      );
+
       final moviesPage = state.searchQuery.isEmpty
-          ? await getMoviesInteractor(pageNumber)
+          ? await getMoviesInteractor(
+              MoviesQuery(
+                pageNumber: pageNumber,
+                filter: filter,
+              ),
+            )
           : await searchMoviesInteractor(
-              SearchQuery(query: state.searchQuery, page: pageNumber),
+              FilterRichSearchQuery(
+                query: state.searchQuery,
+                page: pageNumber,
+                filter: filter,
+              ),
             );
 
       final paginationState = state.paginationState;

@@ -6,6 +6,7 @@ import 'package:movie_shaker/src/di/datasources/movies_remote_datasource_provide
 import 'package:movie_shaker/src/di/mappers/movie_dbo_mapper_provider.dart';
 import 'package:movie_shaker/src/di/mappers/movie_details_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/di/mappers/movie_dto_mapper_provider.dart';
+import 'package:movie_shaker/src/di/mappers/reversed_movies_filter_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,6 +23,9 @@ MoviesRepository moviesRepository(Ref ref) {
   final movieDtoMapper = ref.watch(movieDtoMapperProvider);
   final movieDboMapper = ref.watch(movieDboMapperProvider);
   final movieDetailsDtoMapper = ref.watch(movieDetailsDtoMapperProvider);
+  final reversedMoviesFilterMapper = ref.watch(
+    reversedMoviesFilterMapperProvider,
+  );
 
   return MoviesRepositoryImpl(
     moviesRemoteDatasource,
@@ -30,5 +34,6 @@ MoviesRepository moviesRepository(Ref ref) {
     movieDtoMapper,
     movieDboMapper,
     movieDetailsDtoMapper,
+    reversedMoviesFilterMapper,
   );
 }

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 
 part 'favorites_state.freezed.dart';

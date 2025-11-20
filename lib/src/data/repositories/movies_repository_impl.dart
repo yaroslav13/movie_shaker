@@ -5,9 +5,11 @@ import 'package:movie_shaker/src/data/datasources/remote/movies_remote_datasourc
 import 'package:movie_shaker/src/data/mappers/dbo/movie_dbo_mapper.dart';
 import 'package:movie_shaker/src/data/mappers/dto/movie_details_dto_mapper.dart';
 import 'package:movie_shaker/src/data/mappers/dto/movie_dto_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/dto/reversed_movies_filter_dto_mapper.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
@@ -21,6 +23,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
     this._movieDtoMapper,
     this._movieDboMapper,
     this._movieDetailsDtoMapper,
+    this._reversedMoviesFilterMapper,
   );
 
   final MoviesRemoteDatasource _moviesRemoteDatasource;
@@ -31,12 +34,17 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   final MovieDtoMapper _movieDtoMapper;
   final MovieDboMapper _movieDboMapper;
   final MovieDetailsDtoMapper _movieDetailsDtoMapper;
+  final ReversedMoviesFilterMapper _reversedMoviesFilterMapper;
 
   @override
-  Future<PaginationPage<Movie>> getMovies(PageNumber pageNumber) async {
+  Future<PaginationPage<Movie>> getMovies(MoviesQuery query) async {
     try {
+      final MoviesQuery(:pageNumber, :filter) = query;
+      final dtoFilter = _reversedMoviesFilterMapper.map(filter);
+
       final response = await _moviesRemoteDatasource.discoverMovies(
         page: pageNumber,
+        genres: dtoFilter?.genres,
       );
 
       final movies = response.results
@@ -56,9 +64,12 @@ final class MoviesRepositoryImpl implements MoviesRepository {
   }
 
   @override
-  Future<PaginationPage<Movie>> getMoviesByQuery(SearchQuery query) async {
+  Future<PaginationPage<Movie>> getMoviesByQuery(
+    FilterlessSearchQuery query,
+  ) async {
     try {
       final SearchQuery(query: queryText, page: pageNumber) = query;
+
       final response = await _moviesRemoteDatasource.searchMovies(
         query: queryText,
         page: pageNumber,

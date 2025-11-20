@@ -1,6 +1,6 @@
 import 'package:movie_shaker/src/data/databases/local_database.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 
 final class MovieDboMapper implements BaseBiMapper<MovieDbo, Movie> {
   @override
@@ -9,11 +9,16 @@ final class MovieDboMapper implements BaseBiMapper<MovieDbo, Movie> {
       return null;
     }
 
+    final genreIds = instance.genreIds;
+
     return Movie(
       id: instance.apiId,
       title: instance.title,
       originalTitle: instance.originalTitle,
       posterUrl: instance.posterUrl,
+      genreIds: genreIds != null && genreIds.isNotEmpty
+          ? genreIds.split(',').map(int.tryParse).whereType<int>().toList()
+          : [],
     );
   }
 
@@ -28,6 +33,9 @@ final class MovieDboMapper implements BaseBiMapper<MovieDbo, Movie> {
       title: argument.title,
       originalTitle: argument.originalTitle,
       posterUrl: argument.posterUrl,
+      genreIds: argument.genreIds.isNotEmpty
+          ? argument.genreIds.map((e) => e.toString()).join(',')
+          : null,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_state_notifier.dart';
 import 'package:ui_components/ui_components.dart';
 
@@ -24,9 +24,10 @@ final class MovieLikeButton extends HookConsumerWidget {
         ref
             .read(movieLikeStateNotifierProvider(movie: movie).notifier)
             .onStart();
+
         return;
       },
-      const [],
+      [movie],
     );
 
     final isLiked = state.isLiked;
