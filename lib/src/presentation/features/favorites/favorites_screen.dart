@@ -24,16 +24,21 @@ final class FavoritesScreen extends HookConsumerWidget {
     return Scaffold(
       body: SafeArea(
         child: switch (state) {
-          FavoritesStateLoading() => const Center(
-            child: GlassesProgressIndicator(),
+          FavoritesStateLoading() => Center(
+            child: MsProgressIndicator.moviePosters(),
           ),
           FavoritesStateData(:final favoriteMovies) => MovieCarousel(
             itemCount: favoriteMovies.length,
             itemBuilder: (_, index) => MovieCard.expanded(
               imageUrl: favoriteMovies[index].posterUrl,
             ),
+            noItemsBuilder: (_) => NoItemsStub.noFavorites(),
           ),
-          FavoritesStateError() => const LoadingErrorStub(),
+          FavoritesStateError() => LoadingErrorStub(
+            onRetry: () => ref
+                .read(favoritesStateNotifierProvider.notifier)
+                .onRetryPressed(),
+          ),
         },
       ),
     );

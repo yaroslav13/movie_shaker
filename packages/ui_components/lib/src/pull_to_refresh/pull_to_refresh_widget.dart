@@ -6,7 +6,7 @@ import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:ui_components/src/glasses_progress_indicator/glasses_progress_indicator.dart';
+import 'package:ui_components/src/ms_progress_indicator/ms_progress_indicator.dart';
 import 'package:ui_components/src/pull_to_refresh/entities/refresh_indicator_animation.dart';
 import 'package:ui_components/src/pull_to_refresh/exceptions/no_state_machine_found_exception.dart';
 import 'package:ui_components/src/shared/assets.gen.dart';
@@ -14,6 +14,7 @@ import 'package:ui_components/src/shared/ms_edge_insets.dart';
 
 part 'rive/refresh_indicator_rive_inputs.dart';
 part 'widgets/glasses_refresh_indicator.dart';
+part 'widgets/movies_posters_refresh_indicator.dart';
 part 'widgets/popcorn_refresh_indicator.dart';
 
 const _refreshIndicatorDuration = RefreshIndicatorDurations(
@@ -26,8 +27,8 @@ final class PullToRefreshWidget extends StatelessWidget {
   const PullToRefreshWidget({
     required this.child,
     required this.onRefresh,
-    @Deprecated('The popcorn animation will be removed soon')
-    this.animation = RefreshIndicatorAnimation.glasses,
+    @Deprecated('The popcorn/glasses animation will be removed soon')
+    this.animation = RefreshIndicatorAnimation.moviesPosters,
     super.key,
   });
 
@@ -62,6 +63,8 @@ final class PullToRefreshWidget extends StatelessWidget {
                   RefreshIndicatorAnimation.popcorn => _PopcornRefreshIndicator(
                     state: controller.state,
                   ),
+                  RefreshIndicatorAnimation.moviesPosters =>
+                    const _MoviesPostersRefreshIndicator(),
                 },
               ),
             ),

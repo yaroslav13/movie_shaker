@@ -5,6 +5,7 @@ final class _GlassesRefreshIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GlassesProgressIndicator();
+    // ignore: deprecated_member_use_from_same_package
+    return MsProgressIndicator.glasses();
   }
 }

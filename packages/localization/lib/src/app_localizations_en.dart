@@ -70,4 +70,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get needsMoreBlockbusters => 'Needs more blockbusters!';
+
+  @override
+  String get tapTheHeart => 'Tap the heart icon on a movie to save it here.';
 }

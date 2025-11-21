@@ -29,8 +29,8 @@ final class MovieDetailsScreen extends HookConsumerWidget {
 
     return Scaffold(
       body: switch (state) {
-        MovieDetailsStateLoading() => const Center(
-          child: GlassesProgressIndicator(),
+        MovieDetailsStateLoading() => Center(
+          child: MsProgressIndicator.moviePosters(),
         ),
         MovieDetailsStateError() => LoadingErrorStub(
           onRetry: () => ref
