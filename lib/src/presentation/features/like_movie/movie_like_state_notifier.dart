@@ -5,7 +5,7 @@ import 'package:movie_shaker/src/di/interactors/check_is_movie_liked_interactor_
 import 'package:movie_shaker/src/di/interactors/like_movie_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/unlike_movie_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
-import 'package:movie_shaker/src/domain/entities/movies/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';

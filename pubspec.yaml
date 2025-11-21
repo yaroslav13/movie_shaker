@@ -87,6 +87,7 @@ flutter:
     - assets/images/launch_icons/
 
 melos:
+  useRootAsPackage: true
   command:
     bootstrap:
       runPubGetInParallel: false

@@ -13,6 +13,7 @@ abstract interface class MoviesRemoteDatasource {
   @GET('/discover/movie')
   Future<DiscoverMoviesResponse> discoverMovies({
     @Query('page') required int page,
+    @Query('with_genres') String? genres,
   });
 
   @GET('/search/movie')

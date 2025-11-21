@@ -14,6 +14,7 @@ class MovieDao extends DatabaseAccessor<LocalDatabase> with _$MovieDaoMixin {
 
   Future<List<MovieDbo>> getAllMovies() async {
     final query = select(movies);
+
     return query.get();
   }
 

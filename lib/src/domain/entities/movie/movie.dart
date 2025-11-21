@@ -9,5 +9,6 @@ sealed class Movie with _$Movie {
     required String title,
     required String originalTitle,
     required String posterUrl,
+    @Default([]) List<int> genreIds,
   }) = _Movie;
 }
