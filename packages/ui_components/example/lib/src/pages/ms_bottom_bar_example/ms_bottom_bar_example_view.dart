@@ -25,6 +25,9 @@ final class _MsBottomBarExampleViewState extends State<MsBottomBarExampleView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.label),
+      ),
       bottomNavigationBar: MsBottomBar(
         currentTabIndex: _currentIndex,
         onTabSelected: _onTabSelected,

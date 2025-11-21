@@ -2,9 +2,9 @@ import 'package:example/src/utils/labeled_widget_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_components/ui_components.dart';
 
-final class TextFormFieldExampleView extends StatelessWidget
+final class MsProgressIndicatorExampleView extends StatelessWidget
     with LabeledWidgetMixin {
-  const TextFormFieldExampleView({super.key});
+  const MsProgressIndicatorExampleView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +12,12 @@ final class TextFormFieldExampleView extends StatelessWidget
       appBar: AppBar(
         title: Text(label),
       ),
-      body: const Center(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: MsTextFormField(),
-        ),
+      body: Center(
+        child: MsProgressIndicator.moviePosters(),
       ),
     );
   }
 
   @override
-  String get label => 'Text Form Field Example';
+  String get label => 'Ms Progress Indicator Example';
 }

@@ -1,48 +1,50 @@
 {
-    "movieShaker": "Movie Shaker",
-    "aChillingBooo": "A chilling “Booo!”",
-    "tryAgain": "Try Again… If You Dare",
-    "search": "Search",
-    "movieDetails": "Movie Details",
-    "overview": "Overview",
-    "rating": "Rating",
-    "releaseYear": "Release Year",
-    "genres": "Genres",
-    "runtime": "Runtime",
-    "popularity": "Popularity",
-    "time": "Time",
-    "durationFormatMinutes": "{minutes}m",
-    "@durationFormatMinutes": {
-        "description": "Duration format for minutes only, e.g., 45m",
-        "placeholders": {
-            "minutes": {
-                "type": "int"
-            }
-        }
-    },
-    "durationFormatHoursMinutes": "{hours}h {minutes}m",
-    "@durationFormatHoursMinutes": {
-        "description": "Duration format for hours and minutes, e.g., 1h 45m",
-        "placeholders": {
-            "hours": {
-                "type": "int"
-            },
-            "minutes": {
-                "type": "int"
-            }
-        }
-    },
-    "durationFormatHours": "{hours}h",
-    "@durationFormatHours": {
-        "description": "Duration format for hours only, e.g., 2h",
-        "placeholders": {
-            "hours": {
-                "type": "int"
-            }
-        }
-    },
-    "home": "Home",
-    "collections": "Collections",
-    "favorites": "Favorites",
-    "profile": "Profile"
+  "movieShaker": "Movie Shaker",
+  "aChillingBooo": "A chilling “Booo!”",
+  "tryAgain": "Try Again… If You Dare",
+  "search": "Search",
+  "movieDetails": "Movie Details",
+  "overview": "Overview",
+  "rating": "Rating",
+  "releaseYear": "Release Year",
+  "genres": "Genres",
+  "runtime": "Runtime",
+  "popularity": "Popularity",
+  "time": "Time",
+  "durationFormatMinutes": "{minutes}m",
+  "@durationFormatMinutes": {
+    "description": "Duration format for minutes only, e.g., 45m",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationFormatHoursMinutes": "{hours}h {minutes}m",
+  "@durationFormatHoursMinutes": {
+    "description": "Duration format for hours and minutes, e.g., 1h 45m",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationFormatHours": "{hours}h",
+  "@durationFormatHours": {
+    "description": "Duration format for hours only, e.g., 2h",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "home": "Home",
+  "collections": "Collections",
+  "favorites": "Favorites",
+  "profile": "Profile",
+  "needsMoreBlockbusters": "Needs more blockbusters!",
+  "tapTheHeart": "Tap the heart icon on a movie to save it here."
 }

@@ -12,10 +12,12 @@ final class MovieCarousel extends StatefulWidget {
   const MovieCarousel({
     required this.itemBuilder,
     required this.itemCount,
+    this.noItemsBuilder,
     super.key,
   });
 
   final IndexedWidgetBuilder itemBuilder;
+  final WidgetBuilder? noItemsBuilder;
   final int itemCount;
 
   @override
@@ -40,19 +42,31 @@ final class _MovieCarouselState extends State<MovieCarousel> {
       builder: (context, constraints) {
         final itemExtent = constraints.maxHeight * 0.85;
 
+        final noItemsBuilder = widget.noItemsBuilder;
+
         return Stack(
           alignment: Alignment.centerRight,
           children: [
-            CarouselView(
-              controller: _carouselController,
-              padding: MsEdgeInsets.regularContent,
-              scrollDirection: Axis.vertical,
-              itemExtent: itemExtent,
-              children: List.generate(
-                widget.itemCount,
-                (index) => widget.itemBuilder(context, index),
+            if (widget.itemCount == 0 && noItemsBuilder != null)
+              Center(
+                child: noItemsBuilder(context),
+              )
+            else if (widget.itemCount == 1)
+              Padding(
+                padding: MsEdgeInsets.regularContent,
+                child: widget.itemBuilder(context, 0),
+              )
+            else
+              CarouselView(
+                controller: _carouselController,
+                padding: MsEdgeInsets.regularContent,
+                scrollDirection: Axis.vertical,
+                itemExtent: itemExtent,
+                children: List.generate(
+                  widget.itemCount,
+                  (index) => widget.itemBuilder(context, index),
+                ),
               ),
-            ),
             if (widget.itemCount > 1)
               Positioned(
                 right: MsEdgeInsets.horizontalLarge.right,

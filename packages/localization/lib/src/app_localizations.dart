@@ -207,6 +207,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @needsMoreBlockbusters.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs more blockbusters!'**
+  String get needsMoreBlockbusters;
+
+  /// No description provided for @tapTheHeart.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the heart icon on a movie to save it here.'**
+  String get tapTheHeart;
 }
 
 class _AppLocalizationsDelegate

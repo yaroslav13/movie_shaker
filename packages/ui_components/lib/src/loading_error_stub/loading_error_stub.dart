@@ -81,7 +81,7 @@ final class _VerticalLoadingErrorStub extends StatelessWidget {
                 MsAssets.animations.booAnimation,
               ),
             ),
-            Text(
+            MsText(
               description,
               style: textStyle,
               textAlign: TextAlign.center,

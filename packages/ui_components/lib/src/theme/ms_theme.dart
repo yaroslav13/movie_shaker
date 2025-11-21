@@ -17,6 +17,7 @@ import 'package:ui_components/src/ms_filter_bar/ms_filter_chip_theme.dart';
 import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
+import 'package:ui_components/src/no_items_stub/no_items_stub_theme.dart';
 import 'package:ui_components/src/segmented_row/segmented_row_entry_theme.dart';
 import 'package:ui_components/src/segmented_row/segmented_row_theme.dart';
 import 'package:ui_components/src/shared/ms_border_radius.dart';
@@ -55,6 +56,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMovieCarouselTheme(colorScheme, textTheme),
         _createMsFilterChipTheme(colorScheme, textTheme),
         _createDiscoverAppBarTheme(colorScheme, textTheme),
+        _createNoItemsStubTheme(textTheme),
       ],
     );
   }
@@ -385,6 +387,15 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       backgroundColor: colorScheme.surface,
       elevation: 8,
       borderRadius: MsBorderRadius.extraLarge,
+    );
+  }
+
+  static NoItemsStubTheme _createNoItemsStubTheme(
+    TextTheme textTheme,
+  ) {
+    return NoItemsStubTheme(
+      descriptionStyle: textTheme.titleLarge,
+      captionStyle: textTheme.bodySmall,
     );
   }
 
