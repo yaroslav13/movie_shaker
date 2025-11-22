@@ -46,5 +46,7 @@
   "favorites": "Favorites",
   "profile": "Profile",
   "needsMoreBlockbusters": "Needs more blockbusters!",
-  "tapTheHeart": "Tap the heart icon on a movie to save it here."
+  "tapTheHeart": "Tap the heart icon on a movie to save it here.",
+  "itSeemsSomebodyStoleAllMovies": "It seems somebody stole the movies.",
+  "noCluesFound": "No clues found. Try a different keyword."
 }
