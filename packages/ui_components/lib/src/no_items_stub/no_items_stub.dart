@@ -24,6 +24,22 @@ final class NoItemsStub extends StatelessWidget {
     );
   }
 
+  factory NoItemsStub.noMovies({
+    TextStyle? descriptionStyle,
+    TextStyle? captionStyle,
+    Key? key,
+  }) {
+    return NoItemsStub._(
+      animationJson: MsAssets.animations.noMoviesFoundAnimation,
+      descriptionBuilder: (context) =>
+          context.localizations.itSeemsSomebodyStoleAllMovies,
+      captionBuilder: (context) => context.localizations.noCluesFound,
+      descriptionStyle: descriptionStyle,
+      captionStyle: captionStyle,
+      key: key,
+    );
+  }
+
   const NoItemsStub._({
     required this.animationJson,
     required this.descriptionBuilder,

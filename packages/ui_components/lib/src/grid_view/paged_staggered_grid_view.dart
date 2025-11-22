@@ -5,6 +5,7 @@ import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/entities/loading_error_stub_type.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub.dart';
 import 'package:ui_components/src/ms_progress_indicator/ms_progress_indicator.dart';
+import 'package:ui_components/src/no_items_stub/no_items_stub.dart';
 import 'package:ui_components/src/shared/ms_edge_insets.dart';
 import 'package:ui_components/src/shared/ms_spacings.dart';
 
@@ -120,9 +121,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
             onRetry: onNextPage,
           ),
         ),
-
-        /// TODO(yhalivets): Handle empty state.
-        noItemsFoundIndicatorBuilder: (_) => const SizedBox.shrink(),
+        noItemsFoundIndicatorBuilder: (_) => NoItemsStub.noMovies(),
         noMoreItemsIndicatorBuilder: (_) => const SizedBox.shrink(),
       ),
     );

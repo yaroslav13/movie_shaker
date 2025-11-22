@@ -76,4 +76,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tapTheHeart => 'Tap the heart icon on a movie to save it here.';
+
+  @override
+  String get itSeemsSomebodyStoleAllMovies =>
+      'It seems somebody stole the movies.';
+
+  @override
+  String get noCluesFound => 'No clues found. Try a different keyword.';
 }

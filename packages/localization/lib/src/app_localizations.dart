@@ -219,6 +219,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tap the heart icon on a movie to save it here.'**
   String get tapTheHeart;
+
+  /// No description provided for @itSeemsSomebodyStoleAllMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'It seems somebody stole the movies.'**
+  String get itSeemsSomebodyStoleAllMovies;
+
+  /// No description provided for @noCluesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No clues found. Try a different keyword.'**
+  String get noCluesFound;
 }
 
 class _AppLocalizationsDelegate
