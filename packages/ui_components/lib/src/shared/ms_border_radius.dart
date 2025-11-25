@@ -7,6 +7,7 @@ abstract final class MsBorderRadius {
   static const large = BorderRadius.all(MsRadius.large);
   static const extraLarge = BorderRadius.all(MsRadius.extraLarge);
   static const round = BorderRadius.all(MsRadius.round);
+  static const zero = BorderRadius.zero;
 }
 
 abstract final class MsRadius {
@@ -16,4 +17,5 @@ abstract final class MsRadius {
   static const large = Radius.circular(16);
   static const extraLarge = Radius.circular(24);
   static const round = Radius.circular(50);
+  static const zero = Radius.zero;
 }

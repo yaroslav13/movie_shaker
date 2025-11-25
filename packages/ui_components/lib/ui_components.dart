@@ -12,6 +12,8 @@ export 'src/loading_error_stub/loading_error_stub_theme.dart';
 export 'src/movie_card/movie_card.dart';
 export 'src/movie_card/movie_card_theme.dart';
 export 'src/movie_carousel/movie_carousel.dart';
+export 'src/movie_collection_card/movie_collection_card.dart';
+export 'src/movie_collection_card/movie_collection_card_theme.dart';
 export 'src/ms_app_bar/ms_app_bar.dart';
 export 'src/ms_app_bar_delegate/ms_app_bar_delegate.dart';
 export 'src/ms_app_bar_delegate/ms_app_bar_delegate_theme.dart';

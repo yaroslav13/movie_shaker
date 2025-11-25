@@ -2,6 +2,7 @@ import 'package:example/src/pages/dots_progress_indicator_example/dots_progress_
 import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_example_view.dart';
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
 import 'package:example/src/pages/movie_carousel_example/movie_carousel_example_view.dart';
+import 'package:example/src/pages/movie_collection_card_example/movie_collection_card_example_view.dart';
 import 'package:example/src/pages/ms_bottom_bar_example/ms_bottom_bar_example_view.dart';
 import 'package:example/src/pages/ms_floating_app_bar_example/ms_floating_app_bar_example_view.dart';
 import 'package:example/src/pages/ms_progress_indicator_example/ms_progress_indicator_example_view.dart';
@@ -37,6 +38,7 @@ final class _MainScreenState extends State<MainScreen> {
     const SegmentedRowExampleView(),
     const MsBottomBarExampleView(),
     const MovieCarouselExampleView(),
+    const MovieCollectionCardExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {
