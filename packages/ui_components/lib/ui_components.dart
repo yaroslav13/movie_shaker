@@ -21,6 +21,8 @@ export 'src/ms_bottom_bar/entities/ms_bottom_bar_item.dart';
 export 'src/ms_bottom_bar/ms_bottom_bar.dart';
 export 'src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 export 'src/ms_filter_bar/ms_filter_bar.dart';
+export 'src/ms_floating_action_button/ms_floating_action_button.dart';
+export 'src/ms_floating_action_button/ms_floating_action_button_theme.dart';
 export 'src/ms_floating_app_bar/ms_floating_app_bar.dart';
 export 'src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
 export 'src/ms_icon/ms_icon.dart';

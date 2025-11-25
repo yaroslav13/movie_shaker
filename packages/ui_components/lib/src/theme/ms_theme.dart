@@ -15,7 +15,9 @@ import 'package:ui_components/src/ms_app_bar_delegate/ms_app_bar_delegate_theme.
 import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
 import 'package:ui_components/src/ms_filter_bar/ms_filter_chip_theme.dart';
+import 'package:ui_components/src/ms_floating_action_button/ms_floating_action_button_theme.dart';
 import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
+import 'package:ui_components/src/ms_icon/ms_icon.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
 import 'package:ui_components/src/no_items_stub/no_items_stub_theme.dart';
@@ -34,6 +36,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   }
 
   static const _recommendedAlpha = 0.8;
+  static const _recommendedElevation = 8.0;
 
   static ThemeData _createThemeData(MsColors colors, Brightness brightness) {
     final theme = _setupThemeFoundation(colors, brightness);
@@ -59,6 +62,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createDiscoverAppBarTheme(colorScheme, textTheme),
         _createNoItemsStubTheme(textTheme),
         _createMovieCollectionCardTheme(colorScheme, textTheme),
+        _createMsFloatingActionButtonTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -158,7 +162,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   ) {
     return const MovieCardTheme(
       borderRadius: MsBorderRadius.extraLarge,
-      elevation: 8,
+      elevation: _recommendedElevation,
     );
   }
 
@@ -199,7 +203,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       borderRadius: MsBorderRadius.regular,
-      elevation: 8,
+      elevation: _recommendedElevation,
       padding: const EdgeInsets.all(24),
       textStyle: textTheme.labelLarge,
     );
@@ -212,7 +216,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       borderRadius: MsBorderRadius.regular,
-      elevation: 8,
+      elevation: _recommendedElevation,
       padding: const EdgeInsets.all(16),
     );
   }
@@ -291,7 +295,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     TextTheme textTheme,
   ) {
     return MsAppBarTheme(
-      elevation: 4,
+      elevation: _recommendedElevation,
       centerTitle: true,
     );
   }
@@ -301,7 +305,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     TextTheme textTheme,
   ) {
     return MsFloatingAppBarTheme(
-      elevation: 4,
+      elevation: _recommendedElevation,
       centerTitle: false,
       iconTheme: IconThemeData(
         color: colorScheme.onPrimary,
@@ -387,7 +391,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
   ) {
     return MsAppBarDelegateTheme(
       backgroundColor: colorScheme.surface,
-      elevation: 8,
+      elevation: _recommendedElevation,
       borderRadius: MsBorderRadius.extraLarge,
     );
   }
@@ -406,15 +410,30 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     TextTheme textTheme,
   ) {
     return MovieCollectionCardTheme(
-      elevation: 8,
+      elevation: _recommendedElevation,
       backgroundColor: colorScheme.surfaceContainerHighest,
       borderRadius: MsBorderRadius.extraLarge,
       titleStyle: textTheme.titleMedium,
       subtitleStyle: textTheme.bodySmall,
-      iconTheme: IconThemeData(
+      tileIconTheme: IconThemeData(
         color: colorScheme.onSurface,
-        size: 14,
+        size: MsIcon.smallSize,
       ),
+      placeholderIconTheme: IconThemeData(
+        color: colorScheme.onSurface,
+        size: MsIcon.largeSize,
+      ),
+    );
+  }
+
+  static MsFloatingActionButtonTheme _createMsFloatingActionButtonTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsFloatingActionButtonTheme(
+      backgroundColor: colorScheme.primary,
+      foregroundColor: colorScheme.onPrimary,
+      elevation: _recommendedElevation,
     );
   }
 

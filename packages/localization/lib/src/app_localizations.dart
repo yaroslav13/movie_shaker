@@ -231,6 +231,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No clues found. Try a different keyword.'**
   String get noCluesFound;
+
+  /// No description provided for @doNotLetYourFavoritesGatherDust.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t let your favorites gather dust.'**
+  String get doNotLetYourFavoritesGatherDust;
+
+  /// No description provided for @startCuratingMustWatchLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Start curating your must-watch lists.'**
+  String get startCuratingMustWatchLists;
+
+  /// No description provided for @moviesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Movies'**
+  String moviesCount(Object count);
 }
 
 class _AppLocalizationsDelegate

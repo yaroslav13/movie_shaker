@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
+import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
 
 part 'routes.g.dart';
@@ -47,7 +48,7 @@ final class CollectionsRoute extends GoRouteData with _$CollectionsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const Placeholder();
+      const MovieCollectionsScreen();
 }
 
 final class FavoritesRoute extends GoRouteData with _$FavoritesRoute {

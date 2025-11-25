@@ -48,5 +48,8 @@
   "needsMoreBlockbusters": "Needs more blockbusters!",
   "tapTheHeart": "Tap the heart icon on a movie to save it here.",
   "itSeemsSomebodyStoleAllMovies": "It seems somebody stole the movies.",
-  "noCluesFound": "No clues found. Try a different keyword."
+  "noCluesFound": "No clues found. Try a different keyword.",
+  "doNotLetYourFavoritesGatherDust": "Don't let your favorites gather dust.",
+  "startCuratingMustWatchLists": "Start curating your must-watch lists.",
+  "moviesCount": "{count} Movies"
 }
