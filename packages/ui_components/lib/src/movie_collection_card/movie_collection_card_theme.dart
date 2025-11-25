@@ -11,7 +11,8 @@ final class MovieCollectionCardTheme
     this.borderRadius,
     this.titleStyle,
     this.subtitleStyle,
-    this.iconTheme,
+    this.tileIconTheme,
+    this.placeholderIconTheme,
   });
 
   final Color? backgroundColor;
@@ -24,7 +25,9 @@ final class MovieCollectionCardTheme
 
   final TextStyle? subtitleStyle;
 
-  final IconThemeData? iconTheme;
+  final IconThemeData? tileIconTheme;
+
+  final IconThemeData? placeholderIconTheme;
 
   @override
   MovieCollectionCardTheme copyWith({
@@ -33,7 +36,8 @@ final class MovieCollectionCardTheme
     BorderRadiusGeometry? borderRadius,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
-    IconThemeData? iconTheme,
+    IconThemeData? tileIconTheme,
+    IconThemeData? placeholderIconTheme,
   }) {
     return MovieCollectionCardTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -41,7 +45,8 @@ final class MovieCollectionCardTheme
       borderRadius: borderRadius ?? this.borderRadius,
       titleStyle: titleStyle ?? this.titleStyle,
       subtitleStyle: subtitleStyle ?? this.subtitleStyle,
-      iconTheme: iconTheme ?? this.iconTheme,
+      tileIconTheme: tileIconTheme ?? this.tileIconTheme,
+      placeholderIconTheme: placeholderIconTheme ?? this.placeholderIconTheme,
     );
   }
 
@@ -64,7 +69,12 @@ final class MovieCollectionCardTheme
       ),
       titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t),
       subtitleStyle: TextStyle.lerp(subtitleStyle, other.subtitleStyle, t),
-      iconTheme: IconThemeData.lerp(iconTheme, other.iconTheme, t),
+      tileIconTheme: IconThemeData.lerp(tileIconTheme, other.tileIconTheme, t),
+      placeholderIconTheme: IconThemeData.lerp(
+        placeholderIconTheme,
+        other.placeholderIconTheme,
+        t,
+      ),
     );
   }
 }

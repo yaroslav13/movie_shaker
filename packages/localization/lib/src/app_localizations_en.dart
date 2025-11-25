@@ -83,4 +83,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noCluesFound => 'No clues found. Try a different keyword.';
+
+  @override
+  String get doNotLetYourFavoritesGatherDust =>
+      'Don\'t let your favorites gather dust.';
+
+  @override
+  String get startCuratingMustWatchLists =>
+      'Start curating your must-watch lists.';
+
+  @override
+  String moviesCount(Object count) {
+    return '$count Movies';
+  }
 }

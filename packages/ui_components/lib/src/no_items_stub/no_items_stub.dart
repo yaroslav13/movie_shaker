@@ -40,6 +40,23 @@ final class NoItemsStub extends StatelessWidget {
     );
   }
 
+  factory NoItemsStub.noCollections({
+    TextStyle? descriptionStyle,
+    TextStyle? captionStyle,
+    Key? key,
+  }) {
+    return NoItemsStub._(
+      animationJson: MsAssets.animations.noCollectionsAnimation,
+      descriptionBuilder: (context) =>
+          context.localizations.doNotLetYourFavoritesGatherDust,
+      captionBuilder: (context) =>
+          context.localizations.startCuratingMustWatchLists,
+      descriptionStyle: descriptionStyle,
+      captionStyle: captionStyle,
+      key: key,
+    );
+  }
+
   const NoItemsStub._({
     required this.animationJson,
     required this.descriptionBuilder,

@@ -22,14 +22,14 @@ final class MsAppBarTheme extends ThemeExtension<MsAppBarTheme> {
     Color? backgroundColor,
     double? elevation,
     TextStyle? titleTextStyle,
-    IconThemeData? iconTheme,
+    IconThemeData? tileIconTheme,
     bool? centerTitle,
   }) {
     return MsAppBarTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       elevation: elevation ?? this.elevation,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-      iconTheme: iconTheme ?? this.iconTheme,
+      iconTheme: tileIconTheme ?? this.iconTheme,
       centerTitle: centerTitle ?? this.centerTitle,
     );
   }

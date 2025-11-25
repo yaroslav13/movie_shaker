@@ -19,13 +19,11 @@ final class MovieCollectionCard extends StatelessWidget {
     this.backgroundColor,
     this.borderRadius,
     this.elevation,
-    this.iconTheme,
+    this.tileIconTheme,
+    this.placeholderIconTheme,
     this.onTap,
     super.key,
-  }) : assert(
-         posterUrls.length > 0,
-         'posterUrls must contain at least one URL',
-       );
+  });
 
   final String title;
   final List<String> posterUrls;
@@ -38,7 +36,8 @@ final class MovieCollectionCard extends StatelessWidget {
   final Color? backgroundColor;
   final BorderRadius? borderRadius;
   final double? elevation;
-  final IconThemeData? iconTheme;
+  final IconThemeData? tileIconTheme;
+  final IconThemeData? placeholderIconTheme;
 
   final VoidCallback? onTap;
 
@@ -63,7 +62,10 @@ final class MovieCollectionCard extends StatelessWidget {
     final subtitleStyle =
         this.subtitleStyle ?? theme?.subtitleStyle ?? textTheme.bodyMedium;
 
-    final iconTheme = this.iconTheme ?? theme?.iconTheme;
+    final tileIconTheme = this.tileIconTheme ?? theme?.tileIconTheme;
+
+    final placeholderIconTheme =
+        this.placeholderIconTheme ?? theme?.placeholderIconTheme;
 
     return InkWell(
       onTap: onTap,
@@ -80,6 +82,7 @@ final class MovieCollectionCard extends StatelessWidget {
                 elevation: elevation,
                 backgroundColor: backgroundColor,
                 borderRadius: borderRadius,
+                iconThemeData: placeholderIconTheme,
               ),
             ),
             Padding(
@@ -109,7 +112,7 @@ final class MovieCollectionCard extends StatelessWidget {
                     ),
                   ),
                   Theme(
-                    data: Theme.of(context).copyWith(iconTheme: iconTheme),
+                    data: Theme.of(context).copyWith(iconTheme: tileIconTheme),
                     child: MsIcon.arrowRight(),
                   ),
                 ],
@@ -128,15 +131,28 @@ final class _MoviePostersGrid extends StatelessWidget {
     this.elevation = 0.0,
     this.backgroundColor,
     this.borderRadius,
+    this.iconThemeData,
   });
 
   final List<String> posterUrls;
   final double elevation;
   final Color? backgroundColor;
   final BorderRadiusGeometry? borderRadius;
+  final IconThemeData? iconThemeData;
 
-  Iterable<Widget> _buildGrid() sync* {
+  Iterable<Widget> _buildGrid(BuildContext context) sync* {
     final visibleCount = posterUrls.length.clamp(0, _maxPreviewsCount);
+
+    if (visibleCount == 0) {
+      yield Expanded(
+        child: Center(
+          child: Theme(
+            data: Theme.of(context).copyWith(iconTheme: iconThemeData),
+            child: MsIcon.outlinedFolder(),
+          ),
+        ),
+      );
+    }
 
     if (visibleCount == 1) {
       yield Expanded(
@@ -176,7 +192,7 @@ final class _MoviePostersGrid extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Column(
         spacing: MsSpacings.xxSmall,
-        children: _buildGrid().toList(),
+        children: _buildGrid(context).toList(),
       ),
     );
   }

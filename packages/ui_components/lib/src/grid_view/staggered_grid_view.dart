@@ -8,9 +8,11 @@ const _defaultCrossAxisCount = 2;
 final class StaggeredGridView extends StatelessWidget {
   const StaggeredGridView({
     required this.itemBuilder,
+    this.noItemsBuilder,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.shrinkWrap = false,
+    this.itemExtent,
     this.itemCount,
     this.primary,
     this.padding,
@@ -21,6 +23,32 @@ final class StaggeredGridView extends StatelessWidget {
     super.key,
   });
 
+  factory StaggeredGridView.largeSpacing({
+    required IndexedWidgetBuilder itemBuilder,
+    WidgetBuilder? noItemsBuilder,
+    Axis scrollDirection = Axis.vertical,
+    bool reverse = false,
+    bool shrinkWrap = false,
+    int? itemCount,
+    bool? primary,
+    ScrollController? controller,
+  }) {
+    return StaggeredGridView(
+      itemBuilder: itemBuilder,
+      noItemsBuilder: noItemsBuilder,
+      scrollDirection: scrollDirection,
+      reverse: reverse,
+      shrinkWrap: shrinkWrap,
+      itemExtent: 3 / 4,
+      itemCount: itemCount,
+      primary: primary,
+      controller: controller,
+      crossAxisCount: 2,
+      mainAxisSpacing: MsSpacings.large,
+      crossAxisSpacing: MsSpacings.large,
+    );
+  }
+
   final ScrollController? controller;
 
   final Axis scrollDirection;
@@ -30,6 +58,7 @@ final class StaggeredGridView extends StatelessWidget {
   final int? itemCount;
   final bool? primary;
 
+  final double? itemExtent;
   final int? crossAxisCount;
   final double? mainAxisSpacing;
   final double? crossAxisSpacing;
@@ -37,6 +66,7 @@ final class StaggeredGridView extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   final IndexedWidgetBuilder itemBuilder;
+  final WidgetBuilder? noItemsBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +81,11 @@ final class StaggeredGridView extends StatelessWidget {
 
     final padding = this.padding ?? theme?.padding ?? EdgeInsets.zero;
 
+    final noItemsBuilder = this.noItemsBuilder;
+    if (itemCount == 0 && noItemsBuilder != null) {
+      return noItemsBuilder(context);
+    }
+
     return MasonryGridView.count(
       crossAxisCount: crossAxisCount,
       crossAxisSpacing: crossAxisSpacing,
@@ -63,7 +98,10 @@ final class StaggeredGridView extends StatelessWidget {
       primary: primary,
       itemCount: itemCount,
       physics: const BouncingScrollPhysics(),
-      itemBuilder: itemBuilder,
+      itemBuilder: (context, index) => AspectRatio(
+        aspectRatio: itemExtent ?? 1,
+        child: itemBuilder(context, index),
+      ),
     );
   }
 }
