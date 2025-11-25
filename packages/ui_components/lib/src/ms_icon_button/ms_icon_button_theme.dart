@@ -25,7 +25,6 @@ final class MsIconButtonTheme extends ThemeExtension<MsIconButtonTheme> {
     BorderRadiusGeometry? borderRadius,
     double? elevation,
     EdgeInsetsGeometry? padding,
-    TextStyle? textStyle,
   }) {
     return MsIconButtonTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,

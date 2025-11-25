@@ -18,7 +18,7 @@ final class MsAppBarTheme extends ThemeExtension<MsAppBarTheme> {
   final bool? centerTitle;
 
   @override
-  ThemeExtension<MsAppBarTheme> copyWith({
+  MsAppBarTheme copyWith({
     Color? backgroundColor,
     double? elevation,
     TextStyle? titleTextStyle,

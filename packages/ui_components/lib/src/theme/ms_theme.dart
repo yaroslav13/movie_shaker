@@ -9,6 +9,7 @@ import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.da
 import 'package:ui_components/src/movie_card/movie_card_theme.dart';
 import 'package:ui_components/src/movie_carousel/carousel_dots_indicator_theme.dart';
 import 'package:ui_components/src/movie_carousel/movie_carousel_theme.dart';
+import 'package:ui_components/src/movie_collection_card/movie_collection_card_theme.dart';
 import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
 import 'package:ui_components/src/ms_app_bar_delegate/ms_app_bar_delegate_theme.dart';
 import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
@@ -57,6 +58,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsFilterChipTheme(colorScheme, textTheme),
         _createDiscoverAppBarTheme(colorScheme, textTheme),
         _createNoItemsStubTheme(textTheme),
+        _createMovieCollectionCardTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -399,7 +401,24 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  static Color _applyAlpha(Color color) {
-    return color.withValues(alpha: _recommendedAlpha);
+  static MovieCollectionCardTheme _createMovieCollectionCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MovieCollectionCardTheme(
+      elevation: 8,
+      backgroundColor: colorScheme.surfaceContainerHighest,
+      borderRadius: MsBorderRadius.extraLarge,
+      titleStyle: textTheme.titleMedium,
+      subtitleStyle: textTheme.bodySmall,
+      iconTheme: IconThemeData(
+        color: colorScheme.onSurface,
+        size: 14,
+      ),
+    );
+  }
+
+  static Color _applyAlpha(Color color, [double alpha = _recommendedAlpha]) {
+    return color.withValues(alpha: alpha);
   }
 }
