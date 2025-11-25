@@ -29,7 +29,11 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
           MovieCollectionsStateLoading() => Center(
             child: MsProgressIndicator.moviePosters(),
           ),
-          MovieCollectionsStateError() => const LoadingErrorStub(),
+          MovieCollectionsStateError() => LoadingErrorStub(
+            onRetry: () => ref
+                .read(movieCollectionsStateNotifierProvider.notifier)
+                .onRetryPressed(),
+          ),
           MovieCollectionsStateData() => StaggeredGridView.largeSpacing(
             noItemsBuilder: (_) => NoItemsStub.noCollections(),
             itemCount: state.collections.length,

@@ -16,6 +16,12 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier {
     unawaited(_fetchMovieCollections());
   }
 
+  void onRetryPressed() {
+    state = const MovieCollectionsState.loading();
+
+    unawaited(_fetchMovieCollections());
+  }
+
   Future<void> _fetchMovieCollections() async {
     try {
       final getMovieCollectionsInteractor = ref.read(
