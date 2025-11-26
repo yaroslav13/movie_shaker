@@ -19,6 +19,7 @@ export 'src/ms_floating_app_bar/ms_floating_app_bar.dart';
 export 'src/ms_icon/ms_icon.dart';
 export 'src/ms_progress_indicator/ms_progress_indicator.dart';
 export 'src/ms_search_bar/ms_search_bar.dart';
+export 'src/ms_snack_bar/ms_snack_bar.dart';
 export 'src/ms_text/ms_text.dart';
 export 'src/ms_text_form_field/ms_text_form_field.dart';
 export 'src/no_items_stub/no_items_stub.dart';
