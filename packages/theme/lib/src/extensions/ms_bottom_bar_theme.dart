@@ -31,7 +31,7 @@ final class MsBottomBarTheme extends ThemeExtension<MsBottomBarTheme> {
 
   @override
   MsBottomBarTheme lerp(
-    ThemeExtension<MsBottomBarTheme>? other,
+    covariant ThemeExtension<MsBottomBarTheme>? other,
     double t,
   ) {
     if (other is! MsBottomBarTheme) {
