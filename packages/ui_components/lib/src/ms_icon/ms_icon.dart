@@ -31,6 +31,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedError({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedSettingsError01,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   factory MsIcon.cancel({
     double? size,
     Color? color,
@@ -236,10 +251,6 @@ final class MsIcon extends StatelessWidget {
   final List<Shadow>? shadows;
   final String? semanticLabel;
   final TextDirection? textDirection;
-
-  static const largeSize = 48.0;
-  static const mediumSize = 24.0;
-  static const smallSize = 16.0;
 
   @override
   Widget build(BuildContext context) {

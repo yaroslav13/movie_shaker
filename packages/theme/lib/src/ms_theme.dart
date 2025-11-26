@@ -19,6 +19,7 @@ import 'package:theme/src/extensions/ms_floating_action_button_theme.dart';
 import 'package:theme/src/extensions/ms_floating_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_icon_button_theme.dart';
 import 'package:theme/src/extensions/ms_input_decoration_theme.dart';
+import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
@@ -65,6 +66,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMovieCollectionCardTheme(colorScheme, textTheme),
         _createMsFloatingActionButtonTheme(colorScheme),
         _createMsBottomSheetTheme(colorScheme),
+        _createMsSnackBarTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -438,6 +440,27 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       ),
       clipBehavior: Clip.hardEdge,
       showDragHandle: true,
+    );
+  }
+
+  static MsSnackBarTheme _createMsSnackBarTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsSnackBarTheme(
+      textStyle: textTheme.bodyMedium,
+      shape: const RoundedRectangleBorder(
+        borderRadius: MsBorderRadius.regular,
+      ),
+      elevation: _recommendedElevation,
+      padding: MsEdgeInsets.contentMedium,
+      duration: const Duration(seconds: 1),
+      variantStyles: {
+        MsSnackBarVariant.error: MsSnackBarVariantStyle(
+          backgroundColor: colorScheme.error,
+          foregroundColor: colorScheme.onError,
+        ),
+      },
     );
   }
 

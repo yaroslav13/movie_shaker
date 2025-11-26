@@ -8,7 +8,7 @@ final class MovieCollectionCardExampleView extends StatelessWidget
 
   void _onTap(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+      MsSnackBar.error(context, message),
     );
   }
 
