@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
@@ -66,9 +66,9 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
     final filterBar = isFilterBarVisible
         ? MsFilterBar<T>(
             padding: EdgeInsets.only(
-              bottom: MsEdgeInsets.regularContent.bottom,
-              left: MsEdgeInsets.scaffoldBody.left,
-              right: MsEdgeInsets.scaffoldBody.right,
+              bottom: MsEdgeInsets.contentMedium.bottom,
+              left: MsEdgeInsets.scaffoldBodyPadding.left,
+              right: MsEdgeInsets.scaffoldBodyPadding.right,
             ),
             items: filterItems,
             selectedItem: selectedFilterItem,

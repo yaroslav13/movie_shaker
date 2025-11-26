@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
+import 'package:theme/theme.dart';
+import 'package:ui_components/ui_components.dart';
 
 final class MsElevatedButton extends StatelessWidget {
   const MsElevatedButton({
@@ -13,6 +14,30 @@ final class MsElevatedButton extends StatelessWidget {
     this.textStyle,
     super.key,
   });
+
+  factory MsElevatedButton.text({
+    required String text,
+    VoidCallback? onPressed,
+    Color? backgroundColor,
+    Color? foregroundColor,
+    BorderRadiusGeometry? borderRadius,
+    double? elevation,
+    EdgeInsetsGeometry? padding,
+    TextStyle? textStyle,
+    Key? key,
+  }) {
+    return MsElevatedButton(
+      key: key,
+      onPressed: onPressed,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      borderRadius: borderRadius,
+      elevation: elevation,
+      padding: padding,
+      textStyle: textStyle,
+      child: MsText(text),
+    );
+  }
 
   final Color? backgroundColor;
   final Color? foregroundColor;

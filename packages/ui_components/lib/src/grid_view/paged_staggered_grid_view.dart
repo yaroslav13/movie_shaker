@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/grid_view/entities/pagination_state.dart';
-import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
 import 'package:ui_components/src/loading_error_stub/entities/loading_error_stub_type.dart';
 import 'package:ui_components/src/loading_error_stub/loading_error_stub.dart';
 import 'package:ui_components/src/ms_progress_indicator/ms_progress_indicator.dart';
 import 'package:ui_components/src/no_items_stub/no_items_stub.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 part 'widgets/footer_tile.dart';
 

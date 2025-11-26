@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state_notifier.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
 part 'widgets/overview_widget.dart';
@@ -51,7 +52,7 @@ final class MovieDetailsScreen extends HookConsumerWidget {
             slivers: [
               MsFloatingAppBar.backgroundImage(imageUrl: posterUrl),
               SliverPadding(
-                padding: MsEdgeInsets.largeContent,
+                padding: MsEdgeInsets.contentLarge,
                 sliver: SliverList(
                   delegate: SliverChildListDelegate(
                     [

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:lottie/lottie.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_text/ms_text.dart';
-import 'package:ui_components/src/no_items_stub/no_items_stub_theme.dart';
 import 'package:ui_components/src/shared/assets.gen.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 final class NoItemsStub extends StatelessWidget {
   factory NoItemsStub.noFavorites({
@@ -90,7 +88,7 @@ final class NoItemsStub extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Padding(
-          padding: MsEdgeInsets.scaffoldBody,
+          padding: MsEdgeInsets.scaffoldBodyPadding,
           child: Column(
             spacing: MsSpacings.large,
             mainAxisAlignment: MainAxisAlignment.center,

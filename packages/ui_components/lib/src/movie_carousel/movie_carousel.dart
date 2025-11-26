@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:ui_components/src/movie_carousel/movie_carousel_theme.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
+import 'package:theme/theme.dart';
 
 const _dotSize = Size(8, 8);
 
@@ -53,13 +51,13 @@ final class _MovieCarouselState extends State<MovieCarousel> {
               )
             else if (widget.itemCount == 1)
               Padding(
-                padding: MsEdgeInsets.regularContent,
+                padding: MsEdgeInsets.contentMedium,
                 child: widget.itemBuilder(context, 0),
               )
             else
               CarouselView(
                 controller: _carouselController,
-                padding: MsEdgeInsets.regularContent,
+                padding: MsEdgeInsets.contentMedium,
                 scrollDirection: Axis.vertical,
                 itemExtent: itemExtent,
                 children: List.generate(
@@ -130,7 +128,7 @@ final class _DotsIndicator extends StatelessWidget {
             borderRadius: MsBorderRadius.round,
           ),
           child: Padding(
-            padding: MsEdgeInsets.regularContent,
+            padding: MsEdgeInsets.contentMedium,
             child: AnimatedSmoothIndicator(
               activeIndex: position.round(),
               count: itemCount,

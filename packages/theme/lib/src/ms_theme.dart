@@ -1,32 +1,33 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' hide ProgressIndicatorTheme;
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
-import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
-import 'package:ui_components/src/like_button/like_button_theme.dart';
-import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
-import 'package:ui_components/src/movie_card/movie_card_theme.dart';
-import 'package:ui_components/src/movie_carousel/carousel_dots_indicator_theme.dart';
-import 'package:ui_components/src/movie_carousel/movie_carousel_theme.dart';
-import 'package:ui_components/src/movie_collection_card/movie_collection_card_theme.dart';
-import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
-import 'package:ui_components/src/ms_app_bar_delegate/ms_app_bar_delegate_theme.dart';
-import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
-import 'package:ui_components/src/ms_elevated_button/ms_elevated_button_theme.dart';
-import 'package:ui_components/src/ms_filter_bar/ms_filter_chip_theme.dart';
-import 'package:ui_components/src/ms_floating_action_button/ms_floating_action_button_theme.dart';
-import 'package:ui_components/src/ms_floating_app_bar/ms_floating_app_bar_theme.dart';
-import 'package:ui_components/src/ms_icon/ms_icon.dart';
-import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
-import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
-import 'package:ui_components/src/no_items_stub/no_items_stub_theme.dart';
-import 'package:ui_components/src/segmented_row/segmented_row_entry_theme.dart';
-import 'package:ui_components/src/segmented_row/segmented_row_theme.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
-import 'package:ui_components/src/theme/ms_colors.dart';
+import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
+import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
+import 'package:theme/src/extensions/like_button_theme.dart';
+import 'package:theme/src/extensions/loading_error_stub_theme.dart';
+import 'package:theme/src/extensions/movie_card_theme.dart';
+import 'package:theme/src/extensions/movie_carousel_theme.dart';
+import 'package:theme/src/extensions/movie_collection_card_theme.dart';
+import 'package:theme/src/extensions/ms_app_bar_delegate_theme.dart';
+import 'package:theme/src/extensions/ms_app_bar_theme.dart';
+import 'package:theme/src/extensions/ms_bottom_bar_theme.dart';
+import 'package:theme/src/extensions/ms_bottom_sheet_theme.dart';
+import 'package:theme/src/extensions/ms_elevated_button_theme.dart';
+import 'package:theme/src/extensions/ms_filter_chip_theme.dart';
+import 'package:theme/src/extensions/ms_floating_action_button_theme.dart';
+import 'package:theme/src/extensions/ms_floating_app_bar_theme.dart';
+import 'package:theme/src/extensions/ms_icon_button_theme.dart';
+import 'package:theme/src/extensions/ms_input_decoration_theme.dart';
+import 'package:theme/src/extensions/no_items_stub_theme.dart';
+import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
+import 'package:theme/src/extensions/segmented_row_theme.dart';
+import 'package:theme/src/extensions/staggered_grid_view_theme.dart';
+import 'package:theme/src/ms_colors.dart';
+import 'package:theme/src/shared/ms_border_radius.dart';
+import 'package:theme/src/shared/ms_edge_insets.dart';
+import 'package:theme/src/shared/ms_icon_sizes.dart';
+import 'package:theme/src/shared/ms_spacings.dart';
 
 extension type MsTheme._(ThemeData data) implements ThemeData {
   factory MsTheme.light() {
@@ -45,24 +46,25 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
 
     return theme.copyWith(
       extensions: [
-        _createMovieCardTheme(colorScheme, textTheme),
+        _createMovieCardTheme(),
         _createStaggeredGridViewTheme(textTheme),
         _createDotsProgressIndicatorTheme(colorScheme),
         _createLoadingErrorStubTheme(textTheme),
         _createMsElevatedButtonTheme(colorScheme, textTheme),
         _createMsIconButtonTheme(colorScheme),
         _createMsInputDecorationTheme(colorScheme, textTheme),
-        _createMsAppBarTheme(colorScheme, textTheme),
-        _createMsFloatingAppBarTheme(colorScheme, textTheme),
+        _createMsAppBarTheme(),
+        _createMsFloatingAppBarTheme(colorScheme),
         _createSegmentedRowTheme(colorScheme, textTheme),
-        _createMsBottomBarTheme(colorScheme, textTheme),
-        _createLikeButtonTheme(colorScheme, textTheme),
-        _createMovieCarouselTheme(colorScheme, textTheme),
+        _createMsBottomBarTheme(colorScheme),
+        _createLikeButtonTheme(colorScheme),
+        _createMovieCarouselTheme(colorScheme),
         _createMsFilterChipTheme(colorScheme, textTheme),
-        _createDiscoverAppBarTheme(colorScheme, textTheme),
+        _createAppBarDelegateTheme(colorScheme),
         _createNoItemsStubTheme(textTheme),
         _createMovieCollectionCardTheme(colorScheme, textTheme),
-        _createMsFloatingActionButtonTheme(colorScheme, textTheme),
+        _createMsFloatingActionButtonTheme(colorScheme),
+        _createMsBottomSheetTheme(colorScheme),
       ],
     );
   }
@@ -156,10 +158,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  static MovieCardTheme _createMovieCardTheme(
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
+  static MovieCardTheme _createMovieCardTheme() {
     return const MovieCardTheme(
       borderRadius: MsBorderRadius.extraLarge,
       elevation: _recommendedElevation,
@@ -173,7 +172,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       crossAxisCount: 2,
       crossAxisSpacing: MsSpacings.medium,
       mainAxisSpacing: MsSpacings.medium,
-      padding: MsEdgeInsets.scrollableContent,
+      padding: MsEdgeInsets.scrollableContentPadding,
       largeTextStyle: textTheme.displayMedium,
       smallTextStyle: textTheme.bodyLarge,
     );
@@ -204,7 +203,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       foregroundColor: colorScheme.onPrimary,
       borderRadius: MsBorderRadius.regular,
       elevation: _recommendedElevation,
-      padding: const EdgeInsets.all(24),
+      padding: MsEdgeInsets.contentLarge,
       textStyle: textTheme.labelLarge,
     );
   }
@@ -217,7 +216,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       foregroundColor: colorScheme.onPrimary,
       borderRadius: MsBorderRadius.regular,
       elevation: _recommendedElevation,
-      padding: const EdgeInsets.all(16),
+      padding: MsEdgeInsets.iconButtonPadding,
     );
   }
 
@@ -271,7 +270,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return MsInputDecorationTheme(
       filled: true,
       fillColor: colorScheme.surfaceContainerLow,
-      contentPadding: MsEdgeInsets.textFieldContent,
+      contentPadding: MsEdgeInsets.textFieldPadding,
       border: border,
       enabledBorder: enabledBorder,
       focusedBorder: focusedBorder,
@@ -290,10 +289,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     );
   }
 
-  static MsAppBarTheme _createMsAppBarTheme(
-    ColorScheme colorScheme,
-    TextTheme textTheme,
-  ) {
+  static MsAppBarTheme _createMsAppBarTheme() {
     return MsAppBarTheme(
       elevation: _recommendedElevation,
       centerTitle: true,
@@ -302,7 +298,6 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
 
   static MsFloatingAppBarTheme _createMsFloatingAppBarTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return MsFloatingAppBarTheme(
       elevation: _recommendedElevation,
@@ -330,25 +325,23 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       segmentTheme: SegmentedRowEntryTheme(
         labelStyle: textTheme.bodyMedium,
         captionStyle: textTheme.labelMedium,
-        contentPadding: MsEdgeInsets.regularContent,
+        contentPadding: MsEdgeInsets.contentMedium,
       ),
     );
   }
 
   static MsBottomBarTheme _createMsBottomBarTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return MsBottomBarTheme(
       selectedItemColor: colorScheme.primary,
-      itemPadding: MsEdgeInsets.bottomBarItem,
-      margin: MsEdgeInsets.regularContent,
+      itemPadding: MsEdgeInsets.bottomBarItemPadding,
+      margin: MsEdgeInsets.contentMedium,
     );
   }
 
   static LikeButtonTheme _createLikeButtonTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return LikeButtonTheme(
       likedColor: colorScheme.error,
@@ -359,7 +352,6 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
 
   static MovieCarouselTheme _createMovieCarouselTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return MovieCarouselTheme(
       dotsIndicatorTheme: CarouselDotsIndicatorTheme(
@@ -380,14 +372,13 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       selectedBackgroundColor: colorScheme.secondary,
       selectedForegroundColor: colorScheme.surfaceContainerLowest,
       borderRadius: MsBorderRadius.regular,
-      padding: MsEdgeInsets.chipContent,
+      padding: MsEdgeInsets.chipPadding,
       labelStyle: textTheme.bodyMedium,
     );
   }
 
-  static MsAppBarDelegateTheme _createDiscoverAppBarTheme(
+  static MsAppBarDelegateTheme _createAppBarDelegateTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return MsAppBarDelegateTheme(
       backgroundColor: colorScheme.surface,
@@ -417,23 +408,36 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       subtitleStyle: textTheme.bodySmall,
       tileIconTheme: IconThemeData(
         color: colorScheme.onSurface,
-        size: MsIcon.smallSize,
+        size: MsIconSizes.small,
       ),
       placeholderIconTheme: IconThemeData(
         color: colorScheme.onSurface,
-        size: MsIcon.largeSize,
+        size: MsIconSizes.large,
       ),
     );
   }
 
   static MsFloatingActionButtonTheme _createMsFloatingActionButtonTheme(
     ColorScheme colorScheme,
-    TextTheme textTheme,
   ) {
     return MsFloatingActionButtonTheme(
       backgroundColor: colorScheme.primary,
       foregroundColor: colorScheme.onPrimary,
       elevation: _recommendedElevation,
+    );
+  }
+
+  static MsBottomSheetTheme _createMsBottomSheetTheme(
+    ColorScheme colorScheme,
+  ) {
+    return MsBottomSheetTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      shape: const RoundedRectangleBorder(
+        borderRadius: MsBorderRadius.extraLarge,
+      ),
+      clipBehavior: Clip.hardEdge,
+      showDragHandle: true,
     );
   }
 

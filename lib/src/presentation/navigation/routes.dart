@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_movie_collection_form.dart';
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:navigation/navigation.dart';
 
 part 'routes.g.dart';
 
@@ -19,7 +22,12 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         TypedGoRoute<MovieDetailsRoute>(path: 'movie/:id'),
       ],
     ),
-    TypedGoRoute<CollectionsRoute>(path: '/collections'),
+    TypedGoRoute<CollectionsRoute>(
+      path: '/collections',
+      routes: [
+        TypedGoRoute<AddMovieCollectionRoute>(path: 'add'),
+      ],
+    ),
     TypedGoRoute<FavoritesRoute>(path: '/favorites'),
     TypedGoRoute<ProfileRoute>(path: '/profile'),
   ],
@@ -44,7 +52,9 @@ final class HomeRoute extends GoRouteData with _$HomeRoute {
 }
 
 final class CollectionsRoute extends GoRouteData with _$CollectionsRoute {
-  const CollectionsRoute();
+  const CollectionsRoute([this.$extra]);
+
+  final CollectionsRouteExtra? $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -77,4 +87,18 @@ final class MovieDetailsRoute extends GoRouteData with _$MovieDetailsRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       MovieDetailsScreen(movieId: id);
+}
+
+final class AddMovieCollectionRoute extends GoRouteData
+    with _$AddMovieCollectionRoute {
+  const AddMovieCollectionRoute();
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return const MsBottomSheetPage<void>(
+      child: AddMovieCollectionForm(),
+    );
+  }
 }

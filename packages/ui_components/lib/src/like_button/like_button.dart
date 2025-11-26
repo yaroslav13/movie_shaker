@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button.dart';
-import 'package:ui_components/src/shared/ms_animation_durations.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class LikeButton extends StatelessWidget {
@@ -49,7 +48,7 @@ final class LikeButton extends StatelessWidget {
 
     return MsIconButton(
       borderRadius: MsBorderRadius.round,
-      padding: MsEdgeInsets.smallContent,
+      padding: MsEdgeInsets.contentSmall,
       backgroundColor: backgroundColor,
       icon: AnimatedSwitcher(
         duration: MsAnimationDurations.medium,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_filter_bar/ms_filter_chip.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 const _filterBarHeight = 80.0;
 

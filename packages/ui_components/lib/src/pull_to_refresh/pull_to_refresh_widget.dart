@@ -6,11 +6,11 @@ import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_progress_indicator/ms_progress_indicator.dart';
 import 'package:ui_components/src/pull_to_refresh/entities/refresh_indicator_animation.dart';
 import 'package:ui_components/src/pull_to_refresh/exceptions/no_state_machine_found_exception.dart';
 import 'package:ui_components/src/shared/assets.gen.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
 
 part 'rive/refresh_indicator_rive_inputs.dart';
 part 'widgets/glasses_refresh_indicator.dart';
@@ -55,7 +55,7 @@ final class PullToRefreshWidget extends StatelessWidget {
               height: indicatorHeight,
               child: Padding(
                 padding: EdgeInsets.only(
-                  bottom: MsEdgeInsets.smallContent.bottom,
+                  bottom: MsEdgeInsets.contentSmall.bottom,
                 ),
                 child: switch (animation) {
                   RefreshIndicatorAnimation.glasses =>

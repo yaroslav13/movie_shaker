@@ -1,11 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/movie_collection_card/movie_collection_card_theme.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_icon/ms_icon.dart';
 import 'package:ui_components/src/ms_text/ms_text.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 const _maxPreviewsCount = 4;
 
@@ -71,7 +68,7 @@ final class MovieCollectionCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: borderRadius is BorderRadius ? borderRadius : null,
       child: Padding(
-        padding: MsEdgeInsets.smallContent,
+        padding: MsEdgeInsets.contentSmall,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: MsSpacings.medium,

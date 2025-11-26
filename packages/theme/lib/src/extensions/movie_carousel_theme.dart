@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/movie_carousel/carousel_dots_indicator_theme.dart';
+import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
 
 @immutable
 final class MovieCarouselTheme extends ThemeExtension<MovieCarouselTheme> {

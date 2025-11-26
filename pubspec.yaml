@@ -10,6 +10,8 @@ environment:
 workspace:
   - packages/ui_components
   - packages/localization
+  - packages/navigation
+  - packages/theme
 
 dependencies:
   flutter:
@@ -17,6 +19,9 @@ dependencies:
 
   # localization
   localization: 1.0.0
+
+  # design system
+  theme: 1.0.0
 
   # ui
   cupertino_icons: 1.0.8
@@ -29,6 +34,7 @@ dependencies:
 
   # navigation
   go_router: 16.0.0
+  navigation: 1.0.0
 
   # logger
   logger: 2.6.0
@@ -102,5 +108,8 @@ melos:
       exec:
         concurrency: 1
       packageFilters:
-        ignore: "localization"
+        ignore:
+          - localization
+          - theme
+          - navigation
       run: /bin/bash $MELOS_ROOT_PATH/scripts/run_code_generation.sh

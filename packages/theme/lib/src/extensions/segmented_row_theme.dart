@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/segmented_row/segmented_row_entry_theme.dart';
+import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 
 @immutable
 final class SegmentedRowTheme extends ThemeExtension<SegmentedRowTheme> {

@@ -51,5 +51,9 @@
   "noCluesFound": "No clues found. Try a different keyword.",
   "doNotLetYourFavoritesGatherDust": "Don't let your favorites gather dust.",
   "startCuratingMustWatchLists": "Start curating your must-watch lists.",
-  "moviesCount": "{count} Movies"
+  "moviesCount": "{count} Movies",
+  "newCollection": "New collection",
+  "collectionName": "Collection name",
+  "buildANewListForMoviesYouWantToTrack": "Build a new list for movies you want to track.",
+  "create": "Create"
 }

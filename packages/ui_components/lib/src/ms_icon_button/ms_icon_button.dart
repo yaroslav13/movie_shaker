@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_icon/ms_icon.dart';
-import 'package:ui_components/src/ms_icon_button/ms_icon_button_theme.dart';
 
 final class MsIconButton extends StatelessWidget {
   const MsIconButton({
