@@ -1,0 +1,21 @@
+name: navigation
+description: "Navigation helpers and custom transitions"
+version: 1.0.0
+resolution: workspace
+publish_to: 'none'
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # theme
+  theme:
+    path: ../theme
+
+dev_dependencies:
+  dart_code_metrics_presets: 2.24.0
+
+

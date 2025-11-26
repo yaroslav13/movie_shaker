@@ -1,11 +1,4 @@
-## Project UI Components Library
+## Movie Shaker UI Components
 
-Flutter package containing all reusable UI components used in the project.
-Each component is a separate folder.
-Components may require special theme customization to be used properly. 
-This customization must be done using the theme extension developed specifically for these components.
-The extension lives in the theme folder.
+UI components library for the Movie Shaker app: buttons, cards, lists, and other reusable UI elements designed to provide a consistent look and feel across the application.
 
-## Features
-- Complete set of reusable UI components
-- Theme customization support

@@ -1,0 +1,18 @@
+name: theme
+description: "App theme data and extensions"
+version: 1.0.0
+resolution: workspace
+publish_to: 'none'
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # theme
+  google_fonts: 6.2.1
+  flex_color_scheme: 8.3.0
+
+dev_dependencies:
+  dart_code_metrics_presets: 2.24.0

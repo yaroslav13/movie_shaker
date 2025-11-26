@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
 const _toolbarHeight = 80.0;
@@ -90,6 +91,7 @@ final class MsFloatingAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<MsFloatingAppBarTheme>();
+
     final backgroundColor = this.backgroundColor ?? theme?.backgroundColor;
     final elevation = this.elevation ?? theme?.elevation;
     final titleTextStyle = this.titleTextStyle ?? theme?.titleTextStyle;

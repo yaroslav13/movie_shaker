@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:ui_components/src/grid_view/staggered_grid_view_theme.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
+import 'package:theme/theme.dart';
 
 const _defaultCrossAxisCount = 2;
 
@@ -43,7 +42,6 @@ final class StaggeredGridView extends StatelessWidget {
       itemCount: itemCount,
       primary: primary,
       controller: controller,
-      crossAxisCount: 2,
       mainAxisSpacing: MsSpacings.large,
       crossAxisSpacing: MsSpacings.large,
     );

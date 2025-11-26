@@ -96,4 +96,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String moviesCount(Object count) {
     return '$count Movies';
   }
+
+  @override
+  String get newCollection => 'New collection';
+
+  @override
+  String get collectionName => 'Collection name';
+
+  @override
+  String get buildANewListForMoviesYouWantToTrack =>
+      'Build a new list for movies you want to track.';
+
+  @override
+  String get create => 'Create';
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:localization/localization.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button.dart';
 import 'package:ui_components/src/ms_text_form_field/ms_text_form_field.dart';
-import 'package:ui_components/src/shared/ms_animation_durations.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 const _searchBarHeight = 80.0;
 
@@ -80,7 +78,7 @@ final class _MsSearchBarState extends State<MsSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: MsEdgeInsets.regularContent,
+      padding: MsEdgeInsets.contentMedium,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -114,7 +112,7 @@ final class _MsSearchBarState extends State<MsSearchBar> {
               );
             },
             child: MsIconButton.close(
-              padding: MsEdgeInsets.smallContent,
+              padding: MsEdgeInsets.contentSmall,
               onPressed: _onClearButtonPressed,
             ),
           ),

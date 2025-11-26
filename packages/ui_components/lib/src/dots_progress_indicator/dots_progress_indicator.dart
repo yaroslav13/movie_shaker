@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/dots_progress_indicator/dots_progress_indicator_theme.dart';
+import 'package:theme/theme.dart';
 
 const _dotSize = 6.0;
 const _spacing = 2.0;

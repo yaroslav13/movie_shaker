@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/ms_filter_bar/ms_filter_chip_theme.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_text/ms_text.dart';
-import 'package:ui_components/src/shared/ms_animation_durations.dart';
-import 'package:ui_components/src/shared/ms_border_radius.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
 
 final class MsFilterChip extends StatelessWidget {
   const MsFilterChip({
@@ -85,7 +82,7 @@ final class MsFilterChip extends StatelessWidget {
     final borderRadius =
         this.borderRadius ?? theme?.borderRadius ?? MsBorderRadius.round;
     final padding =
-        this.padding ?? theme?.padding ?? MsEdgeInsets.regularContent;
+        this.padding ?? theme?.padding ?? MsEdgeInsets.contentMedium;
     final labelStyle = this.labelStyle ?? theme?.labelStyle;
 
     final onSelected = this.onSelected;

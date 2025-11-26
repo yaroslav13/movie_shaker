@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 import 'package:lottie/lottie.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/loading_error_stub/entities/loading_error_stub_type.dart';
-import 'package:ui_components/src/loading_error_stub/loading_error_stub_theme.dart';
 import 'package:ui_components/src/ms_elevated_button/ms_elevated_button.dart';
 import 'package:ui_components/src/ms_icon_button/ms_icon_button.dart';
 import 'package:ui_components/src/ms_text/ms_text.dart';
 import 'package:ui_components/src/shared/assets.gen.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
-import 'package:ui_components/src/shared/ms_spacings.dart';
 
 final class LoadingErrorStub extends StatelessWidget {
   const LoadingErrorStub({
@@ -67,7 +65,7 @@ final class _VerticalLoadingErrorStub extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: MsEdgeInsets.scaffoldBody,
+        padding: MsEdgeInsets.scaffoldBodyPadding,
         child: Column(
           spacing: MsSpacings.large,
           mainAxisSize: MainAxisSize.min,
@@ -112,7 +110,7 @@ final class _HorizontalLoadingErrorStub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: MsEdgeInsets.scaffoldBody,
+      padding: MsEdgeInsets.scaffoldBodyPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

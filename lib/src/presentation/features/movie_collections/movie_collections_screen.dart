@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class MovieCollectionsScreen extends HookConsumerWidget {
@@ -12,6 +15,7 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(movieCollectionsStateNotifierProvider);
+    final navigationState = GoRouterState.of(context);
 
     useEffect(
       () {
@@ -22,8 +26,26 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
       const [],
     );
 
+    useEffect(
+      () {
+        if (navigationState.extra case final CollectionsRouteExtra extra) {
+          ref
+              .read(movieCollectionsStateNotifierProvider.notifier)
+              .onNewCollectionNameEntered(extra.newCollectionName);
+        }
+
+        return;
+      },
+      [navigationState.extra],
+    );
+
     return Scaffold(
-      floatingActionButton: MsFloatingActionButton.add(context),
+      floatingActionButton: state is MovieCollectionsStateData
+          ? MsFloatingActionButton.add(
+              context,
+              onPressed: () => const AddMovieCollectionRoute().go(context),
+            )
+          : null,
       body: SafeArea(
         child: switch (state) {
           MovieCollectionsStateLoading() => Center(

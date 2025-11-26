@@ -249,6 +249,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} Movies'**
   String moviesCount(Object count);
+
+  /// No description provided for @newCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'New collection'**
+  String get newCollection;
+
+  /// No description provided for @collectionName.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection name'**
+  String get collectionName;
+
+  /// No description provided for @buildANewListForMoviesYouWantToTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Build a new list for movies you want to track.'**
+  String get buildANewListForMoviesYouWantToTrack;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
 }
 
 class _AppLocalizationsDelegate

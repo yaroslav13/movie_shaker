@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_bottom_bar/entities/ms_bottom_bar_item.dart';
-import 'package:ui_components/src/ms_bottom_bar/ms_bottom_bar_theme.dart';
 
 const _defaultItemPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 16);
 

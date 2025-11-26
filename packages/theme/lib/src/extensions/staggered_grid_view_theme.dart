@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/utils/int_lerp.dart';
+import 'package:theme/src/utils/int_lerp.dart';
 
 @immutable
 final class StaggeredGridViewTheme

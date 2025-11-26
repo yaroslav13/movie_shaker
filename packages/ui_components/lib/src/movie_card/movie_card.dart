@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/movie_card/movie_card_theme.dart';
-import 'package:ui_components/src/shared/ms_edge_insets.dart';
+import 'package:theme/theme.dart';
 
 const _defaultImageSize = Size(177, 265.5);
 
@@ -61,8 +60,8 @@ final class MovieCard extends StatelessWidget {
             ),
             if (action case final action?)
               Positioned(
-                top: MsEdgeInsets.smallContent.top,
-                right: MsEdgeInsets.smallContent.right,
+                top: MsEdgeInsets.contentSmall.top,
+                right: MsEdgeInsets.contentSmall.right,
                 child: action,
               ),
           ],

@@ -60,13 +60,16 @@ lib/
 ### Workspace Packages (`/packages`)
 
 #### 1. **ui_components** (`/packages/ui_components`)
-A comprehensive design system package containing reusable UI components:
-
-- **Custom Components**
-- **Theme System**
+It contains reusable UI components designed to provide a consistent look and feel across the application.
 
 #### 2. **localization** (`/packages/localization`)
-Handles internationalization (i18n) for the entire application.
+It contains source of localization and localization interface for app.
+
+#### 3. **navigation** (`/packages/navigation`)
+It contains helpers and custom transitions for app navigation.
+
+#### 4. **theme** (`/packages/theme`)
+It contains app theme configuration and theme extensions.
 
 ### Technology Stack
 
@@ -80,7 +83,6 @@ Handles internationalization (i18n) for the entire application.
 #### Networking
 - **Dio** (`dio`) - HTTP client
 - **Retrofit** (`retrofit`) - Type-safe REST client generation
-- **Pretty Dio Logger** - Request/response logging
 
 #### Code Quality
 - **Custom Lint** (`custom_lint`, `riverpod_lint`) - Custom lint rules
@@ -99,6 +101,8 @@ The project uses **Melos** to manage the monorepo workspace:
 workspace:
   - packages/ui_components
   - packages/localization
+  - packages/navigation
+  - packages/theme
 ```
 
 **Melos Scripts:**
@@ -255,4 +259,5 @@ Make it executable:
 ```bash
 chmod +x .git/hooks/pre-commit
 ```
+
 

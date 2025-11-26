@@ -1,7 +1,7 @@
 import 'package:example/src/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
-import 'package:ui_components/ui_components.dart';
+import 'package:theme/theme.dart';
 
 final class UiKitApplication extends StatelessWidget {
   const UiKitApplication({super.key});

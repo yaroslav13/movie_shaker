@@ -8,7 +8,7 @@ final class _FooterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: EdgeInsets.symmetric(
-      vertical: MsEdgeInsets.smallContent.vertical,
+      vertical: MsEdgeInsets.contentSmall.vertical,
     ),
     child: Center(child: child),
   );

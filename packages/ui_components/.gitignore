@@ -1,1 +1,2 @@
-lib/src/shared/assets.gen.dart
+../theme/lib/src/shared/assets.gen.dart
+build

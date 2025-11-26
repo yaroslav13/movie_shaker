@@ -7,7 +7,7 @@ part 'movie_collection_details.freezed.dart';
 sealed class MovieCollectionDetails with _$MovieCollectionDetails {
   const factory MovieCollectionDetails({
     required String name,
-    required List<Movie> movies,
+    @Default([]) List<Movie> movies,
   }) = _MovieCollectionDetails;
 
   const MovieCollectionDetails._();

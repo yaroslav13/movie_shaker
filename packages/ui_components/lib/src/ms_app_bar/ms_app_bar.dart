@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/ms_app_bar/ms_app_bar_theme.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_search_bar/ms_search_bar.dart';
 import 'package:ui_components/src/ms_text/ms_text.dart';
 

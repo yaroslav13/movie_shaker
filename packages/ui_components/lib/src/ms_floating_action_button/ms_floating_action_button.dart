@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/ms_floating_action_button/ms_floating_action_button_theme.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_icon/ms_icon.dart';
 
 final class MsFloatingActionButton extends StatelessWidget {

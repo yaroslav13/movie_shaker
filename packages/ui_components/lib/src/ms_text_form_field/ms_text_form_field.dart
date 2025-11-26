@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_components/src/ms_input_decoration/ms_input_decoration_theme.dart';
+import 'package:theme/theme.dart';
 
 final class MsTextFormField extends StatelessWidget {
   const MsTextFormField({
@@ -37,6 +37,57 @@ final class MsTextFormField extends StatelessWidget {
     this.errorStyle,
     super.key,
   });
+
+  factory MsTextFormField.relaxed({
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    String? forceErrorText,
+    String? hintText,
+    String? labelText,
+    TextInputType? keyboardType,
+    String? Function(String?)? validator,
+    ValueChanged<String>? onChanged,
+    ValueChanged<String>? onFieldSubmitted,
+    ValueChanged<String?>? onSaved,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    int? maxLines,
+    int? minLines,
+    bool obscureText = false,
+    bool enabled = true,
+    bool autocorrect = true,
+    bool enableSuggestions = true,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextInputAction textInputAction = TextInputAction.done,
+    bool readOnly = false,
+    Color? fillColor,
+  }) {
+    return MsTextFormField(
+      controller: controller,
+      focusNode: focusNode,
+      forceErrorText: forceErrorText,
+      hintText: hintText,
+      labelText: labelText,
+      keyboardType: keyboardType,
+      validator: validator,
+      onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
+      onSaved: onSaved,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      maxLines: maxLines,
+      minLines: minLines,
+      obscureText: obscureText,
+      enabled: enabled,
+      autocorrect: autocorrect,
+      enableSuggestions: enableSuggestions,
+      textCapitalization: textCapitalization,
+      textInputAction: textInputAction,
+      readOnly: readOnly,
+      fillColor: fillColor,
+      contentPadding: MsEdgeInsets.textFieldPaddingRelaxed,
+    );
+  }
 
   final TextEditingController? controller;
   final FocusNode? focusNode;

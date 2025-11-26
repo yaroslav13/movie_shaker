@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class SegmentedRow extends StatelessWidget {
@@ -99,7 +100,7 @@ final class _Segment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: contentPadding ?? MsEdgeInsets.regularContent,
+        padding: contentPadding ?? MsEdgeInsets.contentMedium,
         child: Column(
           spacing: MsSpacings.xxSmall,
           mainAxisAlignment: MainAxisAlignment.center,
