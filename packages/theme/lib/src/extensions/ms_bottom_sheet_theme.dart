@@ -41,7 +41,7 @@ final class MsBottomSheetTheme extends ThemeExtension<MsBottomSheetTheme> {
 
   @override
   MsBottomSheetTheme lerp(
-    ThemeExtension<MsBottomSheetTheme>? other,
+    covariant ThemeExtension<MsBottomSheetTheme>? other,
     double t,
   ) {
     if (other is! MsBottomSheetTheme) {

@@ -27,7 +27,7 @@ final class LikeButtonTheme extends ThemeExtension<LikeButtonTheme> {
 
   @override
   LikeButtonTheme lerp(
-    ThemeExtension<LikeButtonTheme>? other,
+    covariant ThemeExtension<LikeButtonTheme>? other,
     double t,
   ) {
     if (other is! LikeButtonTheme) {

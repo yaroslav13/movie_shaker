@@ -15,10 +15,7 @@ final class MovieCardTheme extends ThemeExtension<MovieCardTheme> {
   @override
   MovieCardTheme copyWith({
     BorderRadiusGeometry? borderRadius,
-    TextStyle? titleStyle,
-    TextStyle? subtitleStyle,
     double? elevation,
-    Color? backgroundColor,
   }) {
     return MovieCardTheme(
       borderRadius: borderRadius ?? this.borderRadius,

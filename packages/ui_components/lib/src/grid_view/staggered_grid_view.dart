@@ -26,6 +26,8 @@ final class StaggeredGridView extends StatelessWidget {
     required IndexedWidgetBuilder itemBuilder,
     WidgetBuilder? noItemsBuilder,
     Axis scrollDirection = Axis.vertical,
+    double? itemExtent,
+    int? crossAxisCount,
     bool reverse = false,
     bool shrinkWrap = false,
     int? itemCount,
@@ -38,7 +40,8 @@ final class StaggeredGridView extends StatelessWidget {
       scrollDirection: scrollDirection,
       reverse: reverse,
       shrinkWrap: shrinkWrap,
-      itemExtent: 3 / 4,
+      itemExtent: itemExtent,
+      crossAxisCount: crossAxisCount,
       itemCount: itemCount,
       primary: primary,
       controller: controller,
@@ -97,7 +100,7 @@ final class StaggeredGridView extends StatelessWidget {
       itemCount: itemCount,
       physics: const BouncingScrollPhysics(),
       itemBuilder: (context, index) => AspectRatio(
-        aspectRatio: itemExtent ?? 1,
+        aspectRatio: itemExtent ?? 3 / 4,
         child: itemBuilder(context, index),
       ),
     );
