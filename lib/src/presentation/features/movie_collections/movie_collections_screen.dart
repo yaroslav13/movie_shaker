@@ -23,7 +23,10 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
     ref.listen(
       movieCollectionsStateNotifierProvider,
       (previous, current) {
-        if (current.hasCreateCollectionError) {
+        final hasCreateCollectionError = current.hasCreateCollectionError;
+
+        if (previous?.hasCreateCollectionError != hasCreateCollectionError &&
+            hasCreateCollectionError) {
           unawaited(
             context.showErrorSnackBar(
               context.localizations.yourCollectionDisappeared,
