@@ -35,6 +35,17 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
     unawaited(_createMovieCollection(name));
   }
 
+  void onCreateCollectionErrorSnackBarClosed() {
+    info('Create collection error snack bar closed');
+
+    state = switch (state) {
+      final MovieCollectionsStateData state => state.copyWith(
+        createCollectionError: null,
+      ),
+      _ => state,
+    };
+  }
+
   Future<void> _fetchMovieCollections() async {
     info('Fetching movie collections');
 
@@ -69,14 +80,20 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
       info('Successfully created a new movie collection: $newCollection');
 
       state = switch (state) {
-        final MovieCollectionsStateData state => MovieCollectionsState.data(
+        final MovieCollectionsStateData state => state.copyWith(
           collections: [...state.collections, newCollection],
         ),
         _ => throw StateError('Invalid state for adding a new collection'),
       };
     } on AppException catch (e) {
-      // TODO:(yhalivets) Handle error properly (e.g., show a snackbar)
       error('Failed to create a new movie collection', e);
+
+      state = switch (state) {
+        final MovieCollectionsStateData state => state.copyWith(
+          createCollectionError: e,
+        ),
+        _ => state,
+      };
     }
   }
 }

@@ -109,4 +109,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get create => 'Create';
+
+  @override
+  String get yourCollectionDisappeared =>
+      'Oooops, your collection disappeared!';
 }

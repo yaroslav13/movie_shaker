@@ -273,6 +273,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create'**
   String get create;
+
+  /// No description provided for @yourCollectionDisappeared.
+  ///
+  /// In en, this message translates to:
+  /// **'Oooops, your collection disappeared!'**
+  String get yourCollectionDisappeared;
 }
 
 class _AppLocalizationsDelegate
