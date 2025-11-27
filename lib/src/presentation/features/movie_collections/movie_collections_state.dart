@@ -10,8 +10,19 @@ sealed class MovieCollectionsState with _$MovieCollectionsState {
 
   const factory MovieCollectionsState.data({
     @Default([]) List<MovieCollectionDetails> collections,
+    AppException? createCollectionError,
   }) = MovieCollectionsStateData;
 
-  const factory MovieCollectionsState.error(AppException exception) =
+  const factory MovieCollectionsState.error(AppException error) =
       MovieCollectionsStateError;
+
+  const MovieCollectionsState._();
+
+  bool get hasCreateCollectionError {
+    return switch (this) {
+      MovieCollectionsStateData(:final createCollectionError) =>
+        createCollectionError != null,
+      _ => false,
+    };
+  }
 }

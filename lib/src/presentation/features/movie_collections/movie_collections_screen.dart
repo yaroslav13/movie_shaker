@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,7 @@ import 'package:movie_shaker/src/presentation/features/movie_collections/movie_c
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
+import 'package:movie_shaker/src/presentation/utils/snack_bar_extension.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class MovieCollectionsScreen extends HookConsumerWidget {
@@ -16,6 +19,22 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(movieCollectionsStateNotifierProvider);
     final navigationState = GoRouterState.of(context);
+
+    ref.listen(
+      movieCollectionsStateNotifierProvider,
+      (previous, current) {
+        if (current.hasCreateCollectionError) {
+          unawaited(
+            context.showErrorSnackBar(
+              context.localizations.yourCollectionDisappeared,
+              onClosed: () => ref
+                  .read(movieCollectionsStateNotifierProvider.notifier)
+                  .onCreateCollectionErrorSnackBarClosed(),
+            ),
+          );
+        }
+      },
+    );
 
     useEffect(
       () {
