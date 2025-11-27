@@ -35,18 +35,17 @@ final class HomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeStateNotifierProvider);
 
-    final suggestedMovie = state.suggestedMovie;
-    useEffect(
-      () {
-        if (suggestedMovie != null) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _onMovieSuggested(context, suggestedMovie);
-          });
-        }
+    ref.listen(
+      homeStateNotifierProvider,
+      (previous, current) {
+        final currentSuggestedMovie = current.suggestedMovie;
+        final previousSuggestedMovie = previous?.suggestedMovie;
 
-        return;
+        if (previousSuggestedMovie != currentSuggestedMovie &&
+            currentSuggestedMovie != null) {
+          _onMovieSuggested(context, currentSuggestedMovie);
+        }
       },
-      [suggestedMovie],
     );
 
     return Scaffold(
