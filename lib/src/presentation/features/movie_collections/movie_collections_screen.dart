@@ -105,7 +105,7 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
               final collectionName = collection.name;
 
               return MovieCollectionCard(
-                title: collection.name,
+                title: collectionName,
                 subtitle: context.localizations.moviesCount(
                   collection.moviesCount,
                 ),
