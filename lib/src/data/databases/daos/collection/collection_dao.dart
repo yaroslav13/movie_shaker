@@ -28,7 +28,7 @@ class CollectionDao extends DatabaseAccessor<LocalDatabase>
 
   Future<void> deleteCollection(String name) async {
     final query = delete(collections)
-      ..where((table) => table.name.equals(name));
+      ..where((table) => table.name.equals(name) & table.isDefault.not());
 
     await query.go();
   }

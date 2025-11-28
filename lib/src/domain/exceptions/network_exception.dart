@@ -1,7 +1,11 @@
-part of 'app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 
-sealed class NetworkException extends AppException {
+sealed class NetworkException extends InfrastructureException {
   const NetworkException([super.message]);
+}
+
+final class BrokenResponseContentException extends NetworkException {
+  const BrokenResponseContentException();
 }
 
 final class NetworkTimeoutException extends NetworkException {

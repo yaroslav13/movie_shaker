@@ -1,7 +1,7 @@
 import 'package:movie_shaker/src/data/datasources/local/collections_local_datasource.dart';
 import 'package:movie_shaker/src/data/mappers/dbo/movie_collection_dbo_mapper.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
-import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/cache_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movie_collections_repository.dart';
 
 final class MovieCollectionsRepositoryImpl
@@ -67,6 +67,20 @@ final class MovieCollectionsRepositoryImpl
     } on Exception catch (_, s) {
       Error.throwWithStackTrace(
         const CacheReadException(),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<void> removeMovieCollection(MovieCollection collection) async {
+    try {
+      return await _collectionsLocalDatasource.removeMovieCollection(
+        name: collection.name,
+      );
+    } on Exception catch (_, s) {
+      Error.throwWithStackTrace(
+        const CacheDeleteException(),
         s,
       );
     }

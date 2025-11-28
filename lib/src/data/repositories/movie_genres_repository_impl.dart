@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_shaker/src/data/datasources/remote/movie_genres_remote_datasource.dart';
 import 'package:movie_shaker/src/data/mappers/dto/genre_dto_mapper.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
-import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/network_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movie_genres_repository.dart';
 
 final class MovieGenresRepositoryImpl implements MovieGenresRepository {

@@ -44,7 +44,7 @@ class FavoritesStateNotifier extends _$FavoritesStateNotifier with LoggerMixin {
       info('Fetched ${favoriteMovies.length} favorite movies.');
 
       state = FavoritesState.data(favoriteMovies: favoriteMovies);
-    } on AppException catch (e) {
+    } on SemanticException catch (e) {
       state = FavoritesState.error(e);
 
       error('Failed to fetch favorite movies: $e', e);

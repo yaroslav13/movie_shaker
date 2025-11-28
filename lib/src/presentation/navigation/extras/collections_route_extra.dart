@@ -4,7 +4,11 @@ part 'collections_route_extra.freezed.dart';
 
 @freezed
 sealed class CollectionsRouteExtra with _$CollectionsRouteExtra {
-  const factory CollectionsRouteExtra({
-    required String newCollectionName,
-  }) = _CollectionsRouteExtra;
+  const factory CollectionsRouteExtra.add({
+    required String collectionName,
+  }) = AddCollectionsRouteExtra;
+
+  const factory CollectionsRouteExtra.remove({
+    required String collectionName,
+  }) = RemoveCollectionsRouteExtra;
 }

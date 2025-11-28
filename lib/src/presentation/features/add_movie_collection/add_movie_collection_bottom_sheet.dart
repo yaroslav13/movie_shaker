@@ -8,12 +8,12 @@ import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
-final class AddMovieCollectionForm extends HookConsumerWidget {
-  const AddMovieCollectionForm({super.key});
+final class AddMovieCollectionBottomSheet extends HookConsumerWidget {
+  const AddMovieCollectionBottomSheet({super.key});
 
   void _onCreatePressed(BuildContext context, String collectionName) {
     CollectionsRoute(
-      CollectionsRouteExtra(newCollectionName: collectionName),
+      CollectionsRouteExtra.add(collectionName: collectionName),
     ).go(context);
   }
 

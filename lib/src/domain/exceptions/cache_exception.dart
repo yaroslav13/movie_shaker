@@ -1,7 +1,11 @@
-part of 'app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 
-sealed class CacheException extends AppException {
-  const CacheException();
+sealed class CacheException extends InfrastructureException {
+  const CacheException([super.message]);
+}
+
+final class BrokenCacheContentException extends CacheException {
+  const BrokenCacheContentException();
 }
 
 final class CacheWriteException extends CacheException {
@@ -18,8 +22,4 @@ final class CacheDeleteException extends CacheException {
 
 final class CacheEntryNotFoundException extends CacheException {
   const CacheEntryNotFoundException();
-}
-
-final class UnknownCacheException extends CacheException {
-  const UnknownCacheException();
 }

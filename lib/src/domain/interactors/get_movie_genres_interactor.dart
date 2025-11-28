@@ -1,5 +1,7 @@
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
+import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movie_genres_repository.dart';
 
 final class GetMovieGenresInteractor
@@ -10,6 +12,10 @@ final class GetMovieGenresInteractor
 
   @override
   Future<List<Genre>> call() async {
-    return _movieGenresRepository.getMovieGenres();
+    try {
+      return await _movieGenresRepository.getMovieGenres();
+    } on InfrastructureException catch (e, s) {
+      Error.throwWithStackTrace(SemanticException(e), s);
+    }
   }
 }

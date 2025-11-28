@@ -19,6 +19,7 @@ final class MovieCollectionCard extends StatelessWidget {
     this.tileIconTheme,
     this.placeholderIconTheme,
     this.onTap,
+    this.onLongPress,
     super.key,
   });
 
@@ -37,6 +38,7 @@ final class MovieCollectionCard extends StatelessWidget {
   final IconThemeData? placeholderIconTheme;
 
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ final class MovieCollectionCard extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       borderRadius: borderRadius is BorderRadius ? borderRadius : null,
       child: Padding(
         padding: MsEdgeInsets.contentSmall,

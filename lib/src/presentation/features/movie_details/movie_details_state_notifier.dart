@@ -53,7 +53,7 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
         releaseDate: movieDetails.releaseDate,
         popularity: movieDetails.popularity,
       );
-    } on AppException catch (e, s) {
+    } on SemanticException catch (e, s) {
       error('Error fetching movie details', e, s);
 
       state = MovieDetailsState.error(e);

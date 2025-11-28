@@ -5,20 +5,20 @@ import 'package:movie_shaker/src/domain/exceptions/collection_modification_excep
 import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movie_collections_repository.dart';
 
-final class CreateMovieCollectionInteractor
-    implements Interactor<MovieCollectionDetails, MovieCollection> {
-  const CreateMovieCollectionInteractor(this._movieCollectionsRepository);
+final class RemoveMovieCollectionInteractor
+    implements Interactor<void, MovieCollectionDetails> {
+  const RemoveMovieCollectionInteractor(this._movieCollectionsRepository);
 
   final MovieCollectionsRepository _movieCollectionsRepository;
 
   @override
-  Future<MovieCollectionDetails> call(MovieCollection param) async {
+  Future<void> call(MovieCollectionDetails params) async {
     try {
-      await _movieCollectionsRepository.addMovieCollection(param);
+      final collection = MovieCollection(name: params.name);
 
-      return MovieCollectionDetails(name: param.name);
+      await _movieCollectionsRepository.removeMovieCollection(collection);
     } on InfrastructureException catch (e, s) {
-      Error.throwWithStackTrace(CollectionCreationException(e), s);
+      Error.throwWithStackTrace(CollectionRemovalException(e), s);
     }
   }
 }
