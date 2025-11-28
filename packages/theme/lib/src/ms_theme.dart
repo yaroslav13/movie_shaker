@@ -20,6 +20,7 @@ import 'package:theme/src/extensions/ms_floating_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_icon_button_theme.dart';
 import 'package:theme/src/extensions/ms_input_decoration_theme.dart';
 import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
+import 'package:theme/src/extensions/ms_text_button_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
@@ -67,6 +68,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsFloatingActionButtonTheme(colorScheme),
         _createMsBottomSheetTheme(colorScheme),
         _createMsSnackBarTheme(colorScheme, textTheme),
+        _createMsTextButtonTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -461,6 +463,18 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
           foregroundColor: colorScheme.onError,
         ),
       },
+    );
+  }
+
+  static MsTextButtonTheme _createMsTextButtonTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsTextButtonTheme(
+      foregroundColor: colorScheme.primary,
+      borderRadius: MsBorderRadius.regular,
+      padding: MsEdgeInsets.contentLarge,
+      textStyle: textTheme.labelLarge,
     );
   }
 

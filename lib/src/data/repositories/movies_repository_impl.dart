@@ -12,7 +12,8 @@ import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dar
 import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
-import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/cache_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/network_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
 final class MoviesRepositoryImpl implements MoviesRepository {
@@ -101,7 +102,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
       final movieDetails = _movieDetailsDtoMapper.map(response);
 
       if (movieDetails == null) {
-        throw const MovieDetailsNotFoundException();
+        throw const BrokenResponseContentException();
       }
 
       return movieDetails;
@@ -183,7 +184,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
           );
     } on Exception catch (_, s) {
       Error.throwWithStackTrace(
-        const CacheWriteException(),
+        const CacheDeleteException(),
         s,
       );
     }

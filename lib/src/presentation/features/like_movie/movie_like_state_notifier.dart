@@ -45,7 +45,7 @@ class MovieLikeStateNotifier extends _$MovieLikeStateNotifier with LoggerMixin {
 
       final isLiked = await checkIsMovieLikedInteractor(movie);
       state = state.copyWith(isLiked: isLiked);
-    } on AppException catch (e, s) {
+    } on SemanticException catch (e, s) {
       error('Error checking if movie is liked', e, s);
     }
   }
@@ -58,7 +58,7 @@ class MovieLikeStateNotifier extends _$MovieLikeStateNotifier with LoggerMixin {
     try {
       final likeMovieInteractor = ref.read(likeMovieInteractorProvider);
       await likeMovieInteractor(movie);
-    } on AppException catch (e, s) {
+    } on SemanticException catch (e, s) {
       state = state.copyWith(isLiked: false);
 
       warning('Error liking movie: ${movie.title}', e, s);
@@ -73,7 +73,7 @@ class MovieLikeStateNotifier extends _$MovieLikeStateNotifier with LoggerMixin {
     try {
       final unlikeMovieInteractor = ref.read(unlikeMovieInteractorProvider);
       await unlikeMovieInteractor(movie);
-    } on AppException catch (e, s) {
+    } on SemanticException catch (e, s) {
       state = state.copyWith(isLiked: true);
 
       warning('Error unliking movie: ${movie.title}', e, s);

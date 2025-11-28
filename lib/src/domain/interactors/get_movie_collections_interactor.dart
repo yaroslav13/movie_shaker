@@ -2,6 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection_details/movie_collection_details.dart';
+import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movie_collections_repository.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 
@@ -18,27 +20,31 @@ final class GetMovieCollectionsInteractor
 
   @override
   Future<List<MovieCollectionDetails>> call() async {
-    final allCollections = await _movieCollectionsRepository
-        .getMovieCollections();
+    try {
+      final allCollections = await _movieCollectionsRepository
+          .getMovieCollections();
 
-    final collectionsWithoutFavorites = allCollections.whereNot((collection) {
-      return collection == MovieCollection.favorites;
-    }).toList();
+      final collectionsWithoutFavorites = allCollections.whereNot((collection) {
+        return collection == MovieCollection.favorites;
+      }).toList();
 
-    final movieCollectionDetailsList = <MovieCollectionDetails>[];
-    await Future.forEach(collectionsWithoutFavorites, (collection) async {
-      final movies = await _moviesRepository.getMoviesByCollection(
-        collection,
-      );
+      final movieCollectionDetailsList = <MovieCollectionDetails>[];
+      await Future.forEach(collectionsWithoutFavorites, (collection) async {
+        final movies = await _moviesRepository.getMoviesByCollection(
+          collection,
+        );
 
-      final collectionDetails = MovieCollectionDetails(
-        name: collection.name,
-        movies: movies,
-      );
+        final collectionDetails = MovieCollectionDetails(
+          name: collection.name,
+          movies: movies,
+        );
 
-      movieCollectionDetailsList.add(collectionDetails);
-    });
+        movieCollectionDetailsList.add(collectionDetails);
+      });
 
-    return movieCollectionDetailsList;
+      return movieCollectionDetailsList;
+    } on InfrastructureException catch (e, s) {
+      Error.throwWithStackTrace(SemanticException(e), s);
+    }
   }
 }

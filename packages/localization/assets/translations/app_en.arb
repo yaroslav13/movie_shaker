@@ -56,5 +56,7 @@
   "collectionName": "Collection name",
   "buildANewListForMoviesYouWantToTrack": "Build a new list for movies you want to track.",
   "create": "Create",
-  "yourCollectionDisappeared": "Oooops, your collection disappeared!"
+  "yourCollectionDisappeared": "Oooops, your collection disappeared!",
+  "remove": "Remove",
+  "yourCollectionDoNotWantToDisappear": "Ooooops, your collection doesn't want to disappear."
 }

@@ -1,5 +1,5 @@
-part of 'app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 
-final class MovieDetailsNotFoundException extends AppException {
-  const MovieDetailsNotFoundException();
+final class MovieDetailsNotFoundException extends SemanticException {
+  MovieDetailsNotFoundException([super.cause]);
 }

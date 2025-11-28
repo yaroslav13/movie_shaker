@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
+import 'package:movie_shaker/src/domain/exceptions/collection_modification_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
@@ -23,16 +24,25 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
     ref.listen(
       movieCollectionsStateNotifierProvider,
       (previous, current) {
-        final hasCreateCollectionError = current.hasCreateCollectionError;
+        final previousCollectionChangeFailure =
+            previous?.collectionChangeFailure;
+        final collectionChangeFailure = current.collectionChangeFailure;
 
-        if (previous?.hasCreateCollectionError != hasCreateCollectionError &&
-            hasCreateCollectionError) {
+        if (previousCollectionChangeFailure != collectionChangeFailure &&
+            collectionChangeFailure != null) {
+          final errorMessage = switch (collectionChangeFailure) {
+            CollectionRemovalException() =>
+              context.localizations.yourCollectionDoNotWantToDisappear,
+            CollectionCreationException() =>
+              context.localizations.yourCollectionDisappeared,
+          };
+
           unawaited(
             context.showErrorSnackBar(
-              context.localizations.yourCollectionDisappeared,
+              errorMessage,
               onClosed: () => ref
                   .read(movieCollectionsStateNotifierProvider.notifier)
-                  .onCreateCollectionErrorSnackBarClosed(),
+                  .onErrorSnackBarClosed(),
             ),
           );
         }
@@ -50,10 +60,19 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
 
     useEffect(
       () {
-        if (navigationState.extra case final CollectionsRouteExtra extra) {
-          ref
-              .read(movieCollectionsStateNotifierProvider.notifier)
-              .onNewCollectionNameEntered(extra.newCollectionName);
+        final navigationExtra = navigationState.extra;
+
+        switch (navigationExtra) {
+          case AddCollectionsRouteExtra(:final collectionName):
+            ref
+                .read(movieCollectionsStateNotifierProvider.notifier)
+                .onNewCollectionNameEntered(collectionName);
+          case RemoveCollectionsRouteExtra(:final collectionName):
+            ref
+                .read(movieCollectionsStateNotifierProvider.notifier)
+                .onRemoveCollectionPressed(collectionName);
+          case _:
+            break;
         }
 
         return;
@@ -83,6 +102,7 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
             itemCount: state.collections.length,
             itemBuilder: (_, index) {
               final collection = state.collections[index];
+              final collectionName = collection.name;
 
               return MovieCollectionCard(
                 title: collection.name,
@@ -92,6 +112,9 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
                 posterUrls: collection.movies
                     .map((movie) => movie.posterUrl)
                     .toList(),
+                onLongPress: () => RemoveMovieCollectionRoute(
+                  collectionName: collectionName,
+                ).go(context),
               );
             },
           ),

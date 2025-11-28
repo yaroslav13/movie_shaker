@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_movie_collection_form.dart';
+import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_movie_collection_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
+import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
 import 'package:navigation/navigation.dart';
 
@@ -26,6 +27,9 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
       path: '/collections',
       routes: [
         TypedGoRoute<AddMovieCollectionRoute>(path: 'add'),
+        TypedGoRoute<RemoveMovieCollectionRoute>(
+          path: 'remove/:collectionName',
+        ),
       ],
     ),
     TypedGoRoute<FavoritesRoute>(path: '/favorites'),
@@ -98,7 +102,24 @@ final class AddMovieCollectionRoute extends GoRouteData
   @override
   MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
     return const MsBottomSheetPage<void>(
-      child: AddMovieCollectionForm(),
+      child: AddMovieCollectionBottomSheet(),
+    );
+  }
+}
+
+final class RemoveMovieCollectionRoute extends GoRouteData
+    with _$RemoveMovieCollectionRoute {
+  const RemoveMovieCollectionRoute({required this.collectionName});
+
+  final String collectionName;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      showDragHandle: false,
+      child: RemoveMovieCollectionBottomSheet(collectionName: collectionName),
     );
   }
 }

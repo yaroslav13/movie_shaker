@@ -12,6 +12,7 @@ import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dar
 import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/entities/search_query/search_query.dart';
+import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -134,7 +135,7 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       state = state.copyWith(paginationState: newPaginationState);
 
       _subscribeMovieSuggestions(newPaginationState.items);
-    } on Exception catch (e, s) {
+    } on SemanticException catch (e, s) {
       error('Error fetching movies:', e, s);
 
       state = state.copyWith(
@@ -157,7 +158,7 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       final genres = await getMovieGenresInteractor();
 
       state = state.copyWith(availableGenres: genres);
-    } on Exception catch (e, s) {
+    } on SemanticException catch (e, s) {
       error('Error fetching movie genres:', e, s);
     }
   }

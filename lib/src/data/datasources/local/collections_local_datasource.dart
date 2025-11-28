@@ -18,7 +18,11 @@ final class CollectionsLocalDatasource {
     return availableCollections;
   }
 
-  Future<void> saveMovieCollection({required CollectionDbo collection}) {
+  Future<void> saveMovieCollection({required CollectionDbo collection}) async {
     return _dao.addCollection(collection);
+  }
+
+  Future<void> removeMovieCollection({required String name}) async {
+    return _dao.deleteCollection(name);
   }
 }

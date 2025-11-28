@@ -13,6 +13,6 @@ sealed class FavoritesState with _$FavoritesState {
   const factory FavoritesState.loading() = FavoritesStateLoading;
 
   const factory FavoritesState.error(
-    AppException error,
+    SemanticException error,
   ) = FavoritesStateError;
 }

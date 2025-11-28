@@ -16,6 +16,7 @@ export 'src/extensions/ms_floating_app_bar_theme.dart';
 export 'src/extensions/ms_icon_button_theme.dart';
 export 'src/extensions/ms_input_decoration_theme.dart';
 export 'src/extensions/ms_snack_bar_theme.dart';
+export 'src/extensions/ms_text_button_theme.dart';
 export 'src/extensions/no_items_stub_theme.dart';
 export 'src/extensions/segmented_row_entry_theme.dart';
 export 'src/extensions/segmented_row_theme.dart';

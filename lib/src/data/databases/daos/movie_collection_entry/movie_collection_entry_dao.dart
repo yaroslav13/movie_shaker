@@ -42,8 +42,11 @@ class MovieCollectionEntryDao extends DatabaseAccessor<LocalDatabase>
         movieCollectionEntry;
 
     final query = delete(movieCollectionEntries)
-      ..where((table) => table.movieId.equals(movieId))
-      ..where((table) => table.collectionName.equals(collectionName));
+      ..where(
+        (table) =>
+            table.movieId.equals(movieId) &
+            table.collectionName.equals(collectionName),
+      );
 
     await query.go();
   }

@@ -279,6 +279,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Oooops, your collection disappeared!'**
   String get yourCollectionDisappeared;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @yourCollectionDoNotWantToDisappear.
+  ///
+  /// In en, this message translates to:
+  /// **'Ooooops, your collection doesn\'t want to disappear.'**
+  String get yourCollectionDoNotWantToDisappear;
 }
 
 class _AppLocalizationsDelegate

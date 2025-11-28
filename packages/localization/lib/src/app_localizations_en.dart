@@ -113,4 +113,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get yourCollectionDisappeared =>
       'Oooops, your collection disappeared!';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get yourCollectionDoNotWantToDisappear =>
+      'Ooooops, your collection doesn\'t want to disappear.';
 }

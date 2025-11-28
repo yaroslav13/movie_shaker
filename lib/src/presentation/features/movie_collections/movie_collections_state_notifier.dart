@@ -1,11 +1,13 @@
 import 'dart:async';
 
-import 'package:logger/src/logger.dart';
+import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/create_movie_collection_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_collections_interactor_provider.dart';
+import 'package:movie_shaker/src/di/interactors/remove_movie_collection_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/collection_modification_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,12 +37,16 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
     unawaited(_createMovieCollection(name));
   }
 
-  void onCreateCollectionErrorSnackBarClosed() {
-    info('Create collection error snack bar closed');
+  void onRemoveCollectionPressed(String name) {
+    unawaited(_removeMovieCollection(name));
+  }
+
+  void onErrorSnackBarClosed() {
+    info('Error snack bar closed');
 
     state = switch (state) {
       final MovieCollectionsStateData state => state.copyWith(
-        createCollectionError: null,
+        collectionChangeFailure: null,
       ),
       _ => state,
     };
@@ -58,7 +64,7 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
       info('Successfully fetched movie collections: $collections');
 
       state = MovieCollectionsState.data(collections: collections);
-    } on AppException catch (e) {
+    } on SemanticException catch (e) {
       error('Failed to fetch movie collections', e);
 
       state = MovieCollectionsState.error(e);
@@ -85,12 +91,53 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
         ),
         _ => throw StateError('Invalid state for adding a new collection'),
       };
-    } on AppException catch (e) {
+    } on CollectionCreationException catch (e) {
       error('Failed to create a new movie collection', e);
 
       state = switch (state) {
         final MovieCollectionsStateData state => state.copyWith(
-          createCollectionError: e,
+          collectionChangeFailure: e,
+        ),
+        _ => state,
+      };
+    }
+  }
+
+  Future<void> _removeMovieCollection(String name) async {
+    info('Removing movie collection with name: $name');
+
+    try {
+      final removeMovieCollectionInteractor = ref.read(
+        removeMovieCollectionInteractorProvider,
+      );
+
+      final collections = switch (state) {
+        final MovieCollectionsStateData state => state.collections,
+        _ => throw StateError('Invalid state for removing a collection'),
+      };
+
+      final collectionToRemove = collections.firstWhere(
+        (collection) => collection.name == name,
+      );
+
+      await removeMovieCollectionInteractor(collectionToRemove);
+
+      info('Successfully removed movie collection: $name');
+
+      state = switch (state) {
+        final MovieCollectionsStateData state => state.copyWith(
+          collections: state.collections
+              .where((collection) => collection.name != name)
+              .toList(),
+        ),
+        _ => throw StateError('Invalid state for removing a collection'),
+      };
+    } on CollectionRemovalException catch (e) {
+      error('Failed to remove movie collection', e);
+
+      state = switch (state) {
+        final MovieCollectionsStateData state => state.copyWith(
+          collectionChangeFailure: e,
         ),
         _ => state,
       };

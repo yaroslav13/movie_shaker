@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 
-part 'cache_exception.dart';
-part 'movie_details_not_found_exception.dart';
-part 'network_exception.dart';
+part 'semantic_exception.dart';
 
 @immutable
-sealed class AppException implements Exception {
+base class AppException implements Exception {
   const AppException([this.message]);
 
   final String? message;
