@@ -119,5 +119,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourCollectionDoNotWantToDisappear =>
-      'Ooooops, your collection doesn\'t want to disappear.';
+      'Oooops, your collection doesn\'t want to disappear.';
+
+  @override
+  String get itSeemsWeDoNotHaveAChoice => 'It seems we don\'t have a choice.';
+
+  @override
+  String get createACollectionToSaveMovies =>
+      'Create a collection to save movies.';
 }

@@ -5,6 +5,7 @@ import 'package:example/src/pages/movie_carousel_example/movie_carousel_example_
 import 'package:example/src/pages/movie_collection_card_example/movie_collection_card_example_view.dart';
 import 'package:example/src/pages/ms_bottom_bar_example/ms_bottom_bar_example_view.dart';
 import 'package:example/src/pages/ms_floating_app_bar_example/ms_floating_app_bar_example_view.dart';
+import 'package:example/src/pages/ms_list_tile_example/ms_list_tile_example_view.dart';
 import 'package:example/src/pages/ms_progress_indicator_example/ms_progress_indicator_example_view.dart';
 import 'package:example/src/pages/no_items_stub_example/no_items_stub_example_view.dart';
 import 'package:example/src/pages/refresh_indicator_example/refresh_indicator_example_view.dart';
@@ -31,6 +32,7 @@ final class _MainScreenState extends State<MainScreen> {
     const DotsProgressIndicatorExampleView(),
     const LoadingErrorStubExampleView(),
     const MsProgressIndicatorExampleView(),
+    const MsListTileExampleView(),
     const NoItemsStubExampleView(),
     const RefreshIndicatorExampleView(),
     const TextFormFieldExampleView(),

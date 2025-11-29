@@ -45,6 +45,23 @@ final class MsIconButton extends StatelessWidget {
     );
   }
 
+  factory MsIconButton.bookmark({
+    EdgeInsetsGeometry? padding,
+    Color? foregroundColor,
+    Color? backgroundColor,
+    BorderRadius? borderRadius,
+    VoidCallback? onPressed,
+  }) {
+    return MsIconButton(
+      padding: padding,
+      borderRadius: borderRadius,
+      foregroundColor: foregroundColor,
+      backgroundColor: backgroundColor,
+      icon: MsIcon.outlinedBookmark(),
+      onPressed: onPressed,
+    );
+  }
+
   final Color? backgroundColor;
   final Color? foregroundColor;
   final BorderRadiusGeometry? borderRadius;

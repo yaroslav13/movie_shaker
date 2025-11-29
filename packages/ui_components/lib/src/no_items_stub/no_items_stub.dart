@@ -7,6 +7,7 @@ import 'package:ui_components/src/shared/assets.gen.dart';
 
 final class NoItemsStub extends StatelessWidget {
   factory NoItemsStub.noFavorites({
+    bool useSafeArea = true,
     TextStyle? descriptionStyle,
     TextStyle? captionStyle,
     Key? key,
@@ -16,6 +17,7 @@ final class NoItemsStub extends StatelessWidget {
       descriptionBuilder: (context) =>
           context.localizations.needsMoreBlockbusters,
       captionBuilder: (context) => context.localizations.tapTheHeart,
+      useSafeArea: useSafeArea,
       descriptionStyle: descriptionStyle,
       captionStyle: captionStyle,
       key: key,
@@ -23,6 +25,7 @@ final class NoItemsStub extends StatelessWidget {
   }
 
   factory NoItemsStub.noMovies({
+    bool useSafeArea = true,
     TextStyle? descriptionStyle,
     TextStyle? captionStyle,
     Key? key,
@@ -32,6 +35,7 @@ final class NoItemsStub extends StatelessWidget {
       descriptionBuilder: (context) =>
           context.localizations.itSeemsSomebodyStoleAllMovies,
       captionBuilder: (context) => context.localizations.noCluesFound,
+      useSafeArea: useSafeArea,
       descriptionStyle: descriptionStyle,
       captionStyle: captionStyle,
       key: key,
@@ -39,6 +43,7 @@ final class NoItemsStub extends StatelessWidget {
   }
 
   factory NoItemsStub.noCollections({
+    bool useSafeArea = true,
     TextStyle? descriptionStyle,
     TextStyle? captionStyle,
     Key? key,
@@ -49,6 +54,26 @@ final class NoItemsStub extends StatelessWidget {
           context.localizations.doNotLetYourFavoritesGatherDust,
       captionBuilder: (context) =>
           context.localizations.startCuratingMustWatchLists,
+      useSafeArea: useSafeArea,
+      descriptionStyle: descriptionStyle,
+      captionStyle: captionStyle,
+      key: key,
+    );
+  }
+
+  factory NoItemsStub.noSelectionAvailable({
+    bool useSafeArea = true,
+    TextStyle? descriptionStyle,
+    TextStyle? captionStyle,
+    Key? key,
+  }) {
+    return NoItemsStub._(
+      animationJson: MsAssets.animations.noChoiceAnimation,
+      descriptionBuilder: (context) =>
+          context.localizations.itSeemsWeDoNotHaveAChoice,
+      captionBuilder: (context) =>
+          context.localizations.createACollectionToSaveMovies,
+      useSafeArea: useSafeArea,
       descriptionStyle: descriptionStyle,
       captionStyle: captionStyle,
       key: key,
@@ -59,6 +84,7 @@ final class NoItemsStub extends StatelessWidget {
     required this.animationJson,
     required this.descriptionBuilder,
     required this.captionBuilder,
+    this.useSafeArea = true,
     this.descriptionStyle,
     this.captionStyle,
     super.key,
@@ -69,6 +95,7 @@ final class NoItemsStub extends StatelessWidget {
   final String Function(BuildContext context) descriptionBuilder;
   final String Function(BuildContext context) captionBuilder;
 
+  final bool useSafeArea;
   final TextStyle? descriptionStyle;
   final TextStyle? captionStyle;
 
@@ -86,33 +113,66 @@ final class NoItemsStub extends StatelessWidget {
         Theme.of(context).textTheme.bodySmall;
 
     return SafeArea(
-      child: Center(
-        child: Padding(
-          padding: MsEdgeInsets.scaffoldBodyPadding,
-          child: Column(
-            spacing: MsSpacings.large,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              Padding(
-                padding: MsEdgeInsets.horizontalLarge,
-                child: Lottie.asset(animationJson),
+      top: useSafeArea,
+      bottom: useSafeArea,
+      child: Padding(
+        padding: MsEdgeInsets.scaffoldBodyPadding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: MsSpacings.large,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child: _CentralContent(
+                  description: descriptionBuilder(context),
+                  animationJson: animationJson,
+                  descriptionStyle: descriptionStyle,
+                ),
               ),
-              MsText(
-                descriptionBuilder(context),
-                textAlign: TextAlign.center,
-                style: descriptionStyle,
-              ),
-              const Spacer(),
-              MsText(
-                captionBuilder(context),
-                textAlign: TextAlign.center,
-                style: captionStyle,
-              ),
-            ],
-          ),
+            ),
+            MsText(
+              captionBuilder(context),
+              textAlign: TextAlign.center,
+              style: captionStyle,
+            ),
+          ],
         ),
       ),
+    );
+  }
+}
+
+final class _CentralContent extends StatelessWidget {
+  const _CentralContent({
+    required this.description,
+    required this.animationJson,
+    this.descriptionStyle,
+  });
+
+  final String description;
+  final String animationJson;
+
+  final TextStyle? descriptionStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      spacing: MsSpacings.medium,
+      children: [
+        Flexible(
+          child: Padding(
+            padding: MsEdgeInsets.horizontalLarge,
+            child: Lottie.asset(animationJson),
+          ),
+        ),
+        MsText(
+          description,
+          textAlign: TextAlign.center,
+          style: descriptionStyle,
+        ),
+      ],
     );
   }
 }

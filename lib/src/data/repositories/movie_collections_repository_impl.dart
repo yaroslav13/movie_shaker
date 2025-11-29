@@ -1,4 +1,5 @@
 import 'package:movie_shaker/src/data/datasources/local/collections_local_datasource.dart';
+import 'package:movie_shaker/src/data/datasources/local/movie_collection_entries_local_datasource.dart';
 import 'package:movie_shaker/src/data/mappers/dbo/movie_collection_dbo_mapper.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/exceptions/cache_exception.dart';
@@ -8,10 +9,12 @@ final class MovieCollectionsRepositoryImpl
     implements MovieCollectionsRepository {
   MovieCollectionsRepositoryImpl(
     this._collectionsLocalDatasource,
+    this._collectionEntriesLocalDatasource,
     this._collectionDboMapper,
   );
 
   final CollectionsLocalDatasource _collectionsLocalDatasource;
+  final MovieCollectionEntriesLocalDatasource _collectionEntriesLocalDatasource;
 
   final MovieCollectionDboMapper _collectionDboMapper;
 
@@ -81,6 +84,24 @@ final class MovieCollectionsRepositoryImpl
     } on Exception catch (_, s) {
       Error.throwWithStackTrace(
         const CacheDeleteException(),
+        s,
+      );
+    }
+  }
+
+  @override
+  Future<bool> doesCollectionContainMovie(
+    MovieCollection collection,
+    int movieId,
+  ) async {
+    try {
+      final movieCollectionEntries = await _collectionEntriesLocalDatasource
+          .getMovieCollectionsEntries(collectionName: collection.name);
+
+      return movieCollectionEntries.any((entry) => entry.movieId == movieId);
+    } on Exception catch (_, s) {
+      Error.throwWithStackTrace(
+        const CacheReadException(),
         s,
       );
     }

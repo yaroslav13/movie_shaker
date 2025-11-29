@@ -8,8 +8,9 @@ final class MovieCard extends StatelessWidget {
   const MovieCard({
     required this.imageUrl,
     this.size = _defaultImageSize,
-    this.action,
     this.margin = EdgeInsets.zero,
+    this.action,
+    this.leading,
     this.elevation,
     this.borderRadius,
     this.onTap,
@@ -18,8 +19,9 @@ final class MovieCard extends StatelessWidget {
 
   const MovieCard.expanded({
     required this.imageUrl,
-    this.action,
     this.margin = EdgeInsets.zero,
+    this.action,
+    this.leading,
     this.elevation,
     this.borderRadius,
     this.onTap,
@@ -30,6 +32,7 @@ final class MovieCard extends StatelessWidget {
 
   final String imageUrl;
   final Widget? action;
+  final Widget? leading;
   final EdgeInsetsGeometry margin;
 
   final double? elevation;
@@ -63,6 +66,12 @@ final class MovieCard extends StatelessWidget {
                 top: MsEdgeInsets.contentSmall.top,
                 right: MsEdgeInsets.contentSmall.right,
                 child: action,
+              ),
+            if (leading case final leading?)
+              Positioned(
+                top: MsEdgeInsets.contentSmall.top,
+                left: MsEdgeInsets.contentSmall.left,
+                child: leading,
               ),
           ],
         ),

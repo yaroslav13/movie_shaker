@@ -46,6 +46,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedBookmark({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedAllBookmark,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   factory MsIcon.cancel({
     double? size,
     Color? color,
@@ -99,6 +114,21 @@ final class MsIcon extends StatelessWidget {
   }) {
     return MsIcon(
       HugeIcons.strokeRoundedArrowRight01,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
+  factory MsIcon.outlinedCheckmark({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedCheckmarkBadge01,
       size: size,
       color: color,
       semanticLabel: semanticLabel,

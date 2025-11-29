@@ -11,6 +11,7 @@ import 'package:ui_components/src/shared/assets.gen.dart';
 final class LoadingErrorStub extends StatelessWidget {
   const LoadingErrorStub({
     this.type = LoadingErrorStubType.vertical,
+    this.useSafeArea = true,
     this.description,
     this.onRetry,
     this.textStyle,
@@ -20,6 +21,7 @@ final class LoadingErrorStub extends StatelessWidget {
   final LoadingErrorStubType type;
   final String? description;
   final TextStyle? textStyle;
+  final bool useSafeArea;
 
   final VoidCallback? onRetry;
 
@@ -34,6 +36,8 @@ final class LoadingErrorStub extends StatelessWidget {
     final description = this.description ?? context.localizations.aChillingBooo;
 
     return SafeArea(
+      top: useSafeArea,
+      bottom: useSafeArea,
       child: switch (type) {
         LoadingErrorStubType.vertical => _VerticalLoadingErrorStub(
           description: description,
@@ -63,34 +67,27 @@ final class _VerticalLoadingErrorStub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: MsEdgeInsets.scaffoldBodyPadding,
-        child: Column(
-          spacing: MsSpacings.large,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Spacer(),
-            Padding(
-              padding: MsEdgeInsets.horizontalLarge,
-              child: Lottie.asset(
-                MsAssets.animations.booAnimation,
+    return Padding(
+      padding: MsEdgeInsets.scaffoldBodyPadding,
+      child: Column(
+        spacing: MsSpacings.large,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Center(
+              child: _VerticalContent(
+                description: description,
+                textStyle: textStyle,
               ),
             ),
-            MsText(
-              description,
-              style: textStyle,
-              textAlign: TextAlign.center,
-            ),
-            const Spacer(),
-            MsElevatedButton(
-              onPressed: onRetry,
-              child: MsText(context.localizations.tryAgain),
-            ),
-          ],
-        ),
+          ),
+          MsElevatedButton(
+            onPressed: onRetry,
+            child: MsText(context.localizations.tryAgain),
+          ),
+        ],
       ),
     );
   }
@@ -124,6 +121,37 @@ final class _HorizontalLoadingErrorStub extends StatelessWidget {
           MsIconButton.retry(onPressed: onRetry),
         ],
       ),
+    );
+  }
+}
+
+class _VerticalContent extends StatelessWidget {
+  const _VerticalContent({
+    required this.description,
+    required this.textStyle,
+  });
+
+  final String description;
+  final TextStyle? textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      spacing: MsSpacings.medium,
+      children: [
+        Flexible(
+          child: Padding(
+            padding: MsEdgeInsets.horizontalLarge,
+            child: Lottie.asset(MsAssets.animations.booAnimation),
+          ),
+        ),
+        MsText(
+          description,
+          style: textStyle,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

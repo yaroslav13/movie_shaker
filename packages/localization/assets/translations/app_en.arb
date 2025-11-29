@@ -58,5 +58,7 @@
   "create": "Create",
   "yourCollectionDisappeared": "Oooops, your collection disappeared!",
   "remove": "Remove",
-  "yourCollectionDoNotWantToDisappear": "Ooooops, your collection doesn't want to disappear."
+  "yourCollectionDoNotWantToDisappear": "Oooops, your collection doesn't want to disappear.",
+  "itSeemsWeDoNotHaveAChoice": "It seems we don't have a choice.",
+  "createACollectionToSaveMovies": "Create a collection to save movies."
 }
