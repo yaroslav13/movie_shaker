@@ -82,6 +82,14 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       isLoading: paginationState.isLoading,
     );
 
+    final isFirstLoad = state.pages == null && state.isLoading;
+    final isFirstLoadError = state.pages == null && state.error != null;
+    final isEmpty =
+        state.pages != null &&
+        (state.items == null || true == state.items?.isEmpty);
+
+    final shouldBeScrollable = !isFirstLoad && !isFirstLoadError && !isEmpty;
+
     return PagedMasonryGridView<int, T>.count(
       state: state,
       crossAxisSpacing: crossAxisSpacing,
@@ -94,9 +102,9 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       primary: primary,
       scrollController: controller,
       fetchNextPage: onNextPage,
-      physics: state.pages == null && (state.error != null || state.isLoading)
-          ? const NeverScrollableScrollPhysics()
-          : physics ?? const BouncingScrollPhysics(),
+      physics: shouldBeScrollable
+          ? physics ?? const BouncingScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       showNewPageErrorIndicatorAsGridChild: false,
       showNewPageProgressIndicatorAsGridChild: false,
       showNoMoreItemsIndicatorAsGridChild: false,

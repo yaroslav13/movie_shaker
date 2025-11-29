@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
+import 'package:movie_shaker/src/presentation/features/collect_movie_button/collect_movie_button.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
@@ -48,8 +49,14 @@ final class HomeScreen extends HookConsumerWidget {
       },
     );
 
+    final paginationState = state.paginationState;
+    final shouldBeScrollable = paginationState.items.isNotEmpty;
+
     return Scaffold(
       body: NestedScrollView(
+        physics: shouldBeScrollable
+            ? const BouncingScrollPhysics()
+            : const NeverScrollableScrollPhysics(),
         headerSliverBuilder: (_, innerBoxIsScrolled) => [
           _Header(innerBoxIsScrolled: innerBoxIsScrolled),
         ],
@@ -57,7 +64,7 @@ final class HomeScreen extends HookConsumerWidget {
           onRefresh: () async =>
               ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
           child: PagedStaggeredGridView<Movie>(
-            paginationState: state.paginationState,
+            paginationState: paginationState,
             onNextPage: () => ref
                 .read(homeStateNotifierProvider.notifier)
                 .onMoviesGridViewBottomReached(),
@@ -66,6 +73,7 @@ final class HomeScreen extends HookConsumerWidget {
             itemBuilder: (_, movie, index) {
               return MovieCard(
                 action: MovieLikeButton(movie: movie),
+                leading: CollectMovieButton(movie: movie),
                 imageUrl: movie.posterUrl,
                 onTap: () => _onMovieSelected(context, movie),
               );

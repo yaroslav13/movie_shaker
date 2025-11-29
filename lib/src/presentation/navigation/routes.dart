@@ -4,9 +4,11 @@ import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
+import 'package:movie_shaker/src/presentation/features/movie_collection_picker/movie_collection_picker_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collection_picker_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
 import 'package:navigation/navigation.dart';
 
@@ -21,6 +23,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
       path: '/home',
       routes: [
         TypedGoRoute<MovieDetailsRoute>(path: 'movie/:id'),
+        TypedGoRoute<CollectionPickerRoute>(path: 'collection-picker'),
       ],
     ),
     TypedGoRoute<CollectionsRoute>(
@@ -120,6 +123,24 @@ final class RemoveMovieCollectionRoute extends GoRouteData
     return MsBottomSheetPage<void>(
       showDragHandle: false,
       child: RemoveMovieCollectionBottomSheet(collectionName: collectionName),
+    );
+  }
+}
+
+final class CollectionPickerRoute extends GoRouteData
+    with _$CollectionPickerRoute {
+  const CollectionPickerRoute(this.$extra);
+
+  final CollectionPickerRouteExtra $extra;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      child: MovieCollectionPickerBottomSheet(
+        selectedMovie: $extra.movie,
+      ),
     );
   }
 }

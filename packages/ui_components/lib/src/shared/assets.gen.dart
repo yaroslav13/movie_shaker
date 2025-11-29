@@ -24,6 +24,10 @@ class $AssetsAnimationsGen {
   String get moviePosterAnimation =>
       'packages/ui_components/assets/animations/movie_poster_animation.json';
 
+  /// File path: assets/animations/no_choice_animation.json
+  String get noChoiceAnimation =>
+      'packages/ui_components/assets/animations/no_choice_animation.json';
+
   /// File path: assets/animations/no_collections_animation.json
   String get noCollectionsAnimation =>
       'packages/ui_components/assets/animations/no_collections_animation.json';
@@ -49,6 +53,7 @@ class $AssetsAnimationsGen {
     a3dGlassesAnimation,
     booAnimation,
     moviePosterAnimation,
+    noChoiceAnimation,
     noCollectionsAnimation,
     noFavoritesMoviesAnimation,
     noMoviesFoundAnimation,

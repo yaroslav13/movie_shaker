@@ -14,4 +14,10 @@ abstract interface class MovieCollectionsRepository {
 
   @Throws([CacheReadException])
   Future<bool> doesCollectionExist(MovieCollection collection);
+
+  @Throws([CacheReadException])
+  Future<bool> doesCollectionContainMovie(
+    MovieCollection collection,
+    int movieId,
+  );
 }

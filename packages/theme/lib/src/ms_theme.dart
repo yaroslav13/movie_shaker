@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:theme/src/extensions/bookmark_button_theme.dart';
 import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
 import 'package:theme/src/extensions/like_button_theme.dart';
@@ -19,6 +20,7 @@ import 'package:theme/src/extensions/ms_floating_action_button_theme.dart';
 import 'package:theme/src/extensions/ms_floating_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_icon_button_theme.dart';
 import 'package:theme/src/extensions/ms_input_decoration_theme.dart';
+import 'package:theme/src/extensions/ms_list_tile_theme.dart';
 import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
 import 'package:theme/src/extensions/ms_text_button_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
@@ -60,6 +62,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createSegmentedRowTheme(colorScheme, textTheme),
         _createMsBottomBarTheme(colorScheme),
         _createLikeButtonTheme(colorScheme),
+        _createBookmarkButtonTheme(colorScheme),
+        _createMsListTileTheme(colorScheme, textTheme),
         _createMovieCarouselTheme(colorScheme),
         _createMsFilterChipTheme(colorScheme, textTheme),
         _createAppBarDelegateTheme(colorScheme),
@@ -351,6 +355,28 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       likedColor: colorScheme.error,
       unlikedColor: colorScheme.onInverseSurface,
       backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+    );
+  }
+
+  static BookmarkButtonTheme _createBookmarkButtonTheme(
+    ColorScheme colorScheme,
+  ) {
+    return BookmarkButtonTheme(
+      foregroundColor: colorScheme.onInverseSurface,
+      backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+    );
+  }
+
+  static MsListTileTheme _createMsListTileTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MsListTileTheme(
+      backgroundColor: colorScheme.surface,
+      padding: MsEdgeInsets.contentLarge,
+      borderRadius: MsBorderRadius.regular,
+      titleStyle: textTheme.titleMedium,
+      subtitleStyle: textTheme.bodySmall,
     );
   }
 

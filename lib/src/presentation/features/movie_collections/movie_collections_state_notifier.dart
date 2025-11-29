@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/create_movie_collection_interactor_provider.dart';
-import 'package:movie_shaker/src/di/interactors/get_movie_collections_interactor_provider.dart';
+import 'package:movie_shaker/src/di/interactors/get_movie_collections_details_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/remove_movie_collection_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
@@ -56,10 +56,10 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
     info('Fetching movie collections');
 
     try {
-      final getMovieCollectionsInteractor = ref.read(
-        getMovieCollectionsInteractorProvider,
+      final getMovieCollectionsDetailsInteractor = ref.read(
+        getMovieCollectionsDetailsInteractorProvider,
       );
-      final collections = await getMovieCollectionsInteractor();
+      final collections = await getMovieCollectionsDetailsInteractor();
 
       info('Successfully fetched movie collections: $collections');
 

@@ -289,8 +289,20 @@ abstract class AppLocalizations {
   /// No description provided for @yourCollectionDoNotWantToDisappear.
   ///
   /// In en, this message translates to:
-  /// **'Ooooops, your collection doesn\'t want to disappear.'**
+  /// **'Oooops, your collection doesn\'t want to disappear.'**
   String get yourCollectionDoNotWantToDisappear;
+
+  /// No description provided for @itSeemsWeDoNotHaveAChoice.
+  ///
+  /// In en, this message translates to:
+  /// **'It seems we don\'t have a choice.'**
+  String get itSeemsWeDoNotHaveAChoice;
+
+  /// No description provided for @createACollectionToSaveMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a collection to save movies.'**
+  String get createACollectionToSaveMovies;
 }
 
 class _AppLocalizationsDelegate
