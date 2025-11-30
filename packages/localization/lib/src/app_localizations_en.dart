@@ -127,4 +127,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get createACollectionToSaveMovies =>
       'Create a collection to save movies.';
+
+  @override
+  String get thisCollectionIsAGhostTown => 'This collection is a ghost town.';
+
+  @override
+  String get addSomeMoviesToKeepItAlive => 'Add some movies to keep it alive.';
 }

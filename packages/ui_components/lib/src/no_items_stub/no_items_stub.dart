@@ -80,6 +80,25 @@ final class NoItemsStub extends StatelessWidget {
     );
   }
 
+  factory NoItemsStub.emptyCollection({
+    bool useSafeArea = true,
+    TextStyle? descriptionStyle,
+    TextStyle? captionStyle,
+    Key? key,
+  }) {
+    return NoItemsStub._(
+      animationJson: MsAssets.animations.emptyCollectionAnimation,
+      descriptionBuilder: (context) =>
+          context.localizations.thisCollectionIsAGhostTown,
+      captionBuilder: (context) =>
+          context.localizations.addSomeMoviesToKeepItAlive,
+      useSafeArea: useSafeArea,
+      descriptionStyle: descriptionStyle,
+      captionStyle: captionStyle,
+      key: key,
+    );
+  }
+
   const NoItemsStub._({
     required this.animationJson,
     required this.descriptionBuilder,
