@@ -303,6 +303,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create a collection to save movies.'**
   String get createACollectionToSaveMovies;
+
+  /// No description provided for @thisCollectionIsAGhostTown.
+  ///
+  /// In en, this message translates to:
+  /// **'This collection is a ghost town.'**
+  String get thisCollectionIsAGhostTown;
+
+  /// No description provided for @addSomeMoviesToKeepItAlive.
+  ///
+  /// In en, this message translates to:
+  /// **'Add some movies to keep it alive.'**
+  String get addSomeMoviesToKeepItAlive;
 }
 
 class _AppLocalizationsDelegate

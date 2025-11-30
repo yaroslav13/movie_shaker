@@ -11,6 +11,7 @@ import 'package:example/src/pages/no_items_stub_example/no_items_stub_example_vi
 import 'package:example/src/pages/refresh_indicator_example/refresh_indicator_example_view.dart';
 import 'package:example/src/pages/segmented_row_example/segmented_row_example_view.dart';
 import 'package:example/src/pages/text_form_field_example/text_form_field_example_view.dart';
+import 'package:example/src/pages/two_dimensional_scrollable_view_example/two_dimensional_scrollable_view_example_view.dart';
 import 'package:example/src/utils/labeled_widget_mixin.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +42,7 @@ final class _MainScreenState extends State<MainScreen> {
     const MsBottomBarExampleView(),
     const MovieCarouselExampleView(),
     const MovieCollectionCardExampleView(),
+    const TwoDimensionalScrollableViewExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {
