@@ -6,7 +6,7 @@ import 'package:two_dimensional_scrollables/two_dimensional_scrollables.dart';
 
 const _columnFraction = 0.8;
 const _rowFraction = 0.6;
-const _spacing = MsSpacings.large;
+const _spacing = MsSpacings.medium;
 
 final class TwoDimensionalScrollableView extends StatefulWidget {
   const TwoDimensionalScrollableView({
@@ -72,13 +72,14 @@ final class _TwoDimensionalScrollableViewState
     final middleColumn = (actualColumnCount / 2).floor();
 
     if (actualRowCount * strideVertical > viewportHeight) {
-      final targetVertical = (middleRow * strideVertical) - offsetVertical;
+      final targetVertical =
+          (middleRow * strideVertical) + _spacing - offsetVertical;
       _verticalController.jumpTo(max(0, targetVertical));
     }
 
     if (actualColumnCount * strideHorizontal > viewportWidth) {
       final targetHorizontal =
-          (middleColumn * strideHorizontal) - offsetHorizontal;
+          (middleColumn * strideHorizontal) + _spacing - offsetHorizontal;
       _horizontalController.jumpTo(max(0, targetHorizontal));
     }
   }
@@ -103,16 +104,18 @@ final class _TwoDimensionalScrollableViewState
         final itemWidth = viewportWidth * _columnFraction;
         final itemHeight = viewportHeight * _rowFraction;
 
-        final totalContentHeight = rowCount * (itemHeight + _spacing);
-        final totalContentWidth = columnCount * (itemWidth + _spacing);
+        final intrinsicHeight =
+            rowCount * itemHeight + (max(0, rowCount - 1) * _spacing);
+        final intrinsicWidth =
+            columnCount * itemWidth + (max(0, columnCount - 1) * _spacing);
 
-        final topPadding = totalContentHeight < viewportHeight
-            ? (viewportHeight - totalContentHeight) / 2
-            : _spacing / 2;
+        final topPadding = intrinsicHeight < viewportHeight
+            ? (viewportHeight - intrinsicHeight) / 2
+            : _spacing;
 
-        final leftPadding = totalContentWidth < viewportWidth
-            ? (viewportWidth - totalContentWidth) / 2
-            : _spacing / 2;
+        final leftPadding = intrinsicWidth < viewportWidth
+            ? (viewportWidth - intrinsicWidth) / 2
+            : _spacing;
 
         final centerOffsetHorizontal = (viewportWidth - itemWidth) / 2;
         final centerOffsetVertical = (viewportHeight - itemHeight) / 2;
@@ -123,7 +126,7 @@ final class _TwoDimensionalScrollableViewState
             controller: _verticalController,
             physics: _FractionalSnappingPhysics(
               stride: itemHeight + _spacing,
-              centerOffset: centerOffsetVertical,
+              centerOffset: centerOffsetVertical - _spacing,
               parent: widget.verticalPhysics ?? const BouncingScrollPhysics(),
             ),
           ),
@@ -133,7 +136,7 @@ final class _TwoDimensionalScrollableViewState
                 widget.horizontalPhysics ??
                 _FractionalSnappingPhysics(
                   stride: itemWidth + _spacing,
-                  centerOffset: centerOffsetHorizontal,
+                  centerOffset: centerOffsetHorizontal - _spacing,
                   parent:
                       widget.horizontalPhysics ?? const BouncingScrollPhysics(),
                 ),
@@ -143,15 +146,15 @@ final class _TwoDimensionalScrollableViewState
           columnBuilder: (index) => TableSpan(
             extent: const FractionalSpanExtent(_columnFraction),
             padding: TableSpanPadding(
-              leading: index == 0 ? leftPadding : 0,
-              trailing: _spacing / 2,
+              leading: index == 0 ? leftPadding : _spacing,
+              trailing: index == columnCount - 1 ? _spacing : 0,
             ),
           ),
           rowBuilder: (index) => TableSpan(
             extent: const FractionalSpanExtent(_rowFraction),
             padding: TableSpanPadding(
-              leading: index == 0 ? topPadding : 0,
-              trailing: _spacing / 2,
+              leading: index == 0 ? topPadding : _spacing,
+              trailing: index == rowCount - 1 ? _spacing : 0,
             ),
           ),
 
@@ -176,6 +179,7 @@ final class _FractionalSnappingPhysics extends ScrollPhysics {
   });
 
   final double stride;
+
   final double centerOffset;
 
   @override
@@ -193,7 +197,6 @@ final class _FractionalSnappingPhysics extends ScrollPhysics {
     double velocity,
   ) {
     final currentPixels = position.pixels;
-
     final centeredPixels = currentPixels + centerOffset;
     final currentCycle = (centeredPixels / stride).round();
 
