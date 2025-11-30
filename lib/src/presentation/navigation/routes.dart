@@ -4,6 +4,7 @@ import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
+import 'package:movie_shaker/src/presentation/features/movie_collection_details/movie_collection_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_picker/movie_collection_picker_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
@@ -33,6 +34,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         TypedGoRoute<RemoveMovieCollectionRoute>(
           path: 'remove/:collectionName',
         ),
+        TypedGoRoute<MovieCollectionDetailsRoute>(path: ':collectionName'),
       ],
     ),
     TypedGoRoute<FavoritesRoute>(path: '/favorites'),
@@ -94,6 +96,19 @@ final class MovieDetailsRoute extends GoRouteData with _$MovieDetailsRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       MovieDetailsScreen(movieId: id);
+}
+
+final class MovieCollectionDetailsRoute extends GoRouteData
+    with _$MovieCollectionDetailsRoute {
+  const MovieCollectionDetailsRoute({required this.collectionName});
+
+  final String collectionName;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      MovieCollectionDetailsScreen(collectionName: collectionName);
 }
 
 final class AddMovieCollectionRoute extends GoRouteData

@@ -1,0 +1,230 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:theme/theme.dart';
+import 'package:two_dimensional_scrollables/two_dimensional_scrollables.dart';
+
+const _columnFraction = 0.8;
+const _rowFraction = 0.6;
+const _spacing = MsSpacings.large;
+
+final class TwoDimensionalScrollableView extends StatefulWidget {
+  const TwoDimensionalScrollableView({
+    required this.itemCount,
+    required this.columns,
+    required this.itemBuilder,
+    this.verticalPhysics,
+    this.horizontalPhysics,
+    super.key,
+  }) : assert(columns > 0, 'itemAxisCount must be greater than 0');
+
+  final int itemCount;
+  final int columns;
+
+  final ScrollPhysics? verticalPhysics;
+  final ScrollPhysics? horizontalPhysics;
+  final IndexedWidgetBuilder itemBuilder;
+
+  @override
+  State<TwoDimensionalScrollableView> createState() =>
+      _TwoDimensionalScrollableViewState();
+}
+
+final class _TwoDimensionalScrollableViewState
+    extends State<TwoDimensionalScrollableView> {
+  final _verticalController = ScrollController();
+  final _horizontalController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => _jumpToCenter());
+  }
+
+  void _jumpToCenter() {
+    if (!_verticalController.hasClients || !_horizontalController.hasClients) {
+      return;
+    }
+
+    if (widget.itemCount == 0) {
+      return;
+    }
+
+    final viewportWidth = _horizontalController.position.viewportDimension;
+    final viewportHeight = _verticalController.position.viewportDimension;
+
+    final itemWidth = viewportWidth * _columnFraction;
+    final itemHeight = viewportHeight * _rowFraction;
+
+    final strideHorizontal = itemWidth + _spacing;
+    final strideVertical = itemHeight + _spacing;
+
+    final offsetHorizontal = (viewportWidth - itemWidth) / 2;
+    final offsetVertical = (viewportHeight - itemHeight) / 2;
+
+    final actualRowCount = (widget.itemCount / widget.columns).ceil();
+    final actualColumnCount = actualRowCount <= 1
+        ? widget.itemCount
+        : widget.columns;
+
+    final middleRow = (actualRowCount / 2).floor();
+    final middleColumn = (actualColumnCount / 2).floor();
+
+    if (actualRowCount * strideVertical > viewportHeight) {
+      final targetVertical = (middleRow * strideVertical) - offsetVertical;
+      _verticalController.jumpTo(max(0, targetVertical));
+    }
+
+    if (actualColumnCount * strideHorizontal > viewportWidth) {
+      final targetHorizontal =
+          (middleColumn * strideHorizontal) - offsetHorizontal;
+      _horizontalController.jumpTo(max(0, targetHorizontal));
+    }
+  }
+
+  @override
+  void dispose() {
+    _verticalController.dispose();
+    _horizontalController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rowCount = (widget.itemCount / widget.columns).ceil();
+    final columnCount = rowCount <= 1 ? widget.itemCount : widget.columns;
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final viewportWidth = constraints.maxWidth;
+        final viewportHeight = constraints.maxHeight;
+
+        final itemWidth = viewportWidth * _columnFraction;
+        final itemHeight = viewportHeight * _rowFraction;
+
+        final totalContentHeight = rowCount * (itemHeight + _spacing);
+        final totalContentWidth = columnCount * (itemWidth + _spacing);
+
+        final topPadding = totalContentHeight < viewportHeight
+            ? (viewportHeight - totalContentHeight) / 2
+            : _spacing / 2;
+
+        final leftPadding = totalContentWidth < viewportWidth
+            ? (viewportWidth - totalContentWidth) / 2
+            : _spacing / 2;
+
+        final centerOffsetHorizontal = (viewportWidth - itemWidth) / 2;
+        final centerOffsetVertical = (viewportHeight - itemHeight) / 2;
+
+        return TableView.builder(
+          diagonalDragBehavior: DiagonalDragBehavior.free,
+          verticalDetails: ScrollableDetails.vertical(
+            controller: _verticalController,
+            physics: _FractionalSnappingPhysics(
+              stride: itemHeight + _spacing,
+              centerOffset: centerOffsetVertical,
+              parent: widget.verticalPhysics ?? const BouncingScrollPhysics(),
+            ),
+          ),
+          horizontalDetails: ScrollableDetails.horizontal(
+            controller: _horizontalController,
+            physics:
+                widget.horizontalPhysics ??
+                _FractionalSnappingPhysics(
+                  stride: itemWidth + _spacing,
+                  centerOffset: centerOffsetHorizontal,
+                  parent:
+                      widget.horizontalPhysics ?? const BouncingScrollPhysics(),
+                ),
+          ),
+          columnCount: columnCount,
+          rowCount: rowCount,
+          columnBuilder: (index) => TableSpan(
+            extent: const FractionalSpanExtent(_columnFraction),
+            padding: TableSpanPadding(
+              leading: index == 0 ? leftPadding : 0,
+              trailing: _spacing / 2,
+            ),
+          ),
+          rowBuilder: (index) => TableSpan(
+            extent: const FractionalSpanExtent(_rowFraction),
+            padding: TableSpanPadding(
+              leading: index == 0 ? topPadding : 0,
+              trailing: _spacing / 2,
+            ),
+          ),
+
+          cellBuilder: (context, vicinity) {
+            final index = (vicinity.row * widget.columns) + vicinity.column;
+
+            return TableViewCell(
+              child: widget.itemBuilder(context, index),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+final class _FractionalSnappingPhysics extends ScrollPhysics {
+  const _FractionalSnappingPhysics({
+    required this.stride,
+    required this.centerOffset,
+    super.parent,
+  });
+
+  final double stride;
+  final double centerOffset;
+
+  @override
+  _FractionalSnappingPhysics applyTo(ScrollPhysics? ancestor) {
+    return _FractionalSnappingPhysics(
+      stride: stride,
+      centerOffset: centerOffset,
+      parent: buildParent(ancestor),
+    );
+  }
+
+  @override
+  Simulation? createBallisticSimulation(
+    ScrollMetrics position,
+    double velocity,
+  ) {
+    final currentPixels = position.pixels;
+
+    final centeredPixels = currentPixels + centerOffset;
+    final currentCycle = (centeredPixels / stride).round();
+
+    var targetCycle = currentCycle.toDouble();
+
+    if (velocity < -100) {
+      targetCycle = (centeredPixels + velocity * 0.3) / stride;
+    } else if (velocity > 100) {
+      targetCycle = (centeredPixels + velocity * 0.3) / stride;
+    }
+
+    final targetPixels = (targetCycle.round() * stride) - centerOffset;
+
+    final clampedTarget = targetPixels.clamp(
+      position.minScrollExtent,
+      position.maxScrollExtent,
+    );
+
+    if (clampedTarget != currentPixels) {
+      return ScrollSpringSimulation(
+        spring,
+        currentPixels,
+        clampedTarget,
+        velocity,
+        tolerance: toleranceFor(position),
+      );
+    }
+
+    return null;
+  }
+
+  @override
+  bool get allowImplicitScrolling => false;
+}

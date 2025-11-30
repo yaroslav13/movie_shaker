@@ -112,6 +112,9 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
                 posterUrls: collection.movies
                     .map((movie) => movie.posterUrl)
                     .toList(),
+                onTap: () => MovieCollectionDetailsRoute(
+                  collectionName: collectionName,
+                ).go(context),
                 onLongPress: () => RemoveMovieCollectionRoute(
                   collectionName: collectionName,
                 ).go(context),
