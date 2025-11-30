@@ -24,6 +24,7 @@ import 'package:theme/src/extensions/ms_list_tile_theme.dart';
 import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
 import 'package:theme/src/extensions/ms_text_button_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
+import 'package:theme/src/extensions/rounded_back_button_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
 import 'package:theme/src/extensions/staggered_grid_view_theme.dart';
@@ -73,6 +74,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsBottomSheetTheme(colorScheme),
         _createMsSnackBarTheme(colorScheme, textTheme),
         _createMsTextButtonTheme(colorScheme, textTheme),
+        _createRoundedBackButtonTheme(colorScheme),
       ],
     );
   }
@@ -501,6 +503,15 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       borderRadius: MsBorderRadius.regular,
       padding: MsEdgeInsets.contentLarge,
       textStyle: textTheme.labelLarge,
+    );
+  }
+
+  static RoundedBackButtonTheme _createRoundedBackButtonTheme(
+    ColorScheme colorScheme,
+  ) {
+    return RoundedBackButtonTheme(
+      foregroundColor: colorScheme.onInverseSurface,
+      backgroundColor: _applyAlpha(colorScheme.inverseSurface),
     );
   }
 

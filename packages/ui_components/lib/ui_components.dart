@@ -27,5 +27,7 @@ export 'src/ms_text_button/ms_text_button.dart';
 export 'src/ms_text_form_field/ms_text_form_field.dart';
 export 'src/no_items_stub/no_items_stub.dart';
 export 'src/pull_to_refresh/pull_to_refresh_widget.dart';
+export 'src/rounded_back_button/rounded_back_button.dart';
 export 'src/segmented_row/entities/segment_data.dart';
 export 'src/segmented_row/segmented_row.dart';
+export 'src/two_dimensional_scrollable_view/two_dimensional_scrollable_view.dart';

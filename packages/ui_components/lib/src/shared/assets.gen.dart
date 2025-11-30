@@ -20,6 +20,10 @@ class $AssetsAnimationsGen {
   String get booAnimation =>
       'packages/ui_components/assets/animations/boo_animation.json';
 
+  /// File path: assets/animations/empty_collection_animation.json
+  String get emptyCollectionAnimation =>
+      'packages/ui_components/assets/animations/empty_collection_animation.json';
+
   /// File path: assets/animations/movie_poster_animation.json
   String get moviePosterAnimation =>
       'packages/ui_components/assets/animations/movie_poster_animation.json';
@@ -52,6 +56,7 @@ class $AssetsAnimationsGen {
   List<String> get values => [
     a3dGlassesAnimation,
     booAnimation,
+    emptyCollectionAnimation,
     moviePosterAnimation,
     noChoiceAnimation,
     noCollectionsAnimation,
