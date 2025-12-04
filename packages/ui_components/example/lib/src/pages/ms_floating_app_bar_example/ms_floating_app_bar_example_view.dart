@@ -12,7 +12,7 @@ final class MsFloatingAppBarExampleView extends StatelessWidget
       body: CustomScrollView(
         slivers: [
           MsFloatingAppBar.backgroundImage(
-            title: label,
+            title: MsText(label),
             iconTheme: const IconThemeData(color: Colors.black),
             imageUrl:
                 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60',

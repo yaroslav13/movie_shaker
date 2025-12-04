@@ -133,4 +133,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addSomeMoviesToKeepItAlive => 'Add some movies to keep it alive.';
+
+  @override
+  String get watchNow => 'Watch Now';
 }

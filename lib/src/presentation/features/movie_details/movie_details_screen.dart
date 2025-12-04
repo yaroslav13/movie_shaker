@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
@@ -47,10 +48,25 @@ final class MovieDetailsScreen extends HookConsumerWidget {
           :final popularity,
           :final runtime,
           :final releaseDate,
+          :final homepageUrl,
         ) =>
           CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
-              MsFloatingAppBar.backgroundImage(imageUrl: posterUrl),
+              MsFloatingAppBar.backgroundImage(
+                imageUrl: posterUrl,
+                leading: RoundedBackButton(
+                  onPressed: () => const HomeRoute().go(context),
+                ),
+                centerTitle: false,
+                title: homepageUrl != null
+                    ? WatchButton(
+                        onPressed: () => ref
+                            .read(movieDetailsStateNotifierProvider.notifier)
+                            .onWatchButtonPressed(homepageUrl),
+                      )
+                    : null,
+              ),
               SliverPadding(
                 padding: MsEdgeInsets.contentLarge,
                 sliver: SliverList(

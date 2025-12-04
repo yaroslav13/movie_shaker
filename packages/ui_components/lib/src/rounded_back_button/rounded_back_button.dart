@@ -7,12 +7,30 @@ final class RoundedBackButton extends StatelessWidget {
   const RoundedBackButton({
     this.foregroundColor,
     this.backgroundColor,
+    this.padding,
     this.onPressed,
     super.key,
   });
 
+  factory RoundedBackButton.small({
+    Color? foregroundColor,
+    Color? backgroundColor,
+    VoidCallback? onPressed,
+    Key? key,
+  }) {
+    return RoundedBackButton(
+      foregroundColor: foregroundColor,
+      backgroundColor: backgroundColor,
+      padding: MsEdgeInsets.contentSmall,
+      onPressed: onPressed,
+      key: key,
+    );
+  }
+
   final Color? foregroundColor;
   final Color? backgroundColor;
+
+  final EdgeInsetsGeometry? padding;
 
   final VoidCallback? onPressed;
 
@@ -23,8 +41,10 @@ final class RoundedBackButton extends StatelessWidget {
     final foregroundColor = this.foregroundColor ?? theme?.foregroundColor;
     final backgroundColor = this.backgroundColor ?? theme?.backgroundColor;
 
+    final padding = this.padding ?? theme?.padding;
+
     return MsIconButton(
-      padding: MsEdgeInsets.contentMedium,
+      padding: padding,
       borderRadius: MsBorderRadius.round,
       foregroundColor: foregroundColor,
       backgroundColor: backgroundColor,

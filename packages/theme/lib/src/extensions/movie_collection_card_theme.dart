@@ -36,7 +36,7 @@ final class MovieCollectionCardTheme
     BorderRadiusGeometry? borderRadius,
     TextStyle? titleStyle,
     TextStyle? subtitleStyle,
-    IconThemeData? tileIconTheme,
+    IconThemeData? iconTheme,
     IconThemeData? placeholderIconTheme,
   }) {
     return MovieCollectionCardTheme(
@@ -45,7 +45,7 @@ final class MovieCollectionCardTheme
       borderRadius: borderRadius ?? this.borderRadius,
       titleStyle: titleStyle ?? this.titleStyle,
       subtitleStyle: subtitleStyle ?? this.subtitleStyle,
-      tileIconTheme: tileIconTheme ?? this.tileIconTheme,
+      tileIconTheme: iconTheme ?? this.tileIconTheme,
       placeholderIconTheme: placeholderIconTheme ?? this.placeholderIconTheme,
     );
   }
