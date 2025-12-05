@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_details_by_id_interactor_provider.dart';
+import 'package:movie_shaker/src/di/interactors/open_movie_homepage_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
+import 'package:movie_shaker/src/domain/exceptions/movie_homepage_unavailable_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,6 +35,12 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
     unawaited(_fetchMovieDetails(movieId));
   }
 
+  void onWatchButtonPressed(String homepageUrl) {
+    info('Watch button pressed, launching movie homepage: $homepageUrl');
+
+    unawaited(_launchMovieHomepage(homepageUrl));
+  }
+
   Future<void> _fetchMovieDetails(int movieId) async {
     try {
       final getMovieDetailsByIdInteractor = ref.read(
@@ -52,11 +60,24 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
         voteCount: movieDetails.voteCount,
         releaseDate: movieDetails.releaseDate,
         popularity: movieDetails.popularity,
+        homepageUrl: movieDetails.homepageUrl,
       );
     } on SemanticException catch (e, s) {
       error('Error fetching movie details', e, s);
 
       state = MovieDetailsState.error(e);
+    }
+  }
+
+  Future<void> _launchMovieHomepage(String url) async {
+    try {
+      final openMovieHomepageInteractor = ref.read(
+        openMovieHomepageInteractorProvider,
+      );
+
+      await openMovieHomepageInteractor(url);
+    } on MovieHomepageUnavailableException {
+      //TODO(yhalivets): Show error message to user
     }
   }
 }

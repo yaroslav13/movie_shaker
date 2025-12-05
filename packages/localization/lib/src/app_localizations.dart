@@ -315,6 +315,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add some movies to keep it alive.'**
   String get addSomeMoviesToKeepItAlive;
+
+  /// No description provided for @watchNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Now'**
+  String get watchNow;
 }
 
 class _AppLocalizationsDelegate

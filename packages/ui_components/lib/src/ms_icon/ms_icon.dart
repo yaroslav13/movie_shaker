@@ -31,6 +31,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedPlay({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedPlay,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   factory MsIcon.outlinedError({
     double? size,
     Color? color,

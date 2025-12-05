@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:theme/src/extensions/bookmark_button_theme.dart';
 import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
+import 'package:theme/src/extensions/glassmorphic_card_theme.dart';
 import 'package:theme/src/extensions/like_button_theme.dart';
 import 'package:theme/src/extensions/loading_error_stub_theme.dart';
 import 'package:theme/src/extensions/movie_card_theme.dart';
@@ -28,6 +29,7 @@ import 'package:theme/src/extensions/rounded_back_button_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
 import 'package:theme/src/extensions/staggered_grid_view_theme.dart';
+import 'package:theme/src/extensions/watch_button_theme.dart';
 import 'package:theme/src/ms_colors.dart';
 import 'package:theme/src/shared/ms_border_radius.dart';
 import 'package:theme/src/shared/ms_edge_insets.dart';
@@ -75,6 +77,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsSnackBarTheme(colorScheme, textTheme),
         _createMsTextButtonTheme(colorScheme, textTheme),
         _createRoundedBackButtonTheme(colorScheme),
+        _createGlassmorphicCardTheme(colorScheme),
+        _createWatchButtonTheme(textTheme, colorScheme),
       ],
     );
   }
@@ -315,7 +319,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       iconTheme: IconThemeData(
         color: colorScheme.onPrimary,
       ),
-      expandedHeight: 350,
+      expandedHeight: 400,
     );
   }
 
@@ -512,6 +516,27 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return RoundedBackButtonTheme(
       foregroundColor: colorScheme.onInverseSurface,
       backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+      padding: MsEdgeInsets.contentMedium,
+    );
+  }
+
+  static GlassmorphicCardTheme _createGlassmorphicCardTheme(
+    ColorScheme colorScheme,
+  ) {
+    return const GlassmorphicCardTheme(
+      blurSigma: 10,
+      borderRadius: MsBorderRadius.extraLarge,
+      elevation: _recommendedElevation,
+    );
+  }
+
+  static WatchButtonTheme _createWatchButtonTheme(
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+  ) {
+    return WatchButtonTheme(
+      textStyle: textTheme.labelLarge,
+      foregroundColor: colorScheme.onPrimary,
     );
   }
 

@@ -6,19 +6,23 @@ final class RoundedBackButtonTheme
   const RoundedBackButtonTheme({
     this.foregroundColor,
     this.backgroundColor,
+    this.padding,
   });
 
   final Color? foregroundColor;
   final Color? backgroundColor;
+  final EdgeInsetsGeometry? padding;
 
   @override
   RoundedBackButtonTheme copyWith({
     Color? foregroundColor,
     Color? backgroundColor,
+    EdgeInsetsGeometry? padding,
   }) {
     return RoundedBackButtonTheme(
       foregroundColor: foregroundColor ?? this.foregroundColor,
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      padding: padding ?? this.padding,
     );
   }
 
@@ -40,6 +44,11 @@ final class RoundedBackButtonTheme
       backgroundColor: Color.lerp(
         backgroundColor,
         other.backgroundColor,
+        t,
+      ),
+      padding: EdgeInsetsGeometry.lerp(
+        padding,
+        other.padding,
         t,
       ),
     );

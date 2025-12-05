@@ -1,4 +1,5 @@
 import 'package:example/src/pages/dots_progress_indicator_example/dots_progress_indicator_example_view.dart';
+import 'package:example/src/pages/glassmorphic_card_example/glassmorphic_card_example_view.dart';
 import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_example_view.dart';
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
 import 'package:example/src/pages/movie_carousel_example/movie_carousel_example_view.dart';
@@ -43,6 +44,7 @@ final class _MainScreenState extends State<MainScreen> {
     const MovieCarouselExampleView(),
     const MovieCollectionCardExampleView(),
     const TwoDimensionalScrollableViewExampleView(),
+    const GlassmorphicCardExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

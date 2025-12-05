@@ -17,5 +17,6 @@ sealed class MovieDetailsState with _$MovieDetailsState {
     required int voteCount,
     required DateTime releaseDate,
     required double popularity,
+    String? homepageUrl,
   }) = MovieDetailsStateData;
 }

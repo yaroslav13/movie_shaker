@@ -65,6 +65,9 @@ dependencies:
   # meta
   meta: 1.16.0
 
+  # external app launcher
+  url_launcher: 6.3.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

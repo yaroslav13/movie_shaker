@@ -1,6 +1,7 @@
 export 'src/extensions/bookmark_button_theme.dart';
 export 'src/extensions/carousel_dots_indicator_theme.dart';
 export 'src/extensions/dots_progress_indicator_theme.dart';
+export 'src/extensions/glassmorphic_card_theme.dart';
 export 'src/extensions/like_button_theme.dart';
 export 'src/extensions/loading_error_stub_theme.dart';
 export 'src/extensions/movie_card_theme.dart';
@@ -24,6 +25,7 @@ export 'src/extensions/rounded_back_button_theme.dart';
 export 'src/extensions/segmented_row_entry_theme.dart';
 export 'src/extensions/segmented_row_theme.dart';
 export 'src/extensions/staggered_grid_view_theme.dart';
+export 'src/extensions/watch_button_theme.dart';
 export 'src/ms_theme.dart';
 export 'src/shared/ms_animation_durations.dart';
 export 'src/shared/ms_border_radius.dart';
