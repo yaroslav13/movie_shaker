@@ -63,5 +63,12 @@
   "createACollectionToSaveMovies": "Create a collection to save movies.",
   "thisCollectionIsAGhostTown": "This collection is a ghost town.",
   "addSomeMoviesToKeepItAlive": "Add some movies to keep it alive.",
-  "watchNow": "Watch Now"
+  "watchNow": "Watch Now",
+  "imdb": "IMDB",
+  "trending": "Trending",
+  "popularityViralLabel": "Viral",
+  "popularityHighLabel": "High",
+  "popularityMediumLabel": "Medium",
+  "popularityLowLabel": "Low",
+  "popularityNoneLabel": "None"
 }

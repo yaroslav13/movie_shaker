@@ -161,6 +161,12 @@ final class _TwoDimensionalScrollableViewState
           cellBuilder: (context, vicinity) {
             final index = (vicinity.row * widget.columns) + vicinity.column;
 
+            if (index >= widget.itemCount) {
+              return const TableViewCell(
+                child: SizedBox.shrink(),
+              );
+            }
+
             return TableViewCell(
               child: widget.itemBuilder(context, index),
             );

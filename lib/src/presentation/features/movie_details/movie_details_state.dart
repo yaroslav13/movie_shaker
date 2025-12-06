@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 
 part 'movie_details_state.freezed.dart';
@@ -14,9 +15,9 @@ sealed class MovieDetailsState with _$MovieDetailsState {
     required String overview,
     required Duration runtime,
     required double voteAverage,
-    required int voteCount,
     required DateTime releaseDate,
     required double popularity,
+    @Default([]) List<Genre> genres,
     String? homepageUrl,
   }) = MovieDetailsStateData;
 }

@@ -136,4 +136,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get watchNow => 'Watch Now';
+
+  @override
+  String get imdb => 'IMDB';
+
+  @override
+  String get trending => 'Trending';
+
+  @override
+  String get popularityViralLabel => 'Viral';
+
+  @override
+  String get popularityHighLabel => 'High';
+
+  @override
+  String get popularityMediumLabel => 'Medium';
+
+  @override
+  String get popularityLowLabel => 'Low';
+
+  @override
+  String get popularityNoneLabel => 'None';
 }

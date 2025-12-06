@@ -321,6 +321,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Watch Now'**
   String get watchNow;
+
+  /// No description provided for @imdb.
+  ///
+  /// In en, this message translates to:
+  /// **'IMDB'**
+  String get imdb;
+
+  /// No description provided for @trending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get trending;
+
+  /// No description provided for @popularityViralLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Viral'**
+  String get popularityViralLabel;
+
+  /// No description provided for @popularityHighLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get popularityHighLabel;
+
+  /// No description provided for @popularityMediumLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get popularityMediumLabel;
+
+  /// No description provided for @popularityLowLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get popularityLowLabel;
+
+  /// No description provided for @popularityNoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get popularityNoneLabel;
 }
 
 class _AppLocalizationsDelegate

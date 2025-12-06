@@ -51,6 +51,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/animations/
+    - assets/animations/genre_animations/
     - assets/images/
 
 flutter_gen:

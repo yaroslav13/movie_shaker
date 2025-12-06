@@ -69,6 +69,8 @@ final class MovieDetailsDtoMapper
       ),
     );
 
+    final homepage = instance.homepage ?? '';
+
     return MovieDetails(
       id: id,
       title: title,
@@ -83,7 +85,7 @@ final class MovieDetailsDtoMapper
       releaseDate: DateTime.parse(releaseDate),
       popularity: popularity,
       tagline: instance.tagline,
-      homepageUrl: instance.homepage,
+      homepageUrl: homepage.isNotEmpty ? homepage : null,
     );
   }
 }

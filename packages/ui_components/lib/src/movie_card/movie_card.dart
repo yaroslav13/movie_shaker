@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:theme/theme.dart';
+import 'package:ui_components/src/ms_card/ms_card.dart';
 
 const _defaultImageSize = Size(177, 265.5);
 
@@ -46,12 +47,10 @@ final class MovieCard extends StatelessWidget {
     final borderRadius = this.borderRadius ?? theme?.borderRadius;
     final elevation = this.elevation ?? theme?.elevation;
 
-    return Card(
+    return MsCard(
       margin: margin,
       elevation: elevation,
-      shape: borderRadius != null
-          ? RoundedRectangleBorder(borderRadius: borderRadius)
-          : null,
+      borderRadius: borderRadius,
       child: SizedBox.fromSize(
         size: size,
         child: Stack(

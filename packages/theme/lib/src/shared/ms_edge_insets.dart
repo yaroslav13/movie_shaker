@@ -18,6 +18,10 @@ abstract final class MsEdgeInsets {
   static const horizontalMedium = EdgeInsets.symmetric(horizontal: 12);
   static const horizontalSmall = EdgeInsets.symmetric(horizontal: 6);
 
+  static const verticalLarge = EdgeInsets.symmetric(vertical: 24);
+  static const verticalMedium = EdgeInsets.symmetric(vertical: 12);
+  static const verticalSmall = EdgeInsets.symmetric(vertical: 6);
+
   static const iconButtonPadding = EdgeInsets.all(16);
   static const chipPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 12);
   static const bottomBarItemPadding = EdgeInsets.symmetric(
@@ -37,4 +41,6 @@ abstract final class MsEdgeInsets {
     horizontal: 20,
     vertical: 16,
   );
+
+  static const zero = EdgeInsets.zero;
 }

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:theme/src/extensions/bookmark_button_theme.dart';
 import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
+import 'package:theme/src/extensions/dot_separated_text_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
+import 'package:theme/src/extensions/genre_card_theme.dart';
 import 'package:theme/src/extensions/glassmorphic_card_theme.dart';
 import 'package:theme/src/extensions/like_button_theme.dart';
 import 'package:theme/src/extensions/loading_error_stub_theme.dart';
@@ -15,6 +17,7 @@ import 'package:theme/src/extensions/ms_app_bar_delegate_theme.dart';
 import 'package:theme/src/extensions/ms_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_bottom_bar_theme.dart';
 import 'package:theme/src/extensions/ms_bottom_sheet_theme.dart';
+import 'package:theme/src/extensions/ms_card_theme.dart';
 import 'package:theme/src/extensions/ms_elevated_button_theme.dart';
 import 'package:theme/src/extensions/ms_filter_chip_theme.dart';
 import 'package:theme/src/extensions/ms_floating_action_button_theme.dart';
@@ -25,7 +28,10 @@ import 'package:theme/src/extensions/ms_list_tile_theme.dart';
 import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
 import 'package:theme/src/extensions/ms_text_button_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
+import 'package:theme/src/extensions/popularity_score_card_theme.dart';
+import 'package:theme/src/extensions/rating_card_theme.dart';
 import 'package:theme/src/extensions/rounded_back_button_theme.dart';
+import 'package:theme/src/extensions/score_arc_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
 import 'package:theme/src/extensions/staggered_grid_view_theme.dart';
@@ -79,6 +85,12 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createRoundedBackButtonTheme(colorScheme),
         _createGlassmorphicCardTheme(colorScheme),
         _createWatchButtonTheme(textTheme, colorScheme),
+        _createDotSeparatedTextTheme(textTheme, colorScheme),
+        _createScoreArcTheme(colorScheme, textTheme),
+        _createMsCardTheme(colorScheme),
+        _createRatingCardTheme(colorScheme, textTheme),
+        _createEmojiScoreCardTheme(colorScheme, textTheme),
+        _createGenreCardTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -537,6 +549,76 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return WatchButtonTheme(
       textStyle: textTheme.labelLarge,
       foregroundColor: colorScheme.onPrimary,
+    );
+  }
+
+  static DotSeparatedTextTheme _createDotSeparatedTextTheme(
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+  ) {
+    return DotSeparatedTextTheme(
+      textStyle: textTheme.bodyMedium,
+      dotColor: colorScheme.outline,
+    );
+  }
+
+  static ScoreArcTheme _createScoreArcTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return ScoreArcTheme(
+      strokeWidth: 20,
+      trackColor: colorScheme.surfaceContainerLow,
+      valueColors: [
+        colorScheme.error,
+        colorScheme.secondary,
+      ],
+      labelStyle: textTheme.displayLarge,
+    );
+  }
+
+  static MsCardTheme _createMsCardTheme(ColorScheme colorScheme) {
+    return MsCardTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.large,
+    );
+  }
+
+  static RatingCardTheme _createRatingCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return RatingCardTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.extraLarge,
+      descriptionStyle: textTheme.titleLarge,
+    );
+  }
+
+  static PopularityScoreCardTheme _createEmojiScoreCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return PopularityScoreCardTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.extraLarge,
+      scoreStyle: textTheme.displayLarge,
+      descriptionStyle: textTheme.titleLarge,
+    );
+  }
+
+  static GenreCardTheme _createGenreCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return GenreCardTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.extraLarge,
+      titleStyle: textTheme.bodyMedium,
     );
   }
 
