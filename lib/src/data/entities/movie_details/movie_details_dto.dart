@@ -8,6 +8,7 @@ part 'movie_details_dto.g.dart';
 sealed class MovieDetailsDto with _$MovieDetailsDto {
   const factory MovieDetailsDto({
     int? id,
+    String? imdbId,
     String? title,
     String? originalTitle,
     String? posterPath,

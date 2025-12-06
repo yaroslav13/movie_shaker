@@ -57,10 +57,10 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
         overview: movieDetails.overview,
         runtime: movieDetails.runtime,
         voteAverage: movieDetails.voteAverage,
-        voteCount: movieDetails.voteCount,
         releaseDate: movieDetails.releaseDate,
-        popularity: movieDetails.popularity,
         homepageUrl: movieDetails.homepageUrl,
+        popularity: movieDetails.popularity,
+        genres: movieDetails.genres,
       );
     } on SemanticException catch (e, s) {
       error('Error fetching movie details', e, s);

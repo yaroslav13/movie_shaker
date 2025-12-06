@@ -1,4 +1,5 @@
 import 'package:example/src/pages/dots_progress_indicator_example/dots_progress_indicator_example_view.dart';
+import 'package:example/src/pages/genre_card_example/genre_card_example_view.dart';
 import 'package:example/src/pages/glassmorphic_card_example/glassmorphic_card_example_view.dart';
 import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_example_view.dart';
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
@@ -10,6 +11,7 @@ import 'package:example/src/pages/ms_list_tile_example/ms_list_tile_example_view
 import 'package:example/src/pages/ms_progress_indicator_example/ms_progress_indicator_example_view.dart';
 import 'package:example/src/pages/no_items_stub_example/no_items_stub_example_view.dart';
 import 'package:example/src/pages/refresh_indicator_example/refresh_indicator_example_view.dart';
+import 'package:example/src/pages/score_arc_example/score_arc_example_view.dart';
 import 'package:example/src/pages/segmented_row_example/segmented_row_example_view.dart';
 import 'package:example/src/pages/text_form_field_example/text_form_field_example_view.dart';
 import 'package:example/src/pages/two_dimensional_scrollable_view_example/two_dimensional_scrollable_view_example_view.dart';
@@ -45,6 +47,8 @@ final class _MainScreenState extends State<MainScreen> {
     const MovieCollectionCardExampleView(),
     const TwoDimensionalScrollableViewExampleView(),
     const GlassmorphicCardExampleView(),
+    const ScoreArcExampleView(),
+    const GenreCardExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

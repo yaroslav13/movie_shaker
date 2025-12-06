@@ -24,6 +24,10 @@ class $AssetsAnimationsGen {
   String get emptyCollectionAnimation =>
       'packages/ui_components/assets/animations/empty_collection_animation.json';
 
+  /// Directory path: assets/animations/genre_animations
+  $AssetsAnimationsGenreAnimationsGen get genreAnimations =>
+      const $AssetsAnimationsGenreAnimationsGen();
+
   /// File path: assets/animations/movie_poster_animation.json
   String get moviePosterAnimation =>
       'packages/ui_components/assets/animations/movie_poster_animation.json';
@@ -75,6 +79,114 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<String> get values => [horror];
+}
+
+class $AssetsAnimationsGenreAnimationsGen {
+  const $AssetsAnimationsGenreAnimationsGen();
+
+  /// File path: assets/animations/genre_animations/action.json
+  String get action =>
+      'packages/ui_components/assets/animations/genre_animations/action.json';
+
+  /// File path: assets/animations/genre_animations/adventure.json
+  String get adventure =>
+      'packages/ui_components/assets/animations/genre_animations/adventure.json';
+
+  /// File path: assets/animations/genre_animations/animation.json
+  String get animation =>
+      'packages/ui_components/assets/animations/genre_animations/animation.json';
+
+  /// File path: assets/animations/genre_animations/comedy.json
+  String get comedy =>
+      'packages/ui_components/assets/animations/genre_animations/comedy.json';
+
+  /// File path: assets/animations/genre_animations/crime.json
+  String get crime =>
+      'packages/ui_components/assets/animations/genre_animations/crime.json';
+
+  /// File path: assets/animations/genre_animations/documentary.json
+  String get documentary =>
+      'packages/ui_components/assets/animations/genre_animations/documentary.json';
+
+  /// File path: assets/animations/genre_animations/drama.json
+  String get drama =>
+      'packages/ui_components/assets/animations/genre_animations/drama.json';
+
+  /// File path: assets/animations/genre_animations/family.json
+  String get family =>
+      'packages/ui_components/assets/animations/genre_animations/family.json';
+
+  /// File path: assets/animations/genre_animations/fantasy.json
+  String get fantasy =>
+      'packages/ui_components/assets/animations/genre_animations/fantasy.json';
+
+  /// File path: assets/animations/genre_animations/genre_default.json
+  String get genreDefault =>
+      'packages/ui_components/assets/animations/genre_animations/genre_default.json';
+
+  /// File path: assets/animations/genre_animations/history.json
+  String get history =>
+      'packages/ui_components/assets/animations/genre_animations/history.json';
+
+  /// File path: assets/animations/genre_animations/horror.json
+  String get horror =>
+      'packages/ui_components/assets/animations/genre_animations/horror.json';
+
+  /// File path: assets/animations/genre_animations/music.json
+  String get music =>
+      'packages/ui_components/assets/animations/genre_animations/music.json';
+
+  /// File path: assets/animations/genre_animations/mystery.json
+  String get mystery =>
+      'packages/ui_components/assets/animations/genre_animations/mystery.json';
+
+  /// File path: assets/animations/genre_animations/romance.json
+  String get romance =>
+      'packages/ui_components/assets/animations/genre_animations/romance.json';
+
+  /// File path: assets/animations/genre_animations/science_fiction.json
+  String get scienceFiction =>
+      'packages/ui_components/assets/animations/genre_animations/science_fiction.json';
+
+  /// File path: assets/animations/genre_animations/thriller.json
+  String get thriller =>
+      'packages/ui_components/assets/animations/genre_animations/thriller.json';
+
+  /// File path: assets/animations/genre_animations/tv_movie.json
+  String get tvMovie =>
+      'packages/ui_components/assets/animations/genre_animations/tv_movie.json';
+
+  /// File path: assets/animations/genre_animations/war.json
+  String get war =>
+      'packages/ui_components/assets/animations/genre_animations/war.json';
+
+  /// File path: assets/animations/genre_animations/western.json
+  String get western =>
+      'packages/ui_components/assets/animations/genre_animations/western.json';
+
+  /// List of all assets
+  List<String> get values => [
+    action,
+    adventure,
+    animation,
+    comedy,
+    crime,
+    documentary,
+    drama,
+    family,
+    fantasy,
+    genreDefault,
+    history,
+    horror,
+    music,
+    mystery,
+    romance,
+    scienceFiction,
+    thriller,
+    tvMovie,
+    war,
+    western,
+  ];
 }
 
 class MsAssets {
