@@ -11,7 +11,6 @@ import 'package:ui_components/ui_components.dart';
 
 part 'widgets/genres_overview_widget.dart';
 part 'widgets/overview_widget.dart';
-part 'widgets/popularity_metrics_widget.dart';
 part 'widgets/rating_overview_widget.dart';
 part 'widgets/release_time_details_widget.dart';
 
@@ -86,15 +85,15 @@ final class MovieDetailsScreen extends HookConsumerWidget {
                       overview: overview,
                     ),
                     const SizedBox(height: MsSpacings.extraLarge),
-                    if (genres.isNotEmpty) ...[
-                      _GenresOverviewWidget(genres: genres),
-                      const SizedBox(height: MsSpacings.extraLarge),
-                    ],
                     _RatingOverviewWidget(
                       voteAverage: voteAverage,
                       popularity: popularity,
                     ),
                     const SizedBox(height: MsSpacings.extraLarge),
+                    if (genres.isNotEmpty) ...[
+                      _GenresOverviewWidget(genres: genres),
+                      const SizedBox(height: MsSpacings.extraLarge),
+                    ],
                   ],
                 ),
               ),
