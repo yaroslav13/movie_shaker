@@ -7,6 +7,7 @@ final class MsCard extends StatelessWidget {
     this.backgroundColor,
     this.elevation,
     this.borderRadius,
+    this.clipBehavior,
     this.child,
     super.key,
   });
@@ -20,6 +21,7 @@ final class MsCard extends StatelessWidget {
     BorderRadiusGeometry? borderRadius,
     Color? backgroundColor,
     double? elevation,
+    Clip? clipBehavior,
     Key? key,
   }) {
     return MsCard(
@@ -28,6 +30,7 @@ final class MsCard extends StatelessWidget {
       backgroundColor: backgroundColor,
       elevation: elevation,
       borderRadius: borderRadius,
+      clipBehavior: clipBehavior,
       child: Padding(
         padding: padding,
         child: Column(
@@ -51,6 +54,7 @@ final class MsCard extends StatelessWidget {
   final Color? backgroundColor;
   final double? elevation;
   final BorderRadiusGeometry? borderRadius;
+  final Clip? clipBehavior;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +73,7 @@ final class MsCard extends StatelessWidget {
       margin: margin ?? MsEdgeInsets.scaffoldBodyPadding,
       color: backgroundColor,
       elevation: elevation,
+      clipBehavior: clipBehavior,
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
       child: child,
     );

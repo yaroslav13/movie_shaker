@@ -15,7 +15,7 @@ final class _OverviewWidget extends StatelessWidget {
       spacing: MsSpacings.regular,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MsText.headlineMedium(context, title),
+        MsText.displayLarge(context, title),
         MsText.bodySmall(context, overview),
       ],
     );
