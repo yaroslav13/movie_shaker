@@ -28,7 +28,7 @@ final class _GenresOverviewWidget extends StatelessWidget {
                 padding: MsEdgeInsets.contentMedium,
                 child: MsText.titleMedium(
                   context,
-                  context.localizations.genres,
+                  context.localizations.genres.toUpperCase(),
                 ),
               ),
             ),
