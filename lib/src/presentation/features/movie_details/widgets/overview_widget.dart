@@ -12,7 +12,7 @@ final class _OverviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: MsSpacings.regular,
+      spacing: MsSpacings.large,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MsText.displayLarge(context, title),
