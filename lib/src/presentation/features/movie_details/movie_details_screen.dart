@@ -41,15 +41,29 @@ final class MovieDetailsScreen extends HookConsumerWidget {
 
     final openedFrom = this.openedFrom;
 
+    final onBackPressed = () {
+      if (openedFrom == null) {
+        const HomeRoute().go(context);
+      } else {
+        GoRouter.of(context).go(openedFrom);
+      }
+    };
+
     return Scaffold(
       body: switch (state) {
-        MovieDetailsStateLoading() => Center(
-          child: MsProgressIndicator.moviePosters(),
+        MovieDetailsStateLoading() => _ClosableStub(
+          onClose: onBackPressed,
+          child: Center(
+            child: MsProgressIndicator.moviePosters(),
+          ),
         ),
-        MovieDetailsStateError() => LoadingErrorStub(
-          onRetry: () => ref
-              .read(movieDetailsStateNotifierProvider.notifier)
-              .onRetryPressed(movieId),
+        MovieDetailsStateError() => _ClosableStub(
+          onClose: onBackPressed,
+          child: LoadingErrorStub(
+            onRetry: () => ref
+                .read(movieDetailsStateNotifierProvider.notifier)
+                .onRetryPressed(movieId),
+          ),
         ),
         MovieDetailsStateData(
           :final title,
@@ -69,9 +83,7 @@ final class MovieDetailsScreen extends HookConsumerWidget {
               MsFloatingAppBar.backgroundImage(
                 imageUrl: posterUrl,
                 leading: RoundedBackButton(
-                  onPressed: () => openedFrom == null
-                      ? const HomeRoute().go(context)
-                      : GoRouter.of(context).go(openedFrom),
+                  onPressed: onBackPressed,
                 ),
                 centerTitle: false,
                 title: homepageUrl != null
@@ -117,6 +129,32 @@ final class MovieDetailsScreen extends HookConsumerWidget {
             ],
           ),
       },
+    );
+  }
+}
+
+final class _ClosableStub extends StatelessWidget {
+  const _ClosableStub({
+    required this.onClose,
+    required this.child,
+  });
+
+  final VoidCallback onClose;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          top:
+              MsEdgeInsets.appBarLeadingPadding.top +
+              MediaQuery.of(context).viewPadding.top,
+          left: MsEdgeInsets.appBarLeadingPadding.left,
+          child: RoundedBackButton(onPressed: onClose),
+        ),
+      ],
     );
   }
 }
