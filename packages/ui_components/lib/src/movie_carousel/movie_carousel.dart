@@ -60,6 +60,7 @@ final class _MovieCarouselState extends State<MovieCarousel> {
                 padding: MsEdgeInsets.contentMedium,
                 scrollDirection: Axis.vertical,
                 itemExtent: itemExtent,
+                enableSplash: false,
                 children: List.generate(
                   widget.itemCount,
                   (index) => widget.itemBuilder(context, index),
