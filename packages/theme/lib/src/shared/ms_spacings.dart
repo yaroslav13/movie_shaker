@@ -5,6 +5,8 @@ abstract final class MsSpacings {
   static const medium = 16.0;
   static const large = 24.0;
   static const extraLarge = 32.0;
+  static const huge = 48.0;
+  static const massive = 64.0;
 
   static const xSmall = 4.0;
   static const xxSmall = 2.0;

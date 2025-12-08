@@ -63,7 +63,7 @@ final class MsFloatingAppBar extends StatelessWidget {
       forceElevated: false,
       pinned: true,
       stretch: true,
-      floating: true,
+      floating: false,
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
           final viewPadding = MediaQuery.viewPaddingOf(context);
