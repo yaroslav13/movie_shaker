@@ -1,4 +1,5 @@
 export 'src/bookmark_button/bookmark_button.dart';
+export 'src/contributor_card/contributor_card.dart';
 export 'src/dot_separated_text/dot_separated_text.dart';
 export 'src/dots_progress_indicator/dots_progress_indicator.dart';
 export 'src/genre_card/genre_card.dart';
@@ -17,6 +18,7 @@ export 'src/ms_app_bar_delegate/ms_app_bar_delegate.dart';
 export 'src/ms_bottom_bar/entities/ms_bottom_bar_item.dart';
 export 'src/ms_bottom_bar/ms_bottom_bar.dart';
 export 'src/ms_card/ms_card.dart';
+export 'src/ms_carousel/ms_carousel.dart';
 export 'src/ms_elevated_button/ms_elevated_button.dart';
 export 'src/ms_filter_bar/ms_filter_bar.dart';
 export 'src/ms_floating_action_button/ms_floating_action_button.dart';

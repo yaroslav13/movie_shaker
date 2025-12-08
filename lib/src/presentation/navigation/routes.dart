@@ -87,15 +87,16 @@ final class ProfileRoute extends GoRouteData with _$ProfileRoute {
 }
 
 final class MovieDetailsRoute extends GoRouteData with _$MovieDetailsRoute {
-  const MovieDetailsRoute({required this.id});
+  const MovieDetailsRoute({required this.id, this.from});
 
   static final $parentNavigatorKey = rootNavigatorKey;
 
   final int id;
+  final String? from;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      MovieDetailsScreen(movieId: id);
+      MovieDetailsScreen(movieId: id, openedFrom: from);
 }
 
 final class MovieCollectionDetailsRoute extends GoRouteData

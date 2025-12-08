@@ -1,8 +1,8 @@
 import 'package:movie_shaker/src/data/entities/movie_details/movie_details_dto.dart';
-import 'package:movie_shaker/src/data/entities/poster/poster.dart';
+import 'package:movie_shaker/src/data/entities/remote_image/remote_image.dart';
 import 'package:movie_shaker/src/data/extensions/object_x.dart';
 import 'package:movie_shaker/src/data/mappers/dto/genre_dto_mapper.dart';
-import 'package:movie_shaker/src/data/mappers/poster_url_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/remote_image_url_mapper.dart';
 import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
@@ -10,10 +10,13 @@ import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dar
 
 final class MovieDetailsDtoMapper
     with SafeMapper<MovieDetailsDto, MovieDetails> {
-  const MovieDetailsDtoMapper(this._genreDtoMapper, this._posterUrlMapper);
+  const MovieDetailsDtoMapper(
+    this._genreDtoMapper,
+    this._remoteImageUrlMapper,
+  );
 
   final GenreDtoMapper _genreDtoMapper;
-  final PosterUrlMapper _posterUrlMapper;
+  final RemoteImageUrlMapper _remoteImageUrlMapper;
 
   @override
   MovieDetails mapSafe(MovieDetailsDto instance) {
@@ -62,10 +65,10 @@ final class MovieDetailsDtoMapper
       'MovieDetailsDto.popularity',
     );
 
-    final posterUrl = _posterUrlMapper.mapSafe(
-      Poster(
+    final posterUrl = _remoteImageUrlMapper.mapSafe(
+      RemoteImage(
         resolution: ImageResolutions.original,
-        posterPath: posterPath,
+        imagePath: posterPath,
       ),
     );
 

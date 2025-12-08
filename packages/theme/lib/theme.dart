@@ -1,5 +1,6 @@
 export 'src/extensions/bookmark_button_theme.dart';
 export 'src/extensions/carousel_dots_indicator_theme.dart';
+export 'src/extensions/contributor_card_theme.dart';
 export 'src/extensions/dot_separated_text_theme.dart';
 export 'src/extensions/dots_progress_indicator_theme.dart';
 export 'src/extensions/genre_card_theme.dart';
@@ -14,6 +15,7 @@ export 'src/extensions/ms_app_bar_theme.dart';
 export 'src/extensions/ms_bottom_bar_theme.dart';
 export 'src/extensions/ms_bottom_sheet_theme.dart';
 export 'src/extensions/ms_card_theme.dart';
+export 'src/extensions/ms_carousel_theme.dart';
 export 'src/extensions/ms_elevated_button_theme.dart';
 export 'src/extensions/ms_filter_chip_theme.dart';
 export 'src/extensions/ms_floating_action_button_theme.dart';

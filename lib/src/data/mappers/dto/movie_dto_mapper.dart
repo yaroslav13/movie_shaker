@@ -1,15 +1,15 @@
 import 'package:movie_shaker/src/data/entities/movie/movie_dto.dart';
-import 'package:movie_shaker/src/data/entities/poster/poster.dart';
+import 'package:movie_shaker/src/data/entities/remote_image/remote_image.dart';
 import 'package:movie_shaker/src/data/extensions/object_x.dart';
-import 'package:movie_shaker/src/data/mappers/poster_url_mapper.dart';
+import 'package:movie_shaker/src/data/mappers/remote_image_url_mapper.dart';
 import 'package:movie_shaker/src/data/shared/image_resolutions.dart';
 import 'package:movie_shaker/src/domain/base/base_mappers.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 
 final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
-  const MovieDtoMapper(this._posterUrlMapper);
+  const MovieDtoMapper(this._remoteImageUrlMapper);
 
-  final PosterUrlMapper _posterUrlMapper;
+  final RemoteImageUrlMapper _remoteImageUrlMapper;
 
   @override
   Movie mapSafe(MovieDto instance) {
@@ -35,10 +35,10 @@ final class MovieDtoMapper with SafeMapper<MovieDto, Movie> {
 
     final genreIds = instance.genreIds ?? <int>[];
 
-    final posterUrl = _posterUrlMapper.mapSafe(
-      Poster(
+    final posterUrl = _remoteImageUrlMapper.mapSafe(
+      RemoteImage(
         resolution: ImageResolutions.original,
-        posterPath: posterPath,
+        imagePath: posterPath,
       ),
     );
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
+import 'package:movie_shaker/src/domain/entities/contributor/contributor.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state_notifier.dart';
@@ -9,15 +11,21 @@ import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
+part 'widgets/cast_overview_widget.dart';
 part 'widgets/genres_overview_widget.dart';
 part 'widgets/overview_widget.dart';
 part 'widgets/rating_overview_widget.dart';
 part 'widgets/release_time_details_widget.dart';
 
 final class MovieDetailsScreen extends HookConsumerWidget {
-  const MovieDetailsScreen({required this.movieId, super.key});
+  const MovieDetailsScreen({
+    required this.movieId,
+    this.openedFrom,
+    super.key,
+  });
 
   final int movieId;
+  final String? openedFrom;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,6 +38,8 @@ final class MovieDetailsScreen extends HookConsumerWidget {
       const [],
     );
     final state = ref.watch(movieDetailsStateNotifierProvider);
+
+    final openedFrom = this.openedFrom;
 
     return Scaffold(
       body: switch (state) {
@@ -51,6 +61,7 @@ final class MovieDetailsScreen extends HookConsumerWidget {
           :final homepageUrl,
           :final popularity,
           :final genres,
+          :final cast,
         ) =>
           CustomScrollView(
             physics: const BouncingScrollPhysics(),
@@ -58,7 +69,9 @@ final class MovieDetailsScreen extends HookConsumerWidget {
               MsFloatingAppBar.backgroundImage(
                 imageUrl: posterUrl,
                 leading: RoundedBackButton(
-                  onPressed: () => const HomeRoute().go(context),
+                  onPressed: () => openedFrom == null
+                      ? const HomeRoute().go(context)
+                      : GoRouter.of(context).go(openedFrom),
                 ),
                 centerTitle: false,
                 title: homepageUrl != null
@@ -92,6 +105,10 @@ final class MovieDetailsScreen extends HookConsumerWidget {
                     const SizedBox(height: MsSpacings.extraLarge),
                     if (genres.isNotEmpty) ...[
                       _GenresOverviewWidget(genres: genres),
+                      const SizedBox(height: MsSpacings.extraLarge),
+                    ],
+                    if (cast.isNotEmpty) ...[
+                      _CastOverviewWidget(cast: cast),
                       const SizedBox(height: MsSpacings.extraLarge),
                     ],
                   ],

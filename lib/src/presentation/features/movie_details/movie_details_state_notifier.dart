@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
+import 'package:movie_shaker/src/di/interactors/get_movie_cast_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_details_by_id_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/open_movie_homepage_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
@@ -62,6 +63,8 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
         popularity: movieDetails.popularity,
         genres: movieDetails.genres,
       );
+
+      unawaited(_fetchMovieCasts(movieId));
     } on SemanticException catch (e, s) {
       error('Error fetching movie details', e, s);
 
@@ -78,6 +81,25 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
       await openMovieHomepageInteractor(url);
     } on MovieHomepageUnavailableException {
       //TODO(yhalivets): Show error message to user
+    }
+  }
+
+  Future<void> _fetchMovieCasts(int movieId) async {
+    try {
+      final getMovieCastInteractor = ref.read(
+        getMovieCastInteractorProvider,
+      );
+
+      info('Fetching movie casts for movieId: $movieId');
+
+      final cast = await getMovieCastInteractor(movieId);
+
+      state = switch (state) {
+        final MovieDetailsStateData state => state.copyWith(cast: cast),
+        _ => throw StateError('Cannot update casts for state: $state'),
+      };
+    } on SemanticException catch (e, s) {
+      error('Error fetching movie casts', e, s);
     }
   }
 }
