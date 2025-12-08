@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:theme/src/extensions/bookmark_button_theme.dart';
 import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
+import 'package:theme/src/extensions/contributor_card_theme.dart';
 import 'package:theme/src/extensions/dot_separated_text_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
 import 'package:theme/src/extensions/genre_card_theme.dart';
@@ -18,6 +19,7 @@ import 'package:theme/src/extensions/ms_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_bottom_bar_theme.dart';
 import 'package:theme/src/extensions/ms_bottom_sheet_theme.dart';
 import 'package:theme/src/extensions/ms_card_theme.dart';
+import 'package:theme/src/extensions/ms_carousel_theme.dart';
 import 'package:theme/src/extensions/ms_elevated_button_theme.dart';
 import 'package:theme/src/extensions/ms_filter_chip_theme.dart';
 import 'package:theme/src/extensions/ms_floating_action_button_theme.dart';
@@ -91,6 +93,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createRatingCardTheme(colorScheme, textTheme),
         _createEmojiScoreCardTheme(colorScheme, textTheme),
         _createGenreCardTheme(colorScheme, textTheme),
+        _createMsCarouselTheme(colorScheme),
+        _createContributorCardTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -619,6 +623,31 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       elevation: _recommendedElevation,
       borderRadius: MsBorderRadius.extraLarge,
       titleStyle: textTheme.bodyMedium,
+    );
+  }
+
+  static MsCarouselTheme _createMsCarouselTheme(
+    ColorScheme colorScheme,
+  ) {
+    return MsCarouselTheme(
+      backgroundColor: colorScheme.surface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.large,
+      padding: MsEdgeInsets.contentSmall,
+    );
+  }
+
+  static ContributorCardTheme _createContributorCardTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return ContributorCardTheme(
+      captionBackgroundColor: _applyAlpha(colorScheme.inverseSurface),
+      captionForegroundColor: colorScheme.onInverseSurface,
+      elevation: _recommendedElevation,
+      borderRadius: MsBorderRadius.large,
+      nameTextStyle: textTheme.titleMedium,
+      characterTextStyle: textTheme.bodySmall,
     );
   }
 

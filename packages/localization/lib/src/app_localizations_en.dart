@@ -157,4 +157,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get popularityNoneLabel => 'None';
+
+  @override
+  String get cast => 'Cast';
 }

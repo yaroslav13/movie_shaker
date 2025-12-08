@@ -363,6 +363,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'None'**
   String get popularityNoneLabel;
+
+  /// No description provided for @cast.
+  ///
+  /// In en, this message translates to:
+  /// **'Cast'**
+  String get cast;
 }
 
 class _AppLocalizationsDelegate

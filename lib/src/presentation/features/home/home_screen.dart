@@ -29,7 +29,10 @@ final class HomeScreen extends HookConsumerWidget {
       return;
     }
 
-    MovieDetailsRoute(id: movie.id).go(context);
+    MovieDetailsRoute(
+      id: movie.id,
+      from: const HomeRoute().location,
+    ).go(context);
   }
 
   @override
