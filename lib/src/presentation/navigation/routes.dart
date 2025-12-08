@@ -7,10 +7,10 @@ import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_details/movie_collection_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_picker/movie_collection_picker_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
-import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collection_picker_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/mixins/movie_details_route_mixin.dart';
 import 'package:navigation/navigation.dart';
 
 part 'routes.g.dart';
@@ -24,7 +24,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
       path: '/home',
       routes: [
         TypedGoRoute<MovieDetailsRoute>(path: 'movie/:id'),
-        TypedGoRoute<CollectionPickerRoute>(path: 'collection-picker'),
+        TypedGoRoute<CollectionPickerRoute>(path: 'collectionPicker'),
       ],
     ),
     TypedGoRoute<CollectionsRoute>(
@@ -34,10 +34,20 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         TypedGoRoute<RemoveMovieCollectionRoute>(
           path: 'remove/:collectionName',
         ),
-        TypedGoRoute<MovieCollectionDetailsRoute>(path: ':collectionName'),
+        TypedGoRoute<MovieCollectionDetailsRoute>(
+          path: ':collectionName',
+          routes: [
+            TypedGoRoute<CollectedMovieDetailsRoute>(path: 'movie/:id'),
+          ],
+        ),
       ],
     ),
-    TypedGoRoute<FavoritesRoute>(path: '/favorites'),
+    TypedGoRoute<FavoritesRoute>(
+      path: '/favorites',
+      routes: [
+        TypedGoRoute<FavoriteMovieDetailsRoute>(path: 'movie/:id'),
+      ],
+    ),
     TypedGoRoute<ProfileRoute>(path: '/profile'),
   ],
 )
@@ -86,17 +96,50 @@ final class ProfileRoute extends GoRouteData with _$ProfileRoute {
       const Placeholder();
 }
 
-final class MovieDetailsRoute extends GoRouteData with _$MovieDetailsRoute {
-  const MovieDetailsRoute({required this.id, this.from});
+final class MovieDetailsRoute extends GoRouteData
+    with _$MovieDetailsRoute, MovieDetailsRouteMixin {
+  const MovieDetailsRoute({required this.id});
 
   static final $parentNavigatorKey = rootNavigatorKey;
 
+  @override
   final int id;
-  final String? from;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      MovieDetailsScreen(movieId: id, openedFrom: from);
+  GoRouteData? get from => const HomeRoute();
+}
+
+final class CollectedMovieDetailsRoute extends GoRouteData
+    with _$CollectedMovieDetailsRoute, MovieDetailsRouteMixin {
+  const CollectedMovieDetailsRoute({
+    required this.id,
+    required this.collectionName,
+  });
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  final int id;
+
+  final String collectionName;
+
+  @override
+  GoRouteData? get from => MovieCollectionDetailsRoute(
+    collectionName: collectionName,
+  );
+}
+
+final class FavoriteMovieDetailsRoute extends GoRouteData
+    with _$FavoriteMovieDetailsRoute, MovieDetailsRouteMixin {
+  const FavoriteMovieDetailsRoute({required this.id});
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  final int id;
+
+  @override
+  GoRouteData? get from => const FavoritesRoute();
 }
 
 final class MovieCollectionDetailsRoute extends GoRouteData

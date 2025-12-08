@@ -95,9 +95,10 @@ final class _Body extends HookConsumerWidget {
                   return MovieCard.expanded(
                     borderRadius: MsBorderRadius.extraLarge,
                     imageUrl: movie.posterUrl,
-                    onTap: () {
-                      //TODO: Handle movie card tap
-                    },
+                    onTap: () => CollectedMovieDetailsRoute(
+                      id: movie.id,
+                      collectionName: collectionName,
+                    ).go(context),
                   );
                 },
               ),
