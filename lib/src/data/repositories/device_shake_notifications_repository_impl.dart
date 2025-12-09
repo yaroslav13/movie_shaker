@@ -22,9 +22,8 @@ final class DeviceShakeNotificationsRepositoryImpl
 }
 
 final class _ShakeDetectionTransformer
-    extends
-        StreamTransformerBase<UserAccelerometerEvent, DeviceShakeNotification> {
-  static const _shakeThresholdGravity = 1.8;
+    extends StreamTransformerBase<AccelerometerEvent, DeviceShakeNotification> {
+  static const _shakeThresholdGravity = 1.2;
   static const _shakeSlopTimeMS = 500;
   static const _shakeCountResetTime = 3000;
   static const _minimumShakeCount = 1;
@@ -33,7 +32,7 @@ final class _ShakeDetectionTransformer
   int _shakeCount = 0;
 
   @override
-  Stream<DeviceShakeNotification> bind(Stream<UserAccelerometerEvent> stream) {
+  Stream<DeviceShakeNotification> bind(Stream<AccelerometerEvent> stream) {
     StreamSubscription<DeviceShakeNotification?>? sourceSubscription;
 
     final outputController = StreamController<DeviceShakeNotification>(

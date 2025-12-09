@@ -28,8 +28,10 @@ final class MovieShakerScope extends HookConsumerWidget {
           (state) => state.isShaking,
         ),
         (previous, current) {
-          if (previous != current && current) {
-            delegate.onShakeDetected(context);
+          if (previous != current) {
+            current
+                ? delegate.onShakeDetected(context)
+                : delegate.onShakeEnded(context);
           }
         },
       )
@@ -44,17 +46,21 @@ final class MovieShakerScope extends HookConsumerWidget {
         },
       );
 
-    final isVisibleState = useState(false);
+    final isViewportVisible = useState(false);
+    final lifecycleState = useAppLifecycleState();
+
+    final isScopeVisible =
+        isViewportVisible.value && lifecycleState == AppLifecycleState.resumed;
 
     useEffect(
       () {
         ref
             .read(movieShakerStateNotifierProvider(pool: pool).notifier)
-            .onVisibilityChanged(isVisible: isVisibleState.value);
+            .onVisibilityChanged(isVisible: isScopeVisible);
 
         return;
       },
-      [pool, isVisibleState.value],
+      [pool, isScopeVisible],
     );
 
     final key = ValueKey('movie_shaker_scope_$scopeId');
@@ -64,12 +70,13 @@ final class MovieShakerScope extends HookConsumerWidget {
         return;
       }
 
-      isVisibleState.value = info.isVisible;
+      isViewportVisible.value = info.isVisible;
     };
 
     return VisibilityDetector(
       key: key,
       onVisibilityChanged: onVisibilityChanged,
+
       child: child,
     );
   }

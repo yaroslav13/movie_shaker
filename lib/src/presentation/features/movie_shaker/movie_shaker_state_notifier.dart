@@ -69,9 +69,15 @@ class MovieShakerStateNotifier extends _$MovieShakerStateNotifier {
         )
         .listen(
           cancelOnError: false,
-          (movie) => state = state.copyWith(suggestedMovie: movie),
+          (movie) => state = state.copyWith(
+            suggestedMovie: movie,
+            isShaking: false,
+          ),
           onError: (error, stackTrace) {
-            state = state.copyWith(suggestedMovie: null);
+            state = state.copyWith(
+              suggestedMovie: null,
+              isShaking: false,
+            );
 
             // TODO(yhalivets): Show toast for user
           },

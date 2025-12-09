@@ -12,13 +12,16 @@ final class HomeMovieShakerDelegate implements MovieShakerDelegate {
 
   @override
   void onMovieChosen(BuildContext context, Movie movie) {
-    onShakeStateChanged(false);
-
     MovieDetailsRoute(id: movie.id).go(context);
   }
 
   @override
   void onShakeDetected(BuildContext context) {
     onShakeStateChanged(true);
+  }
+
+  @override
+  void onShakeEnded(BuildContext context) {
+    onShakeStateChanged(false);
   }
 }
