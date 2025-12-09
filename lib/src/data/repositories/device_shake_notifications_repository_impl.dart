@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:movie_shaker/src/data/datasources/remote/sensors_data_remote_datasource.dart';
 import 'package:movie_shaker/src/domain/entities/device_shake_notification/axis.dart';
 import 'package:movie_shaker/src/domain/entities/device_shake_notification/device_shake_notification.dart';
+import 'package:movie_shaker/src/domain/entities/device_shake_timing/device_shake_timing.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -23,13 +24,14 @@ final class DeviceShakeNotificationsRepositoryImpl
 
 final class _ShakeDetectionTransformer
     extends StreamTransformerBase<AccelerometerEvent, DeviceShakeNotification> {
-  static const _shakeThresholdGravity = 1.2;
-  static const _shakeSlopTimeMS = 500;
-  static const _shakeCountResetTime = 3000;
-  static const _minimumShakeCount = 1;
+  static final _debounceTimeMS =
+      DeviceShakeTiming.minShakeInterval.inMilliseconds;
 
-  int _shakeTimestamp = DateTime.now().millisecondsSinceEpoch;
-  int _shakeCount = 0;
+  static const _gravity = 9.80665;
+
+  static const _shakeThreshold = 0.2;
+
+  int _lastShakeTimestamp = 0;
 
   @override
   Stream<DeviceShakeNotification> bind(Stream<AccelerometerEvent> stream) {
@@ -47,49 +49,28 @@ final class _ShakeDetectionTransformer
           final y = event.y;
           final z = event.z;
 
-          final gX = x / 9.80665;
-          final gY = y / 9.80665;
-          final gZ = z / 9.80665;
+          final gX = x / _gravity;
+          final gY = y / _gravity;
+          final gZ = z / _gravity;
 
           final gForce = sqrt(gX * gX + gY * gY + gZ * gZ);
 
-          if (gForce > _shakeThresholdGravity) {
+          if (gForce > (1.0 + _shakeThreshold)) {
             final now = DateTime.now().millisecondsSinceEpoch;
 
-            // ignore shake events too close to each other (500ms)
-            if (_shakeTimestamp + _shakeSlopTimeMS > now) {
+            if (_lastShakeTimestamp + _debounceTimeMS > now) {
               return null;
             }
 
-            // reset the shake count after 3 seconds of no shakes
-            if (_shakeTimestamp + _shakeCountResetTime < now) {
-              _shakeCount = 0;
-            }
+            _lastShakeTimestamp = now;
 
-            _shakeTimestamp = now;
-            _shakeCount++;
-
-            if (_shakeCount >= _minimumShakeCount) {
-              final absX = gX.abs();
-              final absY = gY.abs();
-              final absZ = gZ.abs();
-
-              Axis? direction;
-
-              if (absX > absY && absX > absZ) {
-                direction = Axis.x;
-              } else if (absY > absX && absY > absZ) {
-                direction = Axis.y;
-              } else if (absZ > absX && absZ > absY) {
-                direction = Axis.z;
-              }
-
-              return DeviceShakeNotification(
-                timestamp: DateTime.fromMillisecondsSinceEpoch(now),
-                axis: direction,
-              );
-            }
+            return DeviceShakeNotification(
+              timestamp: DateTime.fromMillisecondsSinceEpoch(now),
+              axis: _determineAxis(gX.abs(), gY.abs(), gZ.abs()),
+            );
           }
+
+          return null;
         })
         .listen(
           outputController.add,
@@ -101,5 +82,19 @@ final class _ShakeDetectionTransformer
     return stream.isBroadcast
         ? outputController.stream.asBroadcastStream()
         : outputController.stream;
+  }
+
+  Axis? _determineAxis(double x, double y, double z) {
+    if (x > y && x > z) {
+      return Axis.x;
+    }
+    if (y > x && y > z) {
+      return Axis.y;
+    }
+    if (z > x && z > y) {
+      return Axis.z;
+    }
+
+    return null;
   }
 }

@@ -1,9 +1,8 @@
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
+import 'package:movie_shaker/src/domain/entities/device_shake_timing/device_shake_timing.dart';
 import 'package:movie_shaker/src/domain/repositories/device_feedback_repository.dart';
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
 import 'package:rxdart/rxdart.dart';
-
-const _resetTime = Duration(seconds: 2);
 
 final class SubscribeDeviceShakingStateInteractor
     implements NoArgumentStreamInteractor<bool> {
@@ -24,7 +23,7 @@ final class SubscribeDeviceShakingStateInteractor
 
             return Stream.value(true).concatWith(
               [
-                Stream.value(false).delay(_resetTime),
+                Stream.value(false).delay(DeviceShakeTiming.shakeStopTimeout),
               ],
             );
           },

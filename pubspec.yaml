@@ -63,6 +63,7 @@ dependencies:
 
   # dart utils
   collection: 1.19.1
+  async: 2.13.0
 
   # meta
   meta: 1.16.0
