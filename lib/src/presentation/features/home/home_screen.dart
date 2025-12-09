@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
+import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dart';
 import 'package:movie_shaker/src/presentation/features/collect_movie_button/collect_movie_button.dart';
+import 'package:movie_shaker/src/presentation/features/home/delegates/home_movie_shaker_delegate.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
+import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/movie_pool.dart';
+import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
+
+part 'widgets/shake_effect_widget.dart';
 
 const _moviesSearchDebounceTime = Duration(milliseconds: 200);
 
@@ -20,37 +27,14 @@ final class HomeScreen extends HookConsumerWidget {
     MovieDetailsRoute(id: movie.id).go(context);
   }
 
-  void _onMovieSuggested(BuildContext context, Movie movie) {
-    final isHomeOpened =
-        GoRouter.of(context).routerDelegate.currentConfiguration.fullPath ==
-        const HomeRoute().location;
-
-    if (!isHomeOpened) {
-      return;
-    }
-
-    MovieDetailsRoute(id: movie.id).go(context);
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeStateNotifierProvider);
 
-    ref.listen(
-      homeStateNotifierProvider,
-      (previous, current) {
-        final currentSuggestedMovie = current.suggestedMovie;
-        final previousSuggestedMovie = previous?.suggestedMovie;
-
-        if (previousSuggestedMovie != currentSuggestedMovie &&
-            currentSuggestedMovie != null) {
-          _onMovieSuggested(context, currentSuggestedMovie);
-        }
-      },
-    );
-
     final paginationState = state.paginationState;
     final shouldBeScrollable = paginationState.items.isNotEmpty;
+
+    final isDeviceShaking = useState(false);
 
     return Scaffold(
       body: NestedScrollView(
@@ -60,24 +44,37 @@ final class HomeScreen extends HookConsumerWidget {
         headerSliverBuilder: (_, innerBoxIsScrolled) => [
           _Header(innerBoxIsScrolled: innerBoxIsScrolled),
         ],
-        body: PullToRefreshWidget(
-          onRefresh: () async =>
-              ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
-          child: PagedStaggeredGridView<Movie>(
-            paginationState: paginationState,
-            onNextPage: () => ref
-                .read(homeStateNotifierProvider.notifier)
-                .onMoviesGridViewBottomReached(),
-            onReload: () =>
-                ref.read(homeStateNotifierProvider.notifier).onReloadPressed(),
-            itemBuilder: (_, movie, index) {
-              return MovieCard(
-                action: MovieLikeButton(movie: movie),
-                leading: CollectMovieButton(movie: movie),
-                imageUrl: movie.posterUrl,
-                onTap: () => _onMovieSelected(context, movie),
-              );
-            },
+        body: MovieShakerScope(
+          scopeId: 'home_screen_scope',
+          pool: MoviePool.global(
+            filter: MoviesFilter(genres: [?state.selectedGenre]),
+          ),
+          delegate: HomeMovieShakerDelegate(
+            onShakeStateChanged: (value) => isDeviceShaking.value = value,
+          ),
+          child: PullToRefreshWidget(
+            onRefresh: () async =>
+                ref.read(homeStateNotifierProvider.notifier).onPullToRefresh(),
+            child: PagedStaggeredGridView<Movie>(
+              paginationState: paginationState,
+              onNextPage: () => ref
+                  .read(homeStateNotifierProvider.notifier)
+                  .onMoviesGridViewBottomReached(),
+              onReload: () => ref
+                  .read(homeStateNotifierProvider.notifier)
+                  .onReloadPressed(),
+              itemBuilder: (_, movie, index) {
+                return _ShakeEffectWidget(
+                  isShaking: isDeviceShaking.value,
+                  child: MovieCard(
+                    action: MovieLikeButton(movie: movie),
+                    leading: CollectMovieButton(movie: movie),
+                    imageUrl: movie.posterUrl,
+                    onTap: () => _onMovieSelected(context, movie),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),

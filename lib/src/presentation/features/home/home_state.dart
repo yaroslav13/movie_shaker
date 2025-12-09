@@ -12,6 +12,5 @@ sealed class HomeState with _$HomeState {
     @Default('') String searchQuery,
     @Default(<Genre>[]) List<Genre> availableGenres,
     Genre? selectedGenre,
-    Movie? suggestedMovie,
   }) = _HomeState;
 }
