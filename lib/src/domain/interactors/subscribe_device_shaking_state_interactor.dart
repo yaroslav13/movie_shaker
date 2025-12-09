@@ -3,7 +3,7 @@ import 'package:movie_shaker/src/domain/repositories/device_feedback_repository.
 import 'package:movie_shaker/src/domain/repositories/device_shake_notifications_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
-const _resetTime = Duration(seconds: 2);
+const _resetTime = Duration(seconds: 1);
 
 final class SubscribeDeviceShakingStateInteractor
     implements NoArgumentStreamInteractor<bool> {
