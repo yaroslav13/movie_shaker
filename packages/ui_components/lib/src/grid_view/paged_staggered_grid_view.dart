@@ -105,8 +105,11 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
       physics: shouldBeScrollable
           ? physics ?? const BouncingScrollPhysics()
           : const NeverScrollableScrollPhysics(),
+
+      /* Note: It leads to performance issue because
+       it keeps loaders in the tree */
+      // showNewPageProgressIndicatorAsGridChild: false,
       showNewPageErrorIndicatorAsGridChild: false,
-      showNewPageProgressIndicatorAsGridChild: false,
       showNoMoreItemsIndicatorAsGridChild: false,
       builderDelegate: PagedChildBuilderDelegate(
         itemBuilder: itemBuilder,
@@ -117,7 +120,7 @@ final class PagedStaggeredGridView<T> extends StatelessWidget {
         firstPageProgressIndicatorBuilder: (context) => Center(
           child: MsProgressIndicator.moviePosters(),
         ),
-        newPageProgressIndicatorBuilder: (context) => _FooterTile(
+        newPageProgressIndicatorBuilder: (context) => Center(
           child: MsProgressIndicator.moviePosters(),
         ),
         newPageErrorIndicatorBuilder: (context) => _FooterTile(

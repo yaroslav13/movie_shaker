@@ -4,10 +4,8 @@ import 'package:logger/logger.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_genres_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provider.dart';
-import 'package:movie_shaker/src/di/interactors/subscribe_movie_suggestions_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
-import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dart';
 import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
 import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
@@ -24,14 +22,8 @@ const _initialPageNumber = 1;
 
 @riverpod
 class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
-  StreamSubscription<Movie>? _movieSuggestionsSubscription;
-
   @override
   HomeState build() {
-    ref.onDispose(
-      () => _movieSuggestionsSubscription?.cancel().ignore(),
-    );
-
     return const HomeState(
       paginationState: PaginationState(isLoading: true),
     );
@@ -133,8 +125,6 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       );
 
       state = state.copyWith(paginationState: newPaginationState);
-
-      _subscribeMovieSuggestions(newPaginationState.items);
     } on SemanticException catch (e, s) {
       error('Error fetching movies:', e, s);
 
@@ -161,18 +151,5 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
     } on SemanticException catch (e, s) {
       error('Error fetching movie genres:', e, s);
     }
-  }
-
-  void _subscribeMovieSuggestions(List<Movie> movies) {
-    final subscribeMovieSuggestionsInteractor = ref.read(
-      subscribeMovieSuggestionsInteractorProvider,
-    );
-
-    _movieSuggestionsSubscription ??= subscribeMovieSuggestionsInteractor()
-        .listen(
-          (movie) {
-            state = state.copyWith(suggestedMovie: movie);
-          },
-        );
   }
 }

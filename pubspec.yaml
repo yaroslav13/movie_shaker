@@ -26,6 +26,8 @@ dependencies:
   # ui
   cupertino_icons: 1.0.8
   ui_components: 1.0.0
+  flutter_animate: 4.5.2
+  visibility_detector: 0.4.0+2
 
   # state management / di
   hooks_riverpod: 2.6.1

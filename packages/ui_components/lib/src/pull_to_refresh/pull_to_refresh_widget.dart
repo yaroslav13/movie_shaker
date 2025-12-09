@@ -51,23 +51,25 @@ final class PullToRefreshWidget extends StatelessWidget {
         return Stack(
           alignment: Alignment.topCenter,
           children: [
-            SizedBox(
-              height: indicatorHeight,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  bottom: MsEdgeInsets.contentSmall.bottom,
-                ),
-                child: switch (animation) {
-                  RefreshIndicatorAnimation.glasses =>
-                    const _GlassesRefreshIndicator(),
-                  RefreshIndicatorAnimation.popcorn => _PopcornRefreshIndicator(
-                    state: controller.state,
+            if (indicatorHeight > 0)
+              SizedBox(
+                height: indicatorHeight,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MsEdgeInsets.contentSmall.bottom,
                   ),
-                  RefreshIndicatorAnimation.moviesPosters =>
-                    const _MoviesPostersRefreshIndicator(),
-                },
+                  child: switch (animation) {
+                    RefreshIndicatorAnimation.glasses =>
+                      const _GlassesRefreshIndicator(),
+                    RefreshIndicatorAnimation.popcorn =>
+                      _PopcornRefreshIndicator(
+                        state: controller.state,
+                      ),
+                    RefreshIndicatorAnimation.moviesPosters =>
+                      const _MoviesPostersRefreshIndicator(),
+                  },
+                ),
               ),
-            ),
             Transform.translate(
               offset: Offset(0, controller.value * indicatorHeight),
               child: IgnorePointer(
