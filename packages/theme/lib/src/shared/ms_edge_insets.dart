@@ -42,7 +42,10 @@ abstract final class MsEdgeInsets {
     vertical: 16,
   );
 
-  static const appBarLeadingPadding = EdgeInsets.all(16);
+  static const appBarLeadingPadding = EdgeInsets.symmetric(
+    vertical: 16,
+    horizontal: 13,
+  );
 
   static const zero = EdgeInsets.zero;
 }
