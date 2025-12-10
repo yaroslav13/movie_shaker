@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:theme/theme.dart';
 
+part 'movie_carousel_controller.dart';
+
 const _dotSize = Size(8, 8);
 
 final class MovieCarousel extends StatefulWidget {
   const MovieCarousel({
     required this.itemBuilder,
     required this.itemCount,
+    this.controller,
     this.noItemsBuilder,
     super.key,
   });
 
+  final MovieCarouselController? controller;
   final IndexedWidgetBuilder itemBuilder;
   final WidgetBuilder? noItemsBuilder;
   final int itemCount;
@@ -26,8 +30,26 @@ final class _MovieCarouselState extends State<MovieCarousel> {
   final _carouselController = CarouselController();
 
   @override
+  void initState() {
+    super.initState();
+
+    widget.controller?._attach(this);
+  }
+
+  @override
+  void didUpdateWidget(covariant MovieCarousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.controller != widget.controller) {
+      oldWidget.controller?._detach(this);
+      widget.controller?._attach(this);
+    }
+  }
+
+  @override
   void dispose() {
     _carouselController.dispose();
+    widget.controller?._detach(this);
     super.dispose();
   }
 
