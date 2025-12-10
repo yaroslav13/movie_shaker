@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/select_query/select_movie_query.dart';
@@ -10,8 +12,8 @@ final class SelectSuggestedMovieInteractor
   Future<Movie> call(SelectMovieQuery param) async {
     final movies = param.movies;
 
-    final randomIndex = DateTime.now().millisecondsSinceEpoch % movies.length;
+    final random = Random();
 
-    return movies[randomIndex];
+    return movies[random.nextInt(movies.length)];
   }
 }
