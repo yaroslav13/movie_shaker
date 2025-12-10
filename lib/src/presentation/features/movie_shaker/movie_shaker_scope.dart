@@ -70,13 +70,16 @@ final class MovieShakerScope extends HookConsumerWidget {
         return;
       }
 
+      if (!context.mounted) {
+        return;
+      }
+
       isViewportVisible.value = info.isVisible;
     };
 
     return VisibilityDetector(
       key: key,
       onVisibilityChanged: onVisibilityChanged,
-
       child: child,
     );
   }
