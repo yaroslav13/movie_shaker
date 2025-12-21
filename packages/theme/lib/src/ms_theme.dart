@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:theme/src/extensions/bookmark_button_theme.dart';
 import 'package:theme/src/extensions/carousel_dots_indicator_theme.dart';
 import 'package:theme/src/extensions/contributor_card_theme.dart';
+import 'package:theme/src/extensions/delete_button_theme.dart';
 import 'package:theme/src/extensions/dot_separated_text_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
 import 'package:theme/src/extensions/genre_card_theme.dart';
@@ -95,6 +96,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createGenreCardTheme(colorScheme, textTheme),
         _createMsCarouselTheme(colorScheme),
         _createContributorCardTheme(colorScheme, textTheme),
+        _createDeleteButtonTheme(colorScheme),
       ],
     );
   }
@@ -648,6 +650,15 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       borderRadius: MsBorderRadius.large,
       nameTextStyle: textTheme.titleMedium,
       characterTextStyle: textTheme.bodySmall,
+    );
+  }
+
+  static DeleteButtonTheme _createDeleteButtonTheme(
+    ColorScheme colorScheme,
+  ) {
+    return DeleteButtonTheme(
+      foregroundColor: colorScheme.onInverseSurface,
+      backgroundColor: _applyAlpha(colorScheme.inverseSurface),
     );
   }
 

@@ -1,5 +1,6 @@
 export 'src/bookmark_button/bookmark_button.dart';
 export 'src/contributor_card/contributor_card.dart';
+export 'src/delete_button/delete_button.dart';
 export 'src/dot_separated_text/dot_separated_text.dart';
 export 'src/dots_progress_indicator/dots_progress_indicator.dart';
 export 'src/genre_card/genre_card.dart';

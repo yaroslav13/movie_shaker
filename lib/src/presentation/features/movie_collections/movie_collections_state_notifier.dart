@@ -41,6 +41,10 @@ class MovieCollectionsStateNotifier extends _$MovieCollectionsStateNotifier
     unawaited(_removeMovieCollection(name));
   }
 
+  void onCollectionUpdated(String name) {
+    unawaited(_fetchMovieCollections());
+  }
+
   void onErrorSnackBarClosed() {
     info('Error snack bar closed');
 

@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/domain/exceptions/collection_modification_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:movie_shaker/src/presentation/utils/snack_bar_extension.dart';
@@ -19,7 +19,6 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(movieCollectionsStateNotifierProvider);
-    final navigationState = GoRouterState.of(context);
 
     ref.listen(
       movieCollectionsStateNotifierProvider,
@@ -58,11 +57,9 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
       const [],
     );
 
-    useEffect(
-      () {
-        final navigationExtra = navigationState.extra;
-
-        switch (navigationExtra) {
+    useNavigationExtraEffect<CollectionsRouteExtra>(
+      (extra) {
+        switch (extra) {
           case AddCollectionsRouteExtra(:final collectionName):
             ref
                 .read(movieCollectionsStateNotifierProvider.notifier)
@@ -71,13 +68,14 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
             ref
                 .read(movieCollectionsStateNotifierProvider.notifier)
                 .onRemoveCollectionPressed(collectionName);
+          case UpdatedCollectionsRouteExtra(:final collectionName):
+            ref
+                .read(movieCollectionsStateNotifierProvider.notifier)
+                .onCollectionUpdated(collectionName);
           case _:
             break;
         }
-
-        return;
       },
-      [navigationState.extra],
     );
 
     return Scaffold(

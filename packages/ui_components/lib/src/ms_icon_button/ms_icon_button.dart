@@ -62,6 +62,23 @@ final class MsIconButton extends StatelessWidget {
     );
   }
 
+  factory MsIconButton.delete({
+    EdgeInsetsGeometry? padding,
+    Color? foregroundColor,
+    Color? backgroundColor,
+    BorderRadius? borderRadius,
+    VoidCallback? onPressed,
+  }) {
+    return MsIconButton(
+      padding: padding,
+      borderRadius: borderRadius,
+      foregroundColor: foregroundColor,
+      backgroundColor: backgroundColor,
+      icon: MsIcon.outlinedTrash(),
+      onPressed: onPressed,
+    );
+  }
+
   final Color? backgroundColor;
   final Color? foregroundColor;
   final BorderRadiusGeometry? borderRadius;
