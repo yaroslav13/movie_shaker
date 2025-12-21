@@ -7,6 +7,7 @@ import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_details/movie_collection_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_picker/movie_collection_picker_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
+import 'package:movie_shaker/src/presentation/features/remove_collected_movie/remove_collected_movie_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collection_picker_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
@@ -38,6 +39,9 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
           path: ':collectionName',
           routes: [
             TypedGoRoute<CollectedMovieDetailsRoute>(path: 'movie/:id'),
+            TypedGoRoute<RemoveCollectedMovieRoute>(
+              path: 'removeConfirmation/:id',
+            ),
           ],
         ),
       ],
@@ -144,9 +148,13 @@ final class FavoriteMovieDetailsRoute extends GoRouteData
 
 final class MovieCollectionDetailsRoute extends GoRouteData
     with _$MovieCollectionDetailsRoute {
-  const MovieCollectionDetailsRoute({required this.collectionName});
+  const MovieCollectionDetailsRoute({
+    required this.collectionName,
+    this.$extra,
+  });
 
   final String collectionName;
+  final CollectionsRouteExtra? $extra;
 
   static final $parentNavigatorKey = rootNavigatorKey;
 
@@ -199,6 +207,30 @@ final class CollectionPickerRoute extends GoRouteData
     return MsBottomSheetPage<void>(
       child: MovieCollectionPickerBottomSheet(
         selectedMovie: $extra.movie,
+      ),
+    );
+  }
+}
+
+final class RemoveCollectedMovieRoute extends GoRouteData
+    with _$RemoveCollectedMovieRoute {
+  const RemoveCollectedMovieRoute({
+    required this.collectionName,
+    required this.id,
+  });
+
+  final String collectionName;
+  final int id;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      showDragHandle: false,
+      child: RemoveCollectedMovieBottomSheet(
+        collectionName: collectionName,
+        movieId: id,
       ),
     );
   }

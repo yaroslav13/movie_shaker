@@ -1,6 +1,7 @@
 export 'src/extensions/bookmark_button_theme.dart';
 export 'src/extensions/carousel_dots_indicator_theme.dart';
 export 'src/extensions/contributor_card_theme.dart';
+export 'src/extensions/delete_button_theme.dart';
 export 'src/extensions/dot_separated_text_theme.dart';
 export 'src/extensions/dots_progress_indicator_theme.dart';
 export 'src/extensions/genre_card_theme.dart';

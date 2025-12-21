@@ -6,7 +6,9 @@ import 'package:movie_shaker/src/presentation/features/movie_collection_details/
 import 'package:movie_shaker/src/presentation/features/movie_collection_details/movie_collection_details_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/movie_pool.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
+import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
 import 'package:movie_shaker/src/presentation/hooks/two_dimensional_scrollable_controller_hook.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
@@ -38,6 +40,28 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
       const [],
     );
 
+    useNavigationExtraEffect<CollectionsRouteExtra>(
+      (extra) {
+        switch (extra) {
+          case RemoveMovieCollectionsRouteExtra(
+                :final collectionName,
+                :final movieId,
+              )
+              when collectionName == this.collectionName:
+            ref
+                .read(
+                  movieCollectionDetailsNotifierProvider(
+                    collectionName: collectionName,
+                  ).notifier,
+                )
+                .onRemoveMoviePressed(movieId);
+
+          case _:
+            break;
+        }
+      },
+    );
+
     return Scaffold(
       body: Stack(
         children: [
@@ -51,7 +75,9 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
                 ),
               ),
               child: RoundedBackButton(
-                onPressed: () => const CollectionsRoute().go(context),
+                onPressed: () => CollectionsRoute(
+                  CollectionsRouteExtra.updated(collectionName: collectionName),
+                ).go(context),
               ),
             ),
           ),
@@ -113,6 +139,12 @@ final class _Body extends HookConsumerWidget {
                     final movie = movies[index];
 
                     return MovieCard.expanded(
+                      action: DeleteButton(
+                        onPressed: () => RemoveCollectedMovieRoute(
+                          id: movie.id,
+                          collectionName: collectionName,
+                        ).go(context),
+                      ),
                       borderRadius: MsBorderRadius.extraLarge,
                       imageUrl: movie.posterUrl,
                       onTap: () => CollectedMovieDetailsRoute(

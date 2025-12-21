@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dart';
-import 'package:movie_shaker/src/presentation/features/collect_movie_button/collect_movie_button.dart';
+import 'package:movie_shaker/src/presentation/features/collect_movie/collect_movie_button.dart';
 import 'package:movie_shaker/src/presentation/features/home/delegates/home_movie_shaker_delegate.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';

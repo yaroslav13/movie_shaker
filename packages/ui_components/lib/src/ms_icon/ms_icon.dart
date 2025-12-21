@@ -286,6 +286,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedTrash({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedDelete03,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   final IconData? icon;
   final double? size;
   final double? fill;
