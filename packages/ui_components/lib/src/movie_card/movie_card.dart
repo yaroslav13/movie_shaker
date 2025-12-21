@@ -10,6 +10,8 @@ final class MovieCard extends StatelessWidget {
     required this.imageUrl,
     this.size = _defaultImageSize,
     this.margin = EdgeInsets.zero,
+    this.actionPadding,
+    this.leadingPadding,
     this.action,
     this.leading,
     this.elevation,
@@ -21,6 +23,8 @@ final class MovieCard extends StatelessWidget {
   const MovieCard.expanded({
     required this.imageUrl,
     this.margin = EdgeInsets.zero,
+    this.actionPadding = MsEdgeInsets.contentMedium,
+    this.leadingPadding = MsEdgeInsets.contentMedium,
     this.action,
     this.leading,
     this.elevation,
@@ -35,7 +39,8 @@ final class MovieCard extends StatelessWidget {
   final Widget? action;
   final Widget? leading;
   final EdgeInsetsGeometry margin;
-
+  final EdgeInsetsGeometry? actionPadding;
+  final EdgeInsetsGeometry? leadingPadding;
   final double? elevation;
   final BorderRadiusGeometry? borderRadius;
 
@@ -44,8 +49,15 @@ final class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<MovieCardTheme>();
+
     final borderRadius = this.borderRadius ?? theme?.borderRadius;
     final elevation = this.elevation ?? theme?.elevation;
+    final actionPadding =
+        this.actionPadding ?? theme?.actionPadding ?? MsEdgeInsets.contentSmall;
+    final leadingPadding =
+        this.leadingPadding ??
+        theme?.leadingPadding ??
+        MsEdgeInsets.contentSmall;
 
     return MsCard(
       margin: margin,
@@ -62,14 +74,14 @@ final class MovieCard extends StatelessWidget {
             ),
             if (action case final action?)
               Positioned(
-                top: MsEdgeInsets.contentSmall.top,
-                right: MsEdgeInsets.contentSmall.right,
+                top: actionPadding.vertical / 2,
+                right: actionPadding.horizontal / 2,
                 child: action,
               ),
             if (leading case final leading?)
               Positioned(
-                top: MsEdgeInsets.contentSmall.top,
-                left: MsEdgeInsets.contentSmall.left,
+                top: leadingPadding.vertical / 2,
+                left: leadingPadding.horizontal / 2,
                 child: leading,
               ),
           ],

@@ -194,6 +194,8 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return const MovieCardTheme(
       borderRadius: MsBorderRadius.extraLarge,
       elevation: _recommendedElevation,
+      actionPadding: MsEdgeInsets.contentSmall,
+      leadingPadding: MsEdgeInsets.contentSmall,
     );
   }
 
@@ -379,6 +381,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       likedColor: colorScheme.error,
       unlikedColor: colorScheme.onInverseSurface,
       backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+      padding: MsEdgeInsets.contentSmall,
     );
   }
 

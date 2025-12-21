@@ -10,12 +10,14 @@ final class LikeButton extends StatelessWidget {
     this.likedColor,
     this.unlikedColor,
     this.backgroundColor,
+    this.padding,
     super.key,
   });
 
   final bool isLiked;
   final ValueChanged<bool>? onChanged;
 
+  final EdgeInsetsGeometry? padding;
   final Color? likedColor;
   final Color? unlikedColor;
   final Color? backgroundColor;
@@ -44,11 +46,13 @@ final class LikeButton extends StatelessWidget {
         theme?.backgroundColor ??
         colorScheme.surfaceContainerHigh.withValues(alpha: 0.8);
 
+    final padding = this.padding ?? theme?.padding ?? MsEdgeInsets.contentSmall;
+
     final onChanged = this.onChanged;
 
     return MsIconButton(
       borderRadius: MsBorderRadius.round,
-      padding: MsEdgeInsets.contentSmall,
+      padding: padding,
       backgroundColor: backgroundColor,
       icon: AnimatedSwitcher(
         duration: MsAnimationDurations.medium,
