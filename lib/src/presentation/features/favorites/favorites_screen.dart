@@ -4,10 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/delegates/favorites_movie_shaker_delegate.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_state.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/movie_pool.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
 import 'package:movie_shaker/src/presentation/hooks/movie_carousel_controller_hook.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
+import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
 
 final class FavoritesScreen extends HookConsumerWidget {
@@ -51,6 +53,15 @@ final class FavoritesScreen extends HookConsumerWidget {
                 final movie = favoriteMovies[index];
 
                 return MovieCard.expanded(
+                  action: MovieLikeButton(
+                    padding: MsEdgeInsets.contentMedium,
+                    movie: movie,
+                    onLikeStateChanged: (isLiked) => ref
+                        .read(
+                          favoritesStateNotifierProvider.notifier,
+                        )
+                        .onMovieLikeStateChanged(movie, isLiked: isLiked),
+                  ),
                   imageUrl: movie.posterUrl,
                   onTap: () =>
                       FavoriteMovieDetailsRoute(id: movie.id).go(context),

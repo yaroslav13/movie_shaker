@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:logger/src/logger.dart';
 import 'package:movie_shaker/src/di/interactors/get_liked_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
+import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_state.dart';
 import 'package:movie_shaker/src/utils/logger_mixin.dart';
@@ -30,6 +31,23 @@ class FavoritesStateNotifier extends _$FavoritesStateNotifier with LoggerMixin {
     state = const FavoritesState.loading();
 
     unawaited(_fetchFavoriteMovies());
+  }
+
+  void onMovieLikeStateChanged(Movie movie, {required bool isLiked}) {
+    info('on movie like state changed: $movie');
+
+    if (isLiked) {
+      return;
+    }
+
+    state = switch (state) {
+      final FavoritesStateData state => state.copyWith(
+        favoriteMovies: state.favoriteMovies
+            .where((favoriteMovie) => favoriteMovie.id != movie.id)
+            .toList(),
+      ),
+      _ => state,
+    };
   }
 
   Future<void> _fetchFavoriteMovies() async {
