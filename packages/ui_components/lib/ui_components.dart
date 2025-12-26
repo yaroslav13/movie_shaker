@@ -26,6 +26,8 @@ export 'src/ms_floating_action_button/ms_floating_action_button.dart';
 export 'src/ms_floating_app_bar/ms_floating_app_bar.dart';
 export 'src/ms_icon/ms_icon.dart';
 export 'src/ms_list_tile/ms_list_tile.dart';
+export 'src/ms_menu_button/ms_menu_button.dart';
+export 'src/ms_menu_button/ms_menu_item.dart';
 export 'src/ms_progress_indicator/ms_progress_indicator.dart';
 export 'src/ms_search_bar/ms_search_bar.dart';
 export 'src/ms_snack_bar/ms_snack_bar.dart';

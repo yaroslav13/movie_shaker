@@ -301,6 +301,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.menu({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedMenu03,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   final IconData? icon;
   final double? size;
   final double? fill;
