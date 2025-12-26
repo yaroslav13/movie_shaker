@@ -28,6 +28,7 @@ import 'package:theme/src/extensions/ms_floating_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_icon_button_theme.dart';
 import 'package:theme/src/extensions/ms_input_decoration_theme.dart';
 import 'package:theme/src/extensions/ms_list_tile_theme.dart';
+import 'package:theme/src/extensions/ms_menu_button_theme.dart';
 import 'package:theme/src/extensions/ms_snack_bar_theme.dart';
 import 'package:theme/src/extensions/ms_text_button_theme.dart';
 import 'package:theme/src/extensions/no_items_stub_theme.dart';
@@ -97,6 +98,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createMsCarouselTheme(colorScheme),
         _createContributorCardTheme(colorScheme, textTheme),
         _createDeleteButtonTheme(colorScheme),
+        _createMsMenuButtonTheme(textTheme, colorScheme),
       ],
     );
   }
@@ -662,6 +664,16 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return DeleteButtonTheme(
       foregroundColor: colorScheme.onInverseSurface,
       backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+    );
+  }
+
+  static MsMenuButtonTheme _createMsMenuButtonTheme(
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+  ) {
+    return MsMenuButtonTheme(
+      foregroundColor: colorScheme.onPrimary,
+      textStyle: textTheme.labelLarge,
     );
   }
 

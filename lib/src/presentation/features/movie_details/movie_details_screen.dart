@@ -85,6 +85,9 @@ final class MovieDetailsScreen extends HookConsumerWidget {
                 leading: RoundedBackButton(
                   onPressed: onBackPressed,
                 ),
+                action: const MsMenuButton(
+                  items: [],
+                ),
                 centerTitle: false,
                 title: homepageUrl != null
                     ? WatchButton(

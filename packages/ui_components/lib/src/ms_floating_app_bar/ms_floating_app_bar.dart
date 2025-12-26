@@ -36,6 +36,7 @@ final class MsFloatingAppBar extends StatelessWidget {
   factory MsFloatingAppBar.backgroundImage({
     required String imageUrl,
     Widget? title,
+    Widget? action,
     double? toolbarHeight,
     double? expandedHeight,
     PreferredSizeWidget? bottom,
@@ -82,7 +83,13 @@ final class MsFloatingAppBar extends StatelessWidget {
             title: AnimatedSwitcher(
               duration: MsAnimationDurations.medium,
               child: shouldShowTitle
-                  ? DefaultTextStyle.merge(style: titleTextStyle, child: title)
+                  ? DefaultTextStyle.merge(
+                      style: titleTextStyle,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [title, ?action],
+                      ),
+                    )
                   : null,
             ),
             centerTitle: centerTitle,
