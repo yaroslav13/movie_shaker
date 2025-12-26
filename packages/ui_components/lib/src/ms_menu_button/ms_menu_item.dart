@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 @immutable
 final class MsMenuItem {
@@ -7,6 +8,28 @@ final class MsMenuItem {
     this.onTap,
     this.icon,
   });
+
+  factory MsMenuItem.like({
+    required String title,
+    VoidCallback? onTap,
+  }) {
+    return MsMenuItem(
+      title: title,
+      onTap: onTap,
+      icon: HugeIcons.strokeRoundedFavourite,
+    );
+  }
+
+  factory MsMenuItem.bookmark({
+    required String title,
+    VoidCallback? onTap,
+  }) {
+    return MsMenuItem(
+      title: title,
+      onTap: onTap,
+      icon: HugeIcons.strokeRoundedAllBookmark,
+    );
+  }
 
   final String title;
   final IconData? icon;
