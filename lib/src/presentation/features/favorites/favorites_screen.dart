@@ -8,6 +8,8 @@ import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_but
 import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/movie_pool.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
 import 'package:movie_shaker/src/presentation/hooks/movie_carousel_controller_hook.dart';
+import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/favorites_route_branch_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
@@ -26,6 +28,19 @@ final class FavoritesScreen extends HookConsumerWidget {
         return;
       },
       const [],
+    );
+
+    useNavigationExtraEffect<FavoritesRouteExtra>(
+      (extra) {
+        switch (extra) {
+          case FavoritesRouteExtraUpdateMovie(:final movieId):
+            ref
+                .read(favoritesStateNotifierProvider.notifier)
+                .onMovieUpdated(movieId);
+          case _:
+            break;
+        }
+      },
     );
 
     final movieCarouselController = useMovieCarouselController();

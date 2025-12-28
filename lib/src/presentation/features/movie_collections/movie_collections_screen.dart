@@ -8,7 +8,7 @@ import 'package:movie_shaker/src/domain/exceptions/collection_modification_excep
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_state_notifier.dart';
 import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:movie_shaker/src/presentation/utils/snack_bar_extension.dart';
 import 'package:ui_components/ui_components.dart';
@@ -60,20 +60,18 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
     useNavigationExtraEffect<CollectionsRouteExtra>(
       (extra) {
         switch (extra) {
-          case AddCollectionsRouteExtra(:final collectionName):
+          case CollectionsRouteExtraAddCollection(:final collectionName):
             ref
                 .read(movieCollectionsStateNotifierProvider.notifier)
                 .onNewCollectionNameEntered(collectionName);
-          case RemoveCollectionsRouteExtra(:final collectionName):
+          case CollectionsRouteExtraRemoveCollection(:final collectionName):
             ref
                 .read(movieCollectionsStateNotifierProvider.notifier)
                 .onRemoveCollectionPressed(collectionName);
-          case UpdatedCollectionsRouteExtra(:final collectionName):
+          case CollectionsRouteExtraUpdateCollection(:final collectionName):
             ref
                 .read(movieCollectionsStateNotifierProvider.notifier)
                 .onCollectionUpdated(collectionName);
-          case _:
-            break;
         }
       },
     );

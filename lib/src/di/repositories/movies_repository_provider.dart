@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/data/repositories/movies_repository_impl.dart';
+import 'package:movie_shaker/src/di/data_mappers/movie_dbo_mapper_provider.dart';
+import 'package:movie_shaker/src/di/data_mappers/movie_details_dto_mapper_provider.dart';
+import 'package:movie_shaker/src/di/data_mappers/movie_dto_mapper_provider.dart';
+import 'package:movie_shaker/src/di/data_mappers/reversed_movies_filter_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/di/datasources/movie_collection_entries_local_datasource_provider.dart';
 import 'package:movie_shaker/src/di/datasources/movies_local_datasource_provider.dart';
 import 'package:movie_shaker/src/di/datasources/movies_remote_datasource_provider.dart';
-import 'package:movie_shaker/src/di/mappers/movie_dbo_mapper_provider.dart';
-import 'package:movie_shaker/src/di/mappers/movie_details_dto_mapper_provider.dart';
-import 'package:movie_shaker/src/di/mappers/movie_dto_mapper_provider.dart';
-import 'package:movie_shaker/src/di/mappers/reversed_movies_filter_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

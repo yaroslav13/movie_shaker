@@ -9,8 +9,9 @@ import 'package:movie_shaker/src/presentation/features/movie_collection_picker/m
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
 import 'package:movie_shaker/src/presentation/features/remove_collected_movie/remove_collected_movie_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collection_picker_route_extra.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/favorites_route_branch_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/home_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/mixins/movie_details_route_mixin.dart';
 import 'package:navigation/navigation.dart';
 
@@ -24,8 +25,17 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
     TypedGoRoute<HomeRoute>(
       path: '/home',
       routes: [
-        TypedGoRoute<MovieDetailsRoute>(path: 'movie/:id'),
-        TypedGoRoute<CollectionPickerRoute>(path: 'collectionPicker'),
+        TypedGoRoute<MovieDetailsRoute>(
+          path: MovieDetailsRouteMixin.routeName,
+          routes: [
+            TypedGoRoute<MovieDetailsCollectionPickerRoute>(
+              path: 'collectionPicker',
+            ),
+          ],
+        ),
+        TypedGoRoute<CollectionPickerRoute>(
+          path: 'collectionPicker',
+        ),
       ],
     ),
     TypedGoRoute<CollectionsRoute>(
@@ -38,7 +48,14 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         TypedGoRoute<MovieCollectionDetailsRoute>(
           path: ':collectionName',
           routes: [
-            TypedGoRoute<CollectedMovieDetailsRoute>(path: 'movie/:id'),
+            TypedGoRoute<CollectedMovieDetailsRoute>(
+              path: MovieDetailsRouteMixin.routeName,
+              routes: [
+                TypedGoRoute<CollectedMovieCollectionPickerRoute>(
+                  path: 'collectionPicker',
+                ),
+              ],
+            ),
             TypedGoRoute<RemoveCollectedMovieRoute>(
               path: 'removeConfirmation/:id',
             ),
@@ -49,7 +66,14 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
     TypedGoRoute<FavoritesRoute>(
       path: '/favorites',
       routes: [
-        TypedGoRoute<FavoriteMovieDetailsRoute>(path: 'movie/:id'),
+        TypedGoRoute<FavoriteMovieDetailsRoute>(
+          path: MovieDetailsRouteMixin.routeName,
+          routes: [
+            TypedGoRoute<FavoriteMovieCollectionPickerRoute>(
+              path: 'collectionPicker',
+            ),
+          ],
+        ),
       ],
     ),
     TypedGoRoute<ProfileRoute>(path: '/profile'),
@@ -68,7 +92,9 @@ final class AppShellRoute extends ShellRouteData {
 }
 
 final class HomeRoute extends GoRouteData with _$HomeRoute {
-  const HomeRoute();
+  const HomeRoute([this.$extra]);
+
+  final HomeBranchRouteExtra? $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
@@ -77,7 +103,7 @@ final class HomeRoute extends GoRouteData with _$HomeRoute {
 final class CollectionsRoute extends GoRouteData with _$CollectionsRoute {
   const CollectionsRoute([this.$extra]);
 
-  final CollectionsRouteExtra? $extra;
+  final CollectionsBranchRouteExtra? $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
@@ -154,7 +180,7 @@ final class MovieCollectionDetailsRoute extends GoRouteData
   });
 
   final String collectionName;
-  final CollectionsRouteExtra? $extra;
+  final CollectionsBranchRouteExtra? $extra;
 
   static final $parentNavigatorKey = rootNavigatorKey;
 
@@ -198,7 +224,7 @@ final class CollectionPickerRoute extends GoRouteData
     with _$CollectionPickerRoute {
   const CollectionPickerRoute(this.$extra);
 
-  final CollectionPickerRouteExtra $extra;
+  final HomeRouteExtraAddMovie $extra;
 
   static final $parentNavigatorKey = rootNavigatorKey;
 
@@ -231,6 +257,76 @@ final class RemoveCollectedMovieRoute extends GoRouteData
       child: RemoveCollectedMovieBottomSheet(
         collectionName: collectionName,
         movieId: id,
+      ),
+    );
+  }
+}
+
+final class MovieDetailsCollectionPickerRoute extends GoRouteData
+    with _$MovieDetailsCollectionPickerRoute {
+  const MovieDetailsCollectionPickerRoute({
+    required this.id,
+    required this.$extra,
+  });
+
+  final int id;
+
+  final MovieDetailsRouteExtraSaveMovie $extra;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      child: MovieCollectionPickerBottomSheet(
+        selectedMovie: $extra.movie,
+      ),
+    );
+  }
+}
+
+final class FavoriteMovieCollectionPickerRoute extends GoRouteData
+    with _$FavoriteMovieCollectionPickerRoute {
+  const FavoriteMovieCollectionPickerRoute({
+    required this.id,
+    required this.$extra,
+  });
+
+  final int id;
+  final FavoriteMovieRouteExtraAddMovie $extra;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      child: MovieCollectionPickerBottomSheet(
+        selectedMovie: $extra.movie,
+      ),
+    );
+  }
+}
+
+final class CollectedMovieCollectionPickerRoute extends GoRouteData
+    with _$CollectedMovieCollectionPickerRoute {
+  const CollectedMovieCollectionPickerRoute({
+    required this.id,
+    required this.collectionName,
+    required this.$extra,
+  });
+
+  final int id;
+  final String collectionName;
+
+  final CollectedMovieRouteExtraSaveMovie $extra;
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  MsBottomSheetPage<void> buildPage(BuildContext context, GoRouterState state) {
+    return MsBottomSheetPage<void>(
+      child: MovieCollectionPickerBottomSheet(
+        selectedMovie: $extra.movie,
       ),
     );
   }

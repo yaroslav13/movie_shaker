@@ -3,10 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
+import 'package:movie_shaker/src/di/ui_mappers/movie_details_ui_mapper_provider.dart';
 import 'package:movie_shaker/src/domain/entities/contributor/contributor.dart';
 import 'package:movie_shaker/src/domain/entities/genre/genre.dart';
+import 'package:movie_shaker/src/presentation/features/collect_movie_menu/collect_movie_menu_button.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state_notifier.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/favorites_route_branch_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/home_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
@@ -27,6 +32,29 @@ final class MovieDetailsScreen extends HookConsumerWidget {
   final int movieId;
   final String? openedFrom;
 
+  void _onBackPressed(BuildContext context) {
+    final openedFrom = this.openedFrom;
+
+    Object? extra;
+    if (openedFrom == null) {
+      extra = HomeRouteExtra.updateMovie(movieId: movieId);
+    } else if (openedFrom.contains(const HomeRoute().location)) {
+      extra = HomeRouteExtra.updateMovie(movieId: movieId);
+    } else if (openedFrom.contains(const FavoritesRoute().location)) {
+      extra = FavoritesRouteExtra.updateMovie(movieId: movieId);
+    } else if (openedFrom.contains(const CollectionsRoute().location)) {
+      extra = CollectionDetailsRouteExtra.updateMovie(movieId: movieId);
+    }
+
+    if (openedFrom == null) {
+      HomeRoute(
+        extra as HomeRouteExtra?,
+      ).go(context);
+    } else {
+      GoRouter.of(context).go(openedFrom, extra: extra);
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(
@@ -39,26 +67,20 @@ final class MovieDetailsScreen extends HookConsumerWidget {
     );
     final state = ref.watch(movieDetailsStateNotifierProvider);
 
-    final openedFrom = this.openedFrom;
-
-    final onBackPressed = () {
-      if (openedFrom == null) {
-        const HomeRoute().go(context);
-      } else {
-        GoRouter.of(context).go(openedFrom);
-      }
-    };
+    final movieDetailsUiMapper = ref.watch(
+      movieDetailsUiMapperProvider(movieId: movieId),
+    );
 
     return Scaffold(
       body: switch (state) {
         MovieDetailsStateLoading() => _ClosableStub(
-          onClose: onBackPressed,
+          onClose: () => _onBackPressed(context),
           child: Center(
             child: MsProgressIndicator.moviePosters(),
           ),
         ),
         MovieDetailsStateError() => _ClosableStub(
-          onClose: onBackPressed,
+          onClose: () => _onBackPressed(context),
           child: LoadingErrorStub(
             onRetry: () => ref
                 .read(movieDetailsStateNotifierProvider.notifier)
@@ -83,10 +105,10 @@ final class MovieDetailsScreen extends HookConsumerWidget {
               MsFloatingAppBar.backgroundImage(
                 imageUrl: posterUrl,
                 leading: RoundedBackButton(
-                  onPressed: onBackPressed,
+                  onPressed: () => _onBackPressed(context),
                 ),
-                action: const MsMenuButton(
-                  items: [],
+                action: CollectMovieMenuButton(
+                  movieDetails: movieDetailsUiMapper.reverseMap(state),
                 ),
                 centerTitle: false,
                 title: homepageUrl != null

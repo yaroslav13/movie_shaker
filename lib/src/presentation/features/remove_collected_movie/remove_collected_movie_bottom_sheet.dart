@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_shaker/src/presentation/common/remove_bottom_sheet.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 
 final class RemoveCollectedMovieBottomSheet extends StatelessWidget {
@@ -18,8 +18,7 @@ final class RemoveCollectedMovieBottomSheet extends StatelessWidget {
     return RemoveBottomSheet(
       onPressed: () => MovieCollectionDetailsRoute(
         collectionName: collectionName,
-        $extra: CollectionsRouteExtra.removeMovie(
-          collectionName: collectionName,
+        $extra: CollectionDetailsRouteExtra.removeMovie(
           movieId: movieId,
         ),
       ).go(context),

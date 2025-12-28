@@ -160,4 +160,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cast => 'Cast';
+
+  @override
+  String get like => 'Like';
+
+  @override
+  String get unlike => 'unlike';
+
+  @override
+  String get save => 'Save';
 }

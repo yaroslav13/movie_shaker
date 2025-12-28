@@ -5,6 +5,7 @@ import 'package:movie_shaker/src/di/interactors/get_movie_cast_interactor_provid
 import 'package:movie_shaker/src/di/interactors/get_movie_details_by_id_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/open_movie_homepage_interactor_provider.dart';
 import 'package:movie_shaker/src/di/logger/logger_provider.dart';
+import 'package:movie_shaker/src/di/ui_mappers/movie_details_ui_mapper_provider.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/domain/exceptions/movie_homepage_unavailable_exception.dart';
 import 'package:movie_shaker/src/presentation/features/movie_details/movie_details_state.dart';
@@ -52,17 +53,11 @@ class MovieDetailsStateNotifier extends _$MovieDetailsStateNotifier
 
       final movieDetails = await getMovieDetailsByIdInteractor(movieId);
 
-      state = MovieDetailsState.data(
-        title: movieDetails.title,
-        posterUrl: movieDetails.posterUrl,
-        overview: movieDetails.overview,
-        runtime: movieDetails.runtime,
-        voteAverage: movieDetails.voteAverage,
-        releaseDate: movieDetails.releaseDate,
-        homepageUrl: movieDetails.homepageUrl,
-        popularity: movieDetails.popularity,
-        genres: movieDetails.genres,
+      final movieDetailsUiMapper = ref.read(
+        movieDetailsUiMapperProvider(movieId: movieId),
       );
+
+      state = movieDetailsUiMapper.map(movieDetails);
 
       unawaited(_fetchMovieCasts(movieId));
     } on SemanticException catch (e, s) {

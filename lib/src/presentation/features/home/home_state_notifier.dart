@@ -70,6 +70,12 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
     unawaited(_fetchMovies(_initialPageNumber));
   }
 
+  void onMovieUpdated(int movieId) {
+    info('on movie updated: $movieId');
+
+    unawaited(_fetchMovies(_initialPageNumber));
+  }
+
   Future<void> _fetchMovies(PageNumber pageNumber) async {
     try {
       info('Fetching movies...');
@@ -124,7 +130,10 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
         hasNextPage: !moviesPage.isLastPage,
       );
 
-      state = state.copyWith(paginationState: newPaginationState);
+      state = state.copyWith(
+        paginationState: newPaginationState,
+        lastMoviesUpdate: DateTime.now(),
+      );
     } on SemanticException catch (e, s) {
       error('Error fetching movies:', e, s);
 

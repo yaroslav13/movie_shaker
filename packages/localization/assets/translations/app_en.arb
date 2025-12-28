@@ -71,5 +71,8 @@
   "popularityMediumLabel": "Medium",
   "popularityLowLabel": "Low",
   "popularityNoneLabel": "None",
-  "cast": "Cast"
+  "cast": "Cast",
+  "like": "Like",
+  "unlike": "unlike",
+  "save": "Save"
 }
