@@ -369,6 +369,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cast'**
   String get cast;
+
+  /// No description provided for @like.
+  ///
+  /// In en, this message translates to:
+  /// **'Like'**
+  String get like;
+
+  /// No description provided for @unlike.
+  ///
+  /// In en, this message translates to:
+  /// **'unlike'**
+  String get unlike;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate

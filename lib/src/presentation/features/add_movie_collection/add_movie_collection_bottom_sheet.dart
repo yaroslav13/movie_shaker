@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:localization/localization.dart';
 import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_movie_collection_state_notifier.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
@@ -13,7 +13,7 @@ final class AddMovieCollectionBottomSheet extends HookConsumerWidget {
 
   void _onCreatePressed(BuildContext context, String collectionName) {
     CollectionsRoute(
-      CollectionsRouteExtra.add(collectionName: collectionName),
+      CollectionsRouteExtra.addCollection(collectionName: collectionName),
     ).go(context);
   }
 

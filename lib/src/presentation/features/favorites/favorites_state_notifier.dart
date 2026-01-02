@@ -50,6 +50,25 @@ class FavoritesStateNotifier extends _$FavoritesStateNotifier with LoggerMixin {
     };
   }
 
+  void onMovieUnliked(int movieId) {
+    info('on movie unliked: $movieId');
+
+    state = switch (state) {
+      final FavoritesStateData state => state.copyWith(
+        favoriteMovies: state.favoriteMovies
+            .where((favoriteMovie) => favoriteMovie.id != movieId)
+            .toList(),
+      ),
+      _ => state,
+    };
+  }
+
+  void onMovieUpdated(int movieId) {
+    info('on movie updated: $movieId');
+
+    unawaited(_fetchFavoriteMovies());
+  }
+
   Future<void> _fetchFavoriteMovies() async {
     try {
       info('Fetching favorite movies...');

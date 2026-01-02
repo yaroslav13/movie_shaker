@@ -18,8 +18,10 @@ sealed class MovieDetailsState with _$MovieDetailsState {
     required double voteAverage,
     required DateTime releaseDate,
     required double popularity,
+    required int voteCount,
     @Default([]) List<Genre> genres,
     @Default([]) List<CastMember> cast,
     String? homepageUrl,
+    String? tagline,
   }) = MovieDetailsStateData;
 }

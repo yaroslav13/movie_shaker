@@ -111,7 +111,9 @@ final class MsMenuButton extends StatelessWidget {
       context: context,
       position: position,
       menuPadding: EdgeInsets.zero,
+      shadowColor: Colors.transparent,
       color: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: MsBorderRadius.extraLarge,
       ),
@@ -153,8 +155,11 @@ final class _MsMenuEntryState extends State<_MsMenuEntry> {
   @override
   Widget build(BuildContext context) {
     final icon = widget.item.icon;
+    final foregroundColor =
+        widget.item.foregroundColor ?? widget.foregroundColor;
+
     final resolvedStyle = widget.textStyle?.copyWith(
-      color: widget.foregroundColor,
+      color: foregroundColor,
     );
 
     return SizedBox(
@@ -168,7 +173,7 @@ final class _MsMenuEntryState extends State<_MsMenuEntry> {
             if (icon case final icon?)
               MsIcon(
                 icon,
-                color: widget.foregroundColor,
+                color: foregroundColor,
               ),
             MsText(
               widget.item.title,

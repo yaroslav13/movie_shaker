@@ -71,7 +71,7 @@ final class MsFloatingAppBar extends StatelessWidget {
           final flexibleSpaceHeight = constraints.biggest.height;
 
           final shouldShowTitle =
-              title != null &&
+              (title != null || action != null) &&
               flexibleSpaceHeight >
                   appBarHeight +
                       viewPadding.top +
@@ -87,7 +87,7 @@ final class MsFloatingAppBar extends StatelessWidget {
                       style: titleTextStyle,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [title, ?action],
+                        children: [title ?? const Spacer(), ?action],
                       ),
                     )
                   : null,

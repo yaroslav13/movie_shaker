@@ -8,7 +8,7 @@ import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/mov
 import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
 import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
 import 'package:movie_shaker/src/presentation/hooks/two_dimensional_scrollable_controller_hook.dart';
-import 'package:movie_shaker/src/presentation/navigation/extras/collections_route_extra.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/ui_components.dart';
@@ -40,14 +40,10 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
       const [],
     );
 
-    useNavigationExtraEffect<CollectionsRouteExtra>(
+    useNavigationExtraEffect<CollectionDetailsRouteExtra>(
       (extra) {
         switch (extra) {
-          case RemoveMovieCollectionsRouteExtra(
-                :final collectionName,
-                :final movieId,
-              )
-              when collectionName == this.collectionName:
+          case CollectionDetailsRouteExtraRemoveMovie(:final movieId):
             ref
                 .read(
                   movieCollectionDetailsNotifierProvider(
@@ -55,7 +51,14 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
                   ).notifier,
                 )
                 .onRemoveMoviePressed(movieId);
-
+          case CollectionDetailsRouteExtraUpdateMovie(:final movieId):
+            ref
+                .read(
+                  movieCollectionDetailsNotifierProvider(
+                    collectionName: collectionName,
+                  ).notifier,
+                )
+                .onMovieUpdated(movieId);
           case _:
             break;
         }
@@ -76,7 +79,9 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
               ),
               child: RoundedBackButton(
                 onPressed: () => CollectionsRoute(
-                  CollectionsRouteExtra.updated(collectionName: collectionName),
+                  CollectionsRouteExtra.updateCollection(
+                    collectionName: collectionName,
+                  ),
                 ).go(context),
               ),
             ),

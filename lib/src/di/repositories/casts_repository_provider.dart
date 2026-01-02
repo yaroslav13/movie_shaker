@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:movie_shaker/src/data/repositories/casts_repository_impl.dart';
+import 'package:movie_shaker/src/di/data_mappers/cast_member_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/di/datasources/credits_remote_datasource_provider.dart';
-import 'package:movie_shaker/src/di/mappers/cast_member_dto_mapper_provider.dart';
 import 'package:movie_shaker/src/domain/repositories/casts_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

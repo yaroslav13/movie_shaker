@@ -27,13 +27,13 @@ class MovieLikeStateNotifier extends _$MovieLikeStateNotifier with LoggerMixin {
     unawaited(_checkIsMovieLiked());
   }
 
-  Future<void> onLikeStateChanged({
+  void onLikeStateChanged({
     required bool isLiked,
-  }) async {
+  }) {
     if (isLiked) {
-      await _like();
+      unawaited(_like());
     } else {
-      await _unlike();
+      unawaited(_unlike());
     }
   }
 
@@ -43,7 +43,7 @@ class MovieLikeStateNotifier extends _$MovieLikeStateNotifier with LoggerMixin {
         checkIsMovieLikedInteractorProvider,
       );
 
-      final isLiked = await checkIsMovieLikedInteractor(movie);
+      final isLiked = await checkIsMovieLikedInteractor(movie.id);
       state = state.copyWith(isLiked: isLiked);
     } on SemanticException catch (e, s) {
       error('Error checking if movie is liked', e, s);

@@ -7,15 +7,18 @@ final class MsMenuItem {
     required this.title,
     this.onTap,
     this.icon,
+    this.foregroundColor,
   });
 
   factory MsMenuItem.like({
     required String title,
     VoidCallback? onTap,
+    Color? foregroundColor,
   }) {
     return MsMenuItem(
       title: title,
       onTap: onTap,
+      foregroundColor: foregroundColor,
       icon: HugeIcons.strokeRoundedFavourite,
     );
   }
@@ -23,16 +26,19 @@ final class MsMenuItem {
   factory MsMenuItem.bookmark({
     required String title,
     VoidCallback? onTap,
+    Color? foregroundColor,
   }) {
     return MsMenuItem(
       title: title,
       onTap: onTap,
+      foregroundColor: foregroundColor,
       icon: HugeIcons.strokeRoundedAllBookmark,
     );
   }
 
   final String title;
   final IconData? icon;
+  final Color? foregroundColor;
   final VoidCallback? onTap;
 
   @override

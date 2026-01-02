@@ -9,6 +9,7 @@ part 'home_state.freezed.dart';
 sealed class HomeState with _$HomeState {
   const factory HomeState({
     required PaginationState<Movie> paginationState,
+    DateTime? lastMoviesUpdate,
     @Default('') String searchQuery,
     @Default(<Genre>[]) List<Genre> availableGenres,
     Genre? selectedGenre,

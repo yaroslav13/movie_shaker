@@ -11,6 +11,8 @@ import 'package:movie_shaker/src/presentation/features/home/home_state_notifier.
 import 'package:movie_shaker/src/presentation/features/like_movie/movie_like_button.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/entities/movie_pool.dart';
 import 'package:movie_shaker/src/presentation/features/movie_shaker/movie_shaker_scope.dart';
+import 'package:movie_shaker/src/presentation/hooks/navigation_hook.dart';
+import 'package:movie_shaker/src/presentation/navigation/extras/home_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/routes.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:theme/theme.dart';
@@ -35,6 +37,19 @@ final class HomeScreen extends HookConsumerWidget {
     final shouldBeScrollable = paginationState.items.isNotEmpty;
 
     final isDeviceShaking = useState(false);
+
+    useNavigationExtraEffect<HomeRouteExtra>(
+      (extra) {
+        switch (extra) {
+          case HomeRouteExtraUpdateMovie(:final movieId):
+            ref
+                .read(homeStateNotifierProvider.notifier)
+                .onMovieUpdated(movieId);
+          case _:
+            break;
+        }
+      },
+    );
 
     return Scaffold(
       body: NestedScrollView(
@@ -67,7 +82,10 @@ final class HomeScreen extends HookConsumerWidget {
                 return _ShakeEffectWidget(
                   isShaking: isDeviceShaking.value,
                   child: MovieCard(
-                    action: MovieLikeButton(movie: movie),
+                    action: MovieLikeButton(
+                      key: ValueKey(state.lastMoviesUpdate),
+                      movie: movie,
+                    ),
                     leading: CollectMovieButton(movie: movie),
                     imageUrl: movie.posterUrl,
                     onTap: () => _onMovieSelected(context, movie),

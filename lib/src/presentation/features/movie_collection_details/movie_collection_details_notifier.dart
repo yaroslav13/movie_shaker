@@ -53,6 +53,10 @@ class MovieCollectionDetailsNotifier extends _$MovieCollectionDetailsNotifier {
     }
   }
 
+  void onMovieUpdated(int movieId) {
+    unawaited(_fetchMoviesByCollection());
+  }
+
   Future<void> _fetchMoviesByCollection() async {
     try {
       final getMoviesByCollectionInteractor = ref.read(
