@@ -41,7 +41,7 @@ final class MovieLikeButton extends HookConsumerWidget {
 
         return;
       },
-      [movie],
+      [movie.id],
     );
 
     final isLiked = state.isLiked;
