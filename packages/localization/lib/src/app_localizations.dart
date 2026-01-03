@@ -387,6 +387,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// No description provided for @unitB.
+  ///
+  /// In en, this message translates to:
+  /// **'B'**
+  String get unitB;
+
+  /// No description provided for @unitKB.
+  ///
+  /// In en, this message translates to:
+  /// **'KB'**
+  String get unitKB;
+
+  /// No description provided for @unitMB.
+  ///
+  /// In en, this message translates to:
+  /// **'MB'**
+  String get unitMB;
+
+  /// No description provided for @unitGB.
+  ///
+  /// In en, this message translates to:
+  /// **'GB'**
+  String get unitGB;
+
+  /// No description provided for @fileSizeDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'{size} {unit}'**
+  String fileSizeDisplay(Object size, Object unit);
+
+  /// No description provided for @clearStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Storage'**
+  String get clearStorage;
+
+  /// No description provided for @storage.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
+  String get storage;
 }
 
 class _AppLocalizationsDelegate

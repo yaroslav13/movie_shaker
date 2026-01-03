@@ -7,6 +7,7 @@ import 'package:ui_components/src/ms_text/ms_text.dart';
 final class ScoreArc extends StatelessWidget {
   const ScoreArc({
     required this.value,
+    this.endValue = 10,
     this.labelBuilder,
     this.trackColor,
     this.strokeWidth,
@@ -14,8 +15,8 @@ final class ScoreArc extends StatelessWidget {
     this.labelStyle,
     super.key,
   }) : assert(
-         value >= 0 && value <= 10,
-         'Value must be between 0.0 and 10.0. Provided: $value',
+         value >= 0 && value <= endValue,
+         'Value must be between 0.0 and $endValue. Provided: $value',
        ),
        assert(
          valueColors == null || valueColors.length > 0,
@@ -23,6 +24,7 @@ final class ScoreArc extends StatelessWidget {
        );
 
   final double value;
+  final double endValue;
   final String Function(double)? labelBuilder;
 
   final Color? trackColor;
@@ -59,7 +61,7 @@ final class ScoreArc extends StatelessWidget {
               theme?.labelStyle ??
               Theme.of(context).textTheme.labelLarge;
 
-          final index = ((value / 10) * valueColors.length).floor();
+          final index = ((value / endValue) * valueColors.length).floor();
 
           final barColor = valueColors[index.clamp(0, valueColors.length - 1)];
 

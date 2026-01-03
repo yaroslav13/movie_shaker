@@ -54,6 +54,7 @@ dependencies:
   # local db
   drift: 2.28.0
   drift_flutter: 0.2.6
+  path_provider: 2.1.5
 
   # shake gesture
   sensors_plus: 6.1.1

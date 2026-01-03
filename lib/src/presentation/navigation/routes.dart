@@ -7,8 +7,10 @@ import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_details/movie_collection_details_screen.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collection_picker/movie_collection_picker_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/movie_collections/movie_collections_screen.dart';
+import 'package:movie_shaker/src/presentation/features/profile/profile_screen.dart';
 import 'package:movie_shaker/src/presentation/features/remove_collected_movie/remove_collected_movie_bottom_sheet.dart';
 import 'package:movie_shaker/src/presentation/features/remove_movie_collection/remove_movie_collection_bottom_sheet.dart';
+import 'package:movie_shaker/src/presentation/features/storage_usage/storage_usage_screen.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/collections_branch_route_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/favorites_route_branch_extra.dart';
 import 'package:movie_shaker/src/presentation/navigation/extras/home_branch_route_extra.dart';
@@ -76,7 +78,12 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
         ),
       ],
     ),
-    TypedGoRoute<ProfileRoute>(path: '/profile'),
+    TypedGoRoute<ProfileRoute>(
+      path: '/profile',
+      routes: [
+        TypedGoRoute<StorageUsageRoute>(path: 'storageUsage'),
+      ],
+    ),
   ],
 )
 final class AppShellRoute extends ShellRouteData {
@@ -123,7 +130,17 @@ final class ProfileRoute extends GoRouteData with _$ProfileRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const Placeholder();
+      const ProfileScreen();
+}
+
+final class StorageUsageRoute extends GoRouteData with _$StorageUsageRoute {
+  const StorageUsageRoute();
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const StorageUsageScreen();
 }
 
 final class MovieDetailsRoute extends GoRouteData

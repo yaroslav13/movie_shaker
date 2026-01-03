@@ -169,4 +169,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get unitB => 'B';
+
+  @override
+  String get unitKB => 'KB';
+
+  @override
+  String get unitMB => 'MB';
+
+  @override
+  String get unitGB => 'GB';
+
+  @override
+  String fileSizeDisplay(Object size, Object unit) {
+    return '$size $unit';
+  }
+
+  @override
+  String get clearStorage => 'Clear Storage';
+
+  @override
+  String get storage => 'Storage';
 }

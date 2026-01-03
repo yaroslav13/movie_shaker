@@ -31,9 +31,18 @@ final class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(homeStateNotifierProvider);
+    final paginationState = ref.watch(
+      homeStateNotifierProvider.select(
+        (state) => state.paginationState,
+      ),
+    );
 
-    final paginationState = state.paginationState;
+    final selectedGenre = ref.watch(
+      homeStateNotifierProvider.select(
+        (state) => state.selectedGenre,
+      ),
+    );
+
     final shouldBeScrollable = paginationState.items.isNotEmpty;
 
     final isDeviceShaking = useState(false);
@@ -62,7 +71,7 @@ final class HomeScreen extends HookConsumerWidget {
         body: MovieShakerScope(
           scopeId: 'home_screen_scope',
           pool: MoviePool.global(
-            filter: MoviesFilter(genres: [?state.selectedGenre]),
+            filter: MoviesFilter(genres: [?selectedGenre]),
           ),
           delegate: HomeMovieShakerDelegate(
             onShakeStateChanged: (value) => isDeviceShaking.value = value,
@@ -82,10 +91,7 @@ final class HomeScreen extends HookConsumerWidget {
                 return _ShakeEffectWidget(
                   isShaking: isDeviceShaking.value,
                   child: MovieCard(
-                    action: MovieLikeButton(
-                      key: ValueKey(state.lastMoviesUpdate),
-                      movie: movie,
-                    ),
+                    action: _MovieLikeButton(movie: movie),
                     leading: CollectMovieButton(movie: movie),
                     imageUrl: movie.posterUrl,
                     onTap: () => _onMovieSelected(context, movie),
@@ -169,6 +175,26 @@ final class _Header extends HookConsumerWidget {
             ref.read(homeStateNotifierProvider.notifier).onGenreSelected(genre),
       ),
       pinned: true,
+    );
+  }
+}
+
+final class _MovieLikeButton extends HookConsumerWidget {
+  const _MovieLikeButton({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lastMoviesUpdate = ref.watch(
+      homeStateNotifierProvider.select((state) => state.lastMoviesUpdate),
+    );
+
+    return MovieLikeButton(
+      key: ValueKey(lastMoviesUpdate),
+      movie: movie,
     );
   }
 }

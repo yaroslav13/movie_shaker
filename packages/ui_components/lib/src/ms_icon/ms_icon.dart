@@ -316,6 +316,36 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedDisk({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedFloppyDisk,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
+  factory MsIcon.outlinedUser({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedUser,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   final IconData? icon;
   final double? size;
   final double? fill;

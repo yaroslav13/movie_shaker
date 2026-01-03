@@ -5,4 +5,6 @@ abstract final class MsIconSizes {
   static const regular = 24.0;
   static const large = 32.0;
   static const extraLarge = 48.0;
+
+  static const massive = 64.0;
 }
