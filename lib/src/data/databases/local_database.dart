@@ -9,8 +9,6 @@ import 'package:movie_shaker/src/data/databases/tables/movies.dart';
 
 part 'local_database.g.dart';
 
-const _localDatabaseName = 'local_database.db';
-
 @DriftDatabase(
   tables: [
     Movies,
@@ -27,10 +25,38 @@ final class LocalDatabase extends _$LocalDatabase {
   LocalDatabase([QueryExecutor? executor])
     : super(executor ?? _openConnection());
 
+  static const databaseName = 'local_database.db';
+
   @override
   int get schemaVersion => 1;
 
   static QueryExecutor _openConnection() {
-    return driftDatabase(name: _localDatabaseName);
+    return driftDatabase(
+      name: databaseName,
+      native: DriftNativeOptions(
+        setup: (db) {
+          db.execute('PRAGMA auto_vacuum = FULL;');
+        },
+      ),
+    );
+  }
+
+  Future<void> clearDatabase() async {
+    await transaction(() async {
+      for (final table in allTables) {
+        await delete(table).go();
+      }
+    });
+  }
+
+  Future<bool> get isEmpty async {
+    for (final table in allTables) {
+      final rowCount = await table.count().getSingle();
+      if (rowCount > 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }

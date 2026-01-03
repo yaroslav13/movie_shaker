@@ -74,5 +74,12 @@
   "cast": "Cast",
   "like": "Like",
   "unlike": "unlike",
-  "save": "Save"
+  "save": "Save",
+  "unitB": "B",
+  "unitKB": "KB",
+  "unitMB": "MB",
+  "unitGB": "GB",
+  "fileSizeDisplay": "{size} {unit}",
+  "clearStorage": "Clear Storage",
+  "storage": "Storage"
 }

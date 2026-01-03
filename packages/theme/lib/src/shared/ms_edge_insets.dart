@@ -7,6 +7,8 @@ abstract final class MsEdgeInsets {
   static const contentMedium = EdgeInsets.all(12);
   static const contentLarge = EdgeInsets.all(24);
 
+  static const contentExtraLarge = EdgeInsets.all(32);
+
   static const scrollableContentPadding = EdgeInsets.symmetric(
     horizontal: 16,
     vertical: 12,
