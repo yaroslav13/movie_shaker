@@ -72,6 +72,9 @@ dependencies:
   # external app launcher
   url_launcher: 6.3.2
 
+  # lints
+  dart_code_metrics_annotations: 1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
