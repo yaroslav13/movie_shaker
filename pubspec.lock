@@ -321,6 +321,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.1"
+  dart_code_metrics_annotations:
+    dependency: "direct main"
+    description:
+      name: dart_code_metrics_annotations
+      sha256: "08ad0f2c1bf081efa04ad12d3fded176b08d1b5b1d744ba631fca44c36f581bd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   dart_code_metrics_presets:
     dependency: "direct dev"
     description:

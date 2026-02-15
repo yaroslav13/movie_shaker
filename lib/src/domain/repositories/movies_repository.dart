@@ -1,4 +1,4 @@
-import 'package:movie_shaker/src/domain/annotations/throws.dart';
+import 'package:dart_code_metrics_annotations/annotations.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movie_collection/movie_collection.dart';
 import 'package:movie_shaker/src/domain/entities/movie_details/movie_details.dart';
@@ -9,22 +9,22 @@ import 'package:movie_shaker/src/domain/exceptions/cache_exception.dart';
 import 'package:movie_shaker/src/domain/exceptions/network_exception.dart';
 
 abstract interface class MoviesRepository {
-  @Throws([NetworkException])
+  @Throws({NetworkException})
   Future<PaginationPage<Movie>> getMovies(MoviesQuery query);
 
-  @Throws([NetworkException])
+  @Throws({NetworkException})
   Future<PaginationPage<Movie>> getMoviesByQuery(FilterlessSearchQuery query);
 
-  @Throws([NetworkException])
+  @Throws({NetworkException})
   Future<MovieDetails> getMovieDetails(int movieId);
 
-  @Throws([CacheReadException])
+  @Throws({CacheReadException})
   Future<List<Movie>> getMoviesByCollection(MovieCollection collection);
 
-  @Throws([CacheWriteException])
+  @Throws({CacheWriteException})
   Future<void> addMovieToCollection(Movie movie, MovieCollection collection);
 
-  @Throws([CacheDeleteException])
+  @Throws({CacheDeleteException})
   Future<void> removeMovieFromCollection(
     Movie movie,
     MovieCollection collection,

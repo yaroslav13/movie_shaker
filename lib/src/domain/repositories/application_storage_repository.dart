@@ -1,13 +1,13 @@
-import 'package:movie_shaker/src/domain/annotations/throws.dart';
+import 'package:dart_code_metrics_annotations/annotations.dart';
 import 'package:movie_shaker/src/domain/exceptions/application_storage_exception.dart';
 
 abstract interface class ApplicationStorageRepository {
-  @Throws([ApplicationStorageClearingException])
+  @Throws({ApplicationStorageClearingException})
   Future<void> clear();
 
-  @Throws([ApplicationStorageReadingException])
+  @Throws({ApplicationStorageReadingException})
   Future<double> getSizeInGb();
 
-  @Throws([ApplicationStorageReadingException])
+  @Throws({ApplicationStorageReadingException})
   Future<bool> get isEmpty;
 }
