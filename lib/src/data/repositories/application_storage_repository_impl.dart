@@ -4,17 +4,25 @@ import 'package:movie_shaker/src/data/databases/local_database.dart';
 import 'package:movie_shaker/src/domain/exceptions/application_storage_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/application_storage_repository.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final class ApplicationStorageRepositoryImpl
     implements ApplicationStorageRepository {
-  ApplicationStorageRepositoryImpl(this._localDatabase);
+  ApplicationStorageRepositoryImpl(
+    this._localDatabase,
+    this._sharedPreferences,
+  );
 
   final LocalDatabase _localDatabase;
+  final SharedPreferencesAsync _sharedPreferences;
 
   @override
   Future<void> clear() async {
     try {
-      await _localDatabase.clearDatabase();
+      await Future.wait([
+        _localDatabase.clearDatabase(),
+        _sharedPreferences.clear(),
+      ]);
     } on Exception catch (_, s) {
       Error.throwWithStackTrace(
         const ApplicationStorageClearingException(),

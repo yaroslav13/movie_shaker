@@ -192,4 +192,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storage => 'Storage';
+
+  @override
+  String get filters => 'Filters';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get movieDuration => 'Movie Duration';
+
+  @override
+  String get imdbRating => 'IMDB Rating';
 }

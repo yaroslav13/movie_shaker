@@ -256,6 +256,21 @@ final class MsIcon extends StatelessWidget {
     );
   }
 
+  factory MsIcon.outlinedSettings({
+    double? size,
+    Color? color,
+    String? semanticLabel,
+    Key? key,
+  }) {
+    return MsIcon(
+      HugeIcons.strokeRoundedSettings01,
+      size: size,
+      color: color,
+      semanticLabel: semanticLabel,
+      key: key,
+    );
+  }
+
   factory MsIcon.outlinedProfile({
     double? size,
     Color? color,

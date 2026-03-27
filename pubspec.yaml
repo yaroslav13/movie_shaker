@@ -56,6 +56,9 @@ dependencies:
   drift_flutter: 0.2.6
   path_provider: 2.1.5
 
+  # shared preferences
+  shared_preferences: 2.5.5
+
   # shake gesture
   sensors_plus: 6.1.1
 

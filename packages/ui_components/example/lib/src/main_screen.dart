@@ -1,10 +1,12 @@
 import 'package:example/src/pages/dots_progress_indicator_example/dots_progress_indicator_example_view.dart';
 import 'package:example/src/pages/genre_card_example/genre_card_example_view.dart';
 import 'package:example/src/pages/glassmorphic_card_example/glassmorphic_card_example_view.dart';
+import 'package:example/src/pages/imdb_rating_slider_example/imdb_rating_slider_example_view.dart';
 import 'package:example/src/pages/loading_error_stub_example/loading_error_stub_example_view.dart';
 import 'package:example/src/pages/movie_card_examples/movie_card_examples_view.dart';
 import 'package:example/src/pages/movie_carousel_example/movie_carousel_example_view.dart';
 import 'package:example/src/pages/movie_collection_card_example/movie_collection_card_example_view.dart';
+import 'package:example/src/pages/movie_duration_slider_example/movie_duration_slider_example_view.dart';
 import 'package:example/src/pages/ms_bottom_bar_example/ms_bottom_bar_example_view.dart';
 import 'package:example/src/pages/ms_floating_app_bar_example/ms_floating_app_bar_example_view.dart';
 import 'package:example/src/pages/ms_list_tile_example/ms_list_tile_example_view.dart';
@@ -15,6 +17,7 @@ import 'package:example/src/pages/score_arc_example/score_arc_example_view.dart'
 import 'package:example/src/pages/segmented_row_example/segmented_row_example_view.dart';
 import 'package:example/src/pages/text_form_field_example/text_form_field_example_view.dart';
 import 'package:example/src/pages/two_dimensional_scrollable_view_example/two_dimensional_scrollable_view_example_view.dart';
+import 'package:example/src/pages/years_slider_example/years_slider_example_view.dart';
 import 'package:example/src/utils/labeled_widget_mixin.dart';
 import 'package:flutter/material.dart';
 
@@ -49,6 +52,9 @@ final class _MainScreenState extends State<MainScreen> {
     const GlassmorphicCardExampleView(),
     const ScoreArcExampleView(),
     const GenreCardExampleView(),
+    const YearsSliderExampleView(),
+    const MovieDurationSliderExampleView(),
+    const ImdbRatingSliderExampleView(),
   ];
 
   String _getWidgetTitle(Widget widget) {

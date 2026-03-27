@@ -19,6 +19,8 @@ abstract class HomeRouteExtra extends HomeBranchRouteExtra
   const factory HomeRouteExtra.addMovie({
     required Movie movie,
   }) = HomeRouteExtraAddMovie;
+
+  const factory HomeRouteExtra.filtersApplied() = HomeRouteExtraFiltersApplied;
 }
 
 @freezed

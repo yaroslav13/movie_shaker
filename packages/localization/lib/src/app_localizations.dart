@@ -429,6 +429,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Storage'**
   String get storage;
+
+  /// No description provided for @filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filters;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @movieDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie Duration'**
+  String get movieDuration;
+
+  /// No description provided for @imdbRating.
+  ///
+  /// In en, this message translates to:
+  /// **'IMDB Rating'**
+  String get imdbRating;
 }
 
 class _AppLocalizationsDelegate

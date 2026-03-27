@@ -43,6 +43,24 @@ final class HomeScreen extends HookConsumerWidget {
       ),
     );
 
+    final selectedImdbRating = ref.watch(
+      homeStateNotifierProvider.select(
+        (state) => state.selectedImdbRating,
+      ),
+    );
+
+    final selectedMovieDuration = ref.watch(
+      homeStateNotifierProvider.select(
+        (state) => state.selectedMovieDuration,
+      ),
+    );
+
+    final selectedReleaseYearsRange = ref.watch(
+      homeStateNotifierProvider.select(
+        (state) => state.selectedReleaseYearsRange,
+      ),
+    );
+
     final shouldBeScrollable = paginationState.items.isNotEmpty;
 
     final isDeviceShaking = useState(false);
@@ -54,6 +72,10 @@ final class HomeScreen extends HookConsumerWidget {
             ref
                 .read(homeStateNotifierProvider.notifier)
                 .onMovieUpdated(movieId);
+          case HomeRouteExtraFiltersApplied():
+            ref
+                .read(homeStateNotifierProvider.notifier)
+                .onAdvancedFiltersApplied();
           case _:
             break;
         }
@@ -71,7 +93,12 @@ final class HomeScreen extends HookConsumerWidget {
         body: MovieShakerScope(
           scopeId: 'home_screen_scope',
           pool: MoviePool.global(
-            filter: MoviesFilter(genres: [?selectedGenre]),
+            filter: MoviesFilter(
+              genres: [?selectedGenre],
+              imdbRating: selectedImdbRating,
+              movieDuration: selectedMovieDuration,
+              releaseYearsRange: selectedReleaseYearsRange,
+            ),
           ),
           delegate: HomeMovieShakerDelegate(
             onShakeStateChanged: (value) => isDeviceShaking.value = value,
@@ -171,6 +198,8 @@ final class _Header extends HookConsumerWidget {
         filterItems: state.availableGenres,
         filterLabelBuilder: (_, item) => item.name,
         selectedFilterItem: state.selectedGenre,
+        onAdvancedFiltersPressed: () =>
+            const AdvancedMovieFiltersRoute().go(context),
         onFilterSelected: (genre) =>
             ref.read(homeStateNotifierProvider.notifier).onGenreSelected(genre),
       ),

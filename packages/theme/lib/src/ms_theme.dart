@@ -10,11 +10,13 @@ import 'package:theme/src/extensions/dot_separated_text_theme.dart';
 import 'package:theme/src/extensions/dots_progress_indicator_theme.dart';
 import 'package:theme/src/extensions/genre_card_theme.dart';
 import 'package:theme/src/extensions/glassmorphic_card_theme.dart';
+import 'package:theme/src/extensions/imdb_rating_slider_theme.dart';
 import 'package:theme/src/extensions/like_button_theme.dart';
 import 'package:theme/src/extensions/loading_error_stub_theme.dart';
 import 'package:theme/src/extensions/movie_card_theme.dart';
 import 'package:theme/src/extensions/movie_carousel_theme.dart';
 import 'package:theme/src/extensions/movie_collection_card_theme.dart';
+import 'package:theme/src/extensions/movie_duration_slider_theme.dart';
 import 'package:theme/src/extensions/ms_app_bar_delegate_theme.dart';
 import 'package:theme/src/extensions/ms_app_bar_theme.dart';
 import 'package:theme/src/extensions/ms_bottom_bar_theme.dart';
@@ -38,8 +40,10 @@ import 'package:theme/src/extensions/rounded_back_button_theme.dart';
 import 'package:theme/src/extensions/score_arc_theme.dart';
 import 'package:theme/src/extensions/segmented_row_entry_theme.dart';
 import 'package:theme/src/extensions/segmented_row_theme.dart';
+import 'package:theme/src/extensions/settings_button_theme.dart';
 import 'package:theme/src/extensions/staggered_grid_view_theme.dart';
 import 'package:theme/src/extensions/watch_button_theme.dart';
+import 'package:theme/src/extensions/years_slider_theme.dart';
 import 'package:theme/src/ms_colors.dart';
 import 'package:theme/src/shared/ms_border_radius.dart';
 import 'package:theme/src/shared/ms_edge_insets.dart';
@@ -75,6 +79,7 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createSegmentedRowTheme(colorScheme, textTheme),
         _createMsBottomBarTheme(colorScheme),
         _createLikeButtonTheme(colorScheme),
+        _createSettingsButtonTheme(colorScheme),
         _createBookmarkButtonTheme(colorScheme),
         _createMsListTileTheme(colorScheme, textTheme),
         _createMovieCarouselTheme(colorScheme),
@@ -99,6 +104,9 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
         _createContributorCardTheme(colorScheme, textTheme),
         _createDeleteButtonTheme(colorScheme),
         _createMsMenuButtonTheme(textTheme, colorScheme),
+        _createYearsSliderTheme(colorScheme, textTheme),
+        _createMovieDurationSliderTheme(colorScheme, textTheme),
+        _createImdbRatingSliderTheme(colorScheme, textTheme),
       ],
     );
   }
@@ -383,6 +391,15 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
       likedColor: colorScheme.error,
       unlikedColor: colorScheme.onInverseSurface,
       backgroundColor: _applyAlpha(colorScheme.inverseSurface),
+      padding: MsEdgeInsets.contentSmall,
+    );
+  }
+
+  static SettingsButtonTheme _createSettingsButtonTheme(
+    ColorScheme colorScheme,
+  ) {
+    return SettingsButtonTheme(
+      backgroundColor: _applyAlpha(colorScheme.primary, 0.6),
       padding: MsEdgeInsets.contentSmall,
     );
   }
@@ -674,6 +691,48 @@ extension type MsTheme._(ThemeData data) implements ThemeData {
     return MsMenuButtonTheme(
       foregroundColor: colorScheme.onPrimary,
       textStyle: textTheme.labelLarge,
+    );
+  }
+
+  static YearsSliderTheme _createYearsSliderTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return YearsSliderTheme(
+      activeColor: colorScheme.primary,
+      inactiveColor: colorScheme.outlineVariant,
+      headlineStyle: textTheme.titleMedium,
+      valuesStyle: textTheme.titleMedium?.copyWith(
+        color: colorScheme.primary,
+      ),
+    );
+  }
+
+  static MovieDurationSliderTheme _createMovieDurationSliderTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return MovieDurationSliderTheme(
+      activeColor: colorScheme.primary,
+      inactiveColor: colorScheme.outlineVariant,
+      headlineStyle: textTheme.titleMedium,
+      valuesStyle: textTheme.titleMedium?.copyWith(
+        color: colorScheme.primary,
+      ),
+    );
+  }
+
+  static ImdbRatingSliderTheme _createImdbRatingSliderTheme(
+    ColorScheme colorScheme,
+    TextTheme textTheme,
+  ) {
+    return ImdbRatingSliderTheme(
+      activeColor: colorScheme.primary,
+      inactiveColor: colorScheme.outlineVariant,
+      headlineStyle: textTheme.titleMedium,
+      valuesStyle: textTheme.titleMedium?.copyWith(
+        color: colorScheme.primary,
+      ),
     );
   }
 

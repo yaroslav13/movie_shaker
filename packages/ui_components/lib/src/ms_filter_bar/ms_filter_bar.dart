@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theme/theme.dart';
 import 'package:ui_components/src/ms_filter_bar/ms_filter_chip.dart';
+import 'package:ui_components/src/settings_button/settings_button.dart';
 
 const _filterBarHeight = 80.0;
 
@@ -11,6 +12,7 @@ final class MsFilterBar<T> extends StatelessWidget
     required this.labelBuilder,
     this.selectedItem,
     this.onSelected,
+    this.onAdvancedFiltersPressed,
     this.padding,
     super.key,
   });
@@ -20,6 +22,7 @@ final class MsFilterBar<T> extends StatelessWidget
 
   final String Function(BuildContext context, T item) labelBuilder;
   final ValueChanged<T?>? onSelected;
+  final VoidCallback? onAdvancedFiltersPressed;
 
   final EdgeInsetsGeometry? padding;
 
@@ -34,10 +37,17 @@ final class MsFilterBar<T> extends StatelessWidget
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: padding,
-        itemCount: items.length,
+        itemCount: items.length + 1,
+        shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(width: MsSpacings.regular),
         itemBuilder: (context, index) {
-          final item = items[index];
+          if (index == 0) {
+            return Align(
+              child: SettingsButton(onPressed: onAdvancedFiltersPressed),
+            );
+          }
+
+          final item = items[index - 1];
           final selected = selectedItem == item;
           final label = labelBuilder(context, item);
 

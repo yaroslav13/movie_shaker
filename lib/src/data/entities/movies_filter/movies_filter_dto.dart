@@ -6,5 +6,9 @@ part 'movies_filter_dto.freezed.dart';
 sealed class MoviesFilterDto with _$MoviesFilterDto {
   const factory MoviesFilterDto({
     String? genres,
+    double? minImdbRating,
+    int? maxMovieDurationInMinutes,
+    String? minReleaseDate,
+    String? maxReleaseDate,
   }) = _MoviesFilterDto;
 }
