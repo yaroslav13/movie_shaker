@@ -60,6 +60,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
       return PaginationPage<Movie>(
         items: movies,
         pageNumber: response.page,
+        totalPages: response.totalPages,
         isLastPage: response.page >= response.totalPages,
       );
     } on DioException catch (e, s) {
@@ -88,6 +89,7 @@ final class MoviesRepositoryImpl implements MoviesRepository {
       return PaginationPage<Movie>(
         items: movies,
         pageNumber: response.page,
+        totalPages: response.totalPages,
         isLastPage: response.page >= response.totalPages,
       );
     } on DioException catch (e, s) {

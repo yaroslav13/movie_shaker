@@ -35,8 +35,15 @@ final class GetMovieSuggestionInteractor
   Future<List<Movie>> _getRandomMoviesPage({
     required MoviesFilter? filter,
   }) async {
+    final firstMoviePage = await _moviesRepository.getMovies(
+      MoviesQuery(pageNumber: 1, filter: filter),
+    );
+
     final random = Random();
-    final pageNumber = random.nextInt(PaginationPage.maxPageNumber);
+
+    final pageNumber = random.nextInt(
+      firstMoviePage.totalPages ?? PaginationPage.maxPageNumber,
+    );
     final moviesPage = await _moviesRepository.getMovies(
       MoviesQuery(pageNumber: pageNumber, filter: filter),
     );

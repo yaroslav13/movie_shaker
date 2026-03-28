@@ -45,6 +45,7 @@ final class SearchMoviesInterceptor
         items: filteredMovies,
         pageNumber: moviesPage.pageNumber,
         isLastPage: moviesPage.isLastPage,
+        totalPages: moviesPage.totalPages,
       );
     } on InfrastructureException catch (e, s) {
       Error.throwWithStackTrace(SemanticException(e), s);
