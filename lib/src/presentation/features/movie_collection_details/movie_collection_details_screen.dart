@@ -65,28 +65,34 @@ final class MovieCollectionDetailsScreen extends HookConsumerWidget {
       },
     );
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          _Body(collectionName: collectionName),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: MsEdgeInsets.contentLarge.add(
-                EdgeInsets.only(
-                  top: MediaQuery.viewPaddingOf(context).top,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (_, _) {
+        return;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _Body(collectionName: collectionName),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: MsEdgeInsets.contentLarge.add(
+                  EdgeInsets.only(
+                    top: MediaQuery.viewPaddingOf(context).top,
+                  ),
+                ),
+                child: RoundedBackButton(
+                  onPressed: () => CollectionsRoute(
+                    CollectionsRouteExtra.updateCollection(
+                      collectionName: collectionName,
+                    ),
+                  ).go(context),
                 ),
               ),
-              child: RoundedBackButton(
-                onPressed: () => CollectionsRoute(
-                  CollectionsRouteExtra.updateCollection(
-                    collectionName: collectionName,
-                  ),
-                ).go(context),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

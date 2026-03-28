@@ -76,48 +76,54 @@ final class MovieCollectionsScreen extends HookConsumerWidget {
       },
     );
 
-    return Scaffold(
-      floatingActionButton: state is MovieCollectionsStateData
-          ? MsFloatingActionButton.add(
-              context,
-              onPressed: () => const AddMovieCollectionRoute().go(context),
-            )
-          : null,
-      body: SafeArea(
-        child: switch (state) {
-          MovieCollectionsStateLoading() => Center(
-            child: MsProgressIndicator.moviePosters(),
-          ),
-          MovieCollectionsStateError() => LoadingErrorStub(
-            onRetry: () => ref
-                .read(movieCollectionsStateNotifierProvider.notifier)
-                .onRetryPressed(),
-          ),
-          MovieCollectionsStateData() => StaggeredGridView.largeSpacing(
-            noItemsBuilder: (_) => NoItemsStub.noCollections(),
-            itemCount: state.collections.length,
-            itemBuilder: (_, index) {
-              final collection = state.collections[index];
-              final collectionName = collection.name;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (_, _) {
+        return;
+      },
+      child: Scaffold(
+        floatingActionButton: state is MovieCollectionsStateData
+            ? MsFloatingActionButton.add(
+                context,
+                onPressed: () => const AddMovieCollectionRoute().go(context),
+              )
+            : null,
+        body: SafeArea(
+          child: switch (state) {
+            MovieCollectionsStateLoading() => Center(
+              child: MsProgressIndicator.moviePosters(),
+            ),
+            MovieCollectionsStateError() => LoadingErrorStub(
+              onRetry: () => ref
+                  .read(movieCollectionsStateNotifierProvider.notifier)
+                  .onRetryPressed(),
+            ),
+            MovieCollectionsStateData() => StaggeredGridView.largeSpacing(
+              noItemsBuilder: (_) => NoItemsStub.noCollections(),
+              itemCount: state.collections.length,
+              itemBuilder: (_, index) {
+                final collection = state.collections[index];
+                final collectionName = collection.name;
 
-              return MovieCollectionCard(
-                title: collectionName,
-                subtitle: context.localizations.moviesCount(
-                  collection.moviesCount,
-                ),
-                posterUrls: collection.movies
-                    .map((movie) => movie.posterUrl)
-                    .toList(),
-                onTap: () => MovieCollectionDetailsRoute(
-                  collectionName: collectionName,
-                ).go(context),
-                onLongPress: () => RemoveMovieCollectionRoute(
-                  collectionName: collectionName,
-                ).go(context),
-              );
-            },
-          ),
-        },
+                return MovieCollectionCard(
+                  title: collectionName,
+                  subtitle: context.localizations.moviesCount(
+                    collection.moviesCount,
+                  ),
+                  posterUrls: collection.movies
+                      .map((movie) => movie.posterUrl)
+                      .toList(),
+                  onTap: () => MovieCollectionDetailsRoute(
+                    collectionName: collectionName,
+                  ).go(context),
+                  onLongPress: () => RemoveMovieCollectionRoute(
+                    collectionName: collectionName,
+                  ).go(context),
+                );
+              },
+            ),
+          },
+        ),
       ),
     );
   }

@@ -71,89 +71,95 @@ final class MovieDetailsScreen extends HookConsumerWidget {
       movieDetailsUiMapperProvider(movieId: movieId),
     );
 
-    return Scaffold(
-      body: switch (state) {
-        MovieDetailsStateLoading() => _ClosableStub(
-          onClose: () => _onBackPressed(context),
-          child: Center(
-            child: MsProgressIndicator.moviePosters(),
-          ),
-        ),
-        MovieDetailsStateError() => _ClosableStub(
-          onClose: () => _onBackPressed(context),
-          child: LoadingErrorStub(
-            onRetry: () => ref
-                .read(movieDetailsStateNotifierProvider.notifier)
-                .onRetryPressed(movieId),
-          ),
-        ),
-        MovieDetailsStateData(
-          :final title,
-          :final posterUrl,
-          :final overview,
-          :final voteAverage,
-          :final runtime,
-          :final releaseDate,
-          :final homepageUrl,
-          :final popularity,
-          :final genres,
-          :final cast,
-        ) =>
-          CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-              MsFloatingAppBar.backgroundImage(
-                imageUrl: posterUrl,
-                leading: RoundedBackButton(
-                  onPressed: () => _onBackPressed(context),
-                ),
-                action: CollectMovieMenuButton(
-                  movieDetails: movieDetailsUiMapper.reverseMap(state),
-                ),
-                centerTitle: false,
-                title: homepageUrl != null
-                    ? WatchButton(
-                        onPressed: () => ref
-                            .read(movieDetailsStateNotifierProvider.notifier)
-                            .onWatchButtonPressed(homepageUrl),
-                      )
-                    : null,
-              ),
-              SliverPadding(
-                padding: MsEdgeInsets.scrollableContentPadding,
-                sliver: SliverList.list(
-                  children: [
-                    Align(
-                      child: _ReleaseTimeDetailsWidget(
-                        releaseDate: releaseDate,
-                        runtime: runtime,
-                      ),
-                    ),
-                    const SizedBox(height: MsSpacings.extraLarge),
-                    _OverviewWidget(
-                      title: title,
-                      overview: overview,
-                    ),
-                    const SizedBox(height: MsSpacings.extraLarge),
-                    _RatingOverviewWidget(
-                      voteAverage: voteAverage,
-                      popularity: popularity,
-                    ),
-                    const SizedBox(height: MsSpacings.extraLarge),
-                    if (genres.isNotEmpty) ...[
-                      _GenresOverviewWidget(genres: genres),
-                      const SizedBox(height: MsSpacings.extraLarge),
-                    ],
-                    if (cast.isNotEmpty) ...[
-                      _CastOverviewWidget(cast: cast),
-                      const SizedBox(height: MsSpacings.extraLarge),
-                    ],
-                  ],
-                ),
-              ),
-            ],
-          ),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (_, _) {
+        return;
       },
+      child: Scaffold(
+        body: switch (state) {
+          MovieDetailsStateLoading() => _ClosableStub(
+            onClose: () => _onBackPressed(context),
+            child: Center(
+              child: MsProgressIndicator.moviePosters(),
+            ),
+          ),
+          MovieDetailsStateError() => _ClosableStub(
+            onClose: () => _onBackPressed(context),
+            child: LoadingErrorStub(
+              onRetry: () => ref
+                  .read(movieDetailsStateNotifierProvider.notifier)
+                  .onRetryPressed(movieId),
+            ),
+          ),
+          MovieDetailsStateData(
+            :final title,
+            :final posterUrl,
+            :final overview,
+            :final voteAverage,
+            :final runtime,
+            :final releaseDate,
+            :final homepageUrl,
+            :final popularity,
+            :final genres,
+            :final cast,
+          ) =>
+            CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                MsFloatingAppBar.backgroundImage(
+                  imageUrl: posterUrl,
+                  leading: RoundedBackButton(
+                    onPressed: () => _onBackPressed(context),
+                  ),
+                  action: CollectMovieMenuButton(
+                    movieDetails: movieDetailsUiMapper.reverseMap(state),
+                  ),
+                  centerTitle: false,
+                  title: homepageUrl != null
+                      ? WatchButton(
+                          onPressed: () => ref
+                              .read(movieDetailsStateNotifierProvider.notifier)
+                              .onWatchButtonPressed(homepageUrl),
+                        )
+                      : null,
+                ),
+                SliverPadding(
+                  padding: MsEdgeInsets.scrollableContentPadding,
+                  sliver: SliverList.list(
+                    children: [
+                      Align(
+                        child: _ReleaseTimeDetailsWidget(
+                          releaseDate: releaseDate,
+                          runtime: runtime,
+                        ),
+                      ),
+                      const SizedBox(height: MsSpacings.extraLarge),
+                      _OverviewWidget(
+                        title: title,
+                        overview: overview,
+                      ),
+                      const SizedBox(height: MsSpacings.extraLarge),
+                      _RatingOverviewWidget(
+                        voteAverage: voteAverage,
+                        popularity: popularity,
+                      ),
+                      const SizedBox(height: MsSpacings.extraLarge),
+                      if (genres.isNotEmpty) ...[
+                        _GenresOverviewWidget(genres: genres),
+                        const SizedBox(height: MsSpacings.extraLarge),
+                      ],
+                      if (cast.isNotEmpty) ...[
+                        _CastOverviewWidget(cast: cast),
+                        const SizedBox(height: MsSpacings.extraLarge),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+        },
+      ),
     );
   }
 }
