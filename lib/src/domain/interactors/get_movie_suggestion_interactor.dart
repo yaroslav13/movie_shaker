@@ -4,6 +4,7 @@ import 'package:movie_shaker/src/domain/base/base_interactors.dart';
 import 'package:movie_shaker/src/domain/entities/movie/movie.dart';
 import 'package:movie_shaker/src/domain/entities/movies_filter/movies_filter.dart';
 import 'package:movie_shaker/src/domain/entities/movies_query/movies_query.dart';
+import 'package:movie_shaker/src/domain/entities/pagination_page/pagination_page.dart';
 import 'package:movie_shaker/src/domain/exceptions/app_exception.dart';
 import 'package:movie_shaker/src/domain/exceptions/infrastructure_exception.dart';
 import 'package:movie_shaker/src/domain/repositories/movies_repository.dart';
@@ -40,7 +41,10 @@ final class GetMovieSuggestionInteractor
 
     final random = Random();
 
-    final totalPages = firstMoviePage.totalPages;
+    final totalPages = min(
+      firstMoviePage.totalPages,
+      PaginationPage.maxPageNumber,
+    );
     final pageNumber = random.nextInt(totalPages) + 1;
 
     final moviesPage = await _moviesRepository.getMovies(
