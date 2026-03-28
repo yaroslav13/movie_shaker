@@ -21,7 +21,7 @@ final class GetMovieSuggestionInteractor
   Future<Movie> call(MoviesFilter param) async {
     try {
       final randomMoviesPage = await _getRandomMoviesPage(
-        filter: param.isFilterSet ? param : null,
+        filter: param,
       );
 
       final randomMovie = _chooseRandomMovie(randomMoviesPage);

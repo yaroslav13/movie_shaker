@@ -24,7 +24,7 @@ final class SearchMoviesInterceptor
         searchQuery,
       );
 
-      final shouldApplyFilters = param.filter.isFilterSet;
+      final shouldApplyFilters = param.filter.genres.isNotEmpty;
       if (!shouldApplyFilters) {
         return moviesPage;
       }

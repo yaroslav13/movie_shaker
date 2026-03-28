@@ -14,12 +14,4 @@ sealed class MoviesFilter with _$MoviesFilter {
     ImdbRating? imdbRating,
     ReleaseYearsRange? releaseYearsRange,
   }) = _MoviesFilter;
-
-  const MoviesFilter._();
-
-  bool get isFilterSet =>
-      genres.isNotEmpty ||
-      movieDuration != null ||
-      imdbRating != null ||
-      releaseYearsRange != null;
 }
