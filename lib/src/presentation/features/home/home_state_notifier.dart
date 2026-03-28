@@ -80,7 +80,9 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
   void onMovieUpdated(int movieId) {
     info('on movie updated: $movieId');
 
-    unawaited(_fetchMovies(_initialPageNumber));
+    state = state.copyWith(
+      lastMoviesUpdate: DateTime.now(),
+    );
   }
 
   Future<void> _fetchMovies(PageNumber pageNumber) async {
