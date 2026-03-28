@@ -10,9 +10,10 @@ sealed class PaginationPage<T> with _$PaginationPage<T> {
     required List<T> items,
     required PageNumber pageNumber,
     required bool isLastPage,
+    required int totalPages,
   }) = _PaginationPage<T>;
 
   const PaginationPage._();
 
-  static const maxPageNumber = 15;
+  static const maxPageNumber = 500;
 }
