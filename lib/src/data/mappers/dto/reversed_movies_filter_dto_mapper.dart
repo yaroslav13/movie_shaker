@@ -13,9 +13,12 @@ final class ReversedMoviesFilterMapper
     }
 
     final releaseYearsRange = argument.releaseYearsRange;
+    final genres = argument.genres;
 
     return MoviesFilterDto(
-      genres: argument.genres.map((genre) => genre.id).join(','),
+      genres: genres.isEmpty
+          ? null
+          : argument.genres.map((genre) => genre.id).join(','),
       maxMovieDurationInMinutes: argument.movieDuration?.valueInMinutes,
       minImdbRating: argument.imdbRating?.value,
       minReleaseDate: releaseYearsRange != null

@@ -14,5 +14,5 @@ sealed class PaginationPage<T> with _$PaginationPage<T> {
 
   const PaginationPage._();
 
-  static const maxPageNumber = 500;
+  static const maxPageNumber = 15;
 }
