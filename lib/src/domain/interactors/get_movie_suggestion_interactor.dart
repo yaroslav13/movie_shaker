@@ -41,9 +41,10 @@ final class GetMovieSuggestionInteractor
 
     final random = Random();
 
-    final pageNumber = random.nextInt(
-      firstMoviePage.totalPages ?? PaginationPage.maxPageNumber,
-    );
+    final totalPages =
+        firstMoviePage.totalPages ?? PaginationPage.maxPageNumber;
+    final pageNumber = random.nextInt(totalPages) + 1;
+
     final moviesPage = await _moviesRepository.getMovies(
       MoviesQuery(pageNumber: pageNumber, filter: filter),
     );
@@ -53,7 +54,7 @@ final class GetMovieSuggestionInteractor
 
   Movie _chooseRandomMovie(List<Movie> movies) {
     final random = Random();
-    final index = random.nextInt(movies.length - 1);
+    final index = random.nextInt(movies.length);
 
     return movies[index];
   }
