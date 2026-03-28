@@ -81,5 +81,9 @@
   "unitGB": "GB",
   "fileSizeDisplay": "{size} {unit}",
   "clearStorage": "Clear Storage",
-  "storage": "Storage"
+  "storage": "Storage",
+  "filters": "Filters",
+  "apply": "Apply",
+  "movieDuration": "Movie Duration",
+  "imdbRating": "IMDB Rating"
 }

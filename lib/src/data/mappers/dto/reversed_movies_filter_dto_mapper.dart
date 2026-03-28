@@ -12,8 +12,18 @@ final class ReversedMoviesFilterMapper
       return null;
     }
 
+    final releaseYearsRange = argument.releaseYearsRange;
+
     return MoviesFilterDto(
       genres: argument.genres.map((genre) => genre.id).join(','),
+      maxMovieDurationInMinutes: argument.movieDuration?.valueInMinutes,
+      minImdbRating: argument.imdbRating?.value,
+      minReleaseDate: releaseYearsRange != null
+          ? DateTime(releaseYearsRange.from).toString()
+          : null,
+      maxReleaseDate: releaseYearsRange != null
+          ? DateTime(releaseYearsRange.to).toString()
+          : null,
     );
   }
 }

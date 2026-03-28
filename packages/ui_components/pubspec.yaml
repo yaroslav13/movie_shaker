@@ -27,6 +27,7 @@ dependencies:
   salomon_bottom_bar: 3.3.2
   smooth_page_indicator: 1.2.1
   two_dimensional_scrollables: 0.3.7
+  syncfusion_flutter_sliders: 33.1.45
 
   # network
   cached_network_image: 3.4.1

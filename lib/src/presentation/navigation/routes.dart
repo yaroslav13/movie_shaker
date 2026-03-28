@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_shaker/src/presentation/features/add_movie_collection/add_movie_collection_bottom_sheet.dart';
+import 'package:movie_shaker/src/presentation/features/advanced_movie_filters/advanced_movie_filters_screen.dart';
 import 'package:movie_shaker/src/presentation/features/app_shell/app_shell.dart';
 import 'package:movie_shaker/src/presentation/features/favorites/favorites_screen.dart';
 import 'package:movie_shaker/src/presentation/features/home/home_screen.dart';
@@ -27,6 +28,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
     TypedGoRoute<HomeRoute>(
       path: '/home',
       routes: [
+        TypedGoRoute<AdvancedMovieFiltersRoute>(path: 'advancedFilters'),
         TypedGoRoute<MovieDetailsRoute>(
           path: MovieDetailsRouteMixin.routeName,
           routes: [
@@ -154,6 +156,17 @@ final class MovieDetailsRoute extends GoRouteData
 
   @override
   GoRouteData? get from => const HomeRoute();
+}
+
+final class AdvancedMovieFiltersRoute extends GoRouteData
+    with _$AdvancedMovieFiltersRoute {
+  const AdvancedMovieFiltersRoute();
+
+  static final $parentNavigatorKey = rootNavigatorKey;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AdvancedMovieFiltersScreen();
 }
 
 final class CollectedMovieDetailsRoute extends GoRouteData

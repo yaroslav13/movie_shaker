@@ -14,6 +14,10 @@ abstract interface class MoviesRemoteDatasource {
   Future<DiscoverMoviesResponse> discoverMovies({
     @Query('page') required int page,
     @Query('with_genres') String? genres,
+    @Query('release_date.gte') String? releaseDateGte,
+    @Query('release_date.lte') String? releaseDateLte,
+    @Query('vote_average.gte') double? minImdbRating,
+    @Query('with_runtime.lte') int? maxMovieDurationInMinutes,
   });
 
   @GET('/search/movie')

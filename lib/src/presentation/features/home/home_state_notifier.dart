@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:logger/logger.dart';
+import 'package:movie_shaker/src/di/interactors/get_movie_filters_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movie_genres_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/get_movies_interactor_provider.dart';
 import 'package:movie_shaker/src/di/interactors/search_movies_interactor_provider.dart';
@@ -39,6 +40,12 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
 
   void onPullToRefresh() {
     info('Refreshing movies...');
+
+    unawaited(_fetchMovies(_initialPageNumber));
+  }
+
+  void onAdvancedFiltersApplied() {
+    info('Filters changed, refreshing movies...');
 
     unawaited(_fetchMovies(_initialPageNumber));
   }
@@ -82,9 +89,20 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
 
       final getMoviesInteractor = ref.read(getMoviesInteractorProvider);
       final searchMoviesInteractor = ref.read(searchMoviesInteractorProvider);
+      final getMovieFiltersInteractor = ref.read(
+        getMovieFiltersInteractorProvider,
+      );
+
+      final movieFilters = await getMovieFiltersInteractor();
+      final imdbRating = movieFilters.imdbRating;
+      final movieDuration = movieFilters.movieDuration;
+      final releaseYearsRange = movieFilters.releaseYearsRange;
 
       final filter = MoviesFilter(
         genres: [?state.selectedGenre],
+        imdbRating: movieFilters.imdbRating,
+        movieDuration: movieFilters.movieDuration,
+        releaseYearsRange: movieFilters.releaseYearsRange,
       );
 
       final moviesPage = state.searchQuery.isEmpty
@@ -133,6 +151,9 @@ class HomeStateNotifier extends _$HomeStateNotifier with LoggerMixin {
       state = state.copyWith(
         paginationState: newPaginationState,
         lastMoviesUpdate: DateTime.now(),
+        selectedReleaseYearsRange: releaseYearsRange,
+        selectedImdbRating: imdbRating,
+        selectedMovieDuration: movieDuration,
       );
     } on SemanticException catch (e, s) {
       error('Error fetching movies:', e, s);

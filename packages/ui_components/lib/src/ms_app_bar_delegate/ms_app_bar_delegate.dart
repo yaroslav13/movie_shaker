@@ -29,6 +29,7 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
     List<T>? filterItems,
     String Function(BuildContext, T)? filterLabelBuilder,
     ValueChanged<T?>? onFilterSelected,
+    VoidCallback? onAdvancedFiltersPressed,
     TextEditingController? searchController,
     FocusNode? searchFocusNode,
     ValueChanged<String>? onSearchChanged,
@@ -74,6 +75,7 @@ final class MsAppBarDelegate extends SliverPersistentHeaderDelegate {
             selectedItem: selectedFilterItem,
             labelBuilder: filterLabelBuilder,
             onSelected: onFilterSelected,
+            onAdvancedFiltersPressed: onAdvancedFiltersPressed,
           )
         : null;
 

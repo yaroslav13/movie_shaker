@@ -46,6 +46,10 @@ final class MoviesRepositoryImpl implements MoviesRepository {
       final response = await _moviesRemoteDatasource.discoverMovies(
         page: pageNumber,
         genres: dtoFilter?.genres,
+        releaseDateGte: dtoFilter?.minReleaseDate,
+        releaseDateLte: dtoFilter?.maxReleaseDate,
+        minImdbRating: dtoFilter?.minImdbRating,
+        maxMovieDurationInMinutes: dtoFilter?.maxMovieDurationInMinutes,
       );
 
       final movies = response.results
