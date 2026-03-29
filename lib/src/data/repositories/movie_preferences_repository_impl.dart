@@ -26,7 +26,7 @@ final class MoviePreferencesRepositoryImpl
     imdbRating: const ImdbRating(value: 5),
     movieDuration: MovieDuration.max(),
     releaseYearsRange: ReleaseYearsRange(
-      from: DateTime.now().year - 3,
+      from: DateTime.now().year - 10,
       to: DateTime.now().year - 1,
     ),
   );

@@ -1,4 +1,4 @@
-package com.shaker.movie.movie_shaker
+package com.shaker.movie
 
 import io.flutter.embedding.android.FlutterActivity
 
